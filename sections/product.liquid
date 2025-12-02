@@ -11,6 +11,7 @@
   assign headline = product.metafields.custom.headline.value
   assign product_form_identifier = 'product-form-' | append: product.id
   assign product_theme = product.metafields.custom.theme.value | default: 'default'
+  assign product_collection = product.collections.first
 
   case product_theme
     when 'recupera'
@@ -65,7 +66,7 @@
         <div class="embla-thumbs flex gap-2 overflow-x-auto flex-nowrap flex-shrink-0 w-full">
           {%- for image in product.images -%}
             <button
-              class="embla-thumbs__slide flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden border-2! border-transparent! bg-white opacity-90 hover:opacity-100 transition-all data-[active=true]:border-[var(--product-accent)]! data-[active=true]:opacity-100"
+              class="embla-thumbs__slide flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2! border-transparent! bg-white opacity-90 hover:opacity-100 transition-all data-[active=true]:border-[var(--product-accent)]! data-[active=true]:opacity-100"
               type="button"
               aria-label="View image {{ forloop.index }}"
               data-active="false"
@@ -80,6 +81,20 @@
     {% comment %} Product content {% endcomment %}
     <div class="flex flex-col gap-10 bg-white rounded-t-3xl px-6 pb-6 pt-12 md:p-12 md:rounded-3xl">
       <div class="flex flex-col">
+        {% comment %} Breadcrumbs {% endcomment %}
+        {% if product_collection %}
+          <nav class="mb-4" aria-label="Breadcrumb">
+            <ol class="flex items-center gap-2 text-sm text-neutral-600">
+              <li>
+                <a href="/" class="hover:text-[var(--product-accent)] transition-colors">Naslovna</a>
+              </li>
+              <li class="text-neutral-400">></li>
+              <li>
+                <a href="{{ product_collection.url }}" class="hover:text-[var(--product-accent)] transition-colors">{{ product_collection.title }}</a>
+              </li>
+            </ol>
+          </nav>
+        {% endif %}
         <h1 class="text-5xl! text-balance max-w-140 mb-3">{{ product.title }}</h1>
         <!-- Start of Judge.me code -->
         <div class="jdgm-widget jdgm-preview-badge mb-3" data-id="{{ product.id }}">
@@ -97,6 +112,30 @@
         product_form_id: product_form_identifier,
         quantity_rule_soldout: false
       %}
+
+      {% comment %} Information points {% endcomment %}
+      {% if section.settings.info_label_1 != blank or section.settings.info_label_2 != blank or section.settings.info_label_3 != blank %}
+        <div class="flex flex-col gap-3">
+          {% if section.settings.info_label_1 != blank %}
+            <div class="flex items-center gap-3">
+              <span class="text-[var(--product-accent)] flex-shrink-0">{{ 'icon-check.svg' | inline_asset_content }}</span>
+              <span class="text-sm font-medium">{{ section.settings.info_label_1 }}</span>
+            </div>
+          {% endif %}
+          {% if section.settings.info_label_2 != blank %}
+            <div class="flex items-center gap-3">
+              <span class="text-[var(--product-accent)] flex-shrink-0">{{ 'icon-check.svg' | inline_asset_content }}</span>
+              <span class="text-sm font-medium">{{ section.settings.info_label_2 }}</span>
+            </div>
+          {% endif %}
+          {% if section.settings.info_label_3 != blank %}
+            <div class="flex items-center gap-3">
+              <span class="text-[var(--product-accent)] flex-shrink-0">{{ 'icon-check.svg' | inline_asset_content }}</span>
+              <span class="text-sm font-medium">{{ section.settings.info_label_3 }}</span>
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
 
       {% comment %} Benefits icons {% endcomment %}
       {% comment %}
@@ -423,7 +462,26 @@
 {% schema %}
 {
   "name": "Product",
-  "settings": [],
+  "settings": [
+    {
+      "type": "text",
+      "id": "info_label_1",
+      "label": "Information point 1 label",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "info_label_2",
+      "label": "Information point 2 label",
+      "default": ""
+    },
+    {
+      "type": "text",
+      "id": "info_label_3",
+      "label": "Information point 3 label",
+      "default": ""
+    }
+  ],
   "disabled_on": {
     "groups": ["header", "footer"]
   }

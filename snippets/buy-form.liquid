@@ -80,6 +80,20 @@
             </div>
           {% endfor %}
         </div>
+        {%- liquid
+          assign free_delivery_threshold = 5000
+          assign current_price = product.selected_or_first_available_variant.price
+          assign show_free_delivery = false
+          if current_price >= free_delivery_threshold
+            assign show_free_delivery = true
+          endif
+        -%}
+        <div
+          class="free-delivery-label text-xs font-medium text-green-600 {% unless show_free_delivery %}hidden{% endunless %}"
+          data-free-delivery-label
+        >
+          Besplatna dostava
+        </div>
       {% endunless %}
 
       <div class="product-form__buttons">
@@ -175,6 +189,39 @@
           }
         });
       });
+
+      // Update free delivery label when variant changes
+      const freeDeliveryLabel = productForm.querySelector('[data-free-delivery-label]');
+      if (freeDeliveryLabel && typeof subscribe !== 'undefined' && typeof PUB_SUB_EVENTS !== 'undefined') {
+        const updateFreeDeliveryLabel = function(variant) {
+          if (variant && variant.price >= 5000) {
+            freeDeliveryLabel.classList.remove('hidden');
+          } else {
+            freeDeliveryLabel.classList.add('hidden');
+          }
+        };
+
+        // Listen to variant change events via pub/sub
+        subscribe(PUB_SUB_EVENTS.variantChange, function(data) {
+          if (data && data.variant) {
+            updateFreeDeliveryLabel(data.variant);
+          }
+        });
+
+        // Initial check
+        const variantIdInput = productForm.querySelector('.product-variant-id');
+        if (variantIdInput && variantIdInput.value) {
+          const productId = productForm.dataset.productId;
+          const productDataScript = document.querySelector(productId ? `#product-data-${productId}` : '#product-data');
+          if (productDataScript) {
+            const product = JSON.parse(productDataScript.textContent);
+            const variant = product.variants.find(v => v.id == variantIdInput.value);
+            if (variant) {
+              updateFreeDeliveryLabel(variant);
+            }
+          }
+        }
+      }
     });
   });
 {% endjavascript %}
