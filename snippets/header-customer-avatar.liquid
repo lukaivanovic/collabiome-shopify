@@ -35,13 +35,18 @@
     endunless
 
     assign initials = initials | upcase
+
+    comment
+      If there is an account, use the product background color.
+    endcomment
+    assign wrapper_class = 'flex items-center justify-center size-9 [&>svg]:size-6 rounded-full bg-[var(--product-background)]'
   endif
 %}
 
 <a
   href="{{ routes.account_url }}"
-  aria-label="Account"
-  class="flex items-center justify-center size-9 [&>svg]:size-6 rounded-full hover:bg-neutral-100"
+  aria-label="{{ aria_label }}"
+  class="{{ wrapper_class }}"
 >
   {% if initials != '' %}
     <span class="inline-flex items-center justify-center w-full h-full text-xs font-medium uppercase">

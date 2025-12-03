@@ -1129,6 +1129,9 @@
   .bg-\[var\(--product-accent\)\] {
     background-color: var(--product-accent);
   }
+  .bg-\[var\(--product-background\)\] {
+    background-color: var(--product-background);
+  }
   .bg-black {
     background-color: var(--color-black);
   }
