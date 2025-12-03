@@ -12,7 +12,13 @@
     assign show_filters = true
   endif
 
-  assign help_banner_has_content = section.settings.help_banner_title != blank or section.settings.help_banner_description != blank
+  # Help banner visibility
+  assign help_banner_has_content = false
+  if section.settings.help_banner_title != blank
+    assign help_banner_has_content = true
+  elsif section.settings.help_banner_description != blank
+    assign help_banner_has_content = true
+  endif
 %}
 
 <div class="container mx-auto max-w-7xl px-4 py-8 md:py-16">
