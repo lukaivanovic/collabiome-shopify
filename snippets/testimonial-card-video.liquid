@@ -1,13 +1,29 @@
-<article class=" testimonial-grid__item-video">
+{% liquid
+  assign product_obj = entry.product.value | default: entry.product
+
+  assign product_theme = product_obj.metafields.custom.theme.value | default: 'default'
+
+  case product_theme
+    when 'recupera'
+      assign product_theme_class = 'product-theme-recupera'
+    when 'boost'
+      assign product_theme_class = 'product-theme-boost'
+    else
+      assign product_theme_class = 'product-theme-default'
+  endcase
+%}
+
+<article class="testimonial-grid__item-video {% if product_obj %}{{ product_theme_class }}{% endif %}">
   {% if entry.type == 'video' or entry.type.value == 'video' %}
     {% render 'testimonial-video', video: entry.video %}
   {% endif %}
 
-  {% assign product_obj = entry.product.value | default: entry.product %}
   {% if product_obj %}
     <a href="{{ product_obj.url }}" class="testimonial-grid__product">
       {{ product_obj.featured_image | image_url: width: 120, height: 120 | image_tag }}
-      {{ product_obj.title -}}
+      <span class="text-sm leading-snug line-clamp-2">
+        {{- product_obj.title -}}
+      </span>
     </a>
   {% endif %}
 </article>

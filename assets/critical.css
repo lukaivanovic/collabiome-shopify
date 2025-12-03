@@ -390,7 +390,8 @@ button:disabled:hover {
 }
 
 .product-theme-recupera {
-  --product-background: linear-gradient(
+  --product-background: linear-gradient(100deg, #a2eeff, #b4ceff, #d4b9ff);
+  --product-background-secondary: linear-gradient(
     100deg,
     color-mix(in srgb, #a2eeff, transparent 20%) 3.17%,
     color-mix(in srgb, #b4ceff, transparent 20%) 35.34%,
