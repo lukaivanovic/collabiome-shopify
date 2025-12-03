@@ -1,9 +1,3 @@
-{% liquid
-  echo customer.first_name
-  echo customer.last_name
-  echo customer.email
-%}
-
 <mega-menu
   class="bg-white border-b border-black/12 h-16"
   role="navigation"
@@ -44,13 +38,8 @@
           </a>
         {% endfor %}
       {% endif %}
-      <a
-        href="account"
-        aria-label="User"
-        class="flex items-center justify-center size-9 [&>svg]:size-6 rounded-full hover:bg-neutral-100"
-      >
-        {{ 'icon-account.svg' | inline_asset_content }}
-      </a>
+
+      {% render 'header-customer-avatar' %}
       <a
         href="{{ routes.cart_url }}"
         aria-label="Cart"

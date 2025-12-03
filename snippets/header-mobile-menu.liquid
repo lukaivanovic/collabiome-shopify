@@ -36,9 +36,7 @@
   </a>
 
   <div class="flex items-center gap-2 justify-end">
-    <a href="account" aria-label="Account" class="flex items-center justify-center size-6 [&>svg]:size-6">
-      {{ 'icon-account.svg' | inline_asset_content }}
-    </a>
+    {% render 'header-customer-avatar' %}
     <a
       href="{{ routes.cart_url }}"
       aria-label="Cart"

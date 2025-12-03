@@ -1,0 +1,53 @@
+{% doc %}
+  Header customer avatar
+
+  Renders an account link that shows customer initials when logged in, or the account icon otherwise.
+
+  @example
+  {% render 'header-customer-avatar' %}
+{% enddoc %}
+
+{% liquid
+  assign avatar_customer = customer
+  assign initials = ''
+  assign wrapper_class = wrapper_class | default: 'flex items-center justify-center size-9 [&>svg]:size-6 rounded-full hover:bg-neutral-100'
+  assign aria_label = aria_label | default: 'Account'
+
+  if avatar_customer and avatar_customer != empty
+    if avatar_customer.first_name != blank
+      assign initials = avatar_customer.first_name | slice: 0, 1
+    endif
+
+    if avatar_customer.last_name != blank
+      assign last_initial = avatar_customer.last_name | slice: 0, 1
+
+      if initials == ''
+        assign initials = last_initial
+      else
+        assign initials = initials | append: last_initial
+      endif
+    endif
+
+    unless initials != ''
+      if avatar_customer.email != blank
+        assign initials = avatar_customer.email | slice: 0, 1
+      endif
+    endunless
+
+    assign initials = initials | upcase
+  endif
+%}
+
+<a
+  href="{{ routes.account_url }}"
+  aria-label="Account"
+  class="flex items-center justify-center size-9 [&>svg]:size-6 rounded-full hover:bg-neutral-100"
+>
+  {% if initials != '' %}
+    <span class="inline-flex items-center justify-center w-full h-full text-xs font-medium uppercase">
+      {{ initials }}
+    </span>
+  {% else %}
+    {{ 'icon-account.svg' | inline_asset_content }}
+  {% endif %}
+</a>
