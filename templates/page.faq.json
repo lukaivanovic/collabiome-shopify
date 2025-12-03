@@ -13,9 +13,41 @@
       "type": "page",
       "disabled": true,
       "settings": {}
+    },
+    "faq_tdnNBt": {
+      "type": "faq",
+      "blocks": {
+        "faq_item_mkba8j": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Frequently asked question?",
+            "answer": "<p>This is the answer to the frequently asked question.</p>"
+          }
+        },
+        "faq_item_NffpRk": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Another frequently asked question?",
+            "answer": "<p>This is another answer to a frequently asked question.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_mkba8j",
+        "faq_item_NffpRk"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "title": "FAQ",
+        "description": "",
+        "custom_id": "",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "faq_tdnNBt"
   ]
 }
