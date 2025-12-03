@@ -10,7 +10,7 @@
   assign supplements_menu = supplements_menu | default: empty
 
   # Prefer explicit supplements collection handles, fall back if needed
-  assign supplements_collection = collections['dodaci-prehrani'] | default: collections['supplements']
+  assign supplements_collection = collections['dodaci-prehrani'] | default: collections.supplements
 
   # Use featured_products metafield when available, otherwise fall back to collection products
   assign featured_products = blank
@@ -38,36 +38,38 @@
       class="mega-menu-card rounded-2xl border border-black/12 bg-[var(--color-background-default)]"
       data-mega-menu-card
     >
-      <div class="grid gap-8 p-8 md:grid-cols-[minmax(260px,320px)_1fr]">
-        <div class="flex flex-col gap-4">
-          {% if supplements_menu and supplements_menu.links.size > 0 %}
-            <h3 class="text-lg font-semibold text-primary">
-              {{ supplements_collection.title }}
-            </h3>
+      <div class="grid gap-4 p-8 md:grid-cols-3">
+        {% for product in featured_products limit: 3 %}
+          {% liquid
+            assign product_theme = product.metafields.custom.theme.value | default: 'default'
 
-            <ul class="m-0 list-none space-y-2 p-0">
-              {% for menu_link in supplements_menu.links %}
-                <li>
-                  <a
-                    href="{{ menu_link.url }}"
-                    class="text-sm text-primary transition-colors duration-200 hover:text-primary/80 no-underline"
-                  >
-                    {{ menu_link.title }}
-                  </a>
-                </li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-        </div>
+            case product_theme
+              when 'recupera'
+                assign product_theme_class = 'product-theme-recupera'
+              when 'boost'
+                assign product_theme_class = 'product-theme-boost'
+              else
+                assign product_theme_class = 'product-theme-default'
+            endcase
+          %}
 
-        <div class="grid gap-6 md:grid-cols-3">
-          {% for product in featured_products limit: 3 %}
+          <div
+            class="product-background {{ product_theme_class }} flex flex-col gap-3 rounded-xl p-4 no-underline"
+          >
+            <div class="flex flex-col gap-1">
+              <h3 class="text-base font-semibold text-primary">
+                {{ product.title }}
+              </h3>
+              {% if product.description != blank %}
+                <p class="text-sm text-primary/80 line-clamp-3">
+                  {{ product.description | strip_html | truncatewords: 24 }}
+                </p>
+              {% endif %}
+            </div>
             {% render 'product-card', product: product, hide_buy_form: true %}
-          {% endfor %}
-        </div>
+          </div>
+        {% endfor %}
       </div>
     </div>
   </div>
 </div>
-
-

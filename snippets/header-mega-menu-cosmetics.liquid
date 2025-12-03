@@ -35,12 +35,8 @@
       data-mega-menu-card
     >
       <div class="flex flex-row gap-8 p-8">
-        <div class="flex flex-col gap-4">
-          <h3 class="text-lg font-semibold text-primary">
-            {{ cosmetics_collection.title }}
-          </h3>
-
-          <div class="flex flex-row gap-3">
+        <div class="flex flex-col gap-5">
+          <div class="flex flex-row justify-between gap-20">
             {% comment %} Tip kože {% endcomment %}
             <div class="flex flex-col gap-1 ">
               <p class="m-0 text-xs font-medium uppercase tracking-wide text-primary/70">Tip kože</p>
@@ -192,9 +188,14 @@
           </div>
         </div>
 
-        <div class="grid gap-6 md:grid-cols-3">
+        <div class="ml-auto flex w-full max-w-sm min-w-150 flex-col gap-3">
           {% for product in featured_products limit: 2 %}
-            {% render 'product-card', product: product, hide_buy_form: true %}
+            {% render 'product-card-mini',
+              product: product,
+              hide_buy_form: true,
+              show_dynamic_checkout: false,
+              card_class: 'border-none shadow-none'
+            %}
           {% endfor %}
         </div>
       </div>
