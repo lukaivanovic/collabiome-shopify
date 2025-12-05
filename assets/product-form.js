@@ -245,12 +245,22 @@ if (!customElements.get("product-form")) {
         });
 
         // Find matching variant
-        const matchingVariant = this.product.variants.find((variant) => {
-          return variant.options.every((option, index) => {
-            const optionName = this.product.options[index];
-            return selectedOptions[optionName] === option;
+        let matchingVariant = null;
+
+        // If there are no option inputs (product without variants), use the first available variant
+        if (optionInputs.length === 0) {
+          matchingVariant =
+            this.product.variants.find((v) => v.available) ||
+            this.product.variants[0];
+        } else {
+          // For products with variants, find the matching variant
+          matchingVariant = this.product.variants.find((variant) => {
+            return variant.options.every((option, index) => {
+              const optionName = this.product.options[index];
+              return selectedOptions[optionName] === option;
+            });
           });
-        });
+        }
 
         if (matchingVariant) {
           // Update hidden variant ID input

@@ -28,42 +28,44 @@
   <div id="CartDrawer">
     <div id="CartDrawer-Overlay" class="cart-drawer__overlay"></div>
     <div
-      class="drawer__inner flex flex-col bg-white border-l border-neutral-300  color-{{ settings.cart_color_scheme }}"
+      class="drawer__inner relative w-[calc(40rem-100px)] h-screen max-w-[calc(100vw-3rem)] flex flex-col my-1 mr-2 md:mr-5 p-5 overflow-hidden rounded-2xl z-2 bg-white border-l border-neutral-300  color-{{ settings.cart_color_scheme }}"
+
       role="dialog"
       aria-modal="true"
       aria-label="Your cart"
       tabindex="-1"
     >
+      {% render 'cart-drawer-header' %}
       {%- if cart == empty -%}
         {% render 'cart-drawer-empty' %}
-      {%- endif -%}
-      {% render 'cart-drawer-header' %}
-      <cart-drawer-items
-        {% if cart == empty %}
-          class=" is-empty"
-        {% endif %}
-      >
-        <form
-          action="{{ routes.cart_url }}"
-          id="CartDrawer-Form"
-          class="cart__contents cart-drawer__form"
-          method="post"
+      {%- else -%}
+        <cart-drawer-items
+          {% if cart == empty %}
+            class=" is-empty"
+          {% endif %}
         >
-          <div id="CartDrawer-CartItems" class="drawer__contents js-contents">
-            {%- if cart != empty -%}
-              <div class="drawer__cart-items-wrapper flex flex-col gap-4">
-                {%- for item in cart.items -%}
-                  {% render 'cart-drawer-item', item: item %}
-                {%- endfor -%}
-              </div>
-            {%- endif -%}
-            <p id="CartDrawer-LiveRegionText" class="visually-hidden" role="status"></p>
-            <p id="CartDrawer-LineItemStatus" class="visually-hidden" aria-hidden="true" role="status">Loading</p>
-          </div>
-          <div id="CartDrawer-CartErrors" role="alert"></div>
-        </form>
-      </cart-drawer-items>
-      {% render 'cart-drawer-footer' %}
+          <form
+            action="{{ routes.cart_url }}"
+            id="CartDrawer-Form"
+            class="cart__contents cart-drawer__form"
+            method="post"
+          >
+            <div id="CartDrawer-CartItems" class="drawer__contents js-contents">
+              {%- if cart != empty -%}
+                <div class="flex-grow flex flex-col gap-4">
+                  {%- for item in cart.items -%}
+                    {% render 'cart-drawer-item', item: item %}
+                  {%- endfor -%}
+                </div>
+              {%- endif -%}
+              <p id="CartDrawer-LiveRegionText" class="visually-hidden" role="status"></p>
+              <p id="CartDrawer-LineItemStatus" class="visually-hidden" aria-hidden="true" role="status">Loading</p>
+            </div>
+            <div id="CartDrawer-CartErrors" role="alert"></div>
+          </form>
+        </cart-drawer-items>
+        {% render 'cart-drawer-footer' %}
+      {%- endif -%}
     </div>
   </div>
 </cart-drawer>

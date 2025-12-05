@@ -65,7 +65,7 @@
 
     {%- comment -%} Product Details (Center-Left) {%- endcomment -%}
     <div class="flex-1 flex flex-col gap-1">
-      <a href="{{ item.url }}" class="cart-item__name hover:underline">
+      <a href="{{ item.url }}" class="cart-item__name text-lg font-medium hover:underline">
         <p>{{- item.product.title | escape -}}</p>
       </a>
       {% if volume != blank %}
@@ -75,140 +75,140 @@
       {%- comment -%} Quantity Selector (Below Title) {%- endcomment -%}
       <div class="flex items-center gap-2 mt-2">
         <quantity-popover>
-        <quantity-input class="quantity cart-quantity flex items-center gap-2">
-          {%- comment -%} Minus Button {%- endcomment -%}
-          <button
-            class="quantity__button w-6 h-6 rounded-full bg-pink-50 border border-pink-800/30 flex items-center justify-center hover:bg-pink-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            name="minus"
-            type="button"
-            aria-label="Decrease quantity for {{ item.product.title | escape }}"
-            {% if item.instructions and item.instructions.can_update_quantity == false %}
-              disabled
-            {% endif %}
-          >
-            <span class="svg-wrapper w-4 h-4 text-pink-900">
-              {{- 'icon-minus.svg' | inline_asset_content -}}
-            </span>
-          </button>
-
-          {%- comment -%} Quantity Display {%- endcomment -%}
-          <div class="quantity__display w-6 h-6 rounded-full bg-pink-50 border border-pink-800/30 flex items-center justify-center">
-            <input
-              class="quantity__input w-6 h-6 text-center text-pink-900 font-medium bg-transparent border-none p-0 leading-none text-sm"
-              type="number"
-              data-quantity-variant-id="{{ item.variant.id }}"
-              name="updates[]"
-              value="{{ item.quantity }}"
-              {% # theme-check-disable %}
-              data-cart-quantity="{{ cart | item_count_for_variant: item.variant.id }}"
-              min="0"
-              data-min="{{ item.variant.quantity_rule.min }}"
-              {% if item.variant.quantity_rule.max != null %}
-                max="{{ item.variant.quantity_rule.max }}"
-              {% endif %}
-              step="{{ item.variant.quantity_rule.increment }}"
-              {% # theme-check-enable %}
-              aria-label="Quantity for {{ item.product.title | escape }}"
-              id="Drawer-quantity-{{ item.index | plus: 1 }}"
-              data-index="{{ item.index | plus: 1 }}"
+          <quantity-input class="quantity cart-quantity flex items-center gap-2">
+            {%- comment -%} Minus Button {%- endcomment -%}
+            <button
+              class="quantity__button w-6 h-6 rounded-full bg-pink-50 border border-pink-800/30 flex items-center justify-center hover:bg-pink-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              name="minus"
+              type="button"
+              aria-label="Decrease quantity for {{ item.product.title | escape }}"
               {% if item.instructions and item.instructions.can_update_quantity == false %}
                 disabled
               {% endif %}
             >
-          </div>
-
-          {%- comment -%} Plus Button {%- endcomment -%}
-          <button
-            class="quantity__button w-6 h-6 rounded-full bg-pink-50 border border-pink-800/30 flex items-center justify-center hover:bg-pink-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
-            name="plus"
-            type="button"
-            aria-label="Increase quantity for {{ item.product.title | escape }}"
-            {% if item.instructions and item.instructions.can_update_quantity == false %}
-              disabled
-            {% endif %}
-          >
-            <span class="svg-wrapper w-4 h-4 text-pink-900">
-              {{- 'icon-plus.svg' | inline_asset_content -}}
-            </span>
-          </button>
-        </quantity-input>
-
-        {%- comment -%} Quantity Rules Popover {%- endcomment -%}
-        {%- if has_vol_pricing or has_qty_rules -%}
-          <button
-            type="button"
-            class="text-sm text-neutral-600 hover:text-neutral-900 flex items-center gap-1 ml-2"
-            aria-expanded="false"
-          >
-            <span class="svg-wrapper w-4 h-4">
-              {{- 'icon-info.svg' | inline_asset_content -}}
-            </span>
-          </button>
-
-          <div
-            class="cart-items__info global-settings-popup quantity-popover__info"
-            tabindex="-1"
-            hidden
-          >
-            {%- if has_qty_rules == false -%}
-              <span class="volume-pricing-label caption">Volume pricing</span>
-            {%- endif -%}
-            <div class="quantity__rules caption">
-              {%- if item.variant.quantity_rule.increment > 1 -%}
-                <span class="divider">
-                  Must be purchased in multiples of {{ item.variant.quantity_rule.increment }}
-                </span>
-              {%- endif -%}
-              {%- if item.variant.quantity_rule.min > 1 -%}
-                <span class="divider"> Minimum of {{ item.variant.quantity_rule.min }} </span>
-              {%- endif -%}
-              {%- if item.variant.quantity_rule.max != null -%}
-                <span class="divider"> Maximum of {{ item.variant.quantity_rule.max }} </span>
-              {%- endif -%}
-            </div>
-            <button
-              class="button-close button button--tertiary"
-              type="button"
-              aria-label="Close"
-            >
-              <span class="svg-wrapper">
-                {{- 'icon-close.svg' | inline_asset_content -}}
+              <span class="svg-wrapper w-4 h-4 text-pink-900">
+                {{- 'icon-minus.svg' | inline_asset_content -}}
               </span>
             </button>
-            {%- if item.variant.quantity_price_breaks.size > 0 -%}
-              <volume-pricing class="parent-display">
-                <ul class="list-unstyled">
-                  <li>
-                    <span>{{ item.variant.quantity_rule.min }}+</span>
-                    <span>{{ item.variant.price | money_with_currency }}/ea</span>
-                  </li>
-                  {%- for price_break in item.variant.quantity_price_breaks -%}
-                    <li>
-                      <span>
-                        {{- price_break.minimum_quantity -}}
-                        <span aria-hidden="true">+</span></span
-                      >
-                      <span>{{ price_break.price | money_with_currency }}/ea</span>
-                    </li>
-                  {%- endfor -%}
-                </ul>
-              </volume-pricing>
-            {%- endif -%}
-          </div>
-        {%- endif -%}
 
-        {%- comment -%} Error Message {%- endcomment -%}
-        <div
-          id="CartDrawer-LineItemError-{{ item.index | plus: 1 }}"
-          class="cart-item__error"
-          role="alert"
-        >
-          <small class="cart-item__error-text"></small>
-          <span class="svg-wrapper">
-            {{- 'icon-error.svg' | inline_asset_content -}}
-          </span>
-        </div>
-      </quantity-popover>
+            {%- comment -%} Quantity Display {%- endcomment -%}
+            <div class="quantity__display w-6 h-6 rounded-full bg-pink-50 border border-pink-800/30 flex items-center justify-center">
+              <input
+                class="quantity__input w-6 h-6 text-center text-pink-900 font-medium bg-transparent border-none p-0 leading-none text-sm"
+                type="number"
+                data-quantity-variant-id="{{ item.variant.id }}"
+                name="updates[]"
+                value="{{ item.quantity }}"
+                {% # theme-check-disable %}
+                data-cart-quantity="{{ cart | item_count_for_variant: item.variant.id }}"
+                min="0"
+                data-min="{{ item.variant.quantity_rule.min }}"
+                {% if item.variant.quantity_rule.max != null %}
+                  max="{{ item.variant.quantity_rule.max }}"
+                {% endif %}
+                step="{{ item.variant.quantity_rule.increment }}"
+                {% # theme-check-enable %}
+                aria-label="Quantity for {{ item.product.title | escape }}"
+                id="Drawer-quantity-{{ item.index | plus: 1 }}"
+                data-index="{{ item.index | plus: 1 }}"
+                {% if item.instructions and item.instructions.can_update_quantity == false %}
+                  disabled
+                {% endif %}
+              >
+            </div>
+
+            {%- comment -%} Plus Button {%- endcomment -%}
+            <button
+              class="quantity__button w-6 h-6 rounded-full bg-pink-50 border border-pink-800/30 flex items-center justify-center hover:bg-pink-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+              name="plus"
+              type="button"
+              aria-label="Increase quantity for {{ item.product.title | escape }}"
+              {% if item.instructions and item.instructions.can_update_quantity == false %}
+                disabled
+              {% endif %}
+            >
+              <span class="svg-wrapper w-4 h-4 text-pink-900">
+                {{- 'icon-plus.svg' | inline_asset_content -}}
+              </span>
+            </button>
+          </quantity-input>
+
+          {%- comment -%} Quantity Rules Popover {%- endcomment -%}
+          {%- if has_vol_pricing or has_qty_rules -%}
+            <button
+              type="button"
+              class="text-sm text-neutral-600 hover:text-neutral-900 flex items-center gap-1 ml-2"
+              aria-expanded="false"
+            >
+              <span class="svg-wrapper w-4 h-4">
+                {{- 'icon-info.svg' | inline_asset_content -}}
+              </span>
+            </button>
+
+            <div
+              class="cart-items__info global-settings-popup quantity-popover__info"
+              tabindex="-1"
+              hidden
+            >
+              {%- if has_qty_rules == false -%}
+                <span class="volume-pricing-label caption">Volume pricing</span>
+              {%- endif -%}
+              <div class="quantity__rules caption">
+                {%- if item.variant.quantity_rule.increment > 1 -%}
+                  <span class="divider">
+                    Must be purchased in multiples of {{ item.variant.quantity_rule.increment }}
+                  </span>
+                {%- endif -%}
+                {%- if item.variant.quantity_rule.min > 1 -%}
+                  <span class="divider"> Minimum of {{ item.variant.quantity_rule.min }} </span>
+                {%- endif -%}
+                {%- if item.variant.quantity_rule.max != null -%}
+                  <span class="divider"> Maximum of {{ item.variant.quantity_rule.max }} </span>
+                {%- endif -%}
+              </div>
+              <button
+                class="button-close button button--tertiary"
+                type="button"
+                aria-label="Close"
+              >
+                <span class="svg-wrapper">
+                  {{- 'icon-close.svg' | inline_asset_content -}}
+                </span>
+              </button>
+              {%- if item.variant.quantity_price_breaks.size > 0 -%}
+                <volume-pricing class="parent-display">
+                  <ul class="list-unstyled">
+                    <li>
+                      <span>{{ item.variant.quantity_rule.min }}+</span>
+                      <span>{{ item.variant.price | money_with_currency }}/ea</span>
+                    </li>
+                    {%- for price_break in item.variant.quantity_price_breaks -%}
+                      <li>
+                        <span>
+                          {{- price_break.minimum_quantity -}}
+                          <span aria-hidden="true">+</span></span
+                        >
+                        <span>{{ price_break.price | money_with_currency }}/ea</span>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                </volume-pricing>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+
+          {%- comment -%} Error Message {%- endcomment -%}
+          <div
+            id="CartDrawer-LineItemError-{{ item.index | plus: 1 }}"
+            class="cart-item__error"
+            role="alert"
+          >
+            <small class="cart-item__error-text"></small>
+            <span class="svg-wrapper">
+              {{- 'icon-error.svg' | inline_asset_content -}}
+            </span>
+          </div>
+        </quantity-popover>
       </div>
     </div>
 
@@ -232,10 +232,10 @@
     </div>
 
     {%- comment -%} Delete Button (Top Right) {%- endcomment -%}
-  <cart-remove-button
+    <cart-remove-button
       id="CartDrawer-Remove-{{ item.index | plus: 1 }}"
       data-index="{{ item.index | plus: 1 }}"
-      class="absolute top-4 right-4"
+      class="absolute top-0 right-0"
     >
       <button
         type="button"
@@ -246,7 +246,7 @@
           class="hidden"
         {% endif %}
       >
-        {{- 'icon-minus.svg' | inline_asset_content -}}
+        {{- 'icon-trash.svg' | inline_asset_content -}}
       </button>
     </cart-remove-button>
   </div>

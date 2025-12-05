@@ -1,3 +1,16 @@
+{% comment %}
+  {% doc %}
+    Buy Form Component
+
+    Renders a product buy form with variant options and a submit button.
+
+    @param {object} product - Product object (required)
+
+    @example
+    {% render 'buy-form', product: product %}
+  {% enddoc %}
+{% endcomment %}
+
 {% liquid
   assign button_variant = button_variant | default: 'default'
 
@@ -23,6 +36,10 @@
     <span class="product-form__error-message"></span>
   </div>
 
+  {%- liquid
+    assign selected_variant = product.first_available_variant
+  -%}
+
   {%- form 'product',
     product,
     id: product_form_id,
@@ -33,11 +50,8 @@
     <input
       type="hidden"
       name="id"
-      value="{{ product.selected_or_first_available_variant.id }}"
-      {% if product.selected_or_first_available_variant.available == false
-        or quantity_rule_soldout
-        or product.selected_or_first_available_variant == null
-      %}
+      value="{% if selected_variant != blank %}{{ selected_variant.id }}{% endif %}"
+      {% if selected_variant == blank or selected_variant.available == false or quantity_rule_soldout %}
         disabled
       {% endif %}
       class="product-variant-id"
@@ -82,7 +96,10 @@
         </div>
         {%- liquid
           assign free_delivery_threshold = 5000
-          assign current_price = product.selected_or_first_available_variant.price
+          assign current_price = 0
+          if selected_variant != blank
+            assign current_price = selected_variant.price
+          endif
           assign show_free_delivery = false
           if current_price >= free_delivery_threshold
             assign show_free_delivery = true
@@ -98,12 +115,15 @@
 
       <div class="product-form__buttons">
         {%- liquid
-          assign check_against_inventory = true
-          if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
-            assign check_against_inventory = false
-          endif
-          if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
-            assign quantity_rule_soldout = true
+          assign quantity_rule_soldout = false
+          if selected_variant != blank
+            assign check_against_inventory = true
+            if selected_variant.inventory_management != 'shopify' or selected_variant.inventory_policy == 'continue'
+              assign check_against_inventory = false
+            endif
+            if selected_variant.quantity_rule.min > selected_variant.inventory_quantity and check_against_inventory
+              assign quantity_rule_soldout = true
+            endif
           endif
         -%}
         <button
@@ -111,10 +131,7 @@
           type="submit"
           name="add"
           class="button flex items-center gap-2 h-12 px-7 text-base [background:var(--product-button-background)] [color:var(--product-button-text-color)] w-full"
-          {% if product.selected_or_first_available_variant.available == false
-            or quantity_rule_soldout
-            or product.selected_or_first_available_variant == null
-          %}
+          {% if selected_variant == blank or selected_variant.available == false or quantity_rule_soldout %}
             disabled
           {% endif %}
         >
@@ -122,12 +139,12 @@
             {{ 'icon-cart.svg' | inline_asset_content }}
           </div>
           <span>
-            {%- if product.selected_or_first_available_variant == null -%}
+            {%- if selected_variant == blank -%}
               Unavailable
-            {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+            {%- elsif selected_variant.available == false or quantity_rule_soldout -%}
               Sold out
             {%- else -%}
-              Add to cart ({{ product.selected_or_first_available_variant.price | money }})
+              Add to cart ({{ selected_variant.price | money }})
             {%- endif -%}
           </span>
           {% comment %} {%- render 'loading-spinner' -%} {% endcomment %}
@@ -193,7 +210,7 @@
       // Update free delivery label when variant changes
       const freeDeliveryLabel = productForm.querySelector('[data-free-delivery-label]');
       if (freeDeliveryLabel && typeof subscribe !== 'undefined' && typeof PUB_SUB_EVENTS !== 'undefined') {
-        const updateFreeDeliveryLabel = function(variant) {
+        const updateFreeDeliveryLabel = function (variant) {
           if (variant && variant.price >= 5000) {
             freeDeliveryLabel.classList.remove('hidden');
           } else {
@@ -202,7 +219,7 @@
         };
 
         // Listen to variant change events via pub/sub
-        subscribe(PUB_SUB_EVENTS.variantChange, function(data) {
+        subscribe(PUB_SUB_EVENTS.variantChange, function (data) {
           if (data && data.variant) {
             updateFreeDeliveryLabel(data.variant);
           }
@@ -215,7 +232,7 @@
           const productDataScript = document.querySelector(productId ? `#product-data-${productId}` : '#product-data');
           if (productDataScript) {
             const product = JSON.parse(productDataScript.textContent);
-            const variant = product.variants.find(v => v.id == variantIdInput.value);
+            const variant = product.variants.find((v) => v.id == variantIdInput.value);
             if (variant) {
               updateFreeDeliveryLabel(variant);
             }
