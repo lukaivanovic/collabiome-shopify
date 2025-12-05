@@ -11,10 +11,18 @@
   "sections": {
     "main": {
       "type": "cart",
+      "settings": {
+        "title": "Your cart",
+        "description": "Review your items before checking out."
+      }
+    },
+    "1764930776feef78bd": {
+      "type": "apps",
       "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "1764930776feef78bd"
   ]
 }
