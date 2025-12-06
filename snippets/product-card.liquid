@@ -29,7 +29,13 @@
       </p>
     </div>
     {% unless hide_buy_form %}
-      {% render 'buy-form', product: product %}
+      {% render 'product-buy-form',
+        product: product,
+        section_id: section.id,
+        product_form_id: 'product-card-' | append: product.id,
+        show_dynamic_checkout: false,
+        button_variant: 'default'
+      %}
     {% endunless %}
   </div>
 </div>

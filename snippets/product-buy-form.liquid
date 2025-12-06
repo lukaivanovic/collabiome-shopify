@@ -1,22 +1,52 @@
 {% doc %}
-  Product Buy Form
+  Product Buy Form (unified)
 
-  Renders the product purchase form with variant options displayed in a three-column grid and support for a larger primary button.
+  Renders a reusable product purchase form that works on product pages and product cards.
 
-  @param {product} product - Product object to use (optional, defaults to global product)
+  @param {product} product - Product object (required)
   @param {boolean} show_dynamic_checkout - Display dynamic checkout buttons (default: false)
   @param {boolean} gift_card_recipient_feature_active - Hide errors when gift card recipient feature is active (default: false)
   @param {string} section_id - Section identifier used for DOM scoping (optional)
   @param {string} product_form_id - Explicit form identifier (optional)
   @param {boolean} quantity_rule_soldout - Flag from parent context indicating quantity rule sold out (default: false)
+  @param {string} button_variant - Button style variant (default | neutral_large)
+  @param {boolean} enable_free_delivery_label - Show free delivery label (default: false)
+  @param {number} free_delivery_threshold - Price threshold (in cents) for free delivery label (default: 5000)
 {% enddoc %}
 
 {% liquid
+  if product == blank
+    echo '<!-- Error: product required for product-buy-form -->'
+    break
+  endif
+
   assign show_dynamic_checkout = show_dynamic_checkout | default: false
   assign gift_card_recipient_feature_active = gift_card_recipient_feature_active | default: false
   assign section_id_value = section_id | default: 'main-product'
-  assign product_form_id = product_form_id | default: section_id_value | append: '-product-form'
+  assign form_id_value = product_form_id | default: section_id_value | append: '-product-form'
   assign quantity_rule_soldout = quantity_rule_soldout | default: false
+  assign button_variant = button_variant | default: 'default'
+  assign enable_free_delivery_label = enable_free_delivery_label | default: false
+  assign free_delivery_threshold = free_delivery_threshold | default: 5000
+
+  assign selected_variant = product.selected_or_first_available_variant | default: product.first_available_variant
+
+  if selected_variant != blank
+    assign check_against_inventory = true
+    if selected_variant.inventory_management != 'shopify' or selected_variant.inventory_policy == 'continue'
+      assign check_against_inventory = false
+    endif
+    if selected_variant.quantity_rule.min > selected_variant.inventory_quantity and check_against_inventory
+      assign quantity_rule_soldout = true
+    endif
+  endif
+
+  assign button_classes = 'button flex items-center gap-2 h-14 px-7 text-base [background:var(--product-button-background)] [color:var(--product-button-text-color)] w-full'
+  if button_variant == 'neutral_large'
+    assign button_classes = button_classes | append: ' button-neutral text-white'
+  elsif button_variant == 'default'
+    assign button_classes = button_classes | append: ' button-boost text-blue'
+  endif
 %}
 
 <product-form
@@ -24,6 +54,11 @@
   data-hide-errors="{{ gift_card_recipient_feature_active }}"
   data-section-id="{{ section_id_value }}"
   data-product-id="{{ product.id }}"
+  data-product-data-id="product-data-{{ product.id }}"
+  data-product-data-fallback="product-data"
+  {% if enable_free_delivery_label %}
+    data-free-delivery-threshold="{{ free_delivery_threshold }}"
+  {% endif %}
 >
   <div class="product-form__error-message-wrapper" role="alert" hidden>
     <span class="svg-wrapper">
@@ -34,7 +69,7 @@
 
   {%- form 'product',
     product,
-    id: product_form_id,
+    id: form_id_value,
     class: 'form',
     novalidate: 'novalidate',
     data-type: 'add-to-cart-form'
@@ -42,11 +77,8 @@
     <input
       type="hidden"
       name="id"
-      value="{{ product.selected_or_first_available_variant.id }}"
-      {% if product.selected_or_first_available_variant.available == false
-        or quantity_rule_soldout
-        or product.selected_or_first_available_variant == null
-      %}
+      value="{% if selected_variant != blank %}{{ selected_variant.id }}{% endif %}"
+      {% if selected_variant == blank or selected_variant.available == false or quantity_rule_soldout %}
         disabled
       {% endif %}
       class="product-variant-id"
@@ -59,8 +91,9 @@
               {% for value in option.values %}
                 <label
                   for="product-options[{{ option.name }}]-{{ forloop.index }}"
-                  class="group relative flex items-center justify-center px-3 py-3 gap-2 border bg-white rounded-md cursor-pointer transition-all border-neutral-200 hover:bg-neutral-100 data-[selected=true]:border-[var(--product-accent)]  data-[selected=true]:[background:var(--product-background)]"
+                  class="group relative flex items-center justify-center px-3 py-3 gap-2 border bg-white rounded-md cursor-pointer transition-all border-neutral-200 hover:bg-neutral-100 data-[selected=true]:border-[var(--product-accent)] data-[selected=true]:[background:var(--product-background)]"
                   data-option-label
+                  data-option-position="{{ option.position }}"
                   {% if option.selected_value == value %}
                     data-selected="true"
                   {% else %}
@@ -76,6 +109,8 @@
                       checked
                     {% endif %}
                     class="sr-only"
+                    data-option-input
+                    data-option-position="{{ option.position }}"
                   >
                   <span class="font-medium text-primary group-data-[selected=true]:text-[var(--product-accent)]">
                     {{- value -}}
@@ -91,42 +126,38 @@
         </div>
       {% endunless %}
 
+      {% if enable_free_delivery_label %}
+        <div
+          class="free-delivery-label text-xs font-medium text-green-600 {% if selected_variant == blank or selected_variant.price < free_delivery_threshold %}hidden{% endif %}"
+          data-free-delivery-label
+        >
+          Besplatna dostava
+        </div>
+      {% endif %}
+
       <div class="product-form__buttons">
-        {%- liquid
-          assign check_against_inventory = true
-          if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
-            assign check_against_inventory = false
-          endif
-          if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
-            assign quantity_rule_soldout = true
-          endif
-        -%}
         <button
           id="ProductSubmitButton-{{ section_id_value }}"
           type="submit"
           name="add"
-          class="button flex items-center gap-2 h-14 px-7 text-base [background:var(--product-button-background)] [color:var(--product-button-text-color)] w-full"
-          {% if product.selected_or_first_available_variant.available == false
-            or quantity_rule_soldout
-            or product.selected_or_first_available_variant == null
-          %}
+          class="{{ button_classes }}"
+          data-add-to-cart
+          {% if selected_variant == blank or selected_variant.available == false or quantity_rule_soldout %}
             disabled
           {% endif %}
         >
           <div class="size-6">
             {{ 'icon-cart.svg' | inline_asset_content }}
           </div>
-          <span>
-            {%- if product.selected_or_first_available_variant == null -%}
+          <span data-add-to-cart-text>
+            {%- if selected_variant == blank -%}
               Unavailable
-            {%- elsif product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+            {%- elsif selected_variant.available == false or quantity_rule_soldout -%}
               Sold out
             {%- else -%}
-              Add to cart ({{ product.selected_or_first_available_variant.price | money }})
+              Add to cart ({{ selected_variant.price | money }})
             {%- endif -%}
           </span>
-          <span class="text-base font-medium text-white/"> </span>
-          {% comment %} {%- render 'loading-spinner' -%} {% endcomment %}
         </button>
         {%- if show_dynamic_checkout -%}
           {{ form | payment_button }}
@@ -137,20 +168,125 @@
 </product-form>
 
 {% javascript %}
-  // Prevent clicks on variant options and buttons from propagating to parent link
+  // Unified buy form behavior: prevent link bubbling, handle variant selection, keep UI in sync.
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('product-form').forEach(function (productForm) {
+      const productId = productForm.dataset.productId;
+      const dataIdPrimary = productForm.dataset.productDataId;
+      const dataIdFallback = productForm.dataset.productDataFallback;
+      const dataScript =
+        (dataIdPrimary && document.getElementById(dataIdPrimary)) ||
+        (productId && document.getElementById(`product-data-${productId}`)) ||
+        (dataIdFallback && document.getElementById(dataIdFallback)) ||
+        document.getElementById('product-data');
+
+      if (!dataScript) return;
+
+      let productData;
+      try {
+        productData = JSON.parse(dataScript.textContent);
+      } catch (e) {
+        return;
+      }
+
+      const hiddenInput = productForm.querySelector('.product-variant-id');
+      const addButton = productForm.querySelector('[data-add-to-cart]');
+      const addButtonText = productForm.querySelector('[data-add-to-cart-text]');
+      const optionInputs = Array.from(productForm.querySelectorAll('[data-option-input]'));
+      const optionLabels = Array.from(productForm.querySelectorAll('[data-option-label]'));
+      const freeDeliveryLabel = productForm.querySelector('[data-free-delivery-label]');
+      const freeDeliveryThreshold = parseInt(productForm.dataset.freeDeliveryThreshold || '', 10);
+
+      function formatMoney(cents) {
+        if (window.Shopify && typeof Shopify.formatMoney === 'function') {
+          return Shopify.formatMoney(cents);
+        }
+        return (cents / 100).toFixed(2);
+      }
+
+      function setSelectedState(variant) {
+        if (!variant) return;
+        optionLabels.forEach((label) => {
+          const input = label.querySelector('[data-option-input]');
+          const position = Number(label.dataset.optionPosition);
+          const isSelected = variant.options[position - 1] === input?.value;
+          label.dataset.selected = isSelected ? 'true' : 'false';
+          if (input) input.checked = isSelected;
+        });
+      }
+
+      function updateUI(variant) {
+        if (!hiddenInput || !addButton) return;
+        const checkAgainstInventory =
+          variant && variant.inventory_management === 'shopify' && variant.inventory_policy !== 'continue';
+        const minRule = variant?.quantity_rule?.min || 0;
+        const soldOutByRule = checkAgainstInventory && variant && minRule > variant.inventory_quantity;
+        const isAvailable = Boolean(variant && variant.available && !soldOutByRule);
+
+        hiddenInput.value = variant ? variant.id : '';
+        hiddenInput.disabled = !isAvailable;
+        addButton.disabled = !isAvailable;
+
+        if (addButtonText) {
+          if (!variant) {
+            addButtonText.textContent = 'Unavailable';
+          } else if (!isAvailable) {
+            addButtonText.textContent = 'Sold out';
+          } else {
+            addButtonText.textContent = `Add to cart (${formatMoney(variant.price)})`;
+          }
+        }
+
+        if (freeDeliveryLabel && !Number.isNaN(freeDeliveryThreshold)) {
+          if (variant && variant.price >= freeDeliveryThreshold) {
+            freeDeliveryLabel.classList.remove('hidden');
+          } else {
+            freeDeliveryLabel.classList.add('hidden');
+          }
+        }
+      }
+
+      function findVariantFromSelections() {
+        const selections = [];
+        productData.options.forEach((_, idx) => {
+          const input = optionInputs.find((el) => Number(el.dataset.optionPosition) === idx + 1 && el.checked);
+          if (input) selections.push(input.value);
+        });
+
+        if (selections.length !== productData.options.length) return null;
+
+        return productData.variants.find((variant) => variant.options.every((opt, idx) => opt === selections[idx]));
+      }
+
+      // Initial selection: honor preselected variant, otherwise first available.
+      let initialVariant =
+        (hiddenInput && productData.variants.find((variant) => `${variant.id}` === hiddenInput.value)) ||
+        productData.variants.find((variant) => variant.available) ||
+        productData.variants[0];
+
+      if (initialVariant) {
+        setSelectedState(initialVariant);
+        updateUI(initialVariant);
+      }
+
+      optionInputs.forEach((input) => {
+        input.addEventListener('change', function () {
+          const variant = findVariantFromSelections();
+          if (variant) {
+            setSelectedState(variant);
+            updateUI(variant);
+          }
+        });
+      });
+
       // Stop propagation for clicks on variant options and form buttons
       const interactiveElements = productForm.querySelectorAll(
         '[data-option-label], .product-form__submit, input[type="radio"], button[type="submit"]'
       );
 
       interactiveElements.forEach(function (element) {
-        // Handle both click and touch events for mobile compatibility
         function handleInteraction(e) {
-          // Stop propagation to prevent navigation when clicking on form controls
           e.stopPropagation();
-          // Prevent default only if it's a link
           if (e.target.closest('a')) {
             e.preventDefault();
           }
@@ -159,7 +295,6 @@
         element.addEventListener('click', handleInteraction);
         element.addEventListener('touchend', function (e) {
           handleInteraction(e);
-          // Trigger click for accessibility and form submission
           if (!e.defaultPrevented) {
             const clickEvent = new MouseEvent('click', {
               bubbles: true,
