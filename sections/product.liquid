@@ -105,13 +105,15 @@
       </div>
 
       {% comment %} Buy form{% endcomment %}
-      {% render 'product-buy-form',
+      {% render 'buy-form',
         section_id: section.id,
         show_dynamic_checkout: false,
         gift_card_recipient_feature_active: false,
         product_form_id: product_form_identifier,
         quantity_rule_soldout: false,
-        product: product
+        product: product,
+        button_variant: 'default',
+        section: section
       %}
 
       {% comment %} Information points {% endcomment %}

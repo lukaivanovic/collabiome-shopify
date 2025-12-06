@@ -295,3 +295,94 @@ if (!customElements.get('cart-note')) {
     }
   );
 }
+
+class QuantityInput extends HTMLElement {
+  constructor() {
+    super();
+    this.input = this.querySelector('input[type="number"]');
+    this.minusButton = this.querySelector('button[name="minus"]');
+    this.plusButton = this.querySelector('button[name="plus"]');
+
+    if (!this.input) return;
+
+    this.minusButton?.addEventListener('click', () => this.decrease());
+    this.plusButton?.addEventListener('click', () => this.increase());
+    
+    // Update button states when input value changes (e.g., manual typing)
+    this.input.addEventListener('input', () => this.updateButtonStates());
+    this.input.addEventListener('change', () => this.updateButtonStates());
+    
+    this.updateButtonStates();
+  }
+
+  getValue() {
+    return parseInt(this.input.value) || 0;
+  }
+
+  getMin() {
+    return parseInt(this.input.dataset.min) || parseInt(this.input.min) || 0;
+  }
+
+  getMax() {
+    const max = this.input.max;
+    return max ? parseInt(max) : null;
+  }
+
+  getStep() {
+    return parseInt(this.input.step) || 1;
+  }
+
+  decrease() {
+    const currentValue = this.getValue();
+    const min = this.getMin();
+    const step = this.getStep();
+    const newValue = Math.max(min, currentValue - step);
+    
+    if (newValue !== currentValue) {
+      this.input.value = newValue;
+      this.triggerChange();
+      this.updateButtonStates();
+    }
+  }
+
+  increase() {
+    const currentValue = this.getValue();
+    const max = this.getMax();
+    const step = this.getStep();
+    let newValue = currentValue + step;
+    
+    if (max !== null) {
+      newValue = Math.min(max, newValue);
+    }
+    
+    if (newValue !== currentValue) {
+      this.input.value = newValue;
+      this.triggerChange();
+      this.updateButtonStates();
+    }
+  }
+
+  triggerChange() {
+    // Create and dispatch a change event so CartItems can handle it
+    const event = new Event('change', { bubbles: true });
+    this.input.dispatchEvent(event);
+  }
+
+  updateButtonStates() {
+    const currentValue = this.getValue();
+    const min = this.getMin();
+    const max = this.getMax();
+
+    if (this.minusButton) {
+      this.minusButton.disabled = currentValue <= min;
+    }
+
+    if (this.plusButton) {
+      this.plusButton.disabled = max !== null && currentValue >= max;
+    }
+  }
+}
+
+if (!customElements.get('quantity-input')) {
+  customElements.define('quantity-input', QuantityInput);
+}

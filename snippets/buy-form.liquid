@@ -1,3 +1,19 @@
+{% doc %}
+  Renders a message.
+
+  @param {string} product - Product object.
+  @param {string} button_variant - Button variant.
+  @param {object} section - Section object.
+  @param {string} product_form_id - Product form id.
+  @param {boolean} gift_card_recipient_feature_active - Gift card recipient feature active.
+  @param {boolean} quantity_rule_soldout - Quantity rule sold out.
+  @param {boolean} show_dynamic_checkout - Show dynamic checkout.
+  @param {string} section_id - Section id.
+
+  @example
+  {% render 'buy-form', product: product %}
+{% enddoc %}
+
 {% comment %}
   {% doc %}
     Buy Form Component
@@ -37,7 +53,8 @@
   </div>
 
   {%- liquid
-    assign selected_variant = product.first_available_variant
+    assign first_variant = product.first_available_variant
+    assign selected_variant = product.selected_or_first_available_variant
   -%}
 
   {%- form 'product',
