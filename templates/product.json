@@ -11,15 +11,37 @@
   "sections": {
     "main": {
       "type": "product",
-      "settings": {}
+      "settings": {
+        "info_label_1": "",
+        "info_label_2": "",
+        "info_label_3": ""
+      }
+    },
+    "products_row_NQCXFe": {
+      "type": "products-row",
+      "blocks": {
+        "products-row-rotating-text": {
+          "type": "rotating-text",
+          "static": true,
+          "settings": {
+            "text": "Rotating text",
+            "speed": 60,
+            "gap": 24
+          },
+          "blocks": {}
+        }
+      },
+      "name": "Product",
+      "settings": {
+        "title": "Featured products",
+        "description": "Discover our latest products",
+        "products": []
+      }
     },
     "product_upsell_RFhKfi": {
       "type": "product-upsell",
       "name": "Product Upsell",
-      "settings": {
-        "title": "Complete Your Routine",
-        "description": ""
-      }
+      "settings": {}
     },
     "product_benefits_HE6ycF": {
       "type": "product-benefits",
@@ -39,9 +61,8 @@
       "type": "product-ingredients",
       "name": "Product Ingredients",
       "settings": {
-        "title": "Ingredients",
-        "description": "<p>Only the best for our customers</p>",
-        "eyebrow": ""
+        "use_current_product": true,
+        "product": ""
       }
     },
     "product_science_nfrBbH": {
@@ -75,6 +96,7 @@
   },
   "order": [
     "main",
+    "products_row_NQCXFe",
     "product_upsell_RFhKfi",
     "product_benefits_HE6ycF",
     "product_before_after_RheAtk",
