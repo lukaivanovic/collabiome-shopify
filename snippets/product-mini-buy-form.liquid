@@ -15,7 +15,7 @@
 
 {% liquid
   assign product = product | default: empty
-  assign show_dynamic_checkout = false
+  assign show_dynamic_checkout = show_dynamic_checkout | default: false
   assign gift_card_recipient_feature_active = gift_card_recipient_feature_active | default: false
   assign section_id_value = section_id | default: 'mini-product'
   assign product_form_id = product_form_id | default: section_id_value | append: '-mini-product-form'
@@ -29,21 +29,20 @@
 {% endunless %}
 
 {% liquid
-  assign selected_variant = product.selected_or_first_available_variant
-
-  # Fallback to first variant if no available variant found
-  unless selected_variant
+  assign selected_variant = product.selected_or_first_available_variant | default: product.first_available_variant
+  if selected_variant == blank
     assign selected_variant = product.variants.first
-  endunless
-
-  assign check_against_inventory = true
-
-  if selected_variant.inventory_management != 'shopify' or selected_variant.inventory_policy == 'continue'
-    assign check_against_inventory = false
   endif
 
-  if selected_variant.quantity_rule.min > selected_variant.inventory_quantity and check_against_inventory
-    assign quantity_rule_soldout = true
+  assign check_against_inventory = true
+  if selected_variant != blank
+    if selected_variant.inventory_management != 'shopify' or selected_variant.inventory_policy == 'continue'
+      assign check_against_inventory = false
+    endif
+
+    if selected_variant.quantity_rule.min > selected_variant.inventory_quantity and check_against_inventory
+      assign quantity_rule_soldout = true
+    endif
   endif
 
   assign button_classes = 'button flex items-center justify-center gap-2 h-8 px-6 text-sm font-semibold [background:var(--product-button-background)] [color:var(--product-button-text-color)]'
@@ -57,6 +56,8 @@
   data-hide-errors="{{ gift_card_recipient_feature_active }}"
   data-section-id="{{ section_id_value }}"
   data-product-id="{{ product.id }}"
+  data-product-data-id="product-data-{{ product.id }}"
+  data-product-data-fallback="product-data"
 >
   <div class="product-form__error-message-wrapper" role="alert" hidden>
     <span class="svg-wrapper">
@@ -75,8 +76,8 @@
     <input
       type="hidden"
       name="id"
-      value="{{ selected_variant.id }}"
-      {% if selected_variant == null or selected_variant.available == false or quantity_rule_soldout %}
+      value="{% if selected_variant != blank %}{{ selected_variant.id }}{% endif %}"
+      {% if selected_variant == blank or selected_variant.available == false or quantity_rule_soldout %}
         disabled
       {% endif %}
       class="product-variant-id"
@@ -86,12 +87,12 @@
       type="submit"
       name="add"
       class="{{ button_classes }}"
-      {% if selected_variant == null or selected_variant.available == false or quantity_rule_soldout %}
+      {% if selected_variant == blank or selected_variant.available == false or quantity_rule_soldout %}
         disabled
       {% endif %}
     >
       <span>
-        {%- if selected_variant == null -%}
+        {%- if selected_variant == blank -%}
           Unavailable
         {%- elsif selected_variant.available == false or quantity_rule_soldout -%}
           Sold out
@@ -108,18 +109,84 @@
 </product-form>
 
 {% javascript %}
-  // Prevent clicks on form buttons from propagating to parent link
+  // Prevent clicks from bubbling; ensure hidden input stays aligned to first available variant.
   document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('product-form.product-mini-buy-form').forEach(function (productForm) {
-      // Stop propagation for clicks on form buttons
-      const interactiveElements = productForm.querySelectorAll('button[type="submit"]');
+      const dataIdPrimary = productForm.dataset.productDataId;
+      const dataIdFallback = productForm.dataset.productDataFallback;
+      const productId = productForm.dataset.productId;
+      const dataScript =
+        (dataIdPrimary && document.getElementById(dataIdPrimary)) ||
+        (productId && document.getElementById(`product-data-${productId}`)) ||
+        (dataIdFallback && document.getElementById(dataIdFallback)) ||
+        document.getElementById('product-data');
 
+      let productData = null;
+      if (dataScript) {
+        try {
+          productData = JSON.parse(dataScript.textContent);
+        } catch (e) {
+          productData = null;
+        }
+      }
+
+      const hiddenInput = productForm.querySelector('.product-variant-id');
+      const button = productForm.querySelector('button[type="submit"]');
+
+      function isVariantAvailable(variant) {
+        if (!variant) return false;
+        if (!variant.available) return false;
+
+        // Check quantity rules
+        const checkAgainstInventory =
+          variant.inventory_management === 'shopify' && variant.inventory_policy !== 'continue';
+        const minRule = variant.quantity_rule?.min || 0;
+        const soldOutByRule = checkAgainstInventory && minRule > variant.inventory_quantity;
+
+        return !soldOutByRule;
+      }
+
+      function pickFirstAvailableVariant() {
+        if (!productData) return null;
+        return productData.variants.find((v) => isVariantAvailable(v)) || productData.variants[0] || null;
+      }
+
+      function updateUI(variant) {
+        if (!hiddenInput || !button) return;
+
+        const isAvailable = isVariantAvailable(variant);
+        const buttonText = button.querySelector('span');
+
+        hiddenInput.value = variant ? variant.id : '';
+        hiddenInput.disabled = !isAvailable;
+        button.disabled = !isAvailable;
+
+        if (buttonText) {
+          if (!variant) {
+            buttonText.textContent = 'Unavailable';
+          } else if (!isAvailable) {
+            buttonText.textContent = 'Sold out';
+          } else {
+            const formattedPrice =
+              window.Shopify && typeof Shopify.formatMoney === 'function'
+                ? Shopify.formatMoney(variant.price)
+                : (variant.price / 100).toFixed(2);
+            buttonText.textContent = `Add to cart (${formattedPrice})`;
+          }
+        }
+      }
+
+      // Ensure hidden input/value matches first available if blank.
+      if (productData && hiddenInput) {
+        const variant = pickFirstAvailableVariant();
+        updateUI(variant);
+      }
+
+      // Stop propagation on interactions.
+      const interactiveElements = productForm.querySelectorAll('button[type="submit"]');
       interactiveElements.forEach(function (element) {
-        // Handle both click and touch events for mobile compatibility
         function handleInteraction(e) {
-          // Stop propagation to prevent navigation when clicking on form controls
           e.stopPropagation();
-          // Prevent default only if it's a link
           if (e.target.closest('a')) {
             e.preventDefault();
           }
@@ -128,7 +195,6 @@
         element.addEventListener('click', handleInteraction);
         element.addEventListener('touchend', function (e) {
           handleInteraction(e);
-          // Trigger click for accessibility and form submission
           if (!e.defaultPrevented) {
             const clickEvent = new MouseEvent('click', {
               bubbles: true,
