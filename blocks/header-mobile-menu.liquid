@@ -61,18 +61,12 @@
 
 <div
   id="mobile-menu"
-  class="absolute inset-0 top-16 z-[9999] h-screen w-screen opacity-0 invisible transition-opacity duration-300 aria-[hidden=false]:opacity-100 aria-[hidden=false]:visible"
+  class="absolute left-0 right-0 top-16 z-[9999] h-[calc(100dvh-4rem)] overflow-y-scroll w-screen opacity-0 invisible transition-opacity duration-300 aria-[hidden=false]:opacity-100 aria-[hidden=false]:visible"
   aria-hidden="true"
   data-mobile-menu
 >
-  <!-- Overlay -->
-  <div
-    class="absolute inset-0 bg-black/50"
-    data-menu-overlay
-  ></div>
-
   <!-- Menu Content -->
-  <nav class="w-full bg-[var(--color-background-default)] flex flex-col transform -translate-x-full  aria-[hidden=false]:translate-x-0 shadow-lg px-4 gap-2">
+  <nav class="w-full bg-[var(--color-background-default)] flex flex-col transform -translate-x-full aria-[hidden=false]:translate-x-0 shadow-lg p-4 gap-8">
     {% comment %}
       Quiz banner for customers who don't know what to choose.
       Fully optional – shown only when at least title or description is filled.

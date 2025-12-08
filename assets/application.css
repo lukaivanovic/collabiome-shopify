@@ -634,6 +634,9 @@
   .h-\[2lh\] {
     height: 2lh;
   }
+  .h-\[calc\(100dvh-4rem\)\] {
+    height: calc(100dvh - 4rem);
+  }
   .h-auto {
     height: auto;
   }
@@ -660,6 +663,9 @@
   }
   .min-h-\[160px\] {
     min-height: 160px;
+  }
+  .min-h-screen {
+    min-height: 100vh;
   }
   .w-1 {
     width: calc(var(--spacing) * 1);
@@ -1016,6 +1022,9 @@
   }
   .overflow-y-auto {
     overflow-y: auto;
+  }
+  .overflow-y-scroll {
+    overflow-y: scroll;
   }
   .rounded {
     border-radius: 0.25rem;
