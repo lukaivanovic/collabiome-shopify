@@ -8,7 +8,9 @@
 </header>
 
 <header class="relative block md:hidden bg-white z-99 border-b border-black/8 h-16">
-  {% render 'header-mobile-menu',
+  {% content_for 'block',
+    type: 'header-mobile-menu',
+    id: 'header-mobile-menu',
     shop_menu: section.settings.shop_menu,
     marketing_menu: section.settings.marketing_menu
   %}
