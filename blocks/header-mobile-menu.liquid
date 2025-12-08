@@ -100,29 +100,12 @@
             <h2 class="text-lg font-semibold leading-snug">
               {{ block.settings.quiz_banner_title | escape }}
             </h2>
-            <p class="text-sm text-white/80">
+            <p class="text-sm text-white/64">
               {{ block.settings.quiz_banner_description }}
             </p>
           </div>
-          <div class="flex items-center">
-            <span class="inline-flex items-center gap-2 text-sm font-medium underline-offset-4 hover:underline">
-              {{ block.settings.quiz_banner_link_text | default: 'Take quiz' | escape }}
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                viewBox="0 0 16 16"
-                aria-hidden="true"
-                class="w-4 h-4"
-              >
-                <path
-                  d="M5.5 3.5L10.5 8L5.5 12.5"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="1.5"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                />
-              </svg>
-            </span>
+          <div class="flex items-center text-white [&>svg]:w-5 [&>svg]:h-5">
+            {{ 'icon-chevron-right.svg' | inline_asset_content }}
           </div>
         </div>
       </a>
