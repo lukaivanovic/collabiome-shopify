@@ -17,25 +17,12 @@
         "info_label_3": ""
       }
     },
-    "products_row_NQCXFe": {
-      "type": "products-row",
-      "blocks": {
-        "products-row-rotating-text": {
-          "type": "rotating-text",
-          "static": true,
-          "settings": {
-            "text": "Rotating text",
-            "speed": 60,
-            "gap": 24
-          },
-          "blocks": {}
-        }
-      },
-      "name": "Product",
+    "product_videos_KABRrw": {
+      "type": "product-videos",
+      "name": "Product Videos",
       "settings": {
-        "title": "Featured products",
-        "description": "Discover our latest products",
-        "products": []
+        "title": "Product Videos",
+        "description": "<p>Watch our product videos</p>"
       }
     },
     "product_upsell_RFhKfi": {
@@ -92,20 +79,11 @@
       "settings": {
         "background_color": "#ffffff"
       }
-    },
-    "product_videos_KABRrw": {
-      "type": "product-videos",
-      "name": "Product Videos",
-      "settings": {
-        "title": "Product Videos",
-        "description": "<p>Watch our product videos</p>"
-      }
     }
   },
   "order": [
     "main",
     "product_videos_KABRrw",
-    "products_row_NQCXFe",
     "product_upsell_RFhKfi",
     "product_benefits_HE6ycF",
     "product_before_after_RheAtk",
