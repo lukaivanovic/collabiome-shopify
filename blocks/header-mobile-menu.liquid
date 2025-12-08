@@ -147,6 +147,64 @@
       {%- endif -%}
     {% endif %}
 
+    {% comment %} Dodaci prehrani categories section {% endcomment %}
+    {% if block.settings.show_supplements_section %}
+      <div class="px-6 py-6 border-b border-black/5">
+        <h3 class="text-xs font-medium text-[var(--color-foreground)]/64 uppercase tracking-wide mb-4">
+          {{ block.settings.supplements_label | default: 'Dodaci prehrani' | escape }}
+        </h3>
+        <div class="flex flex-col gap-4">
+          {% if block.settings.category_1_title != blank %}
+            <a
+              href="{{ block.settings.category_1_url | default: '#' }}"
+              class="block focus:outline-2 focus:outline-[var(--color-foreground)] focus:outline-offset-2"
+            >
+              <h4 class="text-base font-semibold text-[var(--color-foreground)] mb-1">
+                {{ block.settings.category_1_title | escape }}
+              </h4>
+              {% if block.settings.category_1_description != blank %}
+                <p class="text-sm text-[var(--color-foreground)]/64">
+                  {{ block.settings.category_1_description | escape }}
+                </p>
+              {% endif %}
+            </a>
+          {% endif %}
+
+          {% if block.settings.category_2_title != blank %}
+            <a
+              href="{{ block.settings.category_2_url | default: '#' }}"
+              class="block focus:outline-2 focus:outline-[var(--color-foreground)] focus:outline-offset-2"
+            >
+              <h4 class="text-base font-semibold text-[var(--color-foreground)] mb-1">
+                {{ block.settings.category_2_title | escape }}
+              </h4>
+              {% if block.settings.category_2_description != blank %}
+                <p class="text-sm text-[var(--color-foreground)]/64">
+                  {{ block.settings.category_2_description | escape }}
+                </p>
+              {% endif %}
+            </a>
+          {% endif %}
+
+          {% if block.settings.category_3_title != blank %}
+            <a
+              href="{{ block.settings.category_3_url | default: '#' }}"
+              class="block focus:outline-2 focus:outline-[var(--color-foreground)] focus:outline-offset-2"
+            >
+              <h4 class="text-base font-semibold text-[var(--color-foreground)] mb-1">
+                {{ block.settings.category_3_title | escape }}
+              </h4>
+              {% if block.settings.category_3_description != blank %}
+                <p class="text-sm text-[var(--color-foreground)]/64">
+                  {{ block.settings.category_3_description | escape }}
+                </p>
+              {% endif %}
+            </a>
+          {% endif %}
+        </div>
+      </div>
+    {% endif %}
+
     {% if shop_menu and shop_menu.links.size > 0 %}
       <div class="mb-6">
         <ul class="list-none m-0 p-0">
@@ -346,6 +404,85 @@
       "id": "quiz_banner_link_text",
       "label": "Quiz banner link text",
       "default": "Take quiz"
+    },
+    {
+      "type": "header",
+      "content": "Supplements section"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_supplements_section",
+      "label": "Show supplements section",
+      "default": true
+    },
+    {
+      "type": "text",
+      "id": "supplements_label",
+      "label": "Supplements section label",
+      "default": "Dodaci prehrani"
+    },
+    {
+      "type": "header",
+      "content": "Category 1"
+    },
+    {
+      "type": "text",
+      "id": "category_1_title",
+      "label": "Category 1 title",
+      "default": "Kolagen Boost"
+    },
+    {
+      "type": "text",
+      "id": "category_1_description",
+      "label": "Category 1 description",
+      "default": "Obnovi kožu, kosu i nokte"
+    },
+    {
+      "type": "url",
+      "id": "category_1_url",
+      "label": "Category 1 URL"
+    },
+    {
+      "type": "header",
+      "content": "Category 2"
+    },
+    {
+      "type": "text",
+      "id": "category_2_title",
+      "label": "Category 2 title",
+      "default": "Kolagen Nutriage"
+    },
+    {
+      "type": "text",
+      "id": "category_2_description",
+      "label": "Category 2 description",
+      "default": "Nahrani svoje tijelo"
+    },
+    {
+      "type": "url",
+      "id": "category_2_url",
+      "label": "Category 2 URL"
+    },
+    {
+      "type": "header",
+      "content": "Category 3"
+    },
+    {
+      "type": "text",
+      "id": "category_3_title",
+      "label": "Category 3 title",
+      "default": "Kolagen Recupera"
+    },
+    {
+      "type": "text",
+      "id": "category_3_description",
+      "label": "Category 3 description",
+      "default": "Oporavi se kako zaslužuješ"
+    },
+    {
+      "type": "url",
+      "id": "category_3_url",
+      "label": "Category 3 URL"
     }
   ]
 }
