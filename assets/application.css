@@ -1760,8 +1760,23 @@
   .text-emerald-900 {
     color: var(--color-emerald-900);
   }
+  .text-foreground-default {
+    color: var(--color-foreground-default);
+  }
+  .text-foreground-default\/64 {
+    color: var(--color-foreground-default);
+    @supports (color: color-mix(in lab, red, red)) {
+      color: color-mix(in oklab, var(--color-foreground-default) 64%, transparent);
+    }
+  }
   .text-foreground-secondary {
     color: var(--color-foreground-secondary);
+  }
+  .text-foreground-secondary\/64 {
+    color: color-mix(in srgb, color-mix(in srgb, var(--color-foreground-default) 64%, transparent) 64%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      color: color-mix(in oklab, var(--color-foreground-secondary) 64%, transparent);
+    }
   }
   .text-gray-500 {
     color: var(--color-gray-500);

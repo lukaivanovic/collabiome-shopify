@@ -9,14 +9,14 @@
 
 <a
   href="{{ block.settings.url | default: '#' }}"
-  class="block focus:outline-2 focus:outline-[var(--color-foreground)] focus:outline-offset-2"
+  class="block focus:outline-2 focus:outline-[var(--color-foreground)] focus:outline-offset-2 py-3"
   {{ block.shopify_attributes }}
 >
-  <h4 class="text-base font-semibold text-[var(--color-foreground)] mb-1">
+  <h4 class="text-base font-medium text-foreground-default">
     {{ block.settings.title | escape }}
   </h4>
   {% if block.settings.description != blank %}
-    <p class="text-sm text-[var(--color-foreground)]/64">
+    <p class="text-sm text-foreground-default/64">
       {{ block.settings.description | escape }}
     </p>
   {% endif %}
@@ -50,4 +50,3 @@
   ]
 }
 {% endschema %}
-
