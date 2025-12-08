@@ -16,6 +16,14 @@
 {% liquid
   assign shop_menu = shop_menu | default: empty
   assign marketing_menu = marketing_menu | default: empty
+
+  # Quiz banner visibility
+  assign quiz_banner_has_content = false
+  if block.settings.quiz_banner_title != blank
+    assign quiz_banner_has_content = true
+  elsif block.settings.quiz_banner_description != blank
+    assign quiz_banner_has_content = true
+  endif
 %}
 
 <!-- Mobile Header Bar -->
@@ -65,6 +73,80 @@
 
   <!-- Menu Content -->
   <nav class="w-full bg-[var(--color-background-default)] flex flex-col transform -translate-x-full  aria-[hidden=false]:translate-x-0 shadow-lg">
+    {% comment %}
+      Quiz banner for customers who don't know what to choose.
+      Fully optional – shown only when at least title or description is filled.
+    {% endcomment %}
+    {% if quiz_banner_has_content %}
+      {% assign quiz_banner_link = block.settings.quiz_banner_link %}
+      {% if quiz_banner_link != blank %}
+        <a href="{{ quiz_banner_link }}" class="relative block overflow-hidden bg-black text-white">
+      {% else %}
+        <div class="relative block overflow-hidden bg-black text-white">
+      {% endif %}
+      <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+        {% if block.settings.quiz_banner_image != blank %}
+          {{
+            block.settings.quiz_banner_image
+            | image_url: width: 800
+            | image_tag:
+              loading: 'lazy',
+              sizes: '100vw',
+              alt: block.settings.quiz_banner_title,
+              class: 'absolute inset-0 w-full h-full object-cover'
+          }}
+        {% else %}
+          <div class="w-full h-full bg-gradient-to-r from-black/60 to-black/30"></div>
+        {% endif %}
+        <div
+          class="absolute inset-0 pointer-events-none"
+          style="background: {{ block.settings.quiz_banner_overlay_color | default: '#000000' }}; opacity: {{ block.settings.quiz_banner_overlay_opacity | default: 30 | divided_by: 100.0 }};"
+        ></div>
+      </div>
+
+      <div class="relative z-10 px-6 py-6 flex flex-col gap-3">
+        <div class="space-y-2">
+          {% if block.settings.quiz_banner_title != blank %}
+            <h2 class="text-lg font-semibold leading-snug">
+              {{ block.settings.quiz_banner_title | escape }}
+            </h2>
+          {% endif %}
+          {% if block.settings.quiz_banner_description != blank %}
+            <p class="text-sm text-white/80">
+              {{ block.settings.quiz_banner_description }}
+            </p>
+          {% endif %}
+        </div>
+        {% if quiz_banner_link != blank %}
+          <div class="flex items-center">
+            <span class="inline-flex items-center gap-2 text-sm font-medium underline-offset-4 hover:underline">
+              {{ block.settings.quiz_banner_link_text | default: 'Take quiz' | escape }}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+                class="w-4 h-4"
+              >
+                <path
+                  d="M5.5 3.5L10.5 8L5.5 12.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </div>
+        {% endif %}
+      </div>
+      {%- if quiz_banner_link != blank -%}
+        </a>
+      {%- else -%}
+        </div>
+      {%- endif -%}
+    {% endif %}
+
     {% if shop_menu and shop_menu.links.size > 0 %}
       <div class="mb-6">
         <ul class="list-none m-0 p-0">
@@ -217,6 +299,53 @@
       "type": "link_list",
       "id": "shop_menu",
       "label": "Shop menu"
+    },
+    {
+      "type": "header",
+      "content": "Quiz banner"
+    },
+    {
+      "type": "text",
+      "id": "quiz_banner_title",
+      "label": "Quiz banner title"
+    },
+    {
+      "type": "richtext",
+      "id": "quiz_banner_description",
+      "label": "Quiz banner description"
+    },
+    {
+      "type": "image_picker",
+      "id": "quiz_banner_image",
+      "label": "Quiz banner image"
+    },
+    {
+      "type": "color",
+      "id": "quiz_banner_overlay_color",
+      "label": "Quiz banner overlay color",
+      "default": "#000000",
+      "alpha": true
+    },
+    {
+      "type": "range",
+      "id": "quiz_banner_overlay_opacity",
+      "label": "Quiz banner overlay opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "default": 30,
+      "unit": "%"
+    },
+    {
+      "type": "url",
+      "id": "quiz_banner_link",
+      "label": "Quiz banner link"
+    },
+    {
+      "type": "text",
+      "id": "quiz_banner_link_text",
+      "label": "Quiz banner link text",
+      "default": "Take quiz"
     }
   ]
 }
