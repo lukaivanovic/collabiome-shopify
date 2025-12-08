@@ -1026,6 +1026,9 @@
   .overflow-y-scroll {
     overflow-y: scroll;
   }
+  .overscroll-contain {
+    overscroll-behavior: contain;
+  }
   .rounded {
     border-radius: 0.25rem;
   }
