@@ -68,7 +68,94 @@
             "quiz_banner_link": "shopify://pages/kviz",
             "quiz_banner_link_text": "Take quiz"
           },
-          "blocks": {}
+          "blocks": {
+            "mobile_menu_category_links_pdFDPA": {
+              "type": "mobile-menu-category-links",
+              "name": "Menu category links",
+              "settings": {
+                "label": "Dodaci prehrani"
+              },
+              "blocks": {
+                "mobile_menu_category_PcCU6n": {
+                  "type": "mobile-menu-category",
+                  "settings": {
+                    "title": "Kolagen Boost",
+                    "description": "Obnovi kožu, kosu i nokte",
+                    "url": ""
+                  },
+                  "blocks": {}
+                },
+                "mobile_menu_category_UenrwD": {
+                  "type": "mobile-menu-category",
+                  "settings": {
+                    "title": "Kolagen Nutriage",
+                    "description": "Nahrani svoje tijelo",
+                    "url": ""
+                  },
+                  "blocks": {}
+                },
+                "mobile_menu_category_d88iQa": {
+                  "type": "mobile-menu-category",
+                  "settings": {
+                    "title": "Kolagen Recupera",
+                    "description": "Oporavi se kako zaslužuješ",
+                    "url": ""
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "mobile_menu_category_PcCU6n",
+                "mobile_menu_category_UenrwD",
+                "mobile_menu_category_d88iQa"
+              ]
+            },
+            "mobile_menu_category_links_zwycbn": {
+              "type": "mobile-menu-category-links",
+              "name": "Menu category links",
+              "settings": {
+                "label": "Dodaci prehrani"
+              },
+              "blocks": {
+                "mobile_menu_category_3rcH7d": {
+                  "type": "mobile-menu-category",
+                  "settings": {
+                    "title": "Kolagen Boost",
+                    "description": "Obnovi kožu, kosu i nokte",
+                    "url": ""
+                  },
+                  "blocks": {}
+                },
+                "mobile_menu_category_QffAKe": {
+                  "type": "mobile-menu-category",
+                  "settings": {
+                    "title": "Kolagen Nutriage",
+                    "description": "Nahrani svoje tijelo",
+                    "url": ""
+                  },
+                  "blocks": {}
+                },
+                "mobile_menu_category_ibkm8k": {
+                  "type": "mobile-menu-category",
+                  "settings": {
+                    "title": "Kolagen Recupera",
+                    "description": "Oporavi se kako zaslužuješ",
+                    "url": ""
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "mobile_menu_category_3rcH7d",
+                "mobile_menu_category_QffAKe",
+                "mobile_menu_category_ibkm8k"
+              ]
+            }
+          },
+          "block_order": [
+            "mobile_menu_category_links_pdFDPA",
+            "mobile_menu_category_links_zwycbn"
+          ]
         }
       },
       "settings": {
