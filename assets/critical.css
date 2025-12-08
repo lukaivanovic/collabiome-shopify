@@ -2,8 +2,6 @@
 
 /* Reset styles inspired by https://www.joshwcomeau.com/css/custom-css-reset/ */
 
-@import "tailwindcss";
-
 * {
   box-sizing: border-box;
 }

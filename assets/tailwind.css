@@ -12,6 +12,11 @@
     --color-foreground-pink: var(--color-foreground-pink);
     --color-background-blue: {{ settings.background_blue }};
     --color-foreground-blue: var(--color-foreground-blue);
+    
+    /* Product colors */
+    --color-product-accent: var(--product-accent);
+    --color-product-accent-foreground: var(--product-accent-foreground);
+
     --gradient-boost: var(--gradient-boost);
     --gradient-exclusive: var(--gradient-exclusive);
     --gradient-nutriage: var(--gradient-nutriage);
@@ -19,4 +24,5 @@
     --style-border-radius-inputs: var(--style-border-radius-inputs);
     --text-5xl: 2.75rem;
     --text-5xl--line-height: 1.2;
+    
   }
