@@ -65,7 +65,7 @@
             "quiz_banner_image": "shopify://shop_images/Exfolijant_-_Kompleks_vocnih_kiselina_i_enzima_modec.png",
             "quiz_banner_overlay_color": "#000000",
             "quiz_banner_overlay_opacity": 50,
-            "quiz_banner_link": "",
+            "quiz_banner_link": "shopify://pages/kviz",
             "quiz_banner_link_text": "Take quiz"
           },
           "blocks": {}
