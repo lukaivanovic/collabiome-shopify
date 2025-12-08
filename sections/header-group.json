@@ -91,7 +91,8 @@
                   "settings": {
                     "title": "Kolagen Nutriage",
                     "description": "Nahrani svoje tijelo",
-                    "url": ""
+                    "image": "shopify://shop_images/collagen_nutriage_kutija.1.jpg",
+                    "url": "shopify://products/kolagen-nutriage"
                   },
                   "blocks": {}
                 },
@@ -100,7 +101,8 @@
                   "settings": {
                     "title": "Kolagen Recupera",
                     "description": "Oporavi se kako zaslužuješ",
-                    "url": ""
+                    "image": "shopify://shop_images/Recuperamorebenefits_728090e7-4a83-49bd-a056-f19c56b7455a.png",
+                    "url": "shopify://products/recupera"
                   },
                   "blocks": {}
                 },
