@@ -128,14 +128,14 @@
               "type": "mobile-menu-category-links",
               "name": "Menu category links",
               "settings": {
-                "label": "Dodaci prehrani"
+                "label": "Kozmetika"
               },
               "blocks": {
                 "mobile_menu_category_3rcH7d": {
                   "type": "mobile-menu-category",
                   "settings": {
                     "title": "Kolagen Boost",
-                    "description": "Obnovi kožu, kosu i nokte",
+                    "description": "Sve za suhu kožu",
                     "url": ""
                   },
                   "blocks": {}
