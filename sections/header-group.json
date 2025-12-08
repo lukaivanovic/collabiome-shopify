@@ -102,12 +102,23 @@
                     "url": ""
                   },
                   "blocks": {}
+                },
+                "mobile_menu_category_tzWY6k": {
+                  "type": "mobile-menu-category",
+                  "name": "Menu category",
+                  "settings": {
+                    "title": "Vidi sve",
+                    "description": "",
+                    "url": "shopify://collections/dodaci-prehrani"
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
                 "mobile_menu_category_PcCU6n",
                 "mobile_menu_category_UenrwD",
-                "mobile_menu_category_d88iQa"
+                "mobile_menu_category_d88iQa",
+                "mobile_menu_category_tzWY6k"
               ]
             },
             "mobile_menu_category_links_zwycbn": {
