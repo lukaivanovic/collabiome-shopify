@@ -14,17 +14,8 @@
 
 {% if videos != blank %}
   <div class="product-videos {{ product_theme_class }}">
-    <div class="container-small py-20">
+    <div class="container py-20">
       <div class="flex flex-col gap-12">
-        {% if section.settings.title != blank %}
-          <div class="flex flex-col gap-2 text-center">
-            <h2 class="title-medium text-black">{{ section.settings.title }}</h2>
-            {% if section.settings.description != blank %}
-              <p class="text-foreground-secondary">{{ section.settings.description }}</p>
-            {% endif %}
-          </div>
-        {% endif %}
-
         <div class="product-videos__grid">
           {% for video in videos %}
             {% liquid

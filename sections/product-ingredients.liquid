@@ -10,60 +10,72 @@
   assign section_title = selected_product.metafields.custom.section_ingredients_title.value | default: 'Ingredients'
   assign section_description = selected_product.metafields.custom.section_ingredients_description.value | default: 'Only the best for our customers'
   assign section_eyebrow = selected_product.metafields.custom.section_ingredients_eyebrow.value | default: 'Ingredients'
+  assign product_theme = selected_product.metafields.custom.theme.value | default: 'default'
+
+  case product_theme
+    when 'recupera'
+      assign product_theme_class = 'product-theme-recupera'
+    when 'boost'
+      assign product_theme_class = 'product-theme-boost'
+    else
+      assign product_theme_class = 'product-theme-default'
+  endcase
 -%}
 
-<div class="container-small mx-auto max-w-4xl px-4 text-center py-20 flex flex-col gap-10">
-  <div>
-    <p class="text-sm font-medium uppercase text-neutral-500 tracking-wider">
-      {{ section_eyebrow }}
-    </p>
-    <h2 class="text-4xl font-medium">{{ section_title }}</h2>
-    {% if section_description != blank %}
-      <p class="text-base opacity-70 mt-2">{{ section_description }}</p>
-    {% endif %}
-  </div>
-
-  {%- liquid
-    assign other_ingredients = ''
-    assign other_ingredients_count = 0
-  -%}
-
-  <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
-    {% for ingredient in ingredients limit: 3 %}
-      <div class="flex flex-row items-center gap-4 md:flex-col md:items-stretch">
-        <div class="shrink-0 w-24 h-24 md:w-full md:h-auto md:aspect-square">
-          {% render 'image', image: ingredient.image, class: 'rounded-2xl w-full h-full object-cover' %}
-        </div>
-        <div class="text-left md:text-center">
-          <h3 class="text-lg font-medium">{{ ingredient.name }}</h3>
-          <p class="text-sm text-secondary">{{ ingredient.description }}</p>
-        </div>
-      </div>
-    {% endfor %}
-  </div>
-
-  {% for ingredient in ingredients %}
-    {% if forloop.index > 3 %}
-      {%- liquid
-        if other_ingredients_count > 0
-          assign other_ingredients = other_ingredients | append: ', '
-        endif
-        assign other_ingredients = other_ingredients | append: ingredient.name
-        assign other_ingredients_count = other_ingredients_count | plus: 1
-      -%}
-    {% endif %}
-  {% endfor %}
-
-  {% if other_ingredients != '' %}
+<section class="py-20 [background:var(--product-background)]  {{ product_theme_class }}">
+  <div class="container-small mx-auto max-w-4xl px-4 text-center py-20 flex flex-col gap-10">
     <div>
-      <div class="h-px bg-neutral-100"></div>
-      <div class="text-sm uppercase tracking-wide opacity-70 mb-2 mt-6">
-        {{ 'sections.product_ingredients.list' | t }}
-      </div>
-      <p>{{ other_ingredients }}</p>
+      <p class="text-sm font-medium uppercase text-neutral-500 tracking-wider">
+        {{ section_eyebrow }}
+      </p>
+      <h2 class="text-4xl font-medium">{{ section_title }}</h2>
+      {% if section_description != blank %}
+        <p class="text-base opacity-70 mt-2">{{ section_description }}</p>
+      {% endif %}
     </div>
-  {% endif %}
-</div>
+
+    {%- liquid
+      assign other_ingredients = ''
+      assign other_ingredients_count = 0
+    -%}
+
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      {% for ingredient in ingredients limit: 3 %}
+        <div class="flex flex-row items-center gap-4 md:flex-col md:items-stretch bg-white rounded-2xl p-1">
+          <div class="shrink-0 w-24 h-24 md:w-full md:h-auto md:aspect-square">
+            {% render 'image', image: ingredient.image, class: 'rounded-2xl w-full h-full object-cover' %}
+          </div>
+          <div class="text-left md:text-center">
+            <h3 class="text-lg font-medium">{{ ingredient.name }}</h3>
+            <p class="text-sm text-secondary">{{ ingredient.description }}</p>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+
+    {% for ingredient in ingredients %}
+      {% if forloop.index > 3 %}
+        {%- liquid
+          if other_ingredients_count > 0
+            assign other_ingredients = other_ingredients | append: ', '
+          endif
+          assign other_ingredients = other_ingredients | append: ingredient.name
+          assign other_ingredients_count = other_ingredients_count | plus: 1
+        -%}
+      {% endif %}
+    {% endfor %}
+
+    {% if other_ingredients != '' %}
+      <div>
+        <div class="h-px bg-neutral-100"></div>
+        <div class="text-sm uppercase tracking-wide opacity-70 mb-2 mt-6">
+          {{ 'sections.product_ingredients.list' | t }}
+        </div>
+        <p>{{ other_ingredients }}</p>
+      </div>
+    {% endif %}
+  </div>
+</section>
 
 {% schema %}
 {

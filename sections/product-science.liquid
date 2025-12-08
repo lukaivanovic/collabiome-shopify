@@ -36,19 +36,19 @@
   endcase
 -%}
 
-<section class="py-20 [background:var(--product-background)] {{ product_theme_class }}">
+<section class="py-20  {{ product_theme_class }}">
   <div class="container">
-    <div class="flex flex-col gap-12 lg:flex-row lg:items-center lg:gap-16">
-      <div class="flex-1">
-        <div class="max-w-140">
+    <div class="flex flex-col gap-12 lg:flex-row  lg:gap-16">
+      <div class="flex-1 py-6">
+        <div class="border-b border-neutral-100 pb-6">
           <h2 class="text-4xl font-medium">{{ section_title }}</h2>
           {% if has_description %}
-            <p class="mt-4 text-base">{{ section_description }}</p>
+            <p class="mt-2 text-base text-foreground-secondary">{{ section_description }}</p>
           {% endif %}
         </div>
 
         {% if has_studies %}
-          <div class="mt-12 flex flex-wrap gap-4">
+          <div class="mt-12 grid grid-cols-1 md:grid-cols-2 gap-4">
             {% for study in science_studies %}
               {% liquid
                 assign study_metric = study.metric | default: study.title
@@ -73,32 +73,32 @@
                 endif
               %}
 
-              <div class="rounded-2xl bg-[var(--product-accent)] p-6">
+              <div class="border-b border-neutral-100 py-6">
                 {% if study_metric %}
-                  <p class="text-5xl font-semibold text-[var(--product-background)]">
+                  <p class="text-7xl font-medium ">
                     {{ study_metric }}
                   </p>
                 {% endif %}
 
                 {% if study_text %}
-                  <p class="mt-3 text-sm text-[var(--product-background)]">{{ study_text }}</p>
+                  <p class="mt-3 text-foreground-default/80">{{ study_text }}</p>
                 {% endif %}
 
                 {% if study_source or study_link_url %}
-                  <div class="mt-5 flex flex-col gap-2 text-xs text-[var(--product-background)]/80">
+                  <div class="flex flex-col gap-2 text-[10px] text-foreground-secondary mt-1">
                     {% if study_source %}
                       {% if study_link_url != blank %}
                         <a
                           href="{{ study_link_url }}"
-                          class="font-medium text-[var(--product-background)] underline"
+                          class="font-medium "
                           target="_blank"
                           rel="noopener"
                         >
-                          {{- 'sections.product_science.source_prefix' | t: source: study_source -}}
+                          {{- study_source -}}
                         </a>
                       {% else %}
-                        <span class="font-medium text-[var(--product-background)]">
-                          {{- 'sections.product_science.source_prefix' | t: source: study_source -}}
+                        <span class="font-medium">
+                          {{ study_source }}
                         </span>
                       {% endif %}
                     {% endif %}
@@ -112,7 +112,7 @@
 
       {% if has_image %}
         <div class="flex-shrink-0 lg:w-1/2">
-          <div class="max-h-[600px] overflow-hidden rounded-2xl">
+          <div class="max-h-[800px] overflow-hidden rounded-2xl">
             {% render 'image', image: science_image, class: 'w-full rounded-2xl' %}
           </div>
         </div>
