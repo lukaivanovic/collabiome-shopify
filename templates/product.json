@@ -92,10 +92,19 @@
       "settings": {
         "background_color": "#ffffff"
       }
+    },
+    "product_videos_KABRrw": {
+      "type": "product-videos",
+      "name": "Product Videos",
+      "settings": {
+        "title": "Product Videos",
+        "description": "<p>Watch our product videos</p>"
+      }
     }
   },
   "order": [
     "main",
+    "product_videos_KABRrw",
     "products_row_NQCXFe",
     "product_upsell_RFhKfi",
     "product_benefits_HE6ycF",
