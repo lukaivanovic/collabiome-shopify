@@ -9,17 +9,33 @@
 
 <a
   href="{{ block.settings.url | default: '#' }}"
-  class="block focus:outline-2 focus:outline-[var(--color-foreground)] focus:outline-offset-2 py-3"
+  class="flex items-center gap-3 focus:outline-2 focus:outline-[var(--color-foreground)] focus:outline-offset-2 py-3"
   {{ block.shopify_attributes }}
 >
-  <h4 class="text-base font-medium text-foreground-default">
-    {{ block.settings.title | escape }}
-  </h4>
-  {% if block.settings.description != blank %}
-    <p class="text-sm text-foreground-default/64">
-      {{ block.settings.description | escape }}
-    </p>
+  {% if block.settings.image != blank %}
+    <div class="flex-shrink-0">
+      {{
+        block.settings.image
+        | image_url: width: 60
+        | image_tag: loading: 'lazy', alt: block.settings.title, class: 'w-12 h-12 object-cover rounded'
+      }}
+    </div>
   {% endif %}
+
+  <div class="flex-1 min-w-0">
+    <h4 class="text-base font-medium text-foreground-default">
+      {{ block.settings.title | escape }}
+    </h4>
+    {% if block.settings.description != blank %}
+      <p class="text-sm text-foreground-default/64">
+        {{ block.settings.description | escape }}
+      </p>
+    {% endif %}
+  </div>
+
+  <div class="flex-shrink-0 text-foreground-default/64 [&>svg]:w-5 [&>svg]:h-5">
+    {{ 'icon-chevron-right.svg' | inline_asset_content }}
+  </div>
 </a>
 
 {% schema %}
@@ -36,6 +52,11 @@
       "type": "text",
       "id": "description",
       "label": "Description"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image"
     },
     {
       "type": "url",

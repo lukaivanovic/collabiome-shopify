@@ -694,6 +694,9 @@
   .w-10 {
     width: calc(var(--spacing) * 10);
   }
+  .w-12 {
+    width: calc(var(--spacing) * 12);
+  }
   .w-14 {
     width: calc(var(--spacing) * 14);
   }
@@ -2983,6 +2986,11 @@
       height: calc(var(--spacing) * 3);
     }
   }
+  .\[\&\>svg\]\:h-5 {
+    &>svg {
+      height: calc(var(--spacing) * 5);
+    }
+  }
   .\[\&\>svg\]\:h-10 {
     &>svg {
       height: calc(var(--spacing) * 10);
@@ -2996,6 +3004,11 @@
   .\[\&\>svg\]\:w-3 {
     &>svg {
       width: calc(var(--spacing) * 3);
+    }
+  }
+  .\[\&\>svg\]\:w-5 {
+    &>svg {
+      width: calc(var(--spacing) * 5);
     }
   }
   .\[\&\>svg\]\:w-auto {
