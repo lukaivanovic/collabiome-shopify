@@ -1,0 +1,197 @@
+{%- liquid
+  assign videos = product.metafields.custom.sections_videos.value
+  assign product_theme = product.metafields.custom.theme.value | default: 'default'
+
+  case product_theme
+    when 'recupera'
+      assign product_theme_class = 'product-theme-recupera'
+    when 'boost'
+      assign product_theme_class = 'product-theme-boost'
+    else
+      assign product_theme_class = 'product-theme-default'
+  endcase
+-%}
+
+{% if videos != blank %}
+  <div class="product-videos {{ product_theme_class }}">
+    <div class="container-small py-20">
+      <div class="flex flex-col gap-12">
+        {% if section.settings.title != blank %}
+          <div class="flex flex-col gap-2 text-center">
+            <h2 class="title-medium text-black">{{ section.settings.title }}</h2>
+            {% if section.settings.description != blank %}
+              <p class="text-foreground-secondary">{{ section.settings.description }}</p>
+            {% endif %}
+          </div>
+        {% endif %}
+
+        <div class="product-videos__grid">
+          {% for video in videos %}
+            {% liquid
+              assign video_media = video.value | default: video
+            %}
+            {% if video_media != blank %}
+              <div class="product-videos__item">
+                <testimonial-video-player class="testimonial-video-player">
+                  <button
+                    type="button"
+                    class="testimonial-video-player__trigger"
+                    data-video-trigger
+                    aria-label="{{ 'sections.product_videos.play_video' | t | default: 'Play video' }}"
+                  >
+                    <div class="product-videos__media" data-inline-video>
+                      {{
+                        video_media
+                        | video_tag:
+                          autoplay: true,
+                          muted: true,
+                          loop: true,
+                          controls: false,
+                          playsinline: true,
+                          class: 'product-videos__video'
+                      }}
+                      <span class="testimonial-video-player__overlay" aria-hidden="true">
+                        <span class="testimonial-video-player__icon">
+                          <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                            <path
+                              d="M8 5v14l11-7z"
+                              fill="currentColor"
+                            />
+                          </svg>
+                        </span>
+                      </span>
+                    </div>
+                  </button>
+                </testimonial-video-player>
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="{{ 'testimonial-video-player.js' | asset_url }}" defer></script>
+{% endif %}
+
+{% stylesheet %}
+  .product-videos__grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .product-videos__item {
+    width: 100%;
+    position: relative;
+  }
+
+  .product-videos__media {
+    aspect-ratio: 9 / 16;
+    width: 100%;
+    overflow: hidden;
+    border-radius: var(--style-border-radius-cards, 12px);
+    position: relative;
+  }
+
+  .product-videos__video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    pointer-events: none;
+  }
+
+  .product-videos__video[controls] {
+    pointer-events: auto;
+  }
+
+  .testimonial-video-player {
+    width: 100%;
+    display: block;
+    position: relative;
+  }
+
+  .testimonial-video-player__trigger {
+    display: block;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    border-radius: inherit;
+  }
+
+  .testimonial-video-player__trigger:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 4px;
+  }
+
+  .testimonial-video-player__overlay {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: color-mix(in srgb, black 55%, transparent);
+    opacity: 0;
+    transition: opacity 150ms ease;
+    pointer-events: none;
+  }
+
+  .testimonial-video-player__trigger:hover .testimonial-video-player__overlay,
+  .testimonial-video-player__trigger:focus-visible .testimonial-video-player__overlay {
+    opacity: 1;
+  }
+
+  .testimonial-video-player__icon {
+    width: 64px;
+    height: 64px;
+    border-radius: 999px;
+    background: rgba(0, 0, 0, 0.75);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+  }
+
+  .testimonial-video-player__icon svg {
+    width: 28px;
+    height: 28px;
+  }
+
+  @media (max-width: 768px) {
+    .product-videos__grid {
+      grid-template-columns: 1fr;
+    }
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Product Videos",
+  "tag": "section",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Product Videos"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "Description",
+      "default": "<p>Watch our product videos</p>"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product Videos",
+      "category": "Product"
+    }
+  ]
+}
+{% endschema %}
+

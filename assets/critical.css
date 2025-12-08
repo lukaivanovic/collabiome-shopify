@@ -1,6 +1,9 @@
 /** Critical CSS for the theme. This file is included on every page. */
 
 /* Reset styles inspired by https://www.joshwcomeau.com/css/custom-css-reset/ */
+
+@import "tailwindcss";
+
 * {
   box-sizing: border-box;
 }
@@ -397,4 +400,10 @@ button:disabled:hover {
   --product-accent-foreground: #f9f1f3;
   --product-button-background: linear-gradient(var(--gradient-recupera));
   --product-button-text-color: black;
+}
+
+.title-medium {
+  font-size: var(--text-4xl);
+  line-height: var(--text-4xl--line-height);
+  font-weight: 550;
 }

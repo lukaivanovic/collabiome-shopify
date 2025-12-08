@@ -16,10 +16,10 @@
   <div class="container-small py-20">
     <div class="flex flex-col gap-12">
       <div class="flex flex-col gap-2">
-        <h2 class=" uppercase font-bold text-black">{{ section.settings.title | default: 'FAQ' }}</h2>
+        <h2 class="title-medium text-black">{{ section.settings.title | default: 'FAQ' }}</h2>
 
         {% if section.settings.description != blank %}
-          <p class=" text-neutral-700">
+          <p class="text-foreground-secondary">
             {{ section.settings.description }}
           </p>
         {% endif %}
