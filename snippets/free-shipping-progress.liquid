@@ -1,0 +1,59 @@
+{% comment %}
+  Free Shipping Progress Bar
+
+  Displays a progress bar showing how much more needs to be added to the cart
+  to qualify for free shipping (50 euros).
+
+  Usage:
+  {% render 'free-shipping-progress' %}
+{% endcomment %}
+
+{% liquid
+  # 50 euros in cents (Shopify stores prices in cents)
+  assign free_shipping_threshold = 5000
+  assign current_total = cart.total_price
+  assign remaining = free_shipping_threshold | minus: current_total
+
+  if remaining > 0
+    assign progress_percentage = current_total | times: 100 | divided_by: free_shipping_threshold
+    assign qualifies_for_free_shipping = false
+  else
+    assign progress_percentage = 100
+    assign qualifies_for_free_shipping = true
+    assign remaining = 0
+  endif
+
+  # Ensure progress doesn't exceed 100%
+  if progress_percentage > 100
+    assign progress_percentage = 100
+  endif
+%}
+
+<div class="cart-free-shipping-progress mb-4">
+  {% if qualifies_for_free_shipping %}
+    <div class="flex items-center gap-2 mb-2">
+      <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-green-100 text-green-700 flex-shrink-0">
+        {{ 'icon-check.svg' | inline_asset_content }}
+      </span>
+      <p class="text-sm font-medium text-green-700">You qualify for free shipping!</p>
+    </div>
+  {% else %}
+    <div class="mb-2">
+      <p class="text-sm text-neutral-700 mb-1">
+        Add <strong>{{ remaining | money }}</strong> more for free shipping
+      </p>
+    </div>
+  {% endif %}
+
+  <div class="w-full bg-neutral-100 rounded-full h-2 overflow-hidden">
+    <div
+      class="cart-free-shipping-progress__bar h-full bg-green-500 rounded-full transition-all duration-300 ease-out"
+      style="width: {{ progress_percentage }}%;"
+      role="progressbar"
+      aria-valuenow="{{ progress_percentage }}"
+      aria-valuemin="0"
+      aria-valuemax="100"
+      aria-label="Free shipping progress: {{ progress_percentage }}%"
+    ></div>
+  </div>
+</div>

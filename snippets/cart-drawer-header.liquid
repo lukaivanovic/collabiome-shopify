@@ -7,15 +7,16 @@
   {% render 'cart-drawer-header' %}
 {% enddoc %}
 
-<div class="flex flex-row items-center w-full justify-between py-2">
-  <p class="text-sm">Cart</p>
+<div class="flex flex-row items-center w-full justify-between px-5 pt-3 pb-2 border-b border-neutral-200">
+  <p class="text-sm font-medium">Cart</p>
   <button
     type="button"
     onclick="this.closest('cart-drawer').close()"
     aria-label="Close"
+    class="text-neutral-600 p-1 hover:text-neutral-900"
   >
-    <span class="svg-wrapper">
-      {{- 'icon-minus.svg' | inline_asset_content -}}
+    <span>
+      {{- 'icon-x.svg' | inline_asset_content -}}
     </span>
   </button>
 </div>

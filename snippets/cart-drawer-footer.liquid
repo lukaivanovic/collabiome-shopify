@@ -7,7 +7,7 @@
   {% render 'cart-drawer-footer' %}
 {% enddoc %}
 
-<div class="drawer__footer">
+<div class="border-t border-neutral-100 px-5 py-2!">
   {%- if settings.show_cart_note -%}
     <details id="Details-CartDrawer">
       <summary>
@@ -30,6 +30,8 @@
 
   <!-- Start blocks -->
   <!-- Subtotals -->
+
+  {% render 'free-shipping-progress' %}
 
   <div class="cart-drawer__footer">
     <div class="w-full flex justify-between items-center" role="status">

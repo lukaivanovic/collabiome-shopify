@@ -78,49 +78,14 @@ cart-drawer:not(.is-empty) .cart-drawer__collection {
   right: 5px;
 }
 
-.drawer__close .svg-wrapper {
-  height: 2rem;
-  width: 2rem;
-}
-
 .drawer__contents {
   flex-grow: 1;
   display: flex;
   flex-direction: column;
 }
 
-.drawer__footer {
-  border-top: 0.1rem solid rgba(var(--color-foreground), 0.2);
-  padding: 1.5rem 0;
-}
-
 cart-drawer-items.is-empty + .drawer__footer {
   display: none;
-}
-
-.drawer__footer > details {
-  margin-top: -1.5rem;
-  border-bottom: 0.1rem solid rgba(var(--color-foreground), 0.2);
-}
-
-.drawer__footer > details[open] {
-  padding-bottom: 1.5rem;
-}
-
-.drawer__footer summary {
-  display: flex;
-  position: relative;
-  line-height: 1;
-  padding: 1.5rem 2.8rem 1.5rem 0;
-}
-
-/* Add vertical spacing between totals and checkout button */
-.drawer__footer .cart__ctas {
-  margin-top: 1.25rem;
-}
-
-.drawer__footer > details + .cart-drawer__footer {
-  padding-top: 1.5rem;
 }
 
 cart-drawer {
@@ -285,10 +250,6 @@ cart-drawer-items {
   .cart-drawer .cart-item cart-remove-button {
     margin-left: 0;
   }
-}
-
-.cart-drawer__footer > * + * {
-  margin-top: 1.5rem;
 }
 
 .cart-drawer .totals {
