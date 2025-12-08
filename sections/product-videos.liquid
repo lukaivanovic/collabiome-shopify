@@ -1,5 +1,5 @@
 {%- liquid
-  assign videos = product.metafields.custom.sections_videos.value
+  assign videos = product.metafields.custom.section_videos.value
   assign product_theme = product.metafields.custom.theme.value | default: 'default'
 
   case product_theme
@@ -12,7 +12,6 @@
   endcase
 -%}
 
-{{ videos | json }}
 {% if videos != blank %}
   <div class="product-videos {{ product_theme_class }}">
     <div class="container-small py-20">
@@ -38,7 +37,7 @@
                     type="button"
                     class="testimonial-video-player__trigger"
                     data-video-trigger
-                    aria-label="{{ 'sections.product_videos.play_video' | t | default: 'Play video' }}"
+                    aria-label="Play video"
                   >
                     <div class="product-videos__media" data-inline-video>
                       {{

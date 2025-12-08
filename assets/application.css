@@ -325,6 +325,9 @@
   .top-1\/2 {
     top: calc(1/2 * 100%);
   }
+  .top-2 {
+    top: calc(var(--spacing) * 2);
+  }
   .top-16 {
     top: calc(var(--spacing) * 16);
   }
@@ -337,8 +340,17 @@
   .right-0 {
     right: calc(var(--spacing) * 0);
   }
+  .right-1 {
+    right: calc(var(--spacing) * 1);
+  }
   .right-2 {
     right: calc(var(--spacing) * 2);
+  }
+  .right-3 {
+    right: calc(var(--spacing) * 3);
+  }
+  .right-6 {
+    right: calc(var(--spacing) * 6);
   }
   .right-7 {
     right: calc(var(--spacing) * 7);
@@ -354,6 +366,12 @@
   }
   .bottom-3 {
     bottom: calc(var(--spacing) * 3);
+  }
+  .bottom-4 {
+    bottom: calc(var(--spacing) * 4);
+  }
+  .bottom-6 {
+    bottom: calc(var(--spacing) * 6);
   }
   .left-0 {
     left: calc(var(--spacing) * 0);
@@ -564,6 +582,10 @@
   }
   .aspect-square {
     aspect-ratio: 1 / 1;
+  }
+  .size-4 {
+    width: calc(var(--spacing) * 4);
+    height: calc(var(--spacing) * 4);
   }
   .size-6 {
     width: calc(var(--spacing) * 6);
@@ -2123,6 +2145,16 @@
       }
     }
   }
+  .group-has-\[aria-expanded\=true\]\:block {
+    &:is(:where(.group):has(*:is(aria-expanded=true)) *) {
+      display: block;
+    }
+  }
+  .group-has-\[aria-expanded\=true\]\:hidden {
+    &:is(:where(.group):has(*:is(aria-expanded=true)) *) {
+      display: none;
+    }
+  }
   .group-has-\[aria-expanded\=true\]\:rotate-90 {
     &:is(:where(.group):has(*:is(aria-expanded=true)) *) {
       rotate: 90deg;
@@ -2818,6 +2850,16 @@
   .md\:p-12 {
     @media (width >= 48rem) {
       padding: calc(var(--spacing) * 12);
+    }
+  }
+  .md\:\!px-4 {
+    @media (width >= 48rem) {
+      padding-inline: calc(var(--spacing) * 4) !important;
+    }
+  }
+  .md\:\!px-6 {
+    @media (width >= 48rem) {
+      padding-inline: calc(var(--spacing) * 6) !important;
     }
   }
   .md\:\!px-16 {

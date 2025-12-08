@@ -37,8 +37,13 @@
               type="button"
             >
               <span class="text-lg font-red-hat font-medium text-black pr-4">{{ item.title }}</span>
-              <div class="faq-icon w-7 h-7 rounded-full flex items-center justify-center [&>svg]:size-4 group-has-[aria-expanded=true]:rotate-90 transition-transform duration-300">
-                {{ 'icon-plus.svg' | inline_asset_content }}
+              <div class="faq-icon w-7 h-7 rounded-full flex items-center justify-center [&>svg]:size-4">
+                <span class="faq-icon-plus">
+                  {{ 'icon-plus.svg' | inline_asset_content }}
+                </span>
+                <span class="faq-icon-minus">
+                  {{ 'icon-minus.svg' | inline_asset_content }}
+                </span>
               </div>
             </button>
             <div class="faq-answer" data-collapsible-content>
@@ -69,6 +74,22 @@
   .product-faq .faq-icon {
     background: var(--product-background, rgba(0, 0, 0, 0.05));
     color: var(--product-accent, #1f2937);
+  }
+
+  .product-faq .faq-icon-plus {
+    display: block;
+  }
+
+  .product-faq .faq-icon-minus {
+    display: none;
+  }
+
+  .product-faq button[aria-expanded='true'] .faq-icon-plus {
+    display: none;
+  }
+
+  .product-faq button[aria-expanded='true'] .faq-icon-minus {
+    display: block;
   }
 {% endstylesheet %}
 

@@ -171,11 +171,11 @@ button {
 
 /** Container utility class */
 .container {
-  max-width: 1600px;
+  max-width: 1720px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 64px;
-  padding-right: 64px;
+  padding-left: 24px;
+  padding-right: 24px;
   width: 100%;
 }
 
@@ -406,4 +406,45 @@ button:disabled:hover {
   font-size: var(--text-4xl);
   line-height: var(--text-4xl--line-height);
   font-weight: 550;
+}
+
+.spinner {
+  animation: rotator 1.4s linear infinite;
+}
+
+@keyframes rotator {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(270deg);
+  }
+}
+
+.path {
+  stroke-dasharray: 280;
+  stroke-dashoffset: 0;
+  transform-origin: center;
+  stroke: var(--color-foreground-default);
+  animation: dash 1.4s ease-in-out infinite;
+}
+
+@media screen and (forced-colors: active) {
+  .path {
+    stroke: CanvasText;
+  }
+}
+
+@keyframes dash {
+  0% {
+    stroke-dashoffset: 280;
+  }
+  50% {
+    stroke-dashoffset: 75;
+    transform: rotate(135deg);
+  }
+  100% {
+    stroke-dashoffset: 280;
+    transform: rotate(450deg);
+  }
 }

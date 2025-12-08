@@ -36,6 +36,9 @@
       tabindex="-1"
     >
       {% render 'cart-drawer-header' %}
+      {%- if cart != empty -%}
+        {% render 'free-shipping-progress' %}
+      {%- endif -%}
       {%- if cart == empty -%}
         {% render 'cart-drawer-empty' %}
       {%- else -%}
