@@ -4,7 +4,7 @@
 
 <div class="container relative pt-32 pb-20 ">
   {% if section.settings.title != blank %}
-    <h2 class="pb-1">{{ section.settings.title | escape }}</h2>
+    <h2 class="title-medium pb-1">{{ section.settings.title | escape }}</h2>
     {% if section.settings.description != blank %}
       <p class="text-secondary">{{ section.settings.description | escape }}</p>
     {% endif %}

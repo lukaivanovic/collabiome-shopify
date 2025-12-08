@@ -1,0 +1,164 @@
+{% doc %}
+  Quiz/Help Banner Snippet
+
+  Renders a promotional banner for quiz or help content. Supports two variants:
+  - "mobile": Compact version for mobile menu
+  - "desktop": Full-width version for collection pages
+
+  Uses global theme settings from Theme Settings > Quiz Banner.
+
+  @param {string} variant - Banner variant: "mobile" or "desktop" (default: "desktop")
+
+  @example
+  {% render 'quiz-banner', variant: 'mobile' %}
+  {% render 'quiz-banner', variant: 'desktop' %}
+{% enddoc %}
+
+{% liquid
+  assign variant = variant | default: 'desktop'
+  
+  # Use global theme settings
+  assign banner_title = settings.quiz_banner_title
+  assign banner_description = settings.quiz_banner_description
+  assign banner_image = settings.quiz_banner_image
+  assign banner_overlay_color = settings.quiz_banner_overlay_color | default: '#000000'
+  assign banner_overlay_opacity = settings.quiz_banner_overlay_opacity | default: 30
+  assign banner_link = settings.quiz_banner_link
+  assign banner_link_text = settings.quiz_banner_link_text | default: 'See our recommendations'
+
+  # Check if banner has content
+  assign banner_has_content = false
+  if banner_title != blank
+    assign banner_has_content = true
+  elsif banner_description != blank
+    assign banner_has_content = true
+  endif
+%}
+
+{% if banner_has_content %}
+  {% if variant == 'mobile' %}
+    {% comment %} Mobile variant: compact banner {% endcomment %}
+    {% if banner_link != blank %}
+      <a
+        href="{{ banner_link }}"
+        class="relative flex items-end overflow-hidden bg-black text-white rounded-xl px-3 h-28 py-3"
+      >
+    {% else %}
+      <div class="relative flex items-end overflow-hidden bg-black text-white rounded-xl px-3 h-28 py-3">
+    {% endif %}
+      <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+        {% if banner_image != blank %}
+          {{
+            banner_image
+            | image_url: width: 800
+            | image_tag:
+              loading: 'lazy',
+              sizes: '100vw',
+              alt: banner_title,
+              class: 'absolute inset-0 w-full h-full object-cover'
+          }}
+        {% else %}
+          <div class="w-full h-full bg-gradient-to-r from-black/60 to-black/30"></div>
+        {% endif %}
+        <div
+          class="absolute inset-0 pointer-events-none"
+          style="background: {{ banner_overlay_color }}; opacity: {{ banner_overlay_opacity | divided_by: 100.0 }};"
+        ></div>
+      </div>
+
+      <div class="relative z-10 w-full flex justify-between gap-3">
+        <div>
+          {% if banner_title != blank %}
+            <h2 class="font-semibold leading-snug">
+              {{ banner_title | escape }}
+            </h2>
+          {% endif %}
+          {% if banner_description != blank %}
+            <p class="text-xs text-white/50">
+              {{ banner_description }}
+            </p>
+          {% endif %}
+        </div>
+        {% if banner_link != blank %}
+          <div class="flex items-center text-white [&>svg]:w-5 [&>svg]:h-5">
+            {{ 'icon-chevron-right.svg' | inline_asset_content }}
+          </div>
+        {% endif %}
+      </div>
+    {% if banner_link != blank %}
+      </a>
+    {% else %}
+      </div>
+    {% endif %}
+
+  {% else %}
+    {% comment %} Desktop variant: full-width banner {% endcomment %}
+    {% if banner_link != blank %}
+      <a href="{{ banner_link }}" class="relative block overflow-hidden rounded-3xl bg-black text-white mb-10">
+    {% else %}
+      <div class="relative block overflow-hidden rounded-3xl bg-black text-white mb-10">
+    {% endif %}
+      <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+        {% if banner_image != blank %}
+          {{
+            banner_image
+            | image_url: width: 2000
+            | image_tag:
+              loading: 'lazy',
+              sizes: '100vw',
+              alt: banner_title,
+              class: 'absolute inset-0 w-full h-full object-cover'
+          }}
+        {% else %}
+          <div class="w-full h-full bg-gradient-to-r from-black/60 to-black/30"></div>
+        {% endif %}
+        <div
+          class="absolute inset-0 pointer-events-none"
+          style="background: {{ banner_overlay_color }}; opacity: {{ banner_overlay_opacity | divided_by: 100.0 }};"
+        ></div>
+      </div>
+
+      <div class="relative z-10 px-6 py-7 md:px-10 md:py-9 max-w-none flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+        <div class="max-w-xl space-y-2">
+          {% if banner_title != blank %}
+            <h2 class="text-xl md:text-2xl font-semibold leading-snug">
+              {{ banner_title | escape }}
+            </h2>
+          {% endif %}
+          {% if banner_description != blank %}
+            <p class="text-sm md:text-base text-white/80">
+              {{ banner_description }}
+            </p>
+          {% endif %}
+        </div>
+        {% if banner_link != blank %}
+          <div class="md:self-stretch md:flex md:items-center">
+            <span class="inline-flex items-center gap-2 text-sm font-medium mt-1 md:mt-0 underline-offset-4 hover:underline">
+              {{ banner_link_text }}
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 16 16"
+                aria-hidden="true"
+                class="w-4 h-4"
+              >
+                <path
+                  d="M5.5 3.5L10.5 8L5.5 12.5"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.5"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                />
+              </svg>
+            </span>
+          </div>
+        {% endif %}
+      </div>
+    {% if banner_link != blank %}
+      </a>
+    {% else %}
+      </div>
+    {% endif %}
+  {% endif %}
+{% endif %}
+

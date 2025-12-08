@@ -147,5 +147,61 @@
         "default": 4
       }
     ]
+  },
+  {
+    "name": "Quiz Banner",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Global quiz banner settings"
+      },
+      {
+        "type": "paragraph",
+        "content": "These settings are used globally across the theme. Individual sections and blocks can override these settings."
+      },
+      {
+        "type": "text",
+        "id": "quiz_banner_title",
+        "label": "Quiz banner title"
+      },
+      {
+        "type": "richtext",
+        "id": "quiz_banner_description",
+        "label": "Quiz banner description"
+      },
+      {
+        "type": "image_picker",
+        "id": "quiz_banner_image",
+        "label": "Quiz banner image"
+      },
+      {
+        "type": "color",
+        "id": "quiz_banner_overlay_color",
+        "label": "Quiz banner overlay color",
+        "default": "#000000",
+        "alpha": true
+      },
+      {
+        "type": "range",
+        "id": "quiz_banner_overlay_opacity",
+        "label": "Quiz banner overlay opacity",
+        "min": 0,
+        "max": 100,
+        "step": 1,
+        "default": 30,
+        "unit": "%"
+      },
+      {
+        "type": "url",
+        "id": "quiz_banner_link",
+        "label": "Quiz banner link"
+      },
+      {
+        "type": "text",
+        "id": "quiz_banner_link_text",
+        "label": "Quiz banner link text",
+        "default": "See our recommendations"
+      }
+    ]
   }
 ]

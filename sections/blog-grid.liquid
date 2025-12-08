@@ -5,7 +5,7 @@
 
 <div class="blog-grid container">
   {% if section.settings.heading != blank %}
-    <h2>{{ section.settings.heading | escape }}</h2>
+    <h2 class="title-medium">{{ section.settings.heading | escape }}</h2>
     {% if section.settings.description != blank %}
       <p class="text-secondary pt-2">{{ section.settings.description | escape }}</p>
     {% endif %}

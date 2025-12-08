@@ -2,7 +2,7 @@
   <div class="container">
     <div class="py-6 flex flex-col gap-4">
       {% if section.settings.title != blank %}
-        <h2 class="text-center">{{ section.settings.title | escape }}</h2>
+        <h2 class="title-medium text-center">{{ section.settings.title | escape }}</h2>
         {% if section.settings.description != blank %}
           <p class="text-secondary text-center">{{ section.settings.description | escape }}</p>
         {% endif %}
