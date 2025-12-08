@@ -46,6 +46,10 @@
     aria-label="{{ item.product.title | escape }} part of {{ item.parent_relationship.parent.title | escape }}"
   {% endif %}
 >
+  {%- comment -%} Loading Spinner Overlay {%- endcomment -%}
+  <div class="loading__spinner hidden absolute inset-0 bg-white/80 backdrop-blur-sm flex items-center justify-center z-10 rounded-lg">
+    <div class="spinner"></div>
+  </div>
   {%- comment -%} Product Image (Left) {%- endcomment -%}
   <div class="cart-item__media flex-shrink-0">
     {% if item.image %}

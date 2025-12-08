@@ -12,6 +12,7 @@
   endcase
 -%}
 
+{{ videos | json }}
 {% if videos != blank %}
   <div class="product-videos {{ product_theme_class }}">
     <div class="container-small py-20">
@@ -194,4 +195,3 @@
   ]
 }
 {% endschema %}
-
