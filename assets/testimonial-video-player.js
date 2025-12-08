@@ -1,5 +1,8 @@
 if (!customElements.get("testimonial-video-player")) {
   class TestimonialVideoPlayer extends HTMLElement {
+    // Static property to track the currently playing video instance
+    static currentlyPlaying = null;
+
     constructor() {
       super();
       this.playVideo = this.playVideo.bind(this);
@@ -26,10 +29,18 @@ if (!customElements.get("testimonial-video-player")) {
     playVideo(event) {
       if (!this.inlineVideo) return;
 
-      // Prevent click from bubbling if video is already playing with sound
+      // If video is already playing with sound, reset it to sound-less mode
       if (this.isPlayingWithSound) {
+        event?.preventDefault();
         event?.stopPropagation();
+        this.resetVideo();
         return;
+      }
+
+      // Pause any currently playing video
+      if (TestimonialVideoPlayer.currentlyPlaying && 
+          TestimonialVideoPlayer.currentlyPlaying !== this) {
+        TestimonialVideoPlayer.currentlyPlaying.resetVideo();
       }
 
       // Prevent default button behavior
@@ -39,7 +50,7 @@ if (!customElements.get("testimonial-video-player")) {
       // Start playing with sound
       this.inlineVideo.muted = false;
       this.inlineVideo.loop = false;
-      this.inlineVideo.controls = true;
+      this.inlineVideo.controls = false;
       this.inlineVideo.currentTime = 0;
       
       // Hide the overlay
@@ -58,6 +69,8 @@ if (!customElements.get("testimonial-video-player")) {
       }
       
       this.isPlayingWithSound = true;
+      // Set this instance as the currently playing video
+      TestimonialVideoPlayer.currentlyPlaying = this;
     }
 
     handleVideoEnd() {
@@ -66,6 +79,9 @@ if (!customElements.get("testimonial-video-player")) {
 
     resetVideo() {
       if (!this.inlineVideo) return;
+
+      // Pause the video
+      this.inlineVideo.pause();
 
       this.inlineVideo.muted = true;
       this.inlineVideo.loop = true;
@@ -89,6 +105,11 @@ if (!customElements.get("testimonial-video-player")) {
       }
 
       this.isPlayingWithSound = false;
+      
+      // Clear the currently playing reference if this was the active video
+      if (TestimonialVideoPlayer.currentlyPlaying === this) {
+        TestimonialVideoPlayer.currentlyPlaying = null;
+      }
     }
   }
 

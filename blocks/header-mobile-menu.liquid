@@ -72,52 +72,44 @@
   ></div>
 
   <!-- Menu Content -->
-  <nav class="w-full bg-[var(--color-background-default)] flex flex-col transform -translate-x-full  aria-[hidden=false]:translate-x-0 shadow-lg">
+  <nav class="w-full bg-[var(--color-background-default)] flex flex-col transform -translate-x-full  aria-[hidden=false]:translate-x-0 shadow-lg px-4 gap-2">
     {% comment %}
       Quiz banner for customers who don't know what to choose.
       Fully optional – shown only when at least title or description is filled.
     {% endcomment %}
     {% if quiz_banner_has_content %}
       {% assign quiz_banner_link = block.settings.quiz_banner_link %}
-      {% if quiz_banner_link != blank %}
-        <a href="{{ quiz_banner_link }}" class="relative block overflow-hidden bg-black text-white">
-      {% else %}
-        <div class="relative block overflow-hidden bg-black text-white">
-      {% endif %}
-      <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
-        {% if block.settings.quiz_banner_image != blank %}
-          {{
-            block.settings.quiz_banner_image
-            | image_url: width: 800
-            | image_tag:
-              loading: 'lazy',
-              sizes: '100vw',
-              alt: block.settings.quiz_banner_title,
-              class: 'absolute inset-0 w-full h-full object-cover'
-          }}
-        {% else %}
-          <div class="w-full h-full bg-gradient-to-r from-black/60 to-black/30"></div>
-        {% endif %}
-        <div
-          class="absolute inset-0 pointer-events-none"
-          style="background: {{ block.settings.quiz_banner_overlay_color | default: '#000000' }}; opacity: {{ block.settings.quiz_banner_overlay_opacity | default: 30 | divided_by: 100.0 }};"
-        ></div>
-      </div>
 
-      <div class="relative z-10 px-6 py-6 flex flex-col gap-3">
-        <div class="space-y-2">
-          {% if block.settings.quiz_banner_title != blank %}
+      <a href="{{ quiz_banner_link }}" class="relative block overflow-hidden bg-black text-white rounded-md">
+        <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+          {% if block.settings.quiz_banner_image != blank %}
+            {{
+              block.settings.quiz_banner_image
+              | image_url: width: 800
+              | image_tag:
+                loading: 'lazy',
+                sizes: '100vw',
+                alt: block.settings.quiz_banner_title,
+                class: 'absolute inset-0 w-full h-full object-cover'
+            }}
+          {% else %}
+            <div class="w-full h-full bg-gradient-to-r from-black/60 to-black/30"></div>
+          {% endif %}
+          <div
+            class="absolute inset-0 pointer-events-none"
+            style="background: {{ block.settings.quiz_banner_overlay_color | default: '#000000' }}; opacity: {{ block.settings.quiz_banner_overlay_opacity | default: 30 | divided_by: 100.0 }};"
+          ></div>
+        </div>
+
+        <div class="relative z-10 flex justify-between gap-3">
+          <div class="space-y-2">
             <h2 class="text-lg font-semibold leading-snug">
               {{ block.settings.quiz_banner_title | escape }}
             </h2>
-          {% endif %}
-          {% if block.settings.quiz_banner_description != blank %}
             <p class="text-sm text-white/80">
               {{ block.settings.quiz_banner_description }}
             </p>
-          {% endif %}
-        </div>
-        {% if quiz_banner_link != blank %}
+          </div>
           <div class="flex items-center">
             <span class="inline-flex items-center gap-2 text-sm font-medium underline-offset-4 hover:underline">
               {{ block.settings.quiz_banner_link_text | default: 'Take quiz' | escape }}
@@ -138,72 +130,12 @@
               </svg>
             </span>
           </div>
-        {% endif %}
-      </div>
-      {%- if quiz_banner_link != blank -%}
-        </a>
-      {%- else -%}
         </div>
-      {%- endif -%}
+      </a>
     {% endif %}
 
-    {% comment %} Dodaci prehrani categories section {% endcomment %}
-    {% if block.settings.show_supplements_section %}
-      <div class="px-6 py-6 border-b border-black/5">
-        <h3 class="text-xs font-medium text-[var(--color-foreground)]/64 uppercase tracking-wide mb-4">
-          {{ block.settings.supplements_label | default: 'Dodaci prehrani' | escape }}
-        </h3>
-        <div class="flex flex-col gap-4">
-          {% if block.settings.category_1_title != blank %}
-            <a
-              href="{{ block.settings.category_1_url | default: '#' }}"
-              class="block focus:outline-2 focus:outline-[var(--color-foreground)] focus:outline-offset-2"
-            >
-              <h4 class="text-base font-semibold text-[var(--color-foreground)] mb-1">
-                {{ block.settings.category_1_title | escape }}
-              </h4>
-              {% if block.settings.category_1_description != blank %}
-                <p class="text-sm text-[var(--color-foreground)]/64">
-                  {{ block.settings.category_1_description | escape }}
-                </p>
-              {% endif %}
-            </a>
-          {% endif %}
-
-          {% if block.settings.category_2_title != blank %}
-            <a
-              href="{{ block.settings.category_2_url | default: '#' }}"
-              class="block focus:outline-2 focus:outline-[var(--color-foreground)] focus:outline-offset-2"
-            >
-              <h4 class="text-base font-semibold text-[var(--color-foreground)] mb-1">
-                {{ block.settings.category_2_title | escape }}
-              </h4>
-              {% if block.settings.category_2_description != blank %}
-                <p class="text-sm text-[var(--color-foreground)]/64">
-                  {{ block.settings.category_2_description | escape }}
-                </p>
-              {% endif %}
-            </a>
-          {% endif %}
-
-          {% if block.settings.category_3_title != blank %}
-            <a
-              href="{{ block.settings.category_3_url | default: '#' }}"
-              class="block focus:outline-2 focus:outline-[var(--color-foreground)] focus:outline-offset-2"
-            >
-              <h4 class="text-base font-semibold text-[var(--color-foreground)] mb-1">
-                {{ block.settings.category_3_title | escape }}
-              </h4>
-              {% if block.settings.category_3_description != blank %}
-                <p class="text-sm text-[var(--color-foreground)]/64">
-                  {{ block.settings.category_3_description | escape }}
-                </p>
-              {% endif %}
-            </a>
-          {% endif %}
-        </div>
-      </div>
-    {% endif %}
+    {% comment %} Render category links blocks {% endcomment %}
+    {% content_for 'blocks' %}
 
     {% if shop_menu and shop_menu.links.size > 0 %}
       <div class="mb-6">
@@ -223,7 +155,7 @@
     {% endif %}
 
     {% if marketing_menu and marketing_menu.links.size > 0 %}
-      <div class="px-6">
+      <div>
         <ul class="list-none m-0 p-0 flex flex-col gap-2">
           {% for link in marketing_menu.links %}
             <li>
@@ -352,6 +284,11 @@
 {% schema %}
 {
   "name": "Mobile menu",
+  "blocks": [
+    {
+      "type": "mobile-menu-category-links"
+    }
+  ],
   "settings": [
     {
       "type": "link_list",
@@ -404,85 +341,16 @@
       "id": "quiz_banner_link_text",
       "label": "Quiz banner link text",
       "default": "Take quiz"
-    },
+    }
+  ],
+  "presets": [
     {
-      "type": "header",
-      "content": "Supplements section"
-    },
-    {
-      "type": "checkbox",
-      "id": "show_supplements_section",
-      "label": "Show supplements section",
-      "default": true
-    },
-    {
-      "type": "text",
-      "id": "supplements_label",
-      "label": "Supplements section label",
-      "default": "Dodaci prehrani"
-    },
-    {
-      "type": "header",
-      "content": "Category 1"
-    },
-    {
-      "type": "text",
-      "id": "category_1_title",
-      "label": "Category 1 title",
-      "default": "Kolagen Boost"
-    },
-    {
-      "type": "text",
-      "id": "category_1_description",
-      "label": "Category 1 description",
-      "default": "Obnovi kožu, kosu i nokte"
-    },
-    {
-      "type": "url",
-      "id": "category_1_url",
-      "label": "Category 1 URL"
-    },
-    {
-      "type": "header",
-      "content": "Category 2"
-    },
-    {
-      "type": "text",
-      "id": "category_2_title",
-      "label": "Category 2 title",
-      "default": "Kolagen Nutriage"
-    },
-    {
-      "type": "text",
-      "id": "category_2_description",
-      "label": "Category 2 description",
-      "default": "Nahrani svoje tijelo"
-    },
-    {
-      "type": "url",
-      "id": "category_2_url",
-      "label": "Category 2 URL"
-    },
-    {
-      "type": "header",
-      "content": "Category 3"
-    },
-    {
-      "type": "text",
-      "id": "category_3_title",
-      "label": "Category 3 title",
-      "default": "Kolagen Recupera"
-    },
-    {
-      "type": "text",
-      "id": "category_3_description",
-      "label": "Category 3 description",
-      "default": "Oporavi se kako zaslužuješ"
-    },
-    {
-      "type": "url",
-      "id": "category_3_url",
-      "label": "Category 3 URL"
+      "name": "Mobile menu",
+      "blocks": [
+        {
+          "type": "mobile-menu-category-links"
+        }
+      ]
     }
   ]
 }

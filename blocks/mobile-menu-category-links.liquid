@@ -1,0 +1,67 @@
+{% doc %}
+  Mobile Menu Category Links Container
+
+  Renders a container for category links with a label.
+
+  @example
+  {% content_for 'block', type: 'mobile-menu-category-links', id: 'supplements-categories' %}
+{% enddoc %}
+
+<div class="border-b border-black/5" {{ block.shopify_attributes }}>
+  {% if block.settings.label != blank %}
+    <h3 class="text-xs font-medium text-[var(--color-foreground)]/64 uppercase tracking-wide mb-4">
+      {{ block.settings.label | escape }}
+    </h3>
+  {% endif %}
+  <div class="flex flex-col gap-4">
+    {% content_for 'blocks' %}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Menu category links",
+  "blocks": [
+    {
+      "type": "mobile-menu-category"
+    }
+  ],
+  "settings": [
+    {
+      "type": "text",
+      "id": "label",
+      "label": "Label",
+      "default": "Dodaci prehrani"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Menu category links",
+      "blocks": [
+        {
+          "type": "mobile-menu-category",
+          "settings": {
+            "title": "Kolagen Boost",
+            "description": "Obnovi kožu, kosu i nokte"
+          }
+        },
+        {
+          "type": "mobile-menu-category",
+          "settings": {
+            "title": "Kolagen Nutriage",
+            "description": "Nahrani svoje tijelo"
+          }
+        },
+        {
+          "type": "mobile-menu-category",
+          "settings": {
+            "title": "Kolagen Recupera",
+            "description": "Oporavi se kako zaslužuješ"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+

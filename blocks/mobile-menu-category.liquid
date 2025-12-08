@@ -1,0 +1,53 @@
+{% doc %}
+  Mobile Menu Category Item
+
+  Renders a single category link in the mobile menu.
+
+  @example
+  {% content_for 'block', type: 'mobile-menu-category', id: 'category-1' %}
+{% enddoc %}
+
+<a
+  href="{{ block.settings.url | default: '#' }}"
+  class="block focus:outline-2 focus:outline-[var(--color-foreground)] focus:outline-offset-2"
+  {{ block.shopify_attributes }}
+>
+  <h4 class="text-base font-semibold text-[var(--color-foreground)] mb-1">
+    {{ block.settings.title | escape }}
+  </h4>
+  {% if block.settings.description != blank %}
+    <p class="text-sm text-[var(--color-foreground)]/64">
+      {{ block.settings.description | escape }}
+    </p>
+  {% endif %}
+</a>
+
+{% schema %}
+{
+  "name": "Menu category",
+  "settings": [
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title",
+      "default": "Category"
+    },
+    {
+      "type": "text",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "URL"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Menu category"
+    }
+  ]
+}
+{% endschema %}
+
