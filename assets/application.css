@@ -1204,6 +1204,9 @@
   .bg-\[var\(--product-background\)\] {
     background-color: var(--product-background);
   }
+  .bg-background-default {
+    background-color: var(--color-background-default);
+  }
   .bg-black {
     background-color: var(--color-black);
   }
