@@ -66,7 +66,7 @@
   data-mobile-menu
 >
   <!-- Menu Content -->
-  <nav class="w-full overflow-y-scroll overscroll-contain transform -translate-x-full aria-[hidden=false]:translate-x-0 p-4 space-y-8 h-full">
+  <nav class="w-full overflow-y-scroll overscroll-contain transform -translate-x-full aria-[hidden=false]:translate-x-0 pt-4 px-4 pb-16 space-y-8 h-full">
     {% comment %}
       Quiz banner for customers who don't know what to choose.
       Fully optional – shown only when at least title or description is filled.
@@ -74,7 +74,10 @@
     {% if quiz_banner_has_content %}
       {% assign quiz_banner_link = block.settings.quiz_banner_link %}
 
-      <a href="{{ quiz_banner_link }}" class="relative block overflow-hidden bg-black text-white rounded-lg px-3 py-3">
+      <a
+        href="{{ quiz_banner_link }}"
+        class="relative flex items-end overflow-hidden bg-black text-white rounded-xl px-3 h-28 py-3"
+      >
         <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
           {% if block.settings.quiz_banner_image != blank %}
             {{
@@ -95,7 +98,7 @@
           ></div>
         </div>
 
-        <div class="relative z-10 flex justify-between gap-3">
+        <div class="relative z-10 flex justify-between gap-3 ">
           <div>
             <h2 class="text-lg font-semibold leading-snug">
               {{ block.settings.quiz_banner_title | escape }}
