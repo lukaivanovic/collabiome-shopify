@@ -81,7 +81,8 @@
                   "settings": {
                     "title": "Kolagen Boost",
                     "description": "Obnovi kožu, kosu i nokte",
-                    "url": ""
+                    "image": "shopify://shop_images/Boost_u_novom_ruhu_1_b284883b-97a2-464d-a747-a5741cc0474b.png",
+                    "url": "shopify://products/kolagen-boost"
                   },
                   "blocks": {}
                 },
