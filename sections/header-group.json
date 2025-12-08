@@ -141,8 +141,8 @@
                 "mobile_menu_category_qLb4fp": {
                   "type": "mobile-menu-category",
                   "settings": {
-                    "title": "Pretraži svu kozmetiku",
-                    "description": "",
+                    "title": "Svi proizvodi",
+                    "description": "Pretraži svu kozmetiku",
                     "url": "shopify://collections/kozmetika"
                   },
                   "blocks": {}
