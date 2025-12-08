@@ -54,6 +54,16 @@
     },
     "header": {
       "type": "header",
+      "blocks": {
+        "header-mobile-menu": {
+          "type": "header-mobile-menu",
+          "static": true,
+          "settings": {
+            "shop_menu": "main-menu"
+          },
+          "blocks": {}
+        }
+      },
       "settings": {
         "shop_menu": "main-menu",
         "marketing_menu": "main-navigation-marketing-menu",
