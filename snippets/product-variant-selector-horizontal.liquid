@@ -1,0 +1,57 @@
+{% doc %}
+  Product Variant Selector (Horizontal)
+
+  Renders product variant options as horizontal radio buttons in a grid layout.
+
+  @param {product} product - Product object (required)
+{% enddoc %}
+
+{% liquid
+  if product == blank
+    echo '<!-- Error: product required for product-variant-selector-horizontal -->'
+    break
+  endif
+%}
+
+{% unless product.has_only_default_variant %}
+  <div class="flex flex-col gap-4">
+    {% for option in product.options_with_values %}
+      <div class="grid grid-cols-3 gap-3 w-full">
+        {% for value in option.values %}
+          <label
+            for="product-options[{{ option.name }}]-{{ forloop.index }}"
+            class="group relative flex items-center justify-center px-3 py-3 gap-2 border bg-white rounded-md cursor-pointer transition-all border-neutral-200 hover:bg-neutral-100 data-[selected=true]:border-[var(--product-accent)] data-[selected=true]:[background:var(--product-background)]"
+            data-option-label
+            data-option-position="{{ option.position }}"
+            {% if option.selected_value == value %}
+              data-selected="true"
+            {% else %}
+              data-selected="false"
+            {% endif %}
+          >
+            <input
+              type="radio"
+              id="product-options[{{ option.name }}]-{{ forloop.index }}"
+              name="options[{{ option.name }}]"
+              value="{{ value }}"
+              {% if option.selected_value == value %}
+                checked
+              {% endif %}
+              class="sr-only"
+              data-option-input
+              data-option-position="{{ option.position }}"
+            >
+            <span class="font-medium text-primary group-data-[selected=true]:text-[var(--product-accent)]">
+              {{- value -}}
+            </span>
+            <span
+              class="hidden text-xs font-medium px-1.5 py-0.5 tabular-nums rounded-full bg-[var(--product-accent)] text-[var(--product-button-text-color)] whitespace-nowrap"
+              data-variant-badge
+            ></span>
+          </label>
+        {% endfor %}
+      </div>
+    {% endfor %}
+  </div>
+{% endunless %}
+

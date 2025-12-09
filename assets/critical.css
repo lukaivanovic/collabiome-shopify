@@ -312,8 +312,6 @@ button:disabled:hover {
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08) inset;
 }
 
-
-
 .visually-hidden {
   position: absolute !important;
   overflow: hidden;
@@ -349,13 +347,12 @@ button:disabled:hover {
 }
 
 :root {
-  --product-bg: #f9f1f3; // Section background
+  --product-bg: #f9f1f3; /* Section background */
   --product-bg-secondary: #f9f1f3;
-  --product-accent: #783047; // Accent color (can be gradient)
-  --product-accent-foreground: #f9f1f3; // Accent text color (no gradients)
+  --product-accent: #783047; /* Accent color (can be gradient) */
+  --product-accent-foreground: #f9f1f3; /* Accent text color (no gradients) */
   --product-button-background: #783047;
   --product-button-text-color: #f9f1f3;
-
 }
 
 .product-theme-default {
@@ -368,11 +365,26 @@ button:disabled:hover {
 }
 
 .product-theme-boost {
-  --product-bg: linear-gradient(25deg, #dbeae5 -1.58%, #ede1d7 40.21%, #f6b4ca 100%); 
-  --product-bg-secondary: linear-gradient(25deg, color-mix(in srgb, #dbeae5, transparent 70%) -1.58%, color-mix(in srgb, #ede1d7, transparent 70%) 40.21%, color-mix(in srgb, #f6b4ca, transparent 70%) 100%);;
-  --product-accent: #ECB8CA;
+  --product-bg: linear-gradient(
+    25deg,
+    #dbeae5 -1.58%,
+    #ede1d7 40.21%,
+    #f6b4ca 100%
+  );
+  --product-bg-secondary: linear-gradient(
+    25deg,
+    color-mix(in srgb, #dbeae5, transparent 70%) -1.58%,
+    color-mix(in srgb, #ede1d7, transparent 70%) 40.21%,
+    color-mix(in srgb, #f6b4ca, transparent 70%) 100%
+  );
+  --product-accent: #ecb8ca;
   --product-accent-foreground: #f9f1f3;
-  --product-button-background: linear-gradient(25deg, #dbeae5 -1.58%, #ede1d7 40.21%, #f6b4ca 100%);
+  --product-button-background: linear-gradient(
+    25deg,
+    #dbeae5 -1.58%,
+    #ede1d7 40.21%,
+    #f6b4ca 100%
+  );
   --product-button-text-color: #f9f1f3;
 }
 
@@ -382,14 +394,14 @@ button:disabled:hover {
     #a2eeff 3.17%,
     #b4ceff 35.34%,
     #d4b9ff 103.04%
-  ); 
+  );
   --product-bg-secondary: linear-gradient(
     20deg,
     color-mix(in srgb, #a2eeff, transparent 70%) 3.17%,
     color-mix(in srgb, #b4ceff, transparent 70%) 35.34%,
     color-mix(in srgb, #d4b9ff, transparent 70%) 103.04%
   );
-  --product-accent: #783047; 
+  --product-accent: #783047;
   --product-accent-foreground: #f9f1f3;
   --product-button-background: linear-gradient(
     20deg,
@@ -401,12 +413,16 @@ button:disabled:hover {
 }
 
 .product-theme-nutriage {
-  --product-bg: #DCEDE7;
-  --product-bg-secondary: #DCEDE7;
-  --product-accent: #273B20;
+  --product-bg: #dcede7;
+  --product-bg-secondary: #dcede7;
+  --product-accent: #273b20;
   --product-accent-foreground: #f9f1f3;
-  --product-button-background: linear-gradient(180deg, #BFFDF0 0%, #FEFEE8 150%);
-  --product-button-text-color: #273B20;
+  --product-button-background: linear-gradient(
+    180deg,
+    #bffdf0 0%,
+    #fefee8 150%
+  );
+  --product-button-text-color: #273b20;
 }
 
 .bg-product-bg {
@@ -426,14 +442,15 @@ button:disabled:hover {
   margin-bottom: -200px;
   padding-top: 320px;
   padding-bottom: 240px;
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
   z-index: -1;
-  background: linear-gradient(
+  background:
+    linear-gradient(
       0deg,
       hsla(0, 0%, 100%, 1) 0%,
       hsla(0, 0%, 100%, 0.7) 11%,
@@ -518,5 +535,3 @@ button:disabled:hover {
     transform: rotate(450deg);
   }
 }
-
-

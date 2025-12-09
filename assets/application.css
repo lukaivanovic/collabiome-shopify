@@ -488,6 +488,9 @@
   .ml-auto {
     margin-left: auto;
   }
+  .ml-px {
+    margin-left: 1px;
+  }
   .line-clamp-1 {
     overflow: hidden;
     display: -webkit-box;
@@ -1360,6 +1363,9 @@
   .\!px-0 {
     padding-inline: calc(var(--spacing) * 0) !important;
   }
+  .px-1 {
+    padding-inline: calc(var(--spacing) * 1);
+  }
   .px-1\.5 {
     padding-inline: calc(var(--spacing) * 1.5);
   }
@@ -1604,6 +1610,10 @@
   .font-medium {
     --tw-font-weight: var(--font-weight-medium);
     font-weight: var(--font-weight-medium);
+  }
+  .font-medium\! {
+    --tw-font-weight: var(--font-weight-medium) !important;
+    font-weight: var(--font-weight-medium) !important;
   }
   .font-normal {
     --tw-font-weight: var(--font-weight-normal);
@@ -2225,6 +2235,11 @@
         --tw-shadow: 0 4px 6px -1px var(--tw-shadow-color, rgb(0 0 0 / 0.1)), 0 2px 4px -2px var(--tw-shadow-color, rgb(0 0 0 / 0.1));
         box-shadow: var(--tw-inset-shadow), var(--tw-inset-ring-shadow), var(--tw-ring-offset-shadow), var(--tw-ring-shadow), var(--tw-shadow);
       }
+    }
+  }
+  .focus\:border-\[var\(--product-accent\)\] {
+    &:focus {
+      border-color: var(--product-accent);
     }
   }
   .focus\:border-blue-500 {

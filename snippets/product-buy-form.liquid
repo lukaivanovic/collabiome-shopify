@@ -12,6 +12,7 @@
   @param {string} button_variant - Button style variant (default | neutral_large)
   @param {boolean} enable_free_delivery_label - Show free delivery label (default: false)
   @param {number} free_delivery_threshold - Price threshold (in cents) for free delivery label (default: 5000)
+  @param {string} variant_selector_type - Variant selector type: 'horizontal' or 'select' (default: 'horizontal')
 {% enddoc %}
 
 {% liquid
@@ -28,6 +29,7 @@
   assign button_variant = button_variant | default: 'default'
   assign enable_free_delivery_label = enable_free_delivery_label | default: false
   assign free_delivery_threshold = free_delivery_threshold | default: 5000
+  assign variant_selector_type = variant_selector_type | default: 'horizontal'
 
   assign selected_variant = product.selected_or_first_available_variant | default: product.first_available_variant
 
@@ -80,45 +82,11 @@
     >
     <div class="flex flex-col gap-4">
       {% unless product.has_only_default_variant %}
-        <div class="flex flex-col gap-4">
-          {% for option in product.options_with_values %}
-            <div class="grid grid-cols-3 gap-3 w-full">
-              {% for value in option.values %}
-                <label
-                  for="product-options[{{ option.name }}]-{{ forloop.index }}"
-                  class="group relative flex items-center justify-center px-3 py-3 gap-2 border bg-white rounded-md cursor-pointer transition-all border-neutral-200 hover:bg-neutral-100 data-[selected=true]:border-[var(--product-accent)] data-[selected=true]:[background:var(--product-background)]"
-                  data-option-label
-                  data-option-position="{{ option.position }}"
-                  {% if option.selected_value == value %}
-                    data-selected="true"
-                  {% else %}
-                    data-selected="false"
-                  {% endif %}
-                >
-                  <input
-                    type="radio"
-                    id="product-options[{{ option.name }}]-{{ forloop.index }}"
-                    name="options[{{ option.name }}]"
-                    value="{{ value }}"
-                    {% if option.selected_value == value %}
-                      checked
-                    {% endif %}
-                    class="sr-only"
-                    data-option-input
-                    data-option-position="{{ option.position }}"
-                  >
-                  <span class="font-medium text-primary group-data-[selected=true]:text-[var(--product-accent)]">
-                    {{- value -}}
-                  </span>
-                  <span
-                    class="hidden text-xs font-medium px-1.5 py-0.5 tabular-nums rounded-full bg-[var(--product-accent)] text-[var(--product-button-text-color)] whitespace-nowrap"
-                    data-variant-badge
-                  ></span>
-                </label>
-              {% endfor %}
-            </div>
-          {% endfor %}
-        </div>
+        {% if variant_selector_type == 'select' %}
+          {% render 'product-variant-selector-select', product: product %}
+        {% else %}
+          {% render 'product-variant-selector-horizontal', product: product %}
+        {% endif %}
       {% endunless %}
 
       {% if enable_free_delivery_label %}
@@ -206,7 +174,103 @@
           const position = Number(label.dataset.optionPosition);
           const isSelected = variant.options[position - 1] === input?.value;
           label.dataset.selected = isSelected ? 'true' : 'false';
-          if (input) input.checked = isSelected;
+          if (input) {
+            if (input.type === 'radio') {
+              input.checked = isSelected;
+            } else if (input.tagName === 'SELECT') {
+              input.value = variant.options[position - 1];
+            }
+          }
+        });
+        // Handle select elements that aren't inside labels
+        optionInputs.forEach((input) => {
+          if (input.tagName === 'SELECT') {
+            const position = Number(input.dataset.optionPosition);
+            if (variant && variant.options[position - 1]) {
+              input.value = variant.options[position - 1];
+            }
+          }
+        });
+      }
+
+      function updateSavingsBadges(variant) {
+        if (!productData) return;
+
+        // Update badges for select elements (only when variant is selected)
+        const selectBadges = Array.from(productForm.querySelectorAll('[data-variant-badge][data-option-position]'));
+        selectBadges.forEach((badge) => {
+          // For select badges, we show the discount for the currently selected variant
+          if (variant && variant.compare_at_price && variant.compare_at_price > variant.price) {
+            const compareAtPrice = variant.compare_at_price;
+            const currentPrice = variant.price;
+            const savingsPercent = ((compareAtPrice - currentPrice) / compareAtPrice) * 100;
+
+            if (savingsPercent > 0) {
+              badge.textContent = `-${Math.round(savingsPercent)}%`;
+              badge.classList.remove('hidden');
+            } else {
+              badge.classList.add('hidden');
+            }
+          } else {
+            badge.classList.add('hidden');
+          }
+        });
+
+        // Update badges for horizontal radio buttons (existing logic)
+        const optionLabels = Array.from(productForm.querySelectorAll('[data-option-label]'));
+        optionLabels.forEach((label) => {
+          const badge = label.querySelector('[data-variant-badge]');
+          if (!badge) return;
+
+          const input = label.querySelector('input[type="radio"]');
+          if (!input) return;
+
+          // Get current selections for other options
+          const currentSelectedOptions = {};
+          optionInputs.forEach((optInput) => {
+            if (optInput.type === 'radio' && optInput.checked) {
+              const optionName = optInput.name.match(/options\[(.+)\]/)[1];
+              currentSelectedOptions[optionName] = optInput.value;
+            } else if (optInput.tagName === 'SELECT') {
+              const optionName = optInput.name.match(/options\[(.+)\]/)[1];
+              currentSelectedOptions[optionName] = optInput.value;
+            }
+          });
+
+          const optionName = input.name.match(/options\[(.+)\]/)[1];
+          const optionValue = input.value;
+
+          // Create hypothetical selection
+          const hypotheticalOptions = { ...currentSelectedOptions };
+          hypotheticalOptions[optionName] = optionValue;
+
+          // Find matching variant
+          const matchingVariant = productData.variants.find((v) => {
+            return v.options.every((opt, idx) => {
+              const optionNameKey = productData.options[idx];
+              return hypotheticalOptions[optionNameKey] === opt;
+            });
+          });
+
+          // Update badge
+          if (
+            matchingVariant &&
+            matchingVariant.compare_at_price &&
+            matchingVariant.compare_at_price > matchingVariant.price
+          ) {
+            const compareAtPrice = matchingVariant.compare_at_price;
+            const currentPrice = matchingVariant.price;
+            const savingsPercent = ((compareAtPrice - currentPrice) / compareAtPrice) * 100;
+
+            if (savingsPercent > 0) {
+              badge.textContent = `-${Math.round(savingsPercent)}%`;
+              badge.classList.remove('hidden');
+            } else {
+              badge.classList.add('hidden');
+            }
+          } else {
+            badge.classList.add('hidden');
+          }
         });
       }
 
@@ -239,13 +303,25 @@
             freeDeliveryLabel.classList.add('hidden');
           }
         }
+
+        // Update savings badges
+        updateSavingsBadges(variant);
       }
 
       function findVariantFromSelections() {
         const selections = [];
         productData.options.forEach((_, idx) => {
-          const input = optionInputs.find((el) => Number(el.dataset.optionPosition) === idx + 1 && el.checked);
-          if (input) selections.push(input.value);
+          const input = optionInputs.find((el) => Number(el.dataset.optionPosition) === idx + 1);
+          if (input) {
+            // Handle radio buttons (must be checked) and select elements (always has a value)
+            if (input.type === 'radio') {
+              if (input.checked) {
+                selections.push(input.value);
+              }
+            } else if (input.tagName === 'SELECT') {
+              selections.push(input.value);
+            }
+          }
         });
 
         if (selections.length !== productData.options.length) return null;
@@ -262,6 +338,9 @@
       if (initialVariant) {
         setSelectedState(initialVariant);
         updateUI(initialVariant);
+      } else {
+        // Update badges even if no initial variant (for horizontal view with hypothetical selections)
+        updateSavingsBadges(null);
       }
 
       optionInputs.forEach((input) => {
