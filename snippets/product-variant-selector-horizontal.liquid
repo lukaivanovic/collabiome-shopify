@@ -16,11 +16,11 @@
 {% unless product.has_only_default_variant %}
   <div class="flex flex-col gap-4">
     {% for option in product.options_with_values %}
-      <div class="grid grid-cols-3 gap-3 w-full">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-3 w-full">
         {% for value in option.values %}
           <label
             for="product-options[{{ option.name }}]-{{ forloop.index }}"
-            class="group relative flex items-center justify-center px-3 py-3 gap-2 border bg-white rounded-md cursor-pointer transition-all border-neutral-200 hover:bg-neutral-100 data-[selected=true]:border-[var(--product-accent)] data-[selected=true]:[background:var(--product-background)]"
+            class="group relative flex items-center px-3 py-3 gap-2 border bg-white rounded-md cursor-pointer transition-all border-neutral-200 hover:bg-neutral-100 data-[selected=true]:border-[var(--product-accent)] data-[selected=true]:[background:var(--product-background)]"
             data-option-label
             data-option-position="{{ option.position }}"
             {% if option.selected_value == value %}
@@ -37,7 +37,6 @@
               {% if option.selected_value == value %}
                 checked
               {% endif %}
-              class="sr-only"
               data-option-input
               data-option-position="{{ option.position }}"
             >
@@ -45,7 +44,7 @@
               {{- value -}}
             </span>
             <span
-              class="hidden text-xs font-medium px-1.5 py-0.5 tabular-nums rounded-full bg-[var(--product-accent)] text-[var(--product-button-text-color)] whitespace-nowrap"
+              class="hidden ml-auto text-xs font-medium px-1.5 py-0.5 tabular-nums rounded-full bg-[var(--product-accent)] text-[var(--product-button-text-color)] whitespace-nowrap"
               data-variant-badge
             ></span>
           </label>
