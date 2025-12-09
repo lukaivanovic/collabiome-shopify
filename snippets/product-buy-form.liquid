@@ -42,11 +42,6 @@
   endif
 
   assign button_classes = 'button flex items-center gap-2 h-14 px-7 text-base [background:var(--product-button-background)] [color:var(--product-button-text-color)] w-full'
-  if button_variant == 'neutral_large'
-    assign button_classes = button_classes | append: ' button-neutral text-white'
-  elsif button_variant == 'default'
-    assign button_classes = button_classes | append: ' button-boost text-blue'
-  endif
 %}
 
 <product-form

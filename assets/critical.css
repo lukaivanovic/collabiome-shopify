@@ -353,6 +353,9 @@ button:disabled:hover {
   --product-bg-secondary: #f9f1f3;
   --product-accent: #783047; // Accent color (can be gradient)
   --product-accent-foreground: #f9f1f3; // Accent text color (no gradients)
+  --product-button-background: #783047;
+  --product-button-text-color: #f9f1f3;
+
 }
 
 .product-theme-default {
@@ -360,13 +363,17 @@ button:disabled:hover {
   --product-bg-secondary: #f9f1f3;
   --product-accent: #783047;
   --product-accent-foreground: #f9f1f3;
+  --product-button-background: #783047;
+  --product-button-text-color: #f9f1f3;
 }
 
 .product-theme-boost {
   --product-bg: linear-gradient(25deg, #dbeae5 -1.58%, #ede1d7 40.21%, #f6b4ca 100%); 
   --product-bg-secondary: linear-gradient(25deg, color-mix(in srgb, #dbeae5, transparent 70%) -1.58%, color-mix(in srgb, #ede1d7, transparent 70%) 40.21%, color-mix(in srgb, #f6b4ca, transparent 70%) 100%);;
-  --product-accent: #4e71eb;
+  --product-accent: #ECB8CA;
   --product-accent-foreground: #f9f1f3;
+  --product-button-background: linear-gradient(25deg, #dbeae5 -1.58%, #ede1d7 40.21%, #f6b4ca 100%);
+  --product-button-text-color: #f9f1f3;
 }
 
 .product-theme-recupera {
@@ -384,6 +391,22 @@ button:disabled:hover {
   );
   --product-accent: #783047; 
   --product-accent-foreground: #f9f1f3;
+  --product-button-background: linear-gradient(
+    20deg,
+    #a2eeff 3.17%,
+    #b4ceff 35.34%,
+    #d4b9ff 103.04%
+  );
+  --product-button-text-color: #783047;
+}
+
+.product-theme-nutriage {
+  --product-bg: #DCEDE7;
+  --product-bg-secondary: #DCEDE7;
+  --product-accent: #273B20;
+  --product-accent-foreground: #f9f1f3;
+  --product-button-background: linear-gradient(180deg, #BFFDF0 0%, #FEFEE8 150%);
+  --product-button-text-color: #273B20;
 }
 
 .bg-product-bg {

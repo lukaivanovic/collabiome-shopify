@@ -1169,9 +1169,6 @@
   .bg-\[var\(--product-background\)\] {
     background-color: var(--product-background);
   }
-  .bg-\[var\(--product-bg\,white\)\] {
-    background-color: var(--product-bg,white);
-  }
   .bg-background-default {
     background-color: var(--color-background-default);
   }
