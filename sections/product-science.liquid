@@ -24,102 +24,104 @@
     assign has_image = true
   endif
 
-  assign product_theme = product.metafields.custom.theme.value | default: 'default'
+  assign show_section = false
 
-  case product_theme
-    when 'recupera'
-      assign product_theme_class = 'product-theme-recupera'
-    when 'boost'
-      assign product_theme_class = 'product-theme-boost'
-    else
-      assign product_theme_class = 'product-theme-default'
-  endcase
+  if has_image
+    assign show_section = true
+  endif
+
+  capture product_theme_class
+    render 'product-theme-class', product: product
+  endcapture
+  assign product_theme_class = product_theme_class | strip
 -%}
 
-<section class="py-20  {{ product_theme_class }}">
-  <div class="container">
-    <div class="flex gap-12 flex-col-reverse lg:flex-row lg:gap-16">
-      <div class="flex-1 py-6">
-        <div class="border-b border-neutral-100 pb-6">
-          <h2 class="text-4xl font-medium">{{ section_title }}</h2>
-          {% if has_description %}
-            <p class="mt-2 text-base text-foreground-secondary">{{ section_description }}</p>
+{% if show_section %}
+  <section class="py-20  {{ product_theme_class }}">
+    <div class="container">
+      <div class="flex gap-12 flex-col-reverse lg:flex-row lg:gap-16">
+        <div class="flex-1 py-6">
+          <div class="border-b border-neutral-100 pb-6">
+            <h2 class="text-4xl font-medium">{{ section_title }}</h2>
+            {% if has_description %}
+              <p class="mt-2 text-base text-foreground-secondary">{{ section_description }}</p>
+            {% endif %}
+          </div>
+
+          {% if has_studies %}
+            <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+              {% for study in science_studies %}
+                {% liquid
+                  assign study_metric = study.metric | default: study.title
+                  assign study_text = study.description | default: study.desc
+                  assign study_source = study.source
+                  assign study_link = study.link
+                  assign study_link_url = ''
+                  assign study_link_label = ''
+
+                  if study_link != blank
+                    if study_link.url
+                      assign study_link_url = study_link.url
+                      assign study_link_label = study_link.title
+                    else
+                      assign study_link_url = study_link
+                    endif
+                  endif
+
+                  assign computed_link_label = study_link_label
+                  if computed_link_label == blank
+                    assign computed_link_label = 'sections.product_science.link_label' | t
+                  endif
+                %}
+
+                <div class="border-b border-neutral-100 py-6 bg-product-bg-secondary rounded-2xl p-4">
+                  {% if study_metric %}
+                    <p class="text-5xl md:text-7xl font-medium text-product-accent">
+                      {{ study_metric }}
+                    </p>
+                  {% endif %}
+
+                  {% if study_text %}
+                    <p class="mt-3 ">{{ study_text }}</p>
+                  {% endif %}
+
+                  {% if study_source or study_link_url %}
+                    <div class="flex flex-col gap-2 text-[10px] text-[var(--product-accent)]/72 mt-1">
+                      {% if study_source %}
+                        {% if study_link_url != blank %}
+                          <a
+                            href="{{ study_link_url }}"
+                            class="font-medium "
+                            target="_blank"
+                            rel="noopener"
+                          >
+                            {{- study_source -}}
+                          </a>
+                        {% else %}
+                          <span class="font-medium">
+                            {{ study_source }}
+                          </span>
+                        {% endif %}
+                      {% endif %}
+                    </div>
+                  {% endif %}
+                </div>
+              {% endfor %}
+            </div>
           {% endif %}
         </div>
 
-        {% if has_studies %}
-          <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
-            {% for study in science_studies %}
-              {% liquid
-                assign study_metric = study.metric | default: study.title
-                assign study_text = study.description | default: study.desc
-                assign study_source = study.source
-                assign study_link = study.link
-                assign study_link_url = ''
-                assign study_link_label = ''
-
-                if study_link != blank
-                  if study_link.url
-                    assign study_link_url = study_link.url
-                    assign study_link_label = study_link.title
-                  else
-                    assign study_link_url = study_link
-                  endif
-                endif
-
-                assign computed_link_label = study_link_label
-                if computed_link_label == blank
-                  assign computed_link_label = 'sections.product_science.link_label' | t
-                endif
-              %}
-
-              <div class="border-b border-neutral-100 py-6 [background:var(--product-background)] rounded-2xl p-4">
-                {% if study_metric %}
-                  <p class="text-5xl md:text-7xl font-medium text-product-accent">
-                    {{ study_metric }}
-                  </p>
-                {% endif %}
-
-                {% if study_text %}
-                  <p class="mt-3 ">{{ study_text }}</p>
-                {% endif %}
-
-                {% if study_source or study_link_url %}
-                  <div class="flex flex-col gap-2 text-[10px] text-[var(--product-accent)]/72 mt-1">
-                    {% if study_source %}
-                      {% if study_link_url != blank %}
-                        <a
-                          href="{{ study_link_url }}"
-                          class="font-medium "
-                          target="_blank"
-                          rel="noopener"
-                        >
-                          {{- study_source -}}
-                        </a>
-                      {% else %}
-                        <span class="font-medium">
-                          {{ study_source }}
-                        </span>
-                      {% endif %}
-                    {% endif %}
-                  </div>
-                {% endif %}
-              </div>
-            {% endfor %}
+        {% if has_image %}
+          <div class="flex-shrink-0 lg:w-1/2">
+            <div class="max-h-[800px] overflow-hidden rounded-2xl">
+              {% render 'image', image: science_image, class: 'w-full rounded-2xl' %}
+            </div>
           </div>
         {% endif %}
       </div>
-
-      {% if has_image %}
-        <div class="flex-shrink-0 lg:w-1/2">
-          <div class="max-h-[800px] overflow-hidden rounded-2xl">
-            {% render 'image', image: science_image, class: 'w-full rounded-2xl' %}
-          </div>
-        </div>
-      {% endif %}
     </div>
-  </div>
-</section>
+  </section>
+{% endif %}
 
 {% schema %}
 {

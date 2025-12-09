@@ -172,8 +172,8 @@ button {
   max-width: 1720px;
   margin-left: auto;
   margin-right: auto;
-  padding-left: 24px;
-  padding-right: 24px;
+  padding-left: 40px;
+  padding-right: 40px;
   width: 100%;
 }
 
@@ -365,39 +365,75 @@ button:disabled:hover {
 }
 
 :root {
-  --product-background: #f9f1f3;
-  --product-accent: #783047;
-  --product-accent-foreground: #f9f1f3;
-  --product-button-background: #783047;
-  --product-button-text-color: #f9f1f3;
+  --product-bg: #f9f1f3; // Section background
+  --product-bg-secondary: #f9f1f3;
+  --product-accent: #783047; // Accent color (can be gradient)
+  --product-accent-foreground: #f9f1f3; // Accent text color (no gradients)
 }
 
 .product-theme-default {
-  --product-background: #f9f1f3;
+  --product-bg: #f9f1f3;
+  --product-bg-secondary: #f9f1f3;
   --product-accent: #783047;
   --product-accent-foreground: #f9f1f3;
-  --product-button-background: #783047;
-  --product-button-text-color: #f9f1f3;
 }
 
 .product-theme-recupera {
-  --product-background: linear-gradient(100deg, #a2eeff, #b4ceff, #d4b9ff);
-  --product-background-secondary: linear-gradient(
-    100deg,
-    color-mix(in srgb, #a2eeff, transparent 20%) 3.17%,
-    color-mix(in srgb, #b4ceff, transparent 20%) 35.34%,
-    color-mix(in srgb, #d4b9ff, transparent 20%) 103.04%
+  --product-bg: linear-gradient(
+    20deg,
+    #a2eeff 3.17%,
+    #b4ceff 35.34%,
+    #d4b9ff 103.04%
+  ); 
+  --product-bg-secondary: linear-gradient(
+    20deg,
+    color-mix(in srgb, #a2eeff, transparent 70%) 3.17%,
+    color-mix(in srgb, #b4ceff, transparent 70%) 35.34%,
+    color-mix(in srgb, #d4b9ff, transparent 70%) 103.04%
   );
-  --product-accent: linear-gradient(
-    100deg,
-    color-mix(in srgb, #a2eeff, transparent 20%) 3.17%,
-    color-mix(in srgb, #b4ceff, transparent 20%) 35.34%,
-    color-mix(in srgb, #d4b9ff, transparent 20%) 103.04%
-  );
-  --product-accent-secondary: #996540;
+  --product-accent: #783047; 
   --product-accent-foreground: #f9f1f3;
-  --product-button-background: linear-gradient(var(--gradient-recupera));
-  --product-button-text-color: black;
+}
+
+.bg-product-bg {
+  background: var(--product-bg);
+}
+
+.bg-product-bg-secondary {
+  background: var(--product-bg-secondary);
+}
+
+.product-gradient-bg {
+  position: relative;
+}
+
+.product-gradient-bg::before {
+  margin-top: -300px;
+  margin-bottom: -200px;
+  padding-top: 320px;
+  padding-bottom: 240px;
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: -1;
+  background: linear-gradient(
+      0deg,
+      hsla(0, 0%, 100%, 1) 0%,
+      hsla(0, 0%, 100%, 0.7) 11%,
+      hsla(0, 0%, 100%, 0.47) 22%,
+      hsla(0, 0%, 100%, 0.3) 33%,
+      hsla(0, 0%, 100%, 0.17) 44%,
+      hsla(0, 0%, 100%, 0.09) 50%,
+      hsla(0, 0%, 100%, 0.17) 56%,
+      hsla(0, 0%, 100%, 0.3) 67%,
+      hsla(0, 0%, 100%, 0.47) 77%,
+      hsla(0, 0%, 100%, 0.7) 89%,
+      hsla(0, 0%, 100%, 1) 100%
+    ),
+    var(--product-bg-secondary);
 }
 
 .title-medium {

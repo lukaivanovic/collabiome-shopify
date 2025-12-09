@@ -1,0 +1,38 @@
+{%- comment -%}
+  Renders the product theme class based on product theme metafield.
+
+  Accepts:
+  - product: {Object} Product object (optional, if not provided, uses product_theme)
+  - product_theme: {String} Product theme value (optional, if not provided, reads from product)
+
+  Usage:
+  {% capture product_theme_class %}
+    {% render 'product-theme-class', product: product %}
+  {% endcapture %}
+  {{ product_theme_class | strip }}
+
+  Or:
+  {% capture product_theme_class %}
+    {% render 'product-theme-class', product_theme: 'recupera' %}
+  {% endcapture %}
+{%- endcomment -%}
+
+{%- liquid
+  if product_theme == blank
+    if product != blank
+      assign product_theme = product.metafields.custom.theme.value | default: 'default'
+    else
+      assign product_theme = 'default'
+    endif
+  endif
+
+  case product_theme
+    when 'recupera'
+      echo 'product-theme-recupera'
+    when 'boost'
+      echo 'product-theme-boost'
+    else
+      echo 'product-theme-default'
+  endcase
+-%}
+

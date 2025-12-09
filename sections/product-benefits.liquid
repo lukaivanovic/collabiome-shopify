@@ -2,49 +2,51 @@
   assign benefits = product.metafields.custom.benefits_content.value
   assign benefits_title = product.metafields.custom.benefits_title.value
   assign benefits_description = product.metafields.custom.benefits_description.value
-  assign product_theme = product.metafields.custom.theme.value | default: 'default'
 
-  case product_theme
-    when 'recupera'
-      assign product_theme_class = 'product-theme-recupera'
-    when 'boost'
-      assign product_theme_class = 'product-theme-boost'
-    else
-      assign product_theme_class = 'product-theme-default'
-  endcase
+  capture product_theme_class
+    render 'product-theme-class', product: product
+  endcapture
+  assign product_theme_class = product_theme_class | strip
+
+  assign has_benefits = false
+  if benefits != blank
+    assign has_benefits = true
+  endif
 -%}
 
-<div class="container-small py-20 {{ product_theme_class }}">
-  <div class="p-8">
-    <div class="text-center mb-12">
-      <h2 class="title-medium">{{ benefits_title | default: 'Product Benefits' }}</h2>
+{% if has_benefits %}
+  <div class="container-small py-20 {{ product_theme_class }}">
+    <div class="p-8">
+      <div class="text-center mb-12">
+        <h2 class="title-medium">{{ benefits_title | default: 'Product Benefits' }}</h2>
 
-      {% if benefits_description %}
-        <p class="text-base opacity-70 mt-2">{{ benefits_description }}</p>
-      {% endif %}
-    </div>
+        {% if benefits_description %}
+          <p class="text-base opacity-70 mt-2">{{ benefits_description }}</p>
+        {% endif %}
+      </div>
 
-    <div class="flex flex-row">
-      {% for benefit in benefits %}
-        <div class="flex flex-col items-center text-center w-1/3">
-          <div class="mb-4 size-48">
-            {% render 'image', image: benefit.image_icon, class: 'w-full h-full object-cover' %}
+      <div class="flex flex-row">
+        {% for benefit in benefits %}
+          <div class="flex flex-col items-center text-center w-1/3">
+            <div class="mb-4 size-48">
+              {% render 'image', image: benefit.image_icon, class: 'w-full h-full object-cover' %}
+            </div>
+
+            <div>
+              {% if benefit.title %}
+                <h3 class="font-semibold text-lg mb-2">{{ benefit.title }}</h3>
+              {% endif %}
+
+              {% if benefit.description %}
+                <p class="text-sm opacity-70">{{ benefit.description }}</p>
+              {% endif %}
+            </div>
           </div>
-
-          <div>
-            {% if benefit.title %}
-              <h3 class="font-semibold text-lg mb-2">{{ benefit.title }}</h3>
-            {% endif %}
-
-            {% if benefit.description %}
-              <p class="text-sm opacity-70">{{ benefit.description }}</p>
-            {% endif %}
-          </div>
-        </div>
-      {% endfor %}
+        {% endfor %}
+      </div>
     </div>
   </div>
-</div>
+{% endif %}
 
 {% schema %}
 {

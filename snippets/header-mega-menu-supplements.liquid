@@ -66,9 +66,22 @@
                 </p>
               {% endif %}
             </div>
-            {% render 'product-card', product: product, hide_buy_form: true %}
+            <a href="{{ product.url }}" class="h-80 overflow-hidden rounded-lg">
+              {% if product.featured_media %}
+                {{
+                  product.featured_media
+                  | image_url: width: 800, height: 800, crop: 'center'
+                  | image_tag: class: 'h-full w-full object-contain', loading: 'lazy'
+                }}
+              {% else %}
+                <div class="w-full h-full bg-gradient-to-r from-black/60 to-black/30"></div>
+              {% endif %}
+            </a>
           </div>
         {% endfor %}
+        <div class="flex flex-col">
+          {% render 'quiz-banner', variant: 'mobile' %}
+        </div>
       </div>
     </div>
   </div>

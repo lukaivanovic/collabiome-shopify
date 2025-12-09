@@ -3,61 +3,68 @@
 
   assign section_title = product.metafields.custom.section_upsell_title.value | default: 'Complete your routine'
   assign section_description = product.metafields.custom.section_upsell_description.value
+
+  assign has_upsell = false
+  if upsell_metafield != blank
+    assign has_upsell = true
+  endif
 -%}
 
-<section class="py-30">
-  <div class="container mx-auto px-4">
-    <div class="mx-auto max-w-2xl text-center">
-      <h2 class="text-4xl font-medium">{{ section_title }}</h2>
+{% if has_upsell %}
+  <section class="py-30">
+    <div class="container mx-auto px-4">
+      <div class="mx-auto max-w-2xl text-center">
+        <h2 class="text-4xl font-medium">{{ section_title }}</h2>
 
-      {% if section_description != blank %}
-        <p class="mt-3 text-base text-gray-600">{{ section_description }}</p>
-      {% endif %}
-    </div>
-
-    <div class="mt-12 hidden gap-8 md:grid md:grid-cols-2 lg:grid-cols-3">
-      {% for upsell_item in upsell_metafield %}
-        {% render 'product-upsell-card',
-          product: upsell_item.product.value,
-          title: upsell_item.title,
-          description: upsell_item.description,
-          image: upsell_item.image,
-          step_index: forloop.index
-        %}
-      {% endfor %}
-    </div>
-
-    <div class="mt-12 md:hidden">
-      <div class="embla embla-upsell overflow-hidden" data-section-id="{{ section.id }}">
-        <div class="embla__container flex">
-          {% for upsell_item in upsell_metafield %}
-            <div class="embla__slide w-full flex-shrink-0 px-4">
-              {% render 'product-upsell-card',
-                product: upsell_item.product.value,
-                title: upsell_item.title,
-                description: upsell_item.description,
-                image: upsell_item.image,
-                step_index: forloop.index
-              %}
-            </div>
-          {% endfor %}
-        </div>
+        {% if section_description != blank %}
+          <p class="mt-3 text-base text-gray-600">{{ section_description }}</p>
+        {% endif %}
       </div>
 
-      {% if upsell_metafield.size > 1 %}
-        <div class="mt-6 flex justify-center gap-2">
-          {% for upsell_product in upsell_metafield %}
-            <button
-              class="embla__dot h-2 w-2 rounded-full bg-gray-300 transition-all"
-              data-slide="{{ forloop.index0 }}"
-              aria-label="{{ 'sections.product_upsell.dot_aria_label' | t: slide: forloop.index }}"
-            ></button>
-          {% endfor %}
+      <div class="mt-12 hidden gap-8 md:grid md:grid-cols-2 lg:grid-cols-3">
+        {% for upsell_item in upsell_metafield %}
+          {% render 'product-upsell-card',
+            product: upsell_item.product.value,
+            title: upsell_item.title,
+            description: upsell_item.description,
+            image: upsell_item.image,
+            step_index: forloop.index
+          %}
+        {% endfor %}
+      </div>
+
+      <div class="mt-12 md:hidden">
+        <div class="embla embla-upsell overflow-hidden" data-section-id="{{ section.id }}">
+          <div class="embla__container flex">
+            {% for upsell_item in upsell_metafield %}
+              <div class="embla__slide w-full flex-shrink-0 px-4">
+                {% render 'product-upsell-card',
+                  product: upsell_item.product.value,
+                  title: upsell_item.title,
+                  description: upsell_item.description,
+                  image: upsell_item.image,
+                  step_index: forloop.index
+                %}
+              </div>
+            {% endfor %}
+          </div>
         </div>
-      {% endif %}
+
+        {% if upsell_metafield.size > 1 %}
+          <div class="mt-6 flex justify-center gap-2">
+            {% for upsell_product in upsell_metafield %}
+              <button
+                class="embla__dot h-2 w-2 rounded-full bg-gray-300 transition-all"
+                data-slide="{{ forloop.index0 }}"
+                aria-label="{{ 'sections.product_upsell.dot_aria_label' | t: slide: forloop.index }}"
+              ></button>
+            {% endfor %}
+          </div>
+        {% endif %}
+      </div>
     </div>
-  </div>
-</section>
+  </section>
+{% endif %}
 
 {% stylesheet %}
   .embla-upsell {

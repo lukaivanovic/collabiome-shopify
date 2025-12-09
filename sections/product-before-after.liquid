@@ -1,89 +1,54 @@
 {%- liquid
-  assign product_theme = product.metafields.custom.theme.value | default: 'default'
+  assign has_before_after = false
+  if product.metafields.custom.section_before_after_before_photo.value != blank
+    assign has_before_after = true
+  endif
 
-  case product_theme
-    when 'recupera'
-      assign product_theme_class = 'product-theme-recupera'
-    when 'boost'
-      assign product_theme_class = 'product-theme-boost'
-    else
-      assign product_theme_class = 'product-theme-default'
-  endcase
+  capture product_theme_class
+    render 'product-theme-class', product: product
+  endcapture
+  assign product_theme_class = product_theme_class | strip
 -%}
 
-<section class="product-before-after__section {{ product_theme_class }}">
-  <div class="container-small text-center py-20 relative flex flex-col items-center gap-3">
-    <p class="text-xs font-medium uppercase text-neutral-500 tracking-wider">
-      {{ section.settings.eyebrow | default: 'Before & after' }}
-    </p>
-    <h2 class="text-4xl font-medium">
-      {{ product.metafields.custom.section_before_after_title.value | default: 'Before & after' }}
-    </h2>
+{% if has_before_after %}
+  <div class="{{ product_theme_class }} py-20 product-gradient-bg">
+    <div class="container-small text-center py-20 relative flex flex-col items-center gap-3">
+      <p class="text-xs font-medium uppercase text-neutral-500 tracking-wider">
+        {{ section.settings.eyebrow | default: 'Before & after' }}
+      </p>
+      <h2 class="text-4xl font-medium">
+        {{ product.metafields.custom.section_before_after_title.value | default: 'Before & after' }}
+      </h2>
 
-    {% if product.metafields.custom.section_before_after_description.value %}
-      <p class="text-base opacity-70">{{ product.metafields.custom.section_before_after_description.value }}</p>
-    {% endif %}
+      {% if product.metafields.custom.section_before_after_description.value %}
+        <p class="text-base opacity-70">{{ product.metafields.custom.section_before_after_description.value }}</p>
+      {% endif %}
 
-    <div class="grid grid-cols-2 gap-2 pt-12 max-w-2xl">
-      <div class="flex flex-col relative rounded-xl w-full">
-        {% render 'image',
-          image: product.metafields.custom.section_before_after_before_photo.value,
-          class: 'aspect-[3/5] md:aspect-[3/4] w-full h-full object-cover rounded-3xl'
-        %}
-        <p class="px-3 py-1 absolute bottom-3 left-3 rounded-2xl bg-product-accent text-sm text-white">Before</p>
-      </div>
+      <div class="grid grid-cols-2 gap-2 pt-12 max-w-2xl">
+        <div class="flex flex-col relative rounded-xl w-full">
+          {% render 'image',
+            image: product.metafields.custom.section_before_after_before_photo.value,
+            class: 'aspect-[3/5] md:aspect-[3/4] w-full h-full object-cover rounded-3xl'
+          %}
+          <p class="px-3 py-1 absolute bottom-3 left-3 rounded-2xl bg-product-accent text-sm text-white">Before</p>
+        </div>
 
-      <div class="flex flex-col relative rounded-xl w-full">
-        {% render 'image',
-          image: product.metafields.custom.section_before_after_after_photo.value,
-          class: 'aspect-[3/5] md:aspect-[3/4] w-full h-full object-cover rounded-3xl'
-        %}
-        <p class="px-3 py-1 absolute bottom-3 left-3 rounded-2xl bg-product-accent text-sm text-white">After</p>
+        <div class="flex flex-col relative rounded-xl w-full">
+          {% render 'image',
+            image: product.metafields.custom.section_before_after_after_photo.value,
+            class: 'aspect-[3/5] md:aspect-[3/4] w-full h-full object-cover rounded-3xl'
+          %}
+          <p class="px-3 py-1 absolute bottom-3 left-3 rounded-2xl bg-product-accent text-sm text-white">After</p>
+        </div>
       </div>
     </div>
   </div>
-</section>
-
-{% stylesheet %}
-  .product-before-after__section {
-    position: relative;
-  }
-
-  .product-before-after__section::before {
-    margin-top: -300px;
-    margin-bottom: -200px;
-    padding-top: 320px;
-    padding-bottom: 240px;
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    z-index: -1;
-    background: linear-gradient(
-        0deg,
-        hsla(0, 0%, 100%, 1) 0%,
-        hsla(0, 0%, 100%, 0.7) 11%,
-        hsla(0, 0%, 100%, 0.47) 22%,
-        hsla(0, 0%, 100%, 0.3) 33%,
-        hsla(0, 0%, 100%, 0.17) 44%,
-        hsla(0, 0%, 100%, 0.09) 50%,
-        hsla(0, 0%, 100%, 0.17) 56%,
-        hsla(0, 0%, 100%, 0.3) 67%,
-        hsla(0, 0%, 100%, 0.47) 77%,
-        hsla(0, 0%, 100%, 0.7) 89%,
-        hsla(0, 0%, 100%, 1) 100%
-      ),
-      var(--product-background);
-  }
-{% endstylesheet %}
+{% endif %}
 
 {% schema %}
 {
   "name": "Product Before & After",
   "tag": "section",
-  "class": "product-before-after__section",
   "settings": [
     {
       "type": "text",

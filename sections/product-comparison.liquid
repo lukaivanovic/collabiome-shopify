@@ -1,71 +1,72 @@
 {%- liquid
   assign comparisons = product.metafields.custom.comparison.value
 
-  assign product_theme = product.metafields.custom.theme.value | default: 'default'
+  assign show_section = false
+  if comparisons != blank
+    assign show_section = true
+  endif
 
-  case product_theme
-    when 'recupera'
-      assign product_theme_class = 'product-theme-recupera'
-    when 'boost'
-      assign product_theme_class = 'product-theme-boost'
-    else
-      assign product_theme_class = 'product-theme-default'
-  endcase
+  capture product_theme_class
+    render 'product-theme-class', product: product
+  endcapture
+  assign product_theme_class = product_theme_class | strip
 -%}
 
-<div class="container-small text-center py-30 {{ product_theme_class }}">
-  <div>
-    <p class="text-sm font-medium uppercase text-neutral-500 tracking-wider">
-      {{ section.settings.eyebrow | default: 'Comparison' }}
-    </p>
-    <h2 class="text-4xl font-medium">{{ comparisons.title | default: 'Comparison' }}</h2>
-    {% if section.settings.description %}
-      <div class="text-base opacity-70 mt-2">{{ section.settings.description }}</div>
-    {% elsif comparisons.description %}
-      <p class="text-base opacity-70 mt-2">{{ comparisons.description }}</p>
-    {% endif %}
-  </div>
+{% if show_section %}
+  <div class="container-small text-center py-30 {{ product_theme_class }}">
+    <div>
+      <p class="text-sm font-medium uppercase text-neutral-500 tracking-wider">
+        {{ section.settings.eyebrow | default: 'Comparison' }}
+      </p>
+      <h2 class="text-4xl font-medium">{{ comparisons.title | default: 'Comparison' }}</h2>
+      {% if section.settings.description %}
+        <div class="text-base opacity-70 mt-2">{{ section.settings.description }}</div>
+      {% elsif comparisons.description %}
+        <p class="text-base opacity-70 mt-2">{{ comparisons.description }}</p>
+      {% endif %}
+    </div>
 
-  {% if comparisons and comparisons.products and comparisons.categories and comparisons.values %}
-    <div class="overflow-x-auto pt-12">
-      <table class="w-full text-left border-collapse">
-        <thead>
-          <tr class="border-b border-gray-200">
-            <th class="px-3 py-2 font-medium h-14 align-middle">Category</th>
-            {% for p in comparisons.products %}
-              <th class="px-3 py-2 h-14 border-l border-gray-200 align-middle text-center {% if forloop.first %}bg-white rounded-lg{% endif %}">
-                {{ p.label }}
-              </th>
-            {% endfor %}
-          </tr>
-        </thead>
-        <tbody>
-          {% for c in comparisons.categories %}
-            <tr class="border-b border-gray-200 last:border-b-0">
-              <td class="px-3 py-2 align-middle font-medium h-14">{{ c.label }}</td>
-              {% assign category_values = comparisons.values[c.key] %}
+    {% if comparisons and comparisons.products and comparisons.categories and comparisons.values %}
+      <div class="overflow-x-auto pt-12">
+        <table class="w-full text-left border-collapse">
+          <thead>
+            <tr class="border-b border-gray-200">
+              <th class="px-3 py-2 font-medium h-14 align-middle">Category</th>
               {% for p in comparisons.products %}
-                {% assign val = category_values[p.id] %}
-                <td class="px-3 py-2 align-middle h-14 border-l border-neutral-200 text-center {% if forloop.first %}[background:var(--product-background)] text-[var(--product-accent)]{% endif %}">
-                  <div class="flex items-center justify-center">
-                    {% if val %}
-                      {{ 'icon-check.svg' | inline_asset_content }}
-
-                    {% else %}
-                      <span class="opacity-60">&mdash;</span>
-                    {% endif %}
-                  </div>
-                </td>
+                <th class="px-3 py-2 h-14 border-l border-gray-200 align-middle text-center {% if forloop.first %}bg-white rounded-lg{% endif %}">
+                  {{ p.label }}
+                </th>
               {% endfor %}
             </tr>
-          {% endfor %}
-        </tbody>
-      </table>
-    </div>
-  {% else %}
-    <p class="opacity-70">No comparison data.</p>
-  {% endif %}
-</div>
+          </thead>
+          <tbody>
+            {% for c in comparisons.categories %}
+              <tr class="border-b border-gray-200 last:border-b-0">
+                <td class="px-3 py-2 align-middle font-medium h-14">{{ c.label }}</td>
+                {% assign category_values = comparisons.values[c.key] %}
+                {% for p in comparisons.products %}
+                  {% assign val = category_values[p.id] %}
+                  <td class="px-3 py-2 align-middle h-14 border-l border-neutral-200 text-center {% if forloop.first %}[background:var(--product-background)] text-[var(--product-accent)]{% endif %}">
+                    <div class="flex items-center justify-center">
+                      {% if val %}
+                        {{ 'icon-check.svg' | inline_asset_content }}
+
+                      {% else %}
+                        <span class="opacity-60">&mdash;</span>
+                      {% endif %}
+                    </div>
+                  </td>
+                {% endfor %}
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="opacity-70">No comparison data.</p>
+    {% endif %}
+  </div>
+{% endif %}
 
 {% schema %}
 {

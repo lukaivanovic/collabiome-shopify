@@ -1,64 +1,66 @@
 {%- liquid
   assign faq_data = product.metafields.custom.faq.value
-  assign product_theme = product.metafields.custom.theme.value | default: 'default'
 
-  case product_theme
-    when 'recupera'
-      assign product_theme_class = 'product-theme-recupera'
-    when 'boost'
-      assign product_theme_class = 'product-theme-boost'
-    else
-      assign product_theme_class = 'product-theme-default'
-  endcase
+  assign show_section = false
+  if faq_data != blank
+    assign show_section = true
+  endif
+
+  capture product_theme_class
+    render 'product-theme-class', product: product
+  endcapture
+  assign product_theme_class = product_theme_class | strip
 -%}
 
-<div class="product-faq {{ product_theme_class }}">
-  <div class="container-small py-20">
-    <div class="flex flex-col gap-12">
-      <div class="flex flex-col gap-2">
-        <h2 class="title-medium text-black">{{ section.settings.title | default: 'FAQ' }}</h2>
+{% if show_section %}
+  <div class="product-faq {{ product_theme_class }} product-gradient-bg">
+    <div class="container-small py-20">
+      <div class="flex flex-col gap-12">
+        <div class="flex flex-col gap-2">
+          <h2 class="title-medium text-black">{{ section.settings.title | default: 'FAQ' }}</h2>
 
-        {% if section.settings.description != blank %}
-          <p class="text-foreground-secondary">
-            {{ section.settings.description }}
-          </p>
-        {% endif %}
-      </div>
+          {% if section.settings.description != blank %}
+            <p class="text-foreground-secondary">
+              {{ section.settings.description }}
+            </p>
+          {% endif %}
+        </div>
 
-      <div>
-        {% for item in faq_data %}
-          <collapsible-item
-            class="block faq-item border-b last:border-b-0 transition-colors"
-            style="border-color: var(--product-background, rgba(0, 0, 0, 0.05));"
-          >
-            <button
-              class="group faq-question cursor-pointer outline-none w-full text-left py-5 flex items-center justify-between focus:outline-none focus:ring-0"
-              data-collapsible-trigger
-              type="button"
+        <div>
+          {% for item in faq_data %}
+            <collapsible-item
+              class="block faq-item border-b last:border-b-0 transition-colors"
+              style="border-color: var(--product-background, rgba(0, 0, 0, 0.05));"
             >
-              <span class="text-lg font-red-hat font-medium text-black pr-4">{{ item.title }}</span>
-              <div class="faq-icon w-7 h-7 rounded-full flex items-center justify-center [&>svg]:size-4">
-                <span class="faq-icon-plus">
-                  {{ 'icon-plus.svg' | inline_asset_content }}
-                </span>
-                <span class="faq-icon-minus">
-                  {{ 'icon-minus.svg' | inline_asset_content }}
-                </span>
+              <button
+                class="group faq-question cursor-pointer outline-none w-full text-left py-5 flex items-center justify-between focus:outline-none focus:ring-0"
+                data-collapsible-trigger
+                type="button"
+              >
+                <span class="text-lg font-red-hat font-medium text-black pr-4">{{ item.title }}</span>
+                <div class="faq-icon w-7 h-7 rounded-full flex items-center justify-center [&>svg]:size-4">
+                  <span class="faq-icon-plus">
+                    {{ 'icon-plus.svg' | inline_asset_content }}
+                  </span>
+                  <span class="faq-icon-minus">
+                    {{ 'icon-minus.svg' | inline_asset_content }}
+                  </span>
+                </div>
+              </button>
+              <div class="faq-answer" data-collapsible-content>
+                <div class="pt-3 pb-8 leading-[1.6] text-black gap-4 flex flex-col">
+                  {{ item.answer | metafield_tag }}
+                </div>
               </div>
-            </button>
-            <div class="faq-answer" data-collapsible-content>
-              <div class="pt-3 pb-8 leading-[1.6] text-black gap-4 flex flex-col">
-                {{ item.answer | metafield_tag }}
-              </div>
-            </div>
-          </collapsible-item>
-        {% endfor %}
-      </div>
+            </collapsible-item>
+          {% endfor %}
+        </div>
 
-      <script src="{{ 'collapsible.js' | asset_url }}" defer></script>
+        <script src="{{ 'collapsible.js' | asset_url }}" defer></script>
+      </div>
     </div>
   </div>
-</div>
+{% endif %}
 
 {% stylesheet %}
   .faq-answer {
