@@ -25,13 +25,52 @@
           data-option-position="{{ option.position }}"
         >
           {% for value in option.values %}
+            {% liquid
+              # Find variant that matches this option value
+              # Prefer variant with discount, otherwise use first matching variant
+              assign matching_variant = null
+              assign discount_variant = null
+              assign discount_text = ''
+              assign option_index = option.position | minus: 1
+
+              for variant in product.variants
+                if variant.options[option_index] == value
+                  if matching_variant == null
+                    assign matching_variant = variant
+                  endif
+
+                  # Track variant with discount
+                  if variant.compare_at_price > variant.price
+                    if discount_variant == null
+                      assign discount_variant = variant
+                    endif
+                  endif
+                endif
+              endfor
+
+              # Use discount variant if found, otherwise use first matching variant
+              if discount_variant != null
+                assign matching_variant = discount_variant
+              endif
+
+              # Calculate discount percentage if variant has compare_at_price
+              if matching_variant != null and matching_variant.compare_at_price > matching_variant.price
+                assign compare_at_price = matching_variant.compare_at_price
+                assign current_price = matching_variant.price
+                assign savings = compare_at_price | minus: current_price
+                assign savings_times_100 = savings | times: 100
+                assign savings_percent = savings_times_100 | divided_by: compare_at_price | round
+                assign discount_text = ' (-' | append: savings_percent | append: '%)'
+              endif
+            %}
             <option
               value="{{ value }}"
               {% if option.selected_value == value %}
                 selected
               {% endif %}
             >
-              {{ value }}
+              {{ value -}}
+              {{- discount_text }}
             </option>
           {% endfor %}
         </select>

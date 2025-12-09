@@ -10,25 +10,28 @@
   @param {number} step_index - Position of the product within the flow (default: 1)
 {% enddoc %}
 
-<div class="product-upsell-card flex h-full flex-col items-center gap-6">
-  <div class="relative w-full max-w-xs sm:max-w-sm">
+<div class="product-upsell-card flex h-full flex-col items-center">
+  <div class="relative w-full bg-white rounded-t-full p-4 pb-6">
     <div class="relative aspect-square overflow-hidden rounded-full bg-gray-100">
       {% render 'image', image: image, class: 'absolute inset-0 h-full w-full object-cover' %}
     </div>
 
-    <div class="absolute -bottom-2 left-1/2 -translate-x-1/2 rounded-full [background:var(--product-background)] px-3 py-1 text-[var(--product-accent)] font-medium">
-      {%- assign step_default_label = 'sections.product_upsell.step_label_default' | t -%}
+    <div class="absolute size-8 flex items-center justify-center -bottom-3 left-1/2 -translate-x-1/2 rounded-full [background:var(--product-button-background)] text-[var(--product-button-text-color)] font-medium">
       {{ step_index }}
     </div>
   </div>
 
-  <div class="w-full max-w-sm text-center">
-    <h3 class="mb-2 text-xl font-semibold">{{ title }}</h3>
+  <div class="w-full  bg-white rounded-b-xl p-4 pt-6 text-center flex flex-col gap-4">
+    <div>
+      <h3 class="mb-2 text-xl font-semibold">{{ title }}</h3>
 
-    <p class="text-sm text-gray-600">
-      {{ description }}
-    </p>
+      <p class="text-sm text-gray-600">
+        {{ description }}
+      </p>
+    </div>
 
-    {% render 'product-card-mini', product: product, show_dynamic_checkout: false, hide_buy_form: true %}
+    <div class="border-t border-neutral-100 pt-4">
+      {% render 'product-card-mini', product: product, show_dynamic_checkout: false, hide_buy_form: true %}
+    </div>
   </div>
 </div>

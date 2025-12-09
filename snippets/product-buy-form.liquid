@@ -161,10 +161,13 @@
       const freeDeliveryThreshold = parseInt(productForm.dataset.freeDeliveryThreshold || '', 10);
 
       function formatMoney(cents) {
+        if (!cents && cents !== 0) return '';
         if (window.Shopify && typeof Shopify.formatMoney === 'function') {
           return Shopify.formatMoney(cents);
         }
-        return (cents / 100).toFixed(2);
+        // Fallback: format as currency
+        const amount = (Number(cents) / 100).toFixed(2);
+        return amount;
       }
 
       function setSelectedState(variant) {
@@ -292,7 +295,9 @@
           } else if (!isAvailable) {
             addButtonText.textContent = 'Sold out';
           } else {
-            addButtonText.textContent = `Add to cart (${formatMoney(variant.price)})`;
+            const price = variant.price || 0;
+            const formattedPrice = formatMoney(price);
+            addButtonText.textContent = `Add to cart (${formattedPrice})`;
           }
         }
 
@@ -319,14 +324,23 @@
                 selections.push(input.value);
               }
             } else if (input.tagName === 'SELECT') {
-              selections.push(input.value);
+              // Get the selected option value, not just the input value
+              const selectedValue = input.options[input.selectedIndex]?.value || input.value;
+              if (selectedValue) {
+                selections.push(selectedValue);
+              }
             }
           }
         });
 
         if (selections.length !== productData.options.length) return null;
 
-        return productData.variants.find((variant) => variant.options.every((opt, idx) => opt === selections[idx]));
+        return productData.variants.find((variant) => {
+          return variant.options.every((opt, idx) => {
+            // Normalize comparison - handle potential whitespace or case differences
+            return String(opt).trim() === String(selections[idx]).trim();
+          });
+        });
       }
 
       // Initial selection: honor preselected variant, otherwise first available.
@@ -349,6 +363,9 @@
           if (variant) {
             setSelectedState(variant);
             updateUI(variant);
+          } else {
+            // Update UI even when variant not found (e.g., incomplete selections)
+            updateUI(null);
           }
         });
       });
