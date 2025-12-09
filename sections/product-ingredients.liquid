@@ -15,11 +15,6 @@
   if ingredients != blank
     assign has_ingredients = true
   endif
-
-  capture product_theme_class
-    render 'product-theme-class', product: selected_product
-  endcapture
-  assign product_theme_class = product_theme_class | strip
 -%}
 
 {% if has_ingredients %}

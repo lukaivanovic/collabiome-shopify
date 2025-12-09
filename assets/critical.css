@@ -378,6 +378,13 @@ button:disabled:hover {
   --product-accent-foreground: #f9f1f3;
 }
 
+.product-theme-boost {
+  --product-bg: linear-gradient(25deg, #dbeae5 -1.58%, #ede1d7 40.21%, #f6b4ca 100%); 
+  --product-bg-secondary: linear-gradient(25deg, color-mix(in srgb, #dbeae5, transparent 70%) -1.58%, color-mix(in srgb, #ede1d7, transparent 70%) 40.21%, color-mix(in srgb, #f6b4ca, transparent 70%) 100%);;
+  --product-accent: #4e71eb;
+  --product-accent-foreground: #f9f1f3;
+}
+
 .product-theme-recupera {
   --product-bg: linear-gradient(
     20deg,

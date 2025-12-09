@@ -3,11 +3,6 @@
   assign benefits_title = product.metafields.custom.benefits_title.value
   assign benefits_description = product.metafields.custom.benefits_description.value
 
-  capture product_theme_class
-    render 'product-theme-class', product: product
-  endcapture
-  assign product_theme_class = product_theme_class | strip
-
   assign has_benefits = false
   if benefits != blank
     assign has_benefits = true

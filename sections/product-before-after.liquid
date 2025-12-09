@@ -3,11 +3,6 @@
   if product.metafields.custom.section_before_after_before_photo.value != blank
     assign has_before_after = true
   endif
-
-  capture product_theme_class
-    render 'product-theme-class', product: product
-  endcapture
-  assign product_theme_class = product_theme_class | strip
 -%}
 
 {% if has_before_after %}

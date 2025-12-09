@@ -11,11 +11,6 @@
   assign headline = product.metafields.custom.headline.value
   assign product_form_identifier = 'product-form-' | append: product.id
   assign product_collection = product.collections.first
-
-  capture product_theme_class
-    render 'product-theme-class', product: product
-  endcapture
-  assign product_theme_class = product_theme_class | strip
 -%}
 
 <div class="product-background {{ product_theme_class }}">

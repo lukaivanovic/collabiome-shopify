@@ -29,11 +29,6 @@
   if has_image
     assign show_section = true
   endif
-
-  capture product_theme_class
-    render 'product-theme-class', product: product
-  endcapture
-  assign product_theme_class = product_theme_class | strip
 -%}
 
 {% if show_section %}

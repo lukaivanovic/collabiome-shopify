@@ -1,20 +1,18 @@
 {% style %}
   :root {
-    --page-width: {{ settings.max_page_width }};
-    --page-margin: {{ settings.min_page_margin }}px;
-    --color-background-default: {{ settings.background_default }};
-    --color-foreground-default: {{ settings.foreground_default }};
+    --color-background-default: #fff;
+    --color-foreground-default: #333;
     --color-foreground-secondary: color-mix(in srgb, var(--color-foreground-default) 64%, transparent);
-    --color-background-green: {{ settings.background_green }};
-    --color-foreground-green: {{ settings.foreground_green }};
-    --color-background-pink: {{ settings.background_pink }};
-    --color-foreground-pink: {{ settings.foreground_pink }};
-    --color-background-blue: {{ settings.background_blue }};
-    --color-foreground-blue: {{ settings.foreground_blue }};
-    --gradient-boost: 25deg, #DBEAE5 -1.58%, #EDE1D7 40.21%, #F6B4CA 100%;
-    --gradient-exclusive: 110deg, rgba(251, 178, 171, 0.10) 22.89%, rgba(252, 194, 148, 0.20) 52.59%, rgba(251, 187, 89, 0.10) 84.04%;
+    --color-background-green: #dbeae5;
+    --color-foreground-green: #28483d;
+    --color-background-pink: #f8dce5;
+    --color-foreground-pink: #482832;
+    --color-background-blue: #ddeafd;
+    --color-foreground-blue: #283548;
+    --gradient-boost: 25deg, #dbeae5 -1.58%, #ede1d7 40.21%, #f6b4ca 100%;
+    --gradient-exclusive: 110deg, rgba(251, 178, 171, 0.1) 22.89%, rgba(252, 194, 148, 0.2) 52.59%,
+      rgba(251, 187, 89, 0.1) 84.04%;
     --gradient-nutriage: 310deg, rgba(17, 189, 251, 1) 15%, rgba(33, 249, 150, 1) 85%;
-    --gradient-recupera: 100deg, #A2EEFF 3.17%, #B4CEFF 35.34%, #D4B9FF 103.04%;
-    --style-border-radius-inputs: {{ settings.input_corner_radius }}px;
+    --gradient-recupera: 100deg, #a2eeff 3.17%, #b4ceff 35.34%, #d4b9ff 103.04%;
   }
 {% endstyle %}

@@ -16,16 +16,6 @@
   assign accordion_items = selected_product.metafields.custom.accordion.value
   assign headline = selected_product.metafields.custom.headline.value
   assign product_form_identifier = 'product-form-' | append: selected_product.id
-  assign product_theme = selected_product.metafields.custom.theme.value | default: 'default'
-
-  case product_theme
-    when 'recupera'
-      assign product_theme_class = 'product-theme-recupera'
-    when 'boost'
-      assign product_theme_class = 'product-theme-boost'
-    else
-      assign product_theme_class = 'product-theme-default'
-  endcase
 -%}
 
 <div class="product-background {{ product_theme_class }}">

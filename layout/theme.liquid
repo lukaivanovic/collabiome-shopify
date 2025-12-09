@@ -42,10 +42,18 @@
     {% # Social, title, etc. %}
     {% render 'meta-tags' %}
 
+    {% # Set product theme class on product pages %}
+    {%- if template.name == 'product' and product != blank -%}
+      {%- capture product_theme_class -%}
+        {%- render 'product-theme-class', product: product -%}
+      {%- endcapture -%}
+      {%- assign product_theme_class = product_theme_class | strip -%}
+    {%- endif -%}
+
     {{ content_for_header }}
   </head>
 
-  <body>
+  <body class="{{ product_theme_class }}">
     {% sections 'header-group' %}
 
     {%- if settings.cart_type == 'drawer' -%}

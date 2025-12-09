@@ -9,7 +9,7 @@
 <script defer src="{{ 'countdown.js.liquid' | asset_url }}"></script>
 
 <div
-  class="announcement-bar__inner text-sm py-2"
+  class="announcement-bar__inner text-sm py-2 {{ product_theme_class }}"
   data-section-id="{{ section_id }}"
   {% if should_rotate %}
     data-auto-rotate="true" data-rotate-interval="{{ section.settings.rotate_interval | default: 5000 }}"
@@ -80,7 +80,7 @@
 {% stylesheet %}
   .announcement-bar {
     width: 100%;
-    background: linear-gradient(var(--gradient-boost));
+    background: var(--product-bg);
     color: color-mix(in srgb, black 88%, transparent);
   }
   .announcement-bar__inner {
