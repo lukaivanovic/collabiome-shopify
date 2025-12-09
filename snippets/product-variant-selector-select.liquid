@@ -16,32 +16,30 @@
 {% unless product.has_only_default_variant %}
   <div class="flex flex-col gap-4">
     {% for option in product.options_with_values %}
-      <div class="w-full">
-        <div class="flex items-center gap-2">
-          <select
-            id="product-options-select-{{ option.position }}"
-            name="options[{{ option.name }}]"
-            class="ml-px py-1 rounded-md bg-white text-primary font-medium! focus:outline-none flex-1"
-            data-option-input
-            data-option-position="{{ option.position }}"
-          >
-            {% for value in option.values %}
-              <option
-                value="{{ value }}"
-                {% if option.selected_value == value %}
-                  selected
-                {% endif %}
-              >
-                {{ value }}
-              </option>
-            {% endfor %}
-          </select>
-          <span
-            class="hidden text-xs font-medium px-1.5 py-0.5 tabular-nums rounded-full bg-[var(--product-accent)] text-[var(--product-button-text-color)] whitespace-nowrap"
-            data-variant-badge
-            data-option-position="{{ option.position }}"
-          ></span>
-        </div>
+      <div class="w-full flex items-center justify-start gap-2 border-t border-neutral-100 pt-2">
+        <select
+          id="product-options-select-{{ option.position }}"
+          name="options[{{ option.name }}]"
+          class="ml-px py-1 rounded-md text-sm! bg-white text-primary font-medium! focus:outline-none"
+          data-option-input
+          data-option-position="{{ option.position }}"
+        >
+          {% for value in option.values %}
+            <option
+              value="{{ value }}"
+              {% if option.selected_value == value %}
+                selected
+              {% endif %}
+            >
+              {{ value }}
+            </option>
+          {% endfor %}
+        </select>
+        <span
+          class="hidden text-xs font-medium px-1.5 py-0.5 tabular-nums rounded-full bg-[var(--product-accent)] text-[var(--product-button-text-color)] whitespace-nowrap"
+          data-variant-badge
+          data-option-position="{{ option.position }}"
+        ></span>
       </div>
     {% endfor %}
   </div>
