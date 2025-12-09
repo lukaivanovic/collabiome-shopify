@@ -12,6 +12,13 @@
     "products": "Products",
     "load_more": "Load more products"
   },
+  "products": {
+    "product": {
+      "add_to_cart": "Add to cart",
+      "sold_out": "Sold out",
+      "unavailable": "Unavailable"
+    }
+  },
   "collections": {
     "all": "Shop all",
     "supplements": "Dodaci prehrani",

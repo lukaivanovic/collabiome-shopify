@@ -10,7 +10,6 @@
   @param {string} product_form_id - Explicit form identifier (optional)
   @param {boolean} quantity_rule_soldout - Flag from parent context indicating quantity rule sold out (default: false)
   @param {string} button_variant - Button style variant (default | neutral_large)
-  @param {boolean} enable_free_delivery_label - Show free delivery label (default: false)
   @param {number} free_delivery_threshold - Price threshold (in cents) for free delivery label (default: 5000)
   @param {string} variant_selector_type - Variant selector type: 'horizontal' or 'select' (default: 'horizontal')
 {% enddoc %}
@@ -27,7 +26,6 @@
   assign form_id_value = product_form_id | default: section_id_value | append: '-product-form'
   assign quantity_rule_soldout = quantity_rule_soldout | default: false
   assign button_variant = button_variant | default: 'default'
-  assign enable_free_delivery_label = enable_free_delivery_label | default: false
   assign free_delivery_threshold = free_delivery_threshold | default: 5000
   assign variant_selector_type = variant_selector_type | default: 'horizontal'
 
@@ -46,6 +44,17 @@
   assign button_classes = 'button flex items-center gap-2 h-14 px-7 text-base [background:var(--product-button-background)] [color:var(--product-button-text-color)] w-full'
 %}
 
+{% liquid
+  # Determine initial variant state
+  if selected_variant == blank
+    assign initial_state = 'unavailable'
+  elsif selected_variant.available == false or quantity_rule_soldout
+    assign initial_state = 'soldout'
+  else
+    assign initial_state = 'available'
+  endif
+%}
+
 <product-form
   class="product-form"
   data-hide-errors="{{ gift_card_recipient_feature_active }}"
@@ -53,9 +62,9 @@
   data-product-id="{{ product.id }}"
   data-product-data-id="product-data-{{ product.id }}"
   data-product-data-fallback="product-data"
-  {% if enable_free_delivery_label %}
-    data-free-delivery-threshold="{{ free_delivery_threshold }}"
-  {% endif %}
+  data-variant-state="{{ initial_state }}"
+  data-variant-id="{% if selected_variant != blank %}{{ selected_variant.id }}{% endif %}"
+  data-variant-price="{% if selected_variant != blank %}{{ selected_variant.price }}{% endif %}"
 >
   <div class="product-form__error-message-wrapper" role="alert" hidden>
     <span class="svg-wrapper">
@@ -78,7 +87,7 @@
       {% if selected_variant == blank or selected_variant.available == false or quantity_rule_soldout %}
         disabled
       {% endif %}
-      class="product-variant-id"
+      data-variant-input
     >
     <div class="flex flex-col gap-4">
       {% unless product.has_only_default_variant %}
@@ -89,15 +98,6 @@
         {% endif %}
       {% endunless %}
 
-      {% if enable_free_delivery_label %}
-        <div
-          class="free-delivery-label text-xs font-medium text-green-600 {% if selected_variant == blank or selected_variant.price < free_delivery_threshold %}hidden{% endif %}"
-          data-free-delivery-label
-        >
-          Besplatna dostava
-        </div>
-      {% endif %}
-
       <div class="product-form__buttons">
         <button
           id="ProductSubmitButton-{{ section_id_value }}"
@@ -105,6 +105,9 @@
           name="add"
           class="{{ button_classes }}"
           data-add-to-cart
+          data-text-available="{{ 'products.product.add_to_cart' | t }}"
+          data-text-soldout="{{ 'products.product.sold_out' | t }}"
+          data-text-unavailable="{{ 'products.product.unavailable' | t }}"
           {% if selected_variant == blank or selected_variant.available == false or quantity_rule_soldout %}
             disabled
           {% endif %}
@@ -114,11 +117,11 @@
           </div>
           <span data-add-to-cart-text>
             {%- if selected_variant == blank -%}
-              Unavailable
+              {{ 'products.product.unavailable' | t }}
             {%- elsif selected_variant.available == false or quantity_rule_soldout -%}
-              Sold out
+              {{ 'products.product.sold_out' | t }}
             {%- else -%}
-              Add to cart ({{ selected_variant.price | money }})
+              {{ 'products.product.add_to_cart' | t }} ({{ selected_variant.price | money_with_currency }})
             {%- endif -%}
           </span>
         </button>
@@ -129,273 +132,3 @@
     </div>
   {%- endform -%}
 </product-form>
-
-{% javascript %}
-  // Unified buy form behavior: prevent link bubbling, handle variant selection, keep UI in sync.
-  document.addEventListener('DOMContentLoaded', function () {
-    document.querySelectorAll('product-form').forEach(function (productForm) {
-      const productId = productForm.dataset.productId;
-      const dataIdPrimary = productForm.dataset.productDataId;
-      const dataIdFallback = productForm.dataset.productDataFallback;
-      const dataScript =
-        (dataIdPrimary && document.getElementById(dataIdPrimary)) ||
-        (productId && document.getElementById(`product-data-${productId}`)) ||
-        (dataIdFallback && document.getElementById(dataIdFallback)) ||
-        document.getElementById('product-data');
-
-      if (!dataScript) return;
-
-      let productData;
-      try {
-        productData = JSON.parse(dataScript.textContent);
-      } catch (e) {
-        return;
-      }
-
-      const hiddenInput = productForm.querySelector('.product-variant-id');
-      const addButton = productForm.querySelector('[data-add-to-cart]');
-      const addButtonText = productForm.querySelector('[data-add-to-cart-text]');
-      const optionInputs = Array.from(productForm.querySelectorAll('[data-option-input]'));
-      const optionLabels = Array.from(productForm.querySelectorAll('[data-option-label]'));
-      const freeDeliveryLabel = productForm.querySelector('[data-free-delivery-label]');
-      const freeDeliveryThreshold = parseInt(productForm.dataset.freeDeliveryThreshold || '', 10);
-
-      function formatMoney(cents) {
-        if (!cents && cents !== 0) return '';
-        if (window.Shopify && typeof Shopify.formatMoney === 'function') {
-          return Shopify.formatMoney(cents);
-        }
-        // Fallback: format as currency
-        const amount = (Number(cents) / 100).toFixed(2);
-        return amount;
-      }
-
-      function setSelectedState(variant) {
-        if (!variant) return;
-        optionLabels.forEach((label) => {
-          const input = label.querySelector('[data-option-input]');
-          const position = Number(label.dataset.optionPosition);
-          const isSelected = variant.options[position - 1] === input?.value;
-          label.dataset.selected = isSelected ? 'true' : 'false';
-          if (input) {
-            if (input.type === 'radio') {
-              input.checked = isSelected;
-            } else if (input.tagName === 'SELECT') {
-              input.value = variant.options[position - 1];
-            }
-          }
-        });
-        // Handle select elements that aren't inside labels
-        optionInputs.forEach((input) => {
-          if (input.tagName === 'SELECT') {
-            const position = Number(input.dataset.optionPosition);
-            if (variant && variant.options[position - 1]) {
-              input.value = variant.options[position - 1];
-            }
-          }
-        });
-      }
-
-      function updateSavingsBadges(variant) {
-        if (!productData) return;
-
-        // Update badges for select elements (only when variant is selected)
-        const selectBadges = Array.from(productForm.querySelectorAll('[data-variant-badge][data-option-position]'));
-        selectBadges.forEach((badge) => {
-          // For select badges, we show the discount for the currently selected variant
-          if (variant && variant.compare_at_price && variant.compare_at_price > variant.price) {
-            const compareAtPrice = variant.compare_at_price;
-            const currentPrice = variant.price;
-            const savingsPercent = ((compareAtPrice - currentPrice) / compareAtPrice) * 100;
-
-            if (savingsPercent > 0) {
-              badge.textContent = `-${Math.round(savingsPercent)}%`;
-              badge.classList.remove('hidden');
-            } else {
-              badge.classList.add('hidden');
-            }
-          } else {
-            badge.classList.add('hidden');
-          }
-        });
-
-        // Update badges for horizontal radio buttons (existing logic)
-        const optionLabels = Array.from(productForm.querySelectorAll('[data-option-label]'));
-        optionLabels.forEach((label) => {
-          const badge = label.querySelector('[data-variant-badge]');
-          if (!badge) return;
-
-          const input = label.querySelector('input[type="radio"]');
-          if (!input) return;
-
-          // Get current selections for other options
-          const currentSelectedOptions = {};
-          optionInputs.forEach((optInput) => {
-            if (optInput.type === 'radio' && optInput.checked) {
-              const optionName = optInput.name.match(/options\[(.+)\]/)[1];
-              currentSelectedOptions[optionName] = optInput.value;
-            } else if (optInput.tagName === 'SELECT') {
-              const optionName = optInput.name.match(/options\[(.+)\]/)[1];
-              currentSelectedOptions[optionName] = optInput.value;
-            }
-          });
-
-          const optionName = input.name.match(/options\[(.+)\]/)[1];
-          const optionValue = input.value;
-
-          // Create hypothetical selection
-          const hypotheticalOptions = { ...currentSelectedOptions };
-          hypotheticalOptions[optionName] = optionValue;
-
-          // Find matching variant
-          const matchingVariant = productData.variants.find((v) => {
-            return v.options.every((opt, idx) => {
-              const optionNameKey = productData.options[idx];
-              return hypotheticalOptions[optionNameKey] === opt;
-            });
-          });
-
-          // Update badge
-          if (
-            matchingVariant &&
-            matchingVariant.compare_at_price &&
-            matchingVariant.compare_at_price > matchingVariant.price
-          ) {
-            const compareAtPrice = matchingVariant.compare_at_price;
-            const currentPrice = matchingVariant.price;
-            const savingsPercent = ((compareAtPrice - currentPrice) / compareAtPrice) * 100;
-
-            if (savingsPercent > 0) {
-              badge.textContent = `-${Math.round(savingsPercent)}%`;
-              badge.classList.remove('hidden');
-            } else {
-              badge.classList.add('hidden');
-            }
-          } else {
-            badge.classList.add('hidden');
-          }
-        });
-      }
-
-      function updateUI(variant) {
-        if (!hiddenInput || !addButton) return;
-        const checkAgainstInventory =
-          variant && variant.inventory_management === 'shopify' && variant.inventory_policy !== 'continue';
-        const minRule = variant?.quantity_rule?.min || 0;
-        const soldOutByRule = checkAgainstInventory && variant && minRule > variant.inventory_quantity;
-        const isAvailable = Boolean(variant && variant.available && !soldOutByRule);
-
-        hiddenInput.value = variant ? variant.id : '';
-        hiddenInput.disabled = !isAvailable;
-        addButton.disabled = !isAvailable;
-
-        if (addButtonText) {
-          if (!variant) {
-            addButtonText.textContent = 'Unavailable';
-          } else if (!isAvailable) {
-            addButtonText.textContent = 'Sold out';
-          } else {
-            const price = variant.price || 0;
-            const formattedPrice = formatMoney(price);
-            addButtonText.textContent = `Add to cart (${formattedPrice})`;
-          }
-        }
-
-        if (freeDeliveryLabel && !Number.isNaN(freeDeliveryThreshold)) {
-          if (variant && variant.price >= freeDeliveryThreshold) {
-            freeDeliveryLabel.classList.remove('hidden');
-          } else {
-            freeDeliveryLabel.classList.add('hidden');
-          }
-        }
-
-        // Update savings badges
-        updateSavingsBadges(variant);
-      }
-
-      function findVariantFromSelections() {
-        const selections = [];
-        productData.options.forEach((_, idx) => {
-          const input = optionInputs.find((el) => Number(el.dataset.optionPosition) === idx + 1);
-          if (input) {
-            // Handle radio buttons (must be checked) and select elements (always has a value)
-            if (input.type === 'radio') {
-              if (input.checked) {
-                selections.push(input.value);
-              }
-            } else if (input.tagName === 'SELECT') {
-              // Get the selected option value, not just the input value
-              const selectedValue = input.options[input.selectedIndex]?.value || input.value;
-              if (selectedValue) {
-                selections.push(selectedValue);
-              }
-            }
-          }
-        });
-
-        if (selections.length !== productData.options.length) return null;
-
-        return productData.variants.find((variant) => {
-          return variant.options.every((opt, idx) => {
-            // Normalize comparison - handle potential whitespace or case differences
-            return String(opt).trim() === String(selections[idx]).trim();
-          });
-        });
-      }
-
-      // Initial selection: honor preselected variant, otherwise first available.
-      let initialVariant =
-        (hiddenInput && productData.variants.find((variant) => `${variant.id}` === hiddenInput.value)) ||
-        productData.variants.find((variant) => variant.available) ||
-        productData.variants[0];
-
-      if (initialVariant) {
-        setSelectedState(initialVariant);
-        updateUI(initialVariant);
-      } else {
-        // Update badges even if no initial variant (for horizontal view with hypothetical selections)
-        updateSavingsBadges(null);
-      }
-
-      optionInputs.forEach((input) => {
-        input.addEventListener('change', function () {
-          const variant = findVariantFromSelections();
-          if (variant) {
-            setSelectedState(variant);
-            updateUI(variant);
-          } else {
-            // Update UI even when variant not found (e.g., incomplete selections)
-            updateUI(null);
-          }
-        });
-      });
-
-      // Stop propagation for clicks on variant options and form buttons
-      const interactiveElements = productForm.querySelectorAll(
-        '[data-option-label], .product-form__submit, input[type="radio"], button[type="submit"]'
-      );
-
-      interactiveElements.forEach(function (element) {
-        function handleInteraction(e) {
-          e.stopPropagation();
-          if (e.target.closest('a')) {
-            e.preventDefault();
-          }
-        }
-
-        element.addEventListener('click', handleInteraction);
-        element.addEventListener('touchend', function (e) {
-          handleInteraction(e);
-          if (!e.defaultPrevented) {
-            const clickEvent = new MouseEvent('click', {
-              bubbles: true,
-              cancelable: true,
-              view: window,
-            });
-            element.dispatchEvent(clickEvent);
-          }
-        });
-      });
-    });
-  });
-{% endjavascript %}

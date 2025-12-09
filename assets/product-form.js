@@ -192,13 +192,25 @@ if (!customElements.get("product-form")) {
       setupVariantSelection() {
         if (!this.product || !this.product.variants) return;
 
-        // Find all option inputs
+        // Find all option inputs (radio buttons)
         const optionInputs = this.form.querySelectorAll(
           'input[name^="options["]'
         );
 
         optionInputs.forEach((input) => {
           input.addEventListener("change", () => {
+            this.updateVariantSelection();
+            this.updateOptionStyles();
+          });
+        });
+
+        // Find all option selects (dropdowns)
+        const optionSelects = this.form.querySelectorAll(
+          'select[name^="options["]'
+        );
+
+        optionSelects.forEach((select) => {
+          select.addEventListener("change", () => {
             this.updateVariantSelection();
             this.updateOptionStyles();
           });
@@ -233,7 +245,7 @@ if (!customElements.get("product-form")) {
       updateVariantSelection() {
         if (!this.product || !this.product.variants) return;
 
-        // Get current selected options
+        // Get current selected options from radio buttons
         const selectedOptions = {};
         const optionInputs = this.form.querySelectorAll(
           'input[name^="options["]:checked'
@@ -244,11 +256,24 @@ if (!customElements.get("product-form")) {
           selectedOptions[optionName] = input.value;
         });
 
+        // Get current selected options from select dropdowns
+        const optionSelects = this.form.querySelectorAll(
+          'select[name^="options["]'
+        );
+
+        optionSelects.forEach((select) => {
+          const optionName = select.name.match(/options\[(.+)\]/)[1];
+          selectedOptions[optionName] = select.value;
+        });
+
         // Find matching variant
         let matchingVariant = null;
 
+        // Count total option selectors
+        const totalOptionSelectors = optionInputs.length + optionSelects.length;
+
         // If there are no option inputs (product without variants), use the first available variant
-        if (optionInputs.length === 0) {
+        if (totalOptionSelectors === 0) {
           matchingVariant =
             this.product.variants.find((v) => v.available) ||
             this.product.variants[0];
@@ -285,31 +310,56 @@ if (!customElements.get("product-form")) {
           // No matching variant found
           this.variantIdInput.disabled = true;
           this.submitButton.disabled = true;
-          this.submitButtonText.textContent = "Unavailable";
+          this.dataset.variantState = "unavailable";
+          this.submitButtonText.textContent =
+            this.submitButton.dataset.textUnavailable || "Unavailable";
         }
       }
 
-      updateSubmitButton(variant) {
-        if (!variant) {
-          this.submitButton.disabled = true;
-          this.submitButtonText.textContent = "Unavailable";
-          return;
-        }
+      getVariantState(variant) {
+        if (!variant) return "unavailable";
+        const checkInventory =
+          variant.inventory_management === "shopify" &&
+          variant.inventory_policy !== "continue";
+        const minRule = variant.quantity_rule?.min || 0;
+        const soldOutByRule =
+          checkInventory && minRule > variant.inventory_quantity;
+        if (!variant.available || soldOutByRule) return "soldout";
+        return "available";
+      }
 
-        if (!variant.available) {
-          this.submitButton.disabled = true;
-          this.submitButtonText.textContent = "Sold out";
-        } else {
-          this.submitButton.disabled = false;
+      updateSubmitButton(variant) {
+        const state = this.getVariantState(variant);
+
+        // Update form data attributes (for CSS styling)
+        this.dataset.variantState = state;
+        this.dataset.variantId = variant?.id || "";
+        this.dataset.variantPrice = variant?.price || "";
+
+        // Update button disabled state
+        this.submitButton.disabled = state !== "available";
+
+        // Get localized text from data attributes (set by Liquid)
+        const textMap = {
+          unavailable:
+            this.submitButton.dataset.textUnavailable || "Unavailable",
+          soldout: this.submitButton.dataset.textSoldout || "Sold out",
+          available: this.submitButton.dataset.textAvailable || "Add to cart",
+        };
+
+        const baseText = textMap[state];
+        if (state === "available" && variant) {
           const formattedPrice = this.formatMoney(variant.price);
-          this.submitButtonText.textContent = `Add to cart (${formattedPrice})`;
+          this.submitButtonText.textContent = `${baseText} (${formattedPrice})`;
+        } else {
+          this.submitButtonText.textContent = baseText;
         }
       }
 
       formatMoney(cents) {
-        return new Intl.NumberFormat("en-US", {
+        return new Intl.NumberFormat("en-GB", {
           style: "currency",
-          currency: "USD",
+          currency: "EUR",
         }).format(cents / 100);
       }
 
@@ -325,9 +375,9 @@ if (!customElements.get("product-form")) {
         const totalPrice = variant.price * quantity;
 
         // Update price
-        priceElement.textContent = new Intl.NumberFormat("en-US", {
+        priceElement.textContent = new Intl.NumberFormat("en-GB", {
           style: "currency",
-          currency: "USD",
+          currency: "EUR",
         }).format(totalPrice / 100);
 
         // Handle compare at price
@@ -346,9 +396,9 @@ if (!customElements.get("product-form")) {
               "product-price-compare text-lg text-gray-500 line-through";
             priceWrapper.insertBefore(compareElement, priceElement);
           }
-          compareElement.textContent = new Intl.NumberFormat("en-US", {
+          compareElement.textContent = new Intl.NumberFormat("en-GB", {
             style: "currency",
-            currency: "USD",
+            currency: "EUR",
           }).format(compareAtPrice / 100);
         } else if (compareElement) {
           compareElement.remove();
@@ -428,11 +478,37 @@ if (!customElements.get("product-form")) {
         });
       }
 
+      calcSavingsPercent(compareAt, price) {
+        if (!compareAt || compareAt <= price) return 0;
+        return Math.round(((compareAt - price) / compareAt) * 100);
+      }
+
       updateSavingsBadges() {
         if (!this.product || !this.product.variants) return;
 
+        const currentVariant = this.getCurrentVariant();
+
+        // Select badges: show current variant discount (for dropdown selectors)
+        this.form
+          .querySelectorAll("[data-variant-badge][data-option-position]")
+          .forEach((badge) => {
+            // Skip badges inside option labels (handled below)
+            if (badge.closest("[data-option-label]")) return;
+
+            const percent = currentVariant
+              ? this.calcSavingsPercent(
+                  currentVariant.compare_at_price,
+                  currentVariant.price
+                )
+              : 0;
+            badge.textContent = percent > 0 ? `-${percent}%` : "";
+            badge.classList.toggle("hidden", percent <= 0);
+          });
+
         // Get currently selected options (for building hypothetical selections)
         const currentSelectedOptions = {};
+
+        // From radio buttons
         const currentCheckedInputs = this.form.querySelectorAll(
           'input[name^="options["]:checked'
         );
@@ -441,7 +517,16 @@ if (!customElements.get("product-form")) {
           currentSelectedOptions[optionName] = input.value;
         });
 
-        // Get all option labels
+        // From select dropdowns
+        const currentSelectInputs = this.form.querySelectorAll(
+          'select[name^="options["]'
+        );
+        currentSelectInputs.forEach((select) => {
+          const optionName = select.name.match(/options\[(.+)\]/)[1];
+          currentSelectedOptions[optionName] = select.value;
+        });
+
+        // Get all option labels (radio buttons)
         const allOptionLabels = this.form.querySelectorAll(
           "[data-option-label]"
         );
@@ -471,25 +556,15 @@ if (!customElements.get("product-form")) {
           });
 
           // Check if this variant has savings
-          if (
-            matchingVariant &&
-            matchingVariant.compare_at_price &&
-            matchingVariant.compare_at_price > matchingVariant.price
-          ) {
-            const compareAtPrice = matchingVariant.compare_at_price;
-            const currentPrice = matchingVariant.price;
-            const savingsPercent =
-              ((compareAtPrice - currentPrice) / compareAtPrice) * 100;
+          const savingsPercent = matchingVariant
+            ? this.calcSavingsPercent(
+                matchingVariant.compare_at_price,
+                matchingVariant.price
+              )
+            : 0;
 
-            if (savingsPercent > 0) {
-              badge.textContent = `-${Math.round(savingsPercent)}%`;
-              badge.classList.remove("hidden");
-            } else {
-              badge.classList.add("hidden");
-            }
-          } else {
-            badge.classList.add("hidden");
-          }
+          badge.textContent = savingsPercent > 0 ? `-${savingsPercent}%` : "";
+          badge.classList.toggle("hidden", savingsPercent <= 0);
         });
       }
     }
