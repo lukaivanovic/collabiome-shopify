@@ -3,7 +3,7 @@
 -%}
 
 {% if videos != blank %}
-  <div class="product-videos {{ product_theme_class }}">
+  <div class="product-videos">
     <div class="container py-20">
       <div class="flex flex-col gap-12">
         <div class="product-videos__grid">
@@ -164,7 +164,25 @@
 
   @media (max-width: 768px) {
     .product-videos__grid {
-      grid-template-columns: 1fr;
+      display: flex;
+      flex-direction: row;
+      gap: 1.5rem;
+      overflow-x: auto;
+      overflow-y: hidden;
+      scroll-snap-type: x mandatory;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+
+    .product-videos__grid::-webkit-scrollbar {
+      display: none;
+    }
+
+    .product-videos__item {
+      flex: 0 0 auto;
+      width: 280px;
+      scroll-snap-align: start;
     }
   }
 {% endstylesheet %}
