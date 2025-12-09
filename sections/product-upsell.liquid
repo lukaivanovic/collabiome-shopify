@@ -11,7 +11,7 @@
 -%}
 
 {% if has_upsell %}
-  <div class="py-30 bg-product-bg-secondary">
+  <div class="py-16 md:py-30 bg-product-bg-secondary">
     <div class="container mx-auto px-4">
       <div class="mx-auto max-w-2xl text-center">
         <h2 class="title-medium">{{ section_title }}</h2>
@@ -37,7 +37,7 @@
         <div class="embla embla-upsell overflow-hidden" data-section-id="{{ section.id }}">
           <div class="embla__container flex">
             {% for upsell_item in upsell_metafield %}
-              <div class="embla__slide w-full flex-shrink-0 px-4">
+              <div class="embla__slide w-full flex-shrink-0 px-2">
                 {% render 'product-upsell-card',
                   product: upsell_item.product.value,
                   title: upsell_item.title,

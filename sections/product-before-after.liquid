@@ -6,7 +6,7 @@
 -%}
 
 {% if has_before_after %}
-  <div class="{{ product_theme_class }} py-20 product-gradient-bg">
+  <div class="{{ product_theme_class }} py-12 md:py-20 product-gradient-bg">
     <div class="container-small text-center py-20 relative flex flex-col items-center gap-3">
       <p class="text-xs font-medium uppercase text-neutral-500 tracking-wider">
         {{ section.settings.eyebrow | default: 'Before & after' }}
