@@ -81,17 +81,19 @@
     {% endif %}
   </div>
 
-  <div class="shrink-0">
-    {% render 'product-mini-buy-form',
-      product: product,
-      show_dynamic_checkout: show_dynamic_checkout,
-      gift_card_recipient_feature_active: true,
-      section_id: 'product-card-mini',
-      product_form_id: 'product-card-mini-form',
-      button_full_width: false,
-      quantity_rule_soldout: false
-    %}
-  </div>
+  {% comment %}
+    <div class="shrink-0">
+      {% render 'product-mini-buy-form',
+        product: product,
+        show_dynamic_checkout: show_dynamic_checkout,
+        gift_card_recipient_feature_active: true,
+        section_id: 'product-card-mini',
+        product_form_id: 'product-card-mini-form',
+        button_full_width: false,
+        quantity_rule_soldout: false
+      %}
+    </div>
+  {% endcomment %}
 </div>
 
 {% stylesheet %}
