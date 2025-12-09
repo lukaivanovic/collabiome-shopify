@@ -95,12 +95,6 @@ h1 {
   font-weight: 700;
 }
 
-@media (max-width: 768px) {
-  h1 {
-    font-size: 2.5rem;
-  }
-}
-
 p:empty {
   display: none;
 }
@@ -318,17 +312,7 @@ button:disabled:hover {
   box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.08) inset;
 }
 
-@media (max-width: 768px) {
-  .container {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
 
-  .container-small {
-    padding-left: 24px;
-    padding-right: 24px;
-  }
-}
 
 .visually-hidden {
   position: absolute !important;
@@ -446,7 +430,29 @@ button:disabled:hover {
 .title-medium {
   font-size: var(--text-4xl);
   line-height: var(--text-4xl--line-height);
-  font-weight: 550;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  .container-small {
+    padding-left: 24px;
+    padding-right: 24px;
+  }
+
+  h1 {
+    font-size: 2.5rem;
+  }
+
+  .title-medium {
+    font-size: var(--text-3xl);
+    line-height: var(--text-3xl--line-height);
+    font-weight: 700;
+  }
 }
 
 .spinner {
@@ -489,3 +495,5 @@ button:disabled:hover {
     transform: rotate(450deg);
   }
 }
+
+

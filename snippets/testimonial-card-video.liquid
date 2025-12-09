@@ -1,29 +1,31 @@
 {% liquid
   assign product_obj = entry.product.value | default: entry.product
 
-  assign product_theme = product_obj.metafields.custom.theme.value | default: 'default'
-
-  case product_theme
-    when 'recupera'
-      assign product_theme_class = 'product-theme-recupera'
-    when 'boost'
-      assign product_theme_class = 'product-theme-boost'
-    else
-      assign product_theme_class = 'product-theme-default'
-  endcase
+  capture product_theme_class
+    render 'product-theme-class', product: product_obj
+  endcapture
+  assign product_theme_class = product_theme_class | strip
 %}
 
-<article class="testimonial-grid__item-video {% if product_obj %}{{ product_theme_class }}{% endif %}">
+<article class="testimonial-grid__item-video {{ product_theme_class }}">
   {% if entry.type == 'video' or entry.type.value == 'video' %}
     {% render 'testimonial-video', video: entry.video %}
   {% endif %}
 
   {% if product_obj %}
-    <a href="{{ product_obj.url }}" class="testimonial-grid__product">
-      {{ product_obj.featured_image | image_url: width: 120, height: 120 | image_tag }}
-      <span class="text-sm leading-snug line-clamp-2">
-        {{- product_obj.title -}}
-      </span>
-    </a>
+    <div class="px-6 w-full flex justify-center">
+      <a
+        href="{{ product_obj.url }}"
+        class="relative left-1/2 -translate-x-1/2 mt-[-1rem] mb-4 flex justify-center items-center [background:var(--product-bg,white)] text-[var(--color-foreground-default)] px-5 py-2 rounded-3xl no-underline gap-4 min-w-[220px] text-base max-w-full hover:scale-102 transition-all duration-300"
+      >
+        <div class="size-20 rounded-xl overflow-hidden">
+          {{ product_obj.featured_image | image_url: width: 120, height: 120 | image_tag }}
+        </div>
+        <span class="font-medium leading-snug line-clamp-2">
+          {{- product_obj.title -}}
+        </span>
+        {{ 'icon-chevron-right.svg' | inline_asset_content }}
+      </a>
+    </div>
   {% endif %}
 </article>

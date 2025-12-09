@@ -24,7 +24,7 @@
     <div class="flex flex-1 flex-col gap-3 p-6">
       {% if show_date and article.published_at %}
         <div class="text-xs font-medium uppercase tracking-[0.4em] text-indigo-500">
-          {{ article.published_at | date: "%b %d, %Y" }}
+          {{ article.published_at | date: '%b %d, %Y' }}
         </div>
       {% endif %}
 
@@ -46,4 +46,3 @@
     </div>
   </article>
 </a>
-
