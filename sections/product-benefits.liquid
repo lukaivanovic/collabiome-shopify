@@ -20,21 +20,15 @@
         {% endif %}
       </div>
 
-      <div class="flex flex-row justify-center flex-wrap">
+      <div class="flex flex-col md:flex-row justify-center flex-wrap">
         {% for benefit in benefits %}
-          {% liquid
-            assign has_description = false
-            if benefit.description != blank
-              assign has_description = true
-            endif
-          %}
-          <div class="flex flex-col items-center justify-center text-center w-1/3 pb-6">
+          <div class="flex flex-col items-center justify-center text-center w-full md:w-1/3 pb-6 md:px-4">
             <div class="mb-4 size-32">
               {% render 'image', image: benefit.image_icon, class: 'w-full h-full object-cover' %}
             </div>
             <div class="text-xl font-[550]">{{ benefit.title }}</div>
             <div class="text-sm text-foreground-secondary mt-1">
-              {% if has_description %}
+              {% if benefit.description != blank %}
                 {{ benefit.description }}
               {% endif %}
             </div>
