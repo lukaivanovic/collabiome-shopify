@@ -489,8 +489,8 @@ button:disabled:hover {
   }
 
   .title-medium {
-    font-size: var(--text-3xl);
-    line-height: var(--text-3xl--line-height);
+    font-size: 1.75rem;
+    line-height: 1.2;
     font-weight: 700;
   }
 }

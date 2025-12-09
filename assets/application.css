@@ -82,6 +82,8 @@
     --text-5xl--line-height: 1.2;
     --text-7xl: 4.5rem;
     --text-7xl--line-height: 1;
+    --text-8xl: 6rem;
+    --text-8xl--line-height: 1;
     --font-weight-normal: 400;
     --font-weight-medium: 500;
     --font-weight-semibold: 600;
@@ -1584,6 +1586,10 @@
     font-size: var(--text-5xl) !important;
     line-height: var(--tw-leading, var(--text-5xl--line-height)) !important;
   }
+  .text-7xl {
+    font-size: var(--text-7xl);
+    line-height: var(--tw-leading, var(--text-7xl--line-height));
+  }
   .text-base {
     font-size: var(--text-base);
     line-height: var(--tw-leading, var(--text-base--line-height));
@@ -2030,6 +2036,9 @@
   }
   .\[background\:var\(--product-bg\,white\)\] {
     background: var(--product-bg,white);
+  }
+  .\[background\:var\(--product-bg-secondary\)\] {
+    background: var(--product-bg-secondary);
   }
   .\[background\:var\(--product-button-background\)\] {
     background: var(--product-button-background);
@@ -2815,6 +2824,12 @@
     @media (width >= 48rem) {
       font-size: var(--text-7xl);
       line-height: var(--tw-leading, var(--text-7xl--line-height));
+    }
+  }
+  .md\:text-8xl {
+    @media (width >= 48rem) {
+      font-size: var(--text-8xl);
+      line-height: var(--tw-leading, var(--text-8xl--line-height));
     }
   }
   .md\:text-base {

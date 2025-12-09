@@ -21,7 +21,12 @@
             playsinline: true,
             class: 'testimonial-grid__video'
         }}
-        <span class="testimonial-video-player__overlay" aria-hidden="true">
+        {% comment %} Play icon overlay - always visible in initial state {% endcomment %}
+        <span
+          class="testimonial-video-player__overlay testimonial-video-player__overlay--play"
+          aria-hidden="true"
+          data-play-overlay
+        >
           <span class="testimonial-video-player__icon">
             <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
               <path
@@ -30,6 +35,28 @@
               />
             </svg>
           </span>
+        </span>
+        {% comment %} Pause icon overlay - visible on hover when playing with sound {% endcomment %}
+        <span
+          class="testimonial-video-player__overlay testimonial-video-player__overlay--pause"
+          aria-hidden="true"
+          data-pause-overlay
+        >
+          <button
+            type="button"
+            class="testimonial-video-player__pause-button"
+            data-pause-button
+            aria-label="{{ 'sections.testimonial_grid.pause_video' | t }}"
+          >
+            <span class="testimonial-video-player__icon">
+              <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
+                <path
+                  d="M6 4h4v16H6V4zm8 0h4v16h-4V4z"
+                  fill="currentColor"
+                />
+              </svg>
+            </span>
+          </button>
         </span>
       </div>
     </button>

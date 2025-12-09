@@ -79,6 +79,7 @@
   "sections": {
     "testimonial_grid": {
       "play_video": "Play testimonial video",
+      "pause_video": "Pause video",
       "close_video": "Close video dialog",
       "video_dialog_label": "Testimonial video dialog"
     },

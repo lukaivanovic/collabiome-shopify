@@ -13,7 +13,7 @@
       <p class="text-sm font-medium uppercase text-neutral-500 tracking-wider">
         {{ section.settings.eyebrow | default: 'Comparison' }}
       </p>
-      <h2 class="text-4xl font-medium">{{ comparisons.title | default: 'Comparison' }}</h2>
+      <h2 class="title-medium">{{ comparisons.title | default: 'Comparison' }}</h2>
       {% if section.settings.description %}
         <div class="text-base opacity-70 mt-2">{{ section.settings.description }}</div>
       {% elsif comparisons.description %}
