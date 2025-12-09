@@ -13,12 +13,12 @@
             %}
             {% if video_media != blank %}
               <div class="product-videos__item">
-                <testimonial-video-player class="testimonial-video-player">
+                <testimonial-video-player class="testimonial-video-player group">
                   <button
                     type="button"
                     class="testimonial-video-player__trigger"
                     data-video-trigger
-                    aria-label="Play video"
+                    aria-label="{{ 'sections.testimonial_grid.play_video' | t }}"
                   >
                     <div class="product-videos__media" data-inline-video>
                       {{
@@ -31,14 +31,22 @@
                           playsinline: true,
                           class: 'product-videos__video'
                       }}
-                      <span class="testimonial-video-player__overlay" aria-hidden="true">
-                        <span class="testimonial-video-player__icon">
-                          <svg viewBox="0 0 24 24" focusable="false" aria-hidden="true">
-                            <path
-                              d="M8 5v14l11-7z"
-                              fill="currentColor"
-                            />
-                          </svg>
+                      <span
+                        class="absolute inset-0 bg-black/10 w-full h-full flex items-center justify-center group-data-active:hidden"
+                        aria-hidden="true"
+                        data-play-overlay
+                      >
+                        <span class="size-10 flex items-center justify-center bg-black/80 text-white rounded-full">
+                          {{ 'icon-play.svg' | inline_asset_content }}
+                        </span>
+                      </span>
+                      <span
+                        class="absolute top-2 right-2 items-center justify-center hidden group-data-active:flex"
+                        aria-hidden="true"
+                        data-pause-overlay
+                      >
+                        <span class="size-10 flex items-center justify-center bg-black/80 text-white rounded-full">
+                          {{ 'icon-pause.svg' | inline_asset_content }}
                         </span>
                       </span>
                     </div>
@@ -107,59 +115,6 @@
   .testimonial-video-player__trigger:focus-visible {
     outline: 2px solid currentColor;
     outline-offset: 4px;
-  }
-
-  .testimonial-video-player__overlay {
-    position: absolute;
-    inset: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: color-mix(in srgb, black 55%, transparent);
-    transition: opacity 150ms ease;
-    pointer-events: none;
-  }
-
-  /* Play overlay - always visible in initial state */
-  .testimonial-video-player__overlay--play {
-    opacity: 1;
-  }
-
-  /* Pause overlay - hidden by default, shown on hover when playing with sound */
-  .testimonial-video-player__overlay--pause {
-    opacity: 0;
-    display: none;
-  }
-
-  .testimonial-video-player__pause-button {
-    background: transparent;
-    border: none;
-    padding: 0;
-    margin: 0;
-    cursor: pointer;
-    pointer-events: auto;
-  }
-
-  .testimonial-video-player__pause-button:focus-visible {
-    outline: 2px solid currentColor;
-    outline-offset: 4px;
-    border-radius: 999px;
-  }
-
-  .testimonial-video-player__icon {
-    width: 64px;
-    height: 64px;
-    border-radius: 999px;
-    background: rgba(0, 0, 0, 0.75);
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-  }
-
-  .testimonial-video-player__icon svg {
-    width: 28px;
-    height: 28px;
   }
 
   @media (max-width: 768px) {
