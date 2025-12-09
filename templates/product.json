@@ -25,6 +25,13 @@
         "description": "<p>Watch our product videos</p>"
       }
     },
+    "product_before_after_RheAtk": {
+      "type": "product-before-after",
+      "name": "Product Before & After",
+      "settings": {
+        "eyebrow": ""
+      }
+    },
     "product_upsell_RFhKfi": {
       "type": "product-upsell",
       "name": "Product Upsell",
@@ -35,13 +42,6 @@
       "name": "Product Benefits",
       "settings": {
         "title": "Glow up with our product"
-      }
-    },
-    "product_before_after_RheAtk": {
-      "type": "product-before-after",
-      "name": "Product Before & After",
-      "settings": {
-        "eyebrow": ""
       }
     },
     "product_ingredients_Mhp7N3": {
@@ -84,11 +84,11 @@
   "order": [
     "main",
     "product_videos_KABRrw",
-    "product_upsell_RFhKfi",
-    "product_benefits_HE6ycF",
     "product_before_after_RheAtk",
+    "product_benefits_HE6ycF",
     "product_ingredients_Mhp7N3",
     "product_science_nfrBbH",
+    "product_upsell_RFhKfi",
     "product_comparison_YHCngK",
     "product_faq_jmHdaa",
     "product_reviews_APUjTe"
