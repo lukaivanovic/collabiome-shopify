@@ -1,28 +1,33 @@
 @import "tailwindcss";
 
-@theme{
-    --page-width: var(--page-width);
-    --page-margin: var(--page-margin);
-    --color-background-default: var(--color-background-default);
-    --color-foreground-default: var(--color-foreground-default);
-    --color-foreground-secondary: color-mix(in srgb, var(--color-foreground-default) 64%, transparent);
-    --color-background-green: var(--color-background-green);
-    --color-foreground-green: var(--color-foreground-green);
-    --color-background-pink: {{ settings.background_pink }};
-    --color-foreground-pink: var(--color-foreground-pink);
-    --color-background-blue: {{ settings.background_blue }};
-    --color-foreground-blue: var(--color-foreground-blue);
-    
-    /* Product colors */
-    --color-product-accent: var(--product-accent);
-    --color-product-accent-foreground: var(--product-accent-foreground);
+@theme {
+  --page-width: var(--page-width);
+  --page-margin: var(--page-margin);
+  --color-background-default: var(--color-background-default);
+  --color-foreground-default: var(--color-foreground-default);
+  --color-foreground-secondary: color-mix(
+    in srgb,
+    var(--color-foreground-default) 64%,
+    transparent
+  );
+  --gradient-recupera: 100deg, #a2eeff 3.17%, #b4ceff 35.34%, #d4b9ff 103.04%;
+  --style-border-radius-inputs: var(--style-border-radius-inputs);
+  --text-5xl: 2.75rem;
+  --text-5xl--line-height: 1.2;
+}
 
-    --gradient-boost: var(--gradient-boost);
-    --gradient-exclusive: var(--gradient-exclusive);
-    --gradient-nutriage: var(--gradient-nutriage);
-    --gradient-recupera: 100deg, #A2EEFF 3.17%, #B4CEFF 35.34%, #D4B9FF 103.04%;
-    --style-border-radius-inputs: var(--style-border-radius-inputs);
-    --text-5xl: 2.75rem;
-    --text-5xl--line-height: 1.2;
-    
-  }
+@theme inline {
+  --color-product-accent: var(--product-accent);
+  --color-product-accent-foreground: var(--product-accent-foreground);
+  --gradient-boost: var(--gradient-boost);
+  --gradient-exclusive: var(--gradient-exclusive);
+  --gradient-nutriage: var(--gradient-nutriage);
+}
+
+@utility bg-product-bg {
+  background: var(--product-bg);
+}
+
+@utility bg-product-bg-secondary {
+  background: var(--product-bg-secondary);
+}

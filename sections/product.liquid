@@ -104,11 +104,11 @@
           gift_card_recipient_feature_active: false,
           quantity_rule_soldout: false,
           button_variant: 'default',
-          enable_free_delivery_label: false,
-          free_delivery_threshold: 5000
+          free_delivery_threshold: 5000,
+          variant_selector_type: 'horizontal'
         %}
 
-        <div class="flex flex-col gap-3 items-center">
+        <div class="flex flex-col gap-3 items-center mt-3">
           <div class="flex items-center gap-3">
             <span class="text-neutral-400 flex-shrink-0">
               {{- 'icon-package.svg' | inline_asset_content -}}
@@ -137,57 +137,63 @@
       {% endcomment %}
 
       {% comment %} Benefits {% endcomment %}
-      <div class="flex flex-col gap-4">
-        <span class="text-xs font-semibold uppercase text-neutral-500 tracking-wider">Benefits</span>
-        <div class="flex flex-col gap-2">
-          {%- for benefit in benefits -%}
-            <div class="flex items-center gap-3 bg-white rounded-lg">
-              <span class="text-[var(--product-accent)]">{{ 'icon-check.svg' | inline_asset_content }}</span>
-              <span class="font-medium">{{ benefit | default: 'Benefit' | strip }}</span>
-            </div>
-          {%- endfor -%}
+      {% if benefits != blank %}
+        <div class="flex flex-col gap-4">
+          <span class="text-xs font-semibold uppercase text-neutral-500 tracking-wider">Benefits</span>
+          <div class="flex flex-col gap-2">
+            {%- for benefit in benefits -%}
+              <div class="flex items-center gap-3 bg-white rounded-lg">
+                <span class="text-[var(--product-accent)]">{{ 'icon-check.svg' | inline_asset_content }}</span>
+                <span class="font-medium">{{ benefit | default: 'Benefit' | strip }}</span>
+              </div>
+            {%- endfor -%}
+          </div>
         </div>
-      </div>
+      {% endif %}
 
       {% comment %} Description {% endcomment %}
-      <div class="flex flex-col gap-3">
-        <span class="text-xs font-medium uppercase text-neutral-500 tracking-widest">Description</span>
-        <div class="flex flex-col">
-          {% if product.description != blank %}
-            <div class="leading-[1.6] text-black font-medium gap-4 flex flex-col line-clamp-5">
-              {{ product.description }}
-            </div>
-          {% endif %}
+      {% if product.description != blank %}
+        <div class="flex flex-col gap-3">
+          <span class="text-xs font-medium uppercase text-neutral-500 tracking-widest">Description</span>
+          <div class="flex flex-col">
+            {% if product.description != blank %}
+              <div class="leading-[1.6] text-black font-medium gap-4 flex flex-col line-clamp-5">
+                {{ product.description }}
+              </div>
+            {% endif %}
+          </div>
         </div>
-      </div>
+      {% endif %}
 
       {% comment %} Accordions {% endcomment %}
-      <div class="flex flex-col gap-4">
-        <span class="text-xs font-medium uppercase text-neutral-500 tracking-widest">Additional information</span>
-        <div class="product-accordion flex flex-col">
-          {%- for accordion_item in accordion_items -%}
-            <collapsible-item class="accordion-item border-b border-neutral-100 bg-white transition-colors">
-              <button
-                class="accordion-trigger w-full flex items-center justify-between py-3 text-left "
-                data-collapsible-trigger
-                type="button"
-              >
-                <span class=" text-black font-medium">
-                  {{- accordion_item.title | strip -}}
-                </span>
-                <div class="w-6 h-6 flex items-center justify-center [background:var(--product-background)] rounded-full text-[var(--product-accent)]">
-                  {{ 'icon-plus.svg' | inline_asset_content }}
+      {% if accordion_items != blank %}
+        <div class="flex flex-col gap-4">
+          <span class="text-xs font-medium uppercase text-neutral-500 tracking-widest">Additional information</span>
+          <div class="product-accordion flex flex-col">
+            {%- for accordion_item in accordion_items -%}
+              <collapsible-item class="accordion-item border-b border-neutral-100 bg-white transition-colors">
+                <button
+                  class="accordion-trigger w-full flex items-center justify-between py-3 text-left "
+                  data-collapsible-trigger
+                  type="button"
+                >
+                  <span class=" text-black font-medium">
+                    {{- accordion_item.title | strip -}}
+                  </span>
+                  <div class="w-6 h-6 flex items-center justify-center [background:var(--product-background)] rounded-full text-[var(--product-accent)]">
+                    {{ 'icon-plus.svg' | inline_asset_content }}
+                  </div>
+                </button>
+                <div class="accordion-content" data-collapsible-content>
+                  <div class="pt-3 pb-8 leading-[1.6] text-black gap-4 flex flex-col">
+                    {{ accordion_item.content | metafield_tag }}
+                  </div>
                 </div>
-              </button>
-              <div class="accordion-content" data-collapsible-content>
-                <div class="pt-3 pb-8 leading-[1.6] text-black gap-4 flex flex-col">
-                  {{ accordion_item.content | metafield_tag }}
-                </div>
-              </div>
-            </collapsible-item>
-          {%- endfor -%}
+              </collapsible-item>
+            {%- endfor -%}
+          </div>
         </div>
-      </div>
+      {% endif %}
 
       <div data-rebuy-id="247488" data-rebuy-shopify-product-ids="{{ product.id }}"></div>
 

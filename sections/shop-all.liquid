@@ -77,12 +77,12 @@
         </div>
       {% else %}
         <div
-          class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] sm:grid-cols-[repeat(auto-fill,minmax(240px,1fr))] md:grid-cols-[repeat(auto-fill,minmax(280px,1fr))] gap-4 sm:gap-6 md:gap-8 mb-12"
+          class="grid grid-cols-[repeat(auto-fill,minmax(200px,1fr))] sm:grid-cols-[repeat(auto-fill,minmax(240px,1fr))] md:grid-cols-4 gap-4 sm:gap-6 md:gap-8 mb-12"
           data-section-id="{{ section_id }}"
         >
           {% for product in selected_collection.products %}
             <div class="product-card">
-              {% render 'product-card', product: product %}
+              {% render 'product-card', product: product, hide_buy_form: false, cardStyle: true %}
             </div>
           {% endfor %}
         </div>

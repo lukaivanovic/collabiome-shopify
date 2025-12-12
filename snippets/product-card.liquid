@@ -1,4 +1,17 @@
-<div class="flex flex-col gap-4 text-foreground overflow-hidden">
+{% doc %}
+  Product Card
+
+  Renders a product card with customizable options.
+
+  @param {product} product - Product object (required)
+  @param {boolean} hide_buy_form - Hide the buy form (default: false)
+  @param {boolean} cardStyle - Card style (default: false)
+{% enddoc %}
+
+<div
+  data-card="{{ cardStyle }}"
+  class="flex flex-col gap-4 text-foreground overflow-hidden group data-[card=true]:bg-product-bg-secondary data-[card=true]:rounded-xl"
+>
   <script id="product-data-{{ product.id }}" type="application/json">
     {{ product | json }}
   </script>
@@ -7,21 +20,23 @@
       {{
         product.featured_media
         | image_url: width: 800, height: 800, crop: 'center'
-        | image_tag: class: 'product-card__image product-card__image--primary h-full w-full object-contain'
+        | image_tag:
+          class: 'product-card__image product-card__image--primary h-full w-full object-contain group-data-[card=true]:object-cover'
       }}
 
       {% if product.media[1] %}
         {{
           product.media[1]
           | image_url: width: 800, height: 800, crop: 'center'
-          | image_tag: class: 'product-card__image product-card__image--secondary h-full w-full object-contain'
+          | image_tag:
+            class: 'product-card__image product-card__image--secondary h-full w-full object-contain group-data-[card=true]:object-cover'
         }}
       {% endif %}
     {% else %}
       <div class="product-card__placeholder"></div>
     {% endif %}
   </a>
-  <div class="flex flex-col gap-5">
+  <div class="flex flex-col gap-5 group-data-[card=true]:p-4">
     <div>
       <h3 class="text-lg font-semibold line-clamp-1">{{ product.title | escape }}</h3>
       <p class="product-card__description text-gray-600 line-clamp-1 h-6">
@@ -53,7 +68,6 @@
   .product-card__image {
     width: 100%;
     height: 100%;
-    object-fit: contain;
     transition: opacity 0.3s ease, transform 0.3s ease;
   }
 

@@ -563,7 +563,8 @@ if (!customElements.get("product-form")) {
               )
             : 0;
 
-          badge.textContent = savingsPercent > 0 ? `-${savingsPercent}%` : "";
+          badge.textContent =
+            savingsPercent > 0 ? `${savingsPercent}% uštede` : "";
           badge.classList.toggle("hidden", savingsPercent <= 0);
         });
       }
