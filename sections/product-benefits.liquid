@@ -28,7 +28,7 @@
 {% if show_section %}
   <div class="py-12 md:py-20">
     <div class="container flex gap-6 flex-col-reverse lg:flex-row md:gap-16">
-      <div class="flex-1 flex flex-col justify-between py-6">
+      <div class="flex-1 flex flex-col py-6">
         <div class="pb-6">
           <h2 class="title-medium">{{ benefits_title | default: 'Product Benefits' }}</h2>
           {% if has_description %}
@@ -37,21 +37,21 @@
         </div>
 
         {% if has_benefits %}
-          <div class="mt-6 grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div class="mt-6 grid grid-cols-1 md:grid-cols-1 gap-1">
             {% for benefit in benefits %}
-              <div class="border-b border-neutral-100 py-6 bg-product-bg-secondary rounded-2xl p-4">
+              <div class="border-b border-neutral-200 pb-6 mb-6  last:mb-0">
                 {% if benefit.image_icon %}
-                  <div class="mb-4 size-16">
+                  <div class="mb-4 size-8">
                     {% render 'image', image: benefit.image_icon, class: 'w-full h-full object-cover' %}
                   </div>
                 {% endif %}
 
                 {% if benefit.title %}
-                  <div class="text-xl font-[550]">{{ benefit.title }}</div>
+                  <div class="text-base font-[550]">{{ benefit.title }}</div>
                 {% endif %}
 
                 {% if benefit.description != blank %}
-                  <div class="text-sm text-foreground-secondary mt-1">
+                  <div class="text-base text-foreground-secondary">
                     {{ benefit.description }}
                   </div>
                 {% endif %}

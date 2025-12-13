@@ -49,13 +49,19 @@
         {% endfor %}
       </div>
 
+      {%- liquid
+        assign other_ingredients_list = ''
+      -%}
+
       {% for ingredient in ingredients %}
         {% if forloop.index > 3 %}
           {%- liquid
             if other_ingredients_count > 0
               assign other_ingredients = other_ingredients | append: ', '
+              assign other_ingredients_list = other_ingredients_list | append: '|'
             endif
             assign other_ingredients = other_ingredients | append: ingredient.name
+            assign other_ingredients_list = other_ingredients_list | append: ingredient.name
             assign other_ingredients_count = other_ingredients_count | plus: 1
           -%}
         {% endif %}
@@ -67,12 +73,118 @@
           <div class="text-sm uppercase tracking-wide opacity-70 mb-2 mt-6">
             {{ 'sections.product_ingredients.list' | t }}
           </div>
-          <p>{{ other_ingredients }}</p>
+          <button
+            type="button"
+            data-drawer-trigger="ingredients-drawer"
+            class="text-base font-medium text-primary hover:underline mt-2"
+          >
+            {{ 'sections.product_ingredients.view_all' | t }}
+          </button>
         </div>
       {% endif %}
     </div>
   </div>
+
+  {% if other_ingredients != '' %}
+    <generic-drawer
+      id="ingredients-drawer"
+      class="fixed inset-0 z-[1000] invisible pointer-events-none transition-[visibility] duration-300 ease-in-out"
+    >
+      <div
+        data-drawer-overlay
+        class="absolute inset-0 bg-black/50 opacity-0 transition-opacity duration-300 ease-in-out"
+      ></div>
+      <div
+        data-drawer-container
+        class="absolute left-1/2 top-1/2 bg-white rounded-2xl shadow-xl flex flex-col transition-all duration-300 ease-in-out max-w-2xl w-full mx-4 max-h-[80vh]"
+      >
+        <div
+          data-drawer-header
+          class="flex items-center justify-between p-6 border-b border-neutral-200 flex-shrink-0"
+        >
+          <h2 data-drawer-title class="m-0 text-xl font-semibold text-gray-900">
+            {{ 'sections.product_ingredients.list' | t | default: 'All Ingredients' }}
+          </h2>
+          <button
+            data-drawer-close
+            aria-label="Close drawer"
+            class="flex items-center justify-center w-8 h-8 border-0 bg-transparent cursor-pointer text-gray-500 rounded transition-all duration-200 ease-in-out hover:bg-gray-100 hover:text-gray-700"
+          >
+            <svg
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2"
+              class="w-5 h-5"
+            >
+              <line x1="18" y1="6" x2="6" y2="18"></line>
+              <line x1="6" y1="6" x2="18" y2="18"></line>
+            </svg>
+          </button>
+        </div>
+        <div
+          data-drawer-content
+          class="flex-1 overflow-y-auto p-6"
+        >
+          <div class="prose prose-sm max-w-none">
+            {% assign ingredients_array = other_ingredients_list | split: '|' %}
+            <ul class="list-none space-y-2">
+              {% for ingredient_name in ingredients_array %}
+                {% if ingredient_name != blank %}
+                  <li class="text-base text-gray-700">{{ ingredient_name }}</li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          </div>
+        </div>
+      </div>
+    </generic-drawer>
+
+    <script src="{{ 'drawer.js' | asset_url }}" defer="defer"></script>
+  {% endif %}
 {% endif %}
+
+{% stylesheet %}
+  /* Centered drawer styles */
+  generic-drawer#ingredients-drawer[data-active='true'] {
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  generic-drawer#ingredients-drawer[data-active='true'] [data-drawer-overlay] {
+    opacity: 1;
+  }
+
+  generic-drawer#ingredients-drawer [data-drawer-container] {
+    transform: translate(-50%, -50%) scale(0.95);
+    opacity: 0;
+  }
+
+  generic-drawer#ingredients-drawer[data-active='true'] [data-drawer-container] {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 1;
+  }
+
+  /* Custom scrollbar styling */
+  generic-drawer#ingredients-drawer [data-drawer-content]::-webkit-scrollbar {
+    width: 0.375rem;
+  }
+
+  generic-drawer#ingredients-drawer [data-drawer-content]::-webkit-scrollbar-track {
+    background-color: rgb(241 245 249);
+  }
+
+  generic-drawer#ingredients-drawer [data-drawer-content]::-webkit-scrollbar-thumb {
+    background-color: rgb(203 213 225);
+    border-radius: 0.125rem;
+  }
+
+  generic-drawer#ingredients-drawer [data-drawer-content]::-webkit-scrollbar-thumb:hover {
+    background-color: rgb(148 163 184);
+  }
+{% endstylesheet %}
 
 {% schema %}
 {

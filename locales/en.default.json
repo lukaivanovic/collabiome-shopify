@@ -137,6 +137,7 @@
       "title": "Ingredients",
       "description": "",
       "list": "Other ingredients",
+      "view_all": "View all ingredients",
       "settings": {
         "title": "Title",
         "description": "Description",
