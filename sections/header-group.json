@@ -113,6 +113,47 @@
                 "label": "Kozmetika"
               },
               "blocks": {
+                "mobile_menu_category_7xfmaz": {
+                  "type": "mobile-menu-category",
+                  "name": "Menu category",
+                  "settings": {
+                    "title": "Category",
+                    "description": "",
+                    "url": ""
+                  },
+                  "blocks": {}
+                },
+                "mobile_menu_category_T9RV4X": {
+                  "type": "mobile-menu-category",
+                  "name": "Menu category",
+                  "settings": {
+                    "title": "Category",
+                    "description": "",
+                    "url": ""
+                  },
+                  "blocks": {}
+                },
+                "mobile_menu_category_KBFLMW": {
+                  "type": "mobile-menu-category",
+                  "name": "Menu category",
+                  "settings": {
+                    "title": "Category",
+                    "description": "",
+                    "url": ""
+                  },
+                  "blocks": {}
+                },
+                "mobile_menu_category_4bCDA6": {
+                  "type": "mobile-menu-category",
+                  "name": "Menu category",
+                  "settings": {
+                    "title": "Biome Moisturizer SPF30",
+                    "description": "Za najbolji izgled",
+                    "image": "shopify://shop_images/Collagen_Biome_Moisturizer_SPF30_-_Multibiome_complex_decd784e-3a45-4015-9e33-8b9be4f61d37.png",
+                    "url": ""
+                  },
+                  "blocks": {}
+                },
                 "mobile_menu_category_3rcH7d": {
                   "type": "mobile-menu-category",
                   "settings": {
@@ -144,6 +185,10 @@
                 }
               },
               "block_order": [
+                "mobile_menu_category_7xfmaz",
+                "mobile_menu_category_T9RV4X",
+                "mobile_menu_category_KBFLMW",
+                "mobile_menu_category_4bCDA6",
                 "mobile_menu_category_3rcH7d",
                 "mobile_menu_category_QffAKe",
                 "mobile_menu_category_qLb4fp"
