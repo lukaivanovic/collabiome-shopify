@@ -13,9 +13,27 @@
       "type": "page",
       "disabled": true,
       "settings": {}
+    },
+    "176564777491f227df": {
+      "type": "apps",
+      "blocks": {
+        "judge_me_reviews_review_widget_homepage_exdJpK": {
+          "type": "shopify://apps/judge-me-reviews/blocks/review_widget_homepage/61ccd3b1-a9f2-4160-9fe9-4fec8413e5d8",
+          "settings": {
+            "product": "",
+            "review_data": "sample_data",
+            "max_width": 1200
+          }
+        }
+      },
+      "block_order": [
+        "judge_me_reviews_review_widget_homepage_exdJpK"
+      ],
+      "settings": {}
     }
   },
   "order": [
-    "main"
+    "main",
+    "176564777491f227df"
   ]
 }
