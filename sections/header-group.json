@@ -137,8 +137,9 @@
                   "type": "mobile-menu-category",
                   "name": "Menu category",
                   "settings": {
-                    "title": "Category",
-                    "description": "",
+                    "title": "Exfolijant",
+                    "description": "Očisti svoje lice kao nikad dosad",
+                    "image": "shopify://shop_images/Exfolijant_-_Kompleks_vocnih_kiselina_i_enzima_6563bdb5-96c8-47a1-8f49-4ace194d8bf5.png",
                     "url": ""
                   },
                   "blocks": {}
