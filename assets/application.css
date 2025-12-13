@@ -301,6 +301,9 @@
   .inset-0 {
     inset: calc(var(--spacing) * 0);
   }
+  .-top-1 {
+    top: calc(var(--spacing) * -1);
+  }
   .top-0 {
     top: calc(var(--spacing) * 0);
   }
@@ -318,6 +321,9 @@
   }
   .top-\[calc\(100\%-16px\)\] {
     top: calc(100% - 16px);
+  }
+  .-right-1 {
+    right: calc(var(--spacing) * -1);
   }
   .right-0 {
     right: calc(var(--spacing) * 0);
@@ -564,6 +570,10 @@
     width: calc(var(--spacing) * 10);
     height: calc(var(--spacing) * 10);
   }
+  .size-16 {
+    width: calc(var(--spacing) * 16);
+    height: calc(var(--spacing) * 16);
+  }
   .size-20 {
     width: calc(var(--spacing) * 20);
     height: calc(var(--spacing) * 20);
@@ -628,6 +638,9 @@
   }
   .h-\[2lh\] {
     height: 2lh;
+  }
+  .h-\[18px\] {
+    height: 18px;
   }
   .h-\[calc\(100dvh-4rem\)\] {
     height: calc(100dvh - 4rem);
@@ -766,6 +779,9 @@
   }
   .min-w-150 {
     min-width: calc(var(--spacing) * 150);
+  }
+  .min-w-\[18px\] {
+    min-width: 18px;
   }
   .min-w-\[200px\] {
     min-width: 200px;
@@ -1692,6 +1708,9 @@
       color: color-mix(in oklab, var(--product-accent) 72%, transparent);
     }
   }
+  .text-\[var\(--product-accent-foreground\)\] {
+    color: var(--product-accent-foreground);
+  }
   .text-\[var\(--product-button-text-color\)\] {
     color: var(--product-button-text-color);
   }
@@ -1795,6 +1814,12 @@
     color: color-mix(in srgb, #fff 50%, transparent);
     @supports (color: color-mix(in lab, red, red)) {
       color: color-mix(in oklab, var(--color-white) 50%, transparent);
+    }
+  }
+  .text-white\/70 {
+    color: color-mix(in srgb, #fff 70%, transparent);
+    @supports (color: color-mix(in lab, red, red)) {
+      color: color-mix(in oklab, var(--color-white) 70%, transparent);
     }
   }
   .text-white\/80 {
@@ -2033,11 +2058,6 @@
   .group-data-\[card\=true\]\:object-cover {
     &:is(:where(.group)[data-card="true"] *) {
       object-fit: cover;
-    }
-  }
-  .group-data-\[card\=true\]\:p-2 {
-    &:is(:where(.group)[data-card="true"] *) {
-      padding: calc(var(--spacing) * 2);
     }
   }
   .group-data-\[card\=true\]\:p-4 {

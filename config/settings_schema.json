@@ -114,5 +114,19 @@
         "default": "See our recommendations"
       }
     ]
+  },
+  {
+    "name": "Header Mega Menu",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Cosmetics mega menu"
+      },
+      {
+        "type": "product",
+        "id": "mega_menu_featured_product",
+        "label": "Featured product"
+      }
+    ]
   }
 ]

@@ -182,3 +182,39 @@ class CartDrawerItems extends CartItems {
 }
 
 customElements.define("cart-drawer-items", CartDrawerItems);
+
+// Update cart count badge in header
+function updateCartCountBadge(itemCount) {
+  const cartBubbles = document.querySelectorAll("#cart-icon-bubble");
+  
+  cartBubbles.forEach((cartBubble) => {
+    let badge = cartBubble.querySelector(".cart-count-badge");
+    
+    if (itemCount > 0) {
+      if (!badge) {
+        // Create badge if it doesn't exist
+        badge = document.createElement("span");
+        badge.className = "cart-count-badge absolute -top-1 -right-1 flex items-center justify-center min-w-[18px] h-[18px] px-1.5 text-xs font-medium text-[var(--product-accent-foreground)] bg-[var(--product-accent)] rounded-full";
+        badge.setAttribute("aria-label", `${itemCount} items in cart`);
+        cartBubble.appendChild(badge);
+      }
+      badge.textContent = itemCount;
+      badge.setAttribute("aria-label", `${itemCount} items in cart`);
+      badge.style.display = "flex";
+    } else {
+      // Hide badge if cart is empty
+      if (badge) {
+        badge.style.display = "none";
+      }
+    }
+  });
+}
+
+// Subscribe to cart updates to update the badge
+if (typeof subscribe !== "undefined" && typeof PUB_SUB_EVENTS !== "undefined") {
+  subscribe(PUB_SUB_EVENTS.cartUpdate, (data) => {
+    if (data && data.cartData && typeof data.cartData.item_count !== "undefined") {
+      updateCartCountBadge(data.cartData.item_count);
+    }
+  });
+}

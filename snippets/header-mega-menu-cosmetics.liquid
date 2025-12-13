@@ -189,14 +189,58 @@
         </div>
 
         <div class="ml-auto flex w-full max-w-sm min-w-150 flex-col gap-3">
-          {% for product in featured_products limit: 2 %}
-            {% render 'product-card-mini',
-              product: product,
-              hide_buy_form: true,
-              show_dynamic_checkout: false,
-              card_class: 'border-none shadow-none'
-            %}
-          {% endfor %}
+          {% comment %} Quiz Banner Card {% endcomment %}
+          {% render 'quiz-banner', variant: 'mobile' %}
+
+          {% comment %} Featured Product Card {% endcomment %}
+          {% liquid
+            assign featured_product = settings.mega_menu_featured_product
+          %}
+          {% if featured_product and featured_product != blank %}
+            <a
+              href="{{ featured_product.url }}"
+              class="relative flex items-end overflow-hidden bg-black text-white rounded-xl h-28 px-3 py-3"
+            >
+              <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+                {% if featured_product.featured_media %}
+                  {{
+                    featured_product.featured_media
+                    | image_url: width: 800
+                    | image_tag:
+                      loading: 'lazy',
+                      sizes: '100vw',
+                      alt: featured_product.title,
+                      class: 'absolute inset-0 w-full h-full object-cover'
+                  }}
+                {% else %}
+                  <div class="w-full h-full bg-gradient-to-r from-black/60 to-black/30"></div>
+                {% endif %}
+                <div
+                  class="absolute inset-0 pointer-events-none"
+                  style="background: #000000; opacity: 0.4;"
+                ></div>
+              </div>
+
+              <div class="relative z-10 w-full flex justify-between gap-3">
+                <div>
+                  <h3 class="font-semibold leading-snug text-white">
+                    {{ featured_product.title | escape }}
+                  </h3>
+                  {% if featured_product.description != blank %}
+                    {% liquid
+                      assign product_description = featured_product.description | strip_html | truncate: 80
+                    %}
+                    <p class="text-xs text-white/70 mt-1">
+                      {{ product_description }}
+                    </p>
+                  {% endif %}
+                </div>
+                <div class="flex items-center text-white [&>svg]:w-5 [&>svg]:h-5">
+                  {{ 'icon-chevron-right.svg' | inline_asset_content }}
+                </div>
+              </div>
+            </a>
+          {% endif %}
         </div>
       </div>
     </div>

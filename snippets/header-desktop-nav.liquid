@@ -45,9 +45,17 @@
         aria-label="Cart"
         aria-haspopup="drawer"
         id="cart-icon-bubble"
-        class="flex items-center justify-center size-9 [&>svg]:size-6 rounded-full hover:bg-neutral-100"
+        class="relative flex items-center justify-center size-9 [&>svg]:size-6 rounded-full hover:bg-neutral-100"
       >
         {{ 'icon-cart.svg' | inline_asset_content }}
+        {% if cart.item_count > 0 %}
+          <span
+            class="cart-count-badge absolute -top-1 -right-1 flex items-center justify-center min-w-[18px] h-[18px] px-1.5 text-xs font-medium text-[var(--product-accent-foreground)] bg-[var(--product-accent)] rounded-full"
+            aria-label="{{ cart.item_count }} items in cart"
+          >
+            {{ cart.item_count }}
+          </span>
+        {% endif %}
       </a>
     </div>
   </div>
