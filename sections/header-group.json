@@ -126,9 +126,10 @@
                 "mobile_menu_category_QffAKe": {
                   "type": "mobile-menu-category",
                   "settings": {
-                    "title": "Hidracija kože",
+                    "title": "Noćna krema",
                     "description": "Nahrani svoje tijelo",
-                    "url": ""
+                    "image": "shopify://shop_images/Complete_Collagen_nocna_krema_0abfb640-5f0e-42bc-a3a3-7761f1d76f99.png",
+                    "url": "shopify://products/complete-collagen-nocna-krema"
                   },
                   "blocks": {}
                 },
