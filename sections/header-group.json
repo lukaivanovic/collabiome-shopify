@@ -117,8 +117,9 @@
                   "type": "mobile-menu-category",
                   "name": "Menu category",
                   "settings": {
-                    "title": "Category",
-                    "description": "",
+                    "title": "Moisturizer",
+                    "description": "Nahrani svoje lice",
+                    "image": "shopify://shop_images/Collagen_Anti_Pollution_Moisturizer_product.png",
                     "url": ""
                   },
                   "blocks": {}
@@ -127,8 +128,9 @@
                   "type": "mobile-menu-category",
                   "name": "Menu category",
                   "settings": {
-                    "title": "Category",
-                    "description": "",
+                    "title": "Gel za čišćenje lica",
+                    "description": "Za čisto i smireno lice",
+                    "image": "shopify://shop_images/ESSENTIAL_COLLAGEN_CLEANSING_GEL_100ml_1d4c90ad-22c3-4753-9170-267ae5f87ad2.png",
                     "url": ""
                   },
                   "blocks": {}
