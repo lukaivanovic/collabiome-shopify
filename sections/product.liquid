@@ -11,6 +11,7 @@
   assign headline = product.metafields.custom.headline.value
   assign product_form_identifier = 'product-form-' | append: product.id
   assign product_collection = product.collections.first
+  assign unique_selling_points = product.metafields.custom.unique_selling_points.value
 -%}
 
 <div class="product-background {{ product_theme_class }}">
@@ -136,18 +137,15 @@
         </div>
       {% endcomment %}
 
-      {% comment %} Benefits {% endcomment %}
-      {% if benefits != blank %}
-        <div class="flex flex-col gap-4">
-          <span class="text-xs font-semibold uppercase text-neutral-500 tracking-wider">Benefits</span>
-          <div class="flex flex-col gap-2">
-            {%- for benefit in benefits -%}
-              <div class="flex items-center gap-3 bg-white rounded-lg">
-                <span class="text-[var(--product-accent)]">{{ 'icon-check.svg' | inline_asset_content }}</span>
-                <span class="font-medium">{{ benefit | default: 'Benefit' | strip }}</span>
-              </div>
-            {%- endfor -%}
-          </div>
+      {% comment %} Unique selling points {% endcomment %}
+      {% if unique_selling_points != blank %}
+        <div class="flex flex-row flex-wrap justify-center gap-y-10">
+          {%- for unique_selling_point in unique_selling_points -%}
+            <div class="flex flex-col items-center gap-3 bg-white rounded-lg w-1/3 [&>svg]:w-10 [&>svg]:h-10">
+              {{ 'icon-check.svg' | inline_asset_content }}
+              <span class="font-medium">{{ unique_selling_point | default: 'Unique Selling Point' | strip }}</span>
+            </div>
+          {%- endfor -%}
         </div>
       {% endif %}
 
@@ -161,6 +159,21 @@
                 {{ product.description }}
               </div>
             {% endif %}
+          </div>
+        </div>
+      {% endif %}
+
+      {% comment %} Benefits {% endcomment %}
+      {% if benefits != blank %}
+        <div class="flex flex-col gap-4">
+          <span class="text-xs font-semibold uppercase text-neutral-500 tracking-wider">Benefits</span>
+          <div class="flex flex-col gap-2">
+            {%- for benefit in benefits -%}
+              <div class="flex items-center gap-3 bg-white rounded-lg">
+                <span class="text-[var(--product-accent)]">{{ 'icon-check.svg' | inline_asset_content }}</span>
+                <span class="font-medium">{{ benefit | default: 'Benefit' | strip }}</span>
+              </div>
+            {%- endfor -%}
           </div>
         </div>
       {% endif %}
