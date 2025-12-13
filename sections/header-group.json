@@ -59,14 +59,7 @@
           "type": "header-mobile-menu",
           "static": true,
           "settings": {
-            "shop_menu": "main-menu",
-            "quiz_banner_title": "Nisi siguran koji proizvod odabrati?",
-            "quiz_banner_description": "<p>Prođi naš kviz i saznaj!</p>",
-            "quiz_banner_image": "shopify://shop_images/Exfolijant_-_Kompleks_vocnih_kiselina_i_enzima_modec.png",
-            "quiz_banner_overlay_color": "#000000",
-            "quiz_banner_overlay_opacity": 40,
-            "quiz_banner_link": "shopify://pages/kviz",
-            "quiz_banner_link_text": "Take quiz"
+            "shop_menu": "main-menu"
           },
           "blocks": {
             "mobile_menu_category_links_pdFDPA": {
@@ -123,9 +116,10 @@
                 "mobile_menu_category_3rcH7d": {
                   "type": "mobile-menu-category",
                   "settings": {
-                    "title": "Suha koža",
-                    "description": "Formulacije za suhu kožu",
-                    "url": ""
+                    "title": "Vitamin C Serum",
+                    "description": "Za bolju kožu",
+                    "image": "shopify://shop_images/Vitamin_C_serum_-_15_vitamina_C_d219d1e5-0e39-4a72-97ad-300e0d2ce694.png",
+                    "url": "shopify://products/vitamin-c-serum-preko-15-vitamina-c"
                   },
                   "blocks": {}
                 },
