@@ -32,11 +32,6 @@
         "eyebrow": ""
       }
     },
-    "product_upsell_RFhKfi": {
-      "type": "product-upsell",
-      "name": "Product Upsell",
-      "settings": {}
-    },
     "product_benefits_HE6ycF": {
       "type": "product-benefits",
       "name": "Product Benefits",
@@ -65,6 +60,11 @@
         "description": ""
       }
     },
+    "product_upsell_RFhKfi": {
+      "type": "product-upsell",
+      "name": "Product Upsell",
+      "settings": {}
+    },
     "product_faq_jmHdaa": {
       "type": "product-faq",
       "name": "Product FAQ",
@@ -88,8 +88,8 @@
     "product_benefits_HE6ycF",
     "product_ingredients_Mhp7N3",
     "product_science_nfrBbH",
-    "product_upsell_RFhKfi",
     "product_comparison_YHCngK",
+    "product_upsell_RFhKfi",
     "product_faq_jmHdaa",
     "product_reviews_APUjTe"
   ]
