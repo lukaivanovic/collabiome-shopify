@@ -34,7 +34,7 @@
           >
             {% if block.settings.enable_countdown and block.settings.countdown_target != blank %}
               <div
-                class="announcement-bar__countdown flex items-center justify-center gap-2"
+                class="announcement-bar__countdown flex flex-col md:flex-row items-center justify-center gap-2"
                 data-target="{{ block.settings.countdown_target | escape }}"
               >
                 {% if block.settings.message != blank %}
@@ -56,7 +56,7 @@
         {% else %}
           {% if block.settings.enable_countdown and block.settings.countdown_target != blank %}
             <div
-              class="announcement-bar__countdown flex items-center justify-center gap-2"
+              class="announcement-bar__countdown flex flex-col md:flex-row items-center justify-center gap-2"
               data-target="{{ block.settings.countdown_target | escape }}"
             >
               {% if block.settings.message != blank %}

@@ -67,14 +67,14 @@
 >
   <!-- Menu Content -->
   <nav class="w-full overflow-y-scroll overscroll-contain transform -translate-x-full aria-[hidden=false]:translate-x-0 pt-4 px-4 pb-16 space-y-8 h-full">
+    {% comment %} Render category links blocks {% endcomment %}
+    {% content_for 'blocks' %}
+
     {% comment %}
       Quiz banner for customers who don't know what to choose.
       Uses global settings from Theme Settings > Quiz Banner.
     {% endcomment %}
     {% render 'quiz-banner', variant: 'mobile' %}
-
-    {% comment %} Render category links blocks {% endcomment %}
-    {% content_for 'blocks' %}
 
     {% if marketing_menu and marketing_menu.links.size > 0 %}
       <div>
