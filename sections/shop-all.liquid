@@ -39,13 +39,8 @@
   {% endif %}
 
   {% comment %} Collection chips and filters {% endcomment %}
-<<<<<<< HEAD
-  <div class="flex md:flex-row md:items-center items-start flex-col gap-2 mb-12 pb-4  flex-wrap">
-    {% if show_filters and section.settings.show_filters %}
-=======
   {% if section.settings.show_filters %}
     <div class="flex md:flex-row md:items-center items-start flex-col gap-2 mb-12 pb-4  flex-wrap">
->>>>>>> 72df9b3 (t)
       <div class="flex flex-wrap items-center gap-2">
         <a
           href="{{ routes.collections_url }}/all"
@@ -73,13 +68,6 @@
       {% endif %}
 
       {% comment %} Filters {% endcomment %}
-<<<<<<< HEAD
-      <div class="flex items-center">
-        {% render 'facets' %}
-      </div>
-    {% endif %}
-  </div>
-=======
       {% if show_filters and section.settings.show_filters %}
         <div class="flex items-center">
           {% render 'facets' %}
@@ -87,7 +75,6 @@
       {% endif %}
     </div>
   {% endif %}
->>>>>>> 72df9b3 (t)
 
   {% if selected_collection != blank %}
     {% comment %} Collection context - use pagination {% endcomment %}
