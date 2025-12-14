@@ -14,7 +14,7 @@
       "name": "Shop All",
       "settings": {
         "title": "Shop All Products",
-        "collection": "",
+        "manual_collection": "",
         "products_per_page": 24,
         "show_filters": true
       }
@@ -24,7 +24,7 @@
       "name": "Shop All",
       "settings": {
         "title": "Shop All Products",
-        "collection": "paketi",
+        "manual_collection": "paketi",
         "products_per_page": 12,
         "show_filters": false
       }
