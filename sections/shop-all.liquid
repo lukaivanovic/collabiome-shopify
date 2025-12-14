@@ -5,12 +5,11 @@
   # Priority: 1) Collection page context (preserves current functionality)
   #           2) Section setting collection (for use on other pages)
   #           3) Fallback to all products
-  if collection != blank
+  if section.settings.manual_collection != blank
     # On a collection page - use the page context (handles URL filters automatically)
+    assign selected_collection = section.settings.manual_collection
+  elsif collection != blank
     assign selected_collection = collection
-  elsif section.settings.collection != blank
-    # Use the collection from section settings
-    assign selected_collection = section.settings.collection
   else
     # Fallback to all products
     assign selected_collection = collections.all
@@ -187,9 +186,7 @@
   {% else %}
     {% comment %} Fallback - no collection available {% endcomment %}
     <div class="text-center py-12">
-      <p class="text-lg opacity-75">
-        {{ 'collections.no_products' | t | default: 'No products available.' }}
-      </p>
+      <p class="text-lg opacity-75">No products available.</p>
     </div>
   {% endif %}
 </div>
@@ -337,7 +334,7 @@
     },
     {
       "type": "collection",
-      "id": "collection",
+      "id": "manual_collection",
       "label": "Collection",
       "info": "Select a collection to display. Leave empty to show all products."
     },
