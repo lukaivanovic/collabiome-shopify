@@ -98,39 +98,42 @@
   assign social_links_array = social_links | split: '|'
 -%}
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "name": {{ shop.name | json }},
-  "url": {{ shop.url | json }}{%- if shop.description != blank -%},
-  "description": {{ shop.description | json }}{%- endif -%}{%- if shop.brand.logo -%},
-  "logo": {{ shop.brand.logo | image_url: width: 600 | json }}{%- endif -%}{%- if social_links_array.size > 0 -%},
-  "sameAs": [
-    {%- for link in social_links_array -%}
-      {%- if link != blank -%}
-        {{ link | json }}{%- unless forloop.last -%},{%- endunless -%}
-      {%- endif -%}
-    {%- endfor -%}
-  ]{%- endif -%}
-}
+  {
+    "@context": "https://schema.org",
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    "url": {{ shop.url | json }}{%- if shop.description != blank -%},
+    "description": {{ shop.description | json }}{%- endif -%}{%- if shop.brand.logo -%},
+    "logo": {{ shop.brand.logo | image_url: width: 600 | json }}{%- endif -%}{%- if social_links_array.size > 0 -%},
+    "sameAs": [
+      {%- for link in social_links_array -%}
+        {%- if link != blank -%}
+          {{ link | json }}{%- unless forloop.last -%},{%- endunless -%}
+        {%- endif -%}
+      {%- endfor -%}
+    ]{%- endif -%}
+  }
 </script>
 
 {%- comment -%} WebSite structured data with search action {%- endcomment -%}
+{%- capture search_url_template -%}
+{{ shop.url }}/search?q={search_term_string}
+{%- endcapture -%}
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": {{ shop.name | json }},
-  "url": {{ shop.url | json }},
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": {
-      "@type": "EntryPoint",
-      "urlTemplate": {{ shop.url | append: '/search?q={search_term_string}' | json }}
-    },
-    "query-input": "required name=search_term_string"
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": {{ shop.name | json }},
+    "url": {{ shop.url | json }},
+    "potentialAction": {
+      "@type": "SearchAction",
+      "target": {
+        "@type": "EntryPoint",
+        "urlTemplate": {{ search_url_template | json }}
+      },
+      "query-input": "required name=search_term_string"
+    }
   }
-}
 </script>
 
 <meta
