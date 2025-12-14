@@ -154,6 +154,13 @@
         "columns": 3
       }
     },
+    "product_ingredients_knjfgi": {
+      "type": "product-ingredients",
+      "name": "Ingredients",
+      "settings": {
+        "manual_product": "complete-collagen-nocna-krema"
+      }
+    },
     "left_image_text_rKXn9C": {
       "type": "left-image-text",
       "name": "Image and Text",
@@ -325,6 +332,7 @@
     "product_fKj34x",
     "product_generic_gjNk98",
     "three_column_grid_hpMCwn",
+    "product_ingredients_knjfgi",
     "left_image_text_rKXn9C",
     "left_image_text_YxhUCd",
     "three_column_grid_yBPDLg",
