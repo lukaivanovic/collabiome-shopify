@@ -6,18 +6,24 @@
 {% endcomment %}
 
 {%- liquid
-  assign benefits = product.metafields.custom.benefits.value
-  assign accordion_items = product.metafields.custom.accordion.value
-  assign headline = product.metafields.custom.headline.value
-  assign product_form_identifier = 'product-form-' | append: product.id
-  assign product_collection = product.collections.first
-  assign unique_selling_points = product.metafields.custom.unique_selling_points.value
+  if section.settings.manual_product != blank
+    assign selected_product = section.settings.manual_product
+  else
+    assign selected_product = product
+  endif
+
+  assign benefits = selected_product.metafields.custom.benefits.value
+  assign accordion_items = selected_product.metafields.custom.accordion.value
+  assign headline = selected_product.metafields.custom.headline.value
+  assign product_form_identifier = 'product-form-' | append: selected_product.id
+  assign product_collection = selected_product.collections.first
+  assign unique_selling_points = selected_product.metafields.custom.unique_selling_points.value
 -%}
 
-<div class="product-background {{ product_theme_class }}">
+<div class="product-background">
   <div class="w-full container !px-0 md:!px-6 pt-6 md:pb-30 grid gap-5 lg:[grid-template-columns:1fr_1fr]">
     <script id="product-data" type="application/json">
-      {{ product | json }}
+      {{ selected_product | json }}
     </script>
 
     {% comment %} Product images {% endcomment %}
@@ -25,10 +31,10 @@
       <div class="overflow-hidden relative rounded-2xl w-full flex-grow">
         <div
           class="embla embla-product flex overflow-hidden relative h-full"
-          data-product-id="{{ product.id }}"
+          data-product-id="{{ selected_product.id }}"
         >
           <div class="flex bg-white">
-            {% for image in product.images %}
+            {% for image in selected_product.images %}
               <div class="embla__slide">
                 {% render 'image', image: image %}
               </div>
@@ -53,9 +59,9 @@
         </div>
       </div>
 
-      {%- if product.images.size > 1 -%}
+      {%- if selected_product.images.size > 1 -%}
         <div class="embla-thumbs flex gap-2 overflow-x-auto flex-nowrap flex-shrink-0 w-full">
-          {%- for image in product.images -%}
+          {%- for image in selected_product.images -%}
             <button
               class="embla-thumbs__slide flex-shrink-0 w-20 h-20 rounded-lg overflow-hidden border-2! border-transparent! bg-white opacity-90 hover:opacity-100 transition-all data-[active=true]:border-[var(--product-accent)]! data-[active=true]:opacity-100"
               type="button"
@@ -86,10 +92,10 @@
             </li>
           </ol>
         </nav>
-        <h1 class="text-5xl! text-balance max-w-140 mb-3">{{ product.title }}</h1>
+        <h1 class="text-5xl! text-balance max-w-140 mb-3">{{ selected_product.title }}</h1>
         <!-- Start of Judge.me code -->
-        <div class="jdgm-widget jdgm-preview-badge mb-3" data-id="{{ product.id }}">
-          {{ product.metafields.judgeme.badge }}
+        <div class="jdgm-widget jdgm-preview-badge mb-3" data-id="{{ selected_product.id }}">
+          {{ selected_product.metafields.judgeme.badge }}
         </div>
         <!-- End of Judge.me code -->
         <p class=" font-medium">{{ headline }}</p>
@@ -98,7 +104,7 @@
       {% comment %} Buy form and information points {% endcomment %}
       <div class="flex flex-col gap-2">
         {% render 'product-buy-form',
-          product: product,
+          product: selected_product,
           section_id: section.id,
           product_form_id: product_form_identifier,
           show_dynamic_checkout: false,
@@ -125,18 +131,6 @@
         </div>
       </div>
 
-      {% comment %} Benefits icons {% endcomment %}
-      {% comment %}
-        <div class="product-benefits__list grid gap-4 [grid-template-columns:repeat(auto-fit,minmax(280px,1fr))]">
-          {%- for benefit in benefits -%}
-            <div class="product-benefits__item flex items-start gap-3 bg-white rounded-lg">
-              {{ 'icon-check.svg' | inline_asset_content }}
-              <span class="product-benefits__text text-base leading-6 text-gray-700">{{ benefit | strip }}</span>
-            </div>
-          {%- endfor -%}
-        </div>
-      {% endcomment %}
-
       {% comment %} Unique selling points {% endcomment %}
       {% if unique_selling_points != blank %}
         <div class="flex flex-row flex-wrap justify-center gap-y-10">
@@ -150,13 +144,13 @@
       {% endif %}
 
       {% comment %} Description {% endcomment %}
-      {% if product.description != blank %}
+      {% if selected_product.description != blank %}
         <div class="flex flex-col gap-3">
           <span class="text-xs font-medium uppercase text-neutral-500 tracking-widest">Description</span>
           <div class="flex flex-col">
-            {% if product.description != blank %}
+            {% if selected_product.description != blank %}
               <div class="leading-[1.6] text-black font-medium gap-4 flex flex-col line-clamp-5">
-                {{ product.description }}
+                {{ selected_product.description }}
               </div>
             {% endif %}
           </div>
@@ -208,7 +202,7 @@
         </div>
       {% endif %}
 
-      <div data-rebuy-id="247488" data-rebuy-shopify-product-ids="{{ product.id }}"></div>
+      <div data-rebuy-id="247488" data-rebuy-shopify-product-ids="{{ selected_product.id }}"></div>
 
       <script src="{{ 'collapsible.js' | asset_url }}" defer></script>
     </div>
@@ -469,6 +463,12 @@
 {
   "name": "Product",
   "settings": [
+    {
+      "type": "product",
+      "id": "manual_product",
+      "label": "Manual product",
+      "info": "If no product is selected, the current page product will be used."
+    },
     {
       "type": "text",
       "id": "info_label_1",
