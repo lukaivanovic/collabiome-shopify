@@ -16,7 +16,8 @@
         "title": "Shop All Products",
         "manual_collection": "",
         "products_per_page": 24,
-        "show_filters": true
+        "show_filters": true,
+        "show_quiz_banner": true
       }
     },
     "shop_all_CbdXxF": {
@@ -26,7 +27,8 @@
         "title": "Shop All Products",
         "manual_collection": "paketi",
         "products_per_page": 4,
-        "show_filters": false
+        "show_filters": false,
+        "show_quiz_banner": false
       }
     }
   },
