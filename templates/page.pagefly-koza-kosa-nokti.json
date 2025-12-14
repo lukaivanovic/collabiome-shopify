@@ -19,7 +19,7 @@
       "name": "Hero",
       "settings": {
         "kicker": "",
-        "title": "Hero title",
+        "title": "",
         "description": "",
         "show_buttons": true,
         "button_label": "",
@@ -178,29 +178,11 @@
       "settings": {
         "padding_top": 60,
         "padding_bottom": 60,
-        "image": "shopify://shop_images/nokti_prije_poslije.webp",
+        "image": "shopify://shop_images/Iva_Tokic_kolagen.webp",
         "image_alt": "Image alt text",
         "image_position": "right",
         "title": "Nismo pristalice pseudoznanosti i poluistina",
         "description": "<p>I zato dajemo garanciju na naše proizvode. Vjerujemo u znanost, zato svaki naš proizvod razvija tim vrhunskih stručnjaka i znanstvenika u Hrvatskoj. Sigurni smo u njihovu djelotvornost i zato dajemo potpunu garanciju: ako se nađeš među rijetkih 2,4 % korisnika koji ne primijete rezultate, jednostavno nam vrati proizvod — mi ti vraćamo novac.</p>",
-        "show_button": true,
-        "button_label": "Learn more",
-        "button_link": "",
-        "button_style": "solid",
-        "button_link_target": "_self"
-      }
-    },
-    "left_image_text_zdFHpi": {
-      "type": "left-image-text",
-      "name": "Image and Text",
-      "settings": {
-        "padding_top": 60,
-        "padding_bottom": 60,
-        "image": "shopify://shop_images/nokti_prije_poslije.webp",
-        "image_alt": "Image alt text",
-        "image_position": "left",
-        "title": "Nokti postaju tanki i krhki,",
-        "description": "<p>Pod prstima više nije mekana kao prije, kao da je izgubila sjaj i hidrataciju.</p><p>Svako češljanje završava s nekoliko vlasi na četki, a bojenje i feniranje ostavljaju je još lomljivijom.</p><p>Frizura više ne traje kao nekada, a vrhovi izgledaju suho i ispucano.</p><p>Tada shvatiš da ti je kosa izgubila snagu iznutra.</p>",
         "show_button": true,
         "button_label": "Learn more",
         "button_link": "",
@@ -345,7 +327,6 @@
     "three_column_grid_hpMCwn",
     "left_image_text_rKXn9C",
     "left_image_text_YxhUCd",
-    "left_image_text_zdFHpi",
     "three_column_grid_yBPDLg",
     "faq_rE4mRK"
   ]
