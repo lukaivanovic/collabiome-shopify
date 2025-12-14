@@ -188,9 +188,82 @@
           </div>
         </div>
 
-        <div class="ml-auto flex w-full max-w-sm min-w-150 flex-col gap-3">
+        <div class="ml-auto flex w-full max-w-sm min-w-150 flex-row gap-3">
           {% comment %} Quiz Banner Card {% endcomment %}
-          {% render 'quiz-banner', variant: 'mobile' %}
+          {% liquid
+            # Use global theme settings
+            assign banner_title = settings.quiz_banner_title
+            assign banner_description = settings.quiz_banner_description
+            assign banner_image = settings.quiz_banner_image
+            assign banner_overlay_color = settings.quiz_banner_overlay_color | default: '#000000'
+            assign banner_overlay_opacity = settings.quiz_banner_overlay_opacity | default: 30
+            assign banner_link = settings.quiz_banner_link
+            assign banner_link_text = settings.quiz_banner_link_text | default: 'See our recommendations'
+
+            # Check if banner has content
+            assign banner_has_content = false
+            if banner_title != blank
+              assign banner_has_content = true
+            elsif banner_description != blank
+              assign banner_has_content = true
+            endif
+          %}
+          {% if banner_has_content %}
+            {% if banner_link != blank %}
+              <a
+                href="{{ banner_link }}"
+                class="relative flex items-end overflow-hidden bg-black text-white rounded-xl aspect-square px-3 py-3 flex-1"
+              >
+            {% else %}
+              <div
+                class="relative flex items-end overflow-hidden bg-black text-white rounded-xl aspect-square px-3 py-3 flex-1"
+              >
+            {% endif %}
+            <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+              {% if banner_image != blank %}
+                {{
+                  banner_image
+                  | image_url: width: 800
+                  | image_tag:
+                    loading: 'lazy',
+                    sizes: '100vw',
+                    alt: banner_title,
+                    class: 'absolute inset-0 w-full h-full object-cover'
+                }}
+              {% else %}
+                <div class="w-full h-full bg-gradient-to-r from-black/60 to-black/30"></div>
+              {% endif %}
+              <div
+                class="absolute inset-0 pointer-events-none"
+                style="background: {{ banner_overlay_color }}; opacity: {{ banner_overlay_opacity | divided_by: 100.0 }};"
+              ></div>
+            </div>
+
+            <div class="relative z-10 w-full flex justify-between gap-3">
+              <div>
+                {% if banner_title != blank %}
+                  <h2 class="font-semibold leading-snug">
+                    {{ banner_title | escape }}
+                  </h2>
+                {% endif %}
+                {% if banner_description != blank %}
+                  <p class="text-xs text-white/50">
+                    {{ banner_description }}
+                  </p>
+                {% endif %}
+              </div>
+              {% if banner_link != blank %}
+                <div class="flex items-center text-white [&>svg]:w-5 [&>svg]:h-5">
+                  {{ 'icon-chevron-right.svg' | inline_asset_content }}
+                </div>
+              {% endif %}
+            </div>
+            {% if banner_link != blank %}
+              </a>
+            {% else %}
+              </div>
+            {% endif %}
+          {% endif %}
 
           {% comment %} Featured Product Card {% endcomment %}
           {% liquid
@@ -199,7 +272,7 @@
           {% if featured_product and featured_product != blank %}
             <a
               href="{{ featured_product.url }}"
-              class="relative flex items-end overflow-hidden bg-black text-white rounded-xl h-28 px-3 py-3"
+              class="relative flex items-end overflow-hidden bg-black text-white rounded-xl aspect-square px-3 py-3 flex-1"
             >
               <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
                 {% if featured_product.featured_media %}

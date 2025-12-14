@@ -14,7 +14,9 @@
       </div>
 
       {% if cart == empty %}
-        {% render 'cart-drawer-empty' %}
+        <div class="rounded-3xl border border-dashed border-neutral-300 bg-white p-10 text-center space-y-4">
+          {% render 'cart-drawer-empty' %}
+        </div>
       {% else %}
         <form
           action="{{ routes.cart_url }}"

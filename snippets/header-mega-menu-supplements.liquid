@@ -38,50 +38,128 @@
       class="mega-menu-card rounded-2xl border border-black/12 bg-[var(--color-background-default)]"
       data-mega-menu-card
     >
-      <div class="grid gap-4 p-8 md:grid-cols-4">
+      <div class="flex flex-row gap-3 p-8">
         {% for product in featured_products limit: 3 %}
-          {% liquid
-            assign product_theme = product.metafields.custom.theme.value | default: 'default'
-
-            case product_theme
-              when 'recupera'
-                assign product_theme_class = 'product-theme-recupera'
-              when 'boost'
-                assign product_theme_class = 'product-theme-boost'
-              else
-                assign product_theme_class = 'product-theme-default'
-            endcase
-          %}
-
-          <div
-            class="[background:var(--product-background)] {{ product_theme_class }} flex flex-col gap-3 rounded-xl p-4 no-underline"
+          <a
+            href="{{ product.url }}"
+            class="relative flex items-end overflow-hidden bg-black text-white rounded-xl aspect-square px-3 py-3 flex-1"
           >
-            <div class="flex flex-col gap-1">
-              <h3 class="text-base font-semibold text-primary">
-                {{ product.title }}
-              </h3>
-              {% if product.description != blank %}
-                <p class="text-sm text-primary/80 line-clamp-3">
-                  {{ product.description | strip_html | truncatewords: 24 }}
-                </p>
-              {% endif %}
-            </div>
-            <a href="{{ product.url }}" class="h-80 overflow-hidden rounded-lg">
+            <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
               {% if product.featured_media %}
                 {{
                   product.featured_media
-                  | image_url: width: 800, height: 800, crop: 'center'
-                  | image_tag: class: 'h-full w-full object-contain', loading: 'lazy'
+                  | image_url: width: 800
+                  | image_tag:
+                    loading: 'lazy',
+                    sizes: '100vw',
+                    alt: product.title,
+                    class: 'absolute inset-0 w-full h-full object-cover'
                 }}
               {% else %}
                 <div class="w-full h-full bg-gradient-to-r from-black/60 to-black/30"></div>
               {% endif %}
-            </a>
-          </div>
+              <div
+                class="absolute inset-0 pointer-events-none"
+                style="background: #000000; opacity: 0.4;"
+              ></div>
+            </div>
+
+            <div class="relative z-10 w-full flex justify-between gap-3">
+              <div>
+                <h3 class="font-semibold leading-snug text-white">
+                  {{ product.title | escape }}
+                </h3>
+                {% if product.description != blank %}
+                  {% liquid
+                    assign product_description = product.description | strip_html | truncate: 80
+                  %}
+                  <p class="text-xs text-white/70 mt-1">
+                    {{ product_description }}
+                  </p>
+                {% endif %}
+              </div>
+              <div class="flex items-center text-white [&>svg]:w-5 [&>svg]:h-5">
+                {{ 'icon-chevron-right.svg' | inline_asset_content }}
+              </div>
+            </div>
+          </a>
         {% endfor %}
-        <div class="flex flex-col">
-          {% render 'quiz-banner', variant: 'mobile' %}
-        </div>
+
+        {% comment %} Quiz Banner Card {% endcomment %}
+        {% liquid
+          # Use global theme settings
+          assign banner_title = settings.quiz_banner_title
+          assign banner_description = settings.quiz_banner_description
+          assign banner_image = settings.quiz_banner_image
+          assign banner_overlay_color = settings.quiz_banner_overlay_color | default: '#000000'
+          assign banner_overlay_opacity = settings.quiz_banner_overlay_opacity | default: 30
+          assign banner_link = settings.quiz_banner_link
+          assign banner_link_text = settings.quiz_banner_link_text | default: 'See our recommendations'
+
+          # Check if banner has content
+          assign banner_has_content = false
+          if banner_title != blank
+            assign banner_has_content = true
+          elsif banner_description != blank
+            assign banner_has_content = true
+          endif
+        %}
+        {% if banner_has_content %}
+          {% if banner_link != blank %}
+            <a
+              href="{{ banner_link }}"
+              class="relative flex items-end overflow-hidden bg-black text-white rounded-xl aspect-square px-3 py-3 flex-1"
+            >
+          {% else %}
+            <div
+              class="relative flex items-end overflow-hidden bg-black text-white rounded-xl aspect-square px-3 py-3 flex-1"
+            >
+          {% endif %}
+          <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+            {% if banner_image != blank %}
+              {{
+                banner_image
+                | image_url: width: 800
+                | image_tag:
+                  loading: 'lazy',
+                  sizes: '100vw',
+                  alt: banner_title,
+                  class: 'absolute inset-0 w-full h-full object-cover'
+              }}
+            {% else %}
+              <div class="w-full h-full bg-gradient-to-r from-black/60 to-black/30"></div>
+            {% endif %}
+            <div
+              class="absolute inset-0 pointer-events-none"
+              style="background: {{ banner_overlay_color }}; opacity: {{ banner_overlay_opacity | divided_by: 100.0 }};"
+            ></div>
+          </div>
+
+          <div class="relative z-10 w-full flex justify-between gap-3">
+            <div>
+              {% if banner_title != blank %}
+                <h2 class="font-semibold leading-snug">
+                  {{ banner_title | escape }}
+                </h2>
+              {% endif %}
+              {% if banner_description != blank %}
+                <p class="text-xs text-white/50">
+                  {{ banner_description }}
+                </p>
+              {% endif %}
+            </div>
+            {% if banner_link != blank %}
+              <div class="flex items-center text-white [&>svg]:w-5 [&>svg]:h-5">
+                {{ 'icon-chevron-right.svg' | inline_asset_content }}
+              </div>
+            {% endif %}
+          </div>
+          {% if banner_link != blank %}
+            </a>
+          {% else %}
+            </div>
+          {% endif %}
+        {% endif %}
       </div>
     </div>
   </div>
