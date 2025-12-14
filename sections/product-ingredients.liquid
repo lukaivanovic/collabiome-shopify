@@ -1,6 +1,6 @@
 {%- liquid
-  if section.settings.use_current_product == false
-    assign selected_product = section.settings.product
+  if section.settings.manual_product != blank
+    assign selected_product = section.settings.manual_product
     echo selected_product | json
   else
     assign selected_product = product
@@ -191,15 +191,9 @@
   "name": "Product Ingredients",
   "settings": [
     {
-      "type": "checkbox",
-      "id": "use_current_product",
-      "label": "Use current product",
-      "default": true
-    },
-    {
       "type": "product",
-      "id": "product",
-      "label": "Product",
+      "id": "manual_product",
+      "label": "Manual product",
       "info": "Select a product to display. If no product is selected, the current page product will be used."
     }
   ],
