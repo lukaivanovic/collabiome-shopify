@@ -30,7 +30,10 @@
           <div class="flex bg-white">
             {% for image in product.images %}
               <div class="embla__slide">
-                {% render 'image', image: image %}
+                {% render 'image', 
+                  image: image,
+                  alt: image.alt | default: product.title | append: ' - Image ' | append: forloop.index
+                %}
               </div>
             {% endfor %}
           </div>
@@ -62,7 +65,10 @@
               aria-label="View image {{ forloop.index }}"
               data-active="false"
             >
-              {% render 'image', image: image %}
+              {% render 'image', 
+                image: image,
+                alt: image.alt | default: product.title | append: ' - Thumbnail ' | append: forloop.index
+              %}
             </button>
           {%- endfor -%}
         </div>
@@ -214,6 +220,34 @@
     </div>
   </div>
 </div>
+
+{%- comment -%} BreadcrumbList structured data {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    {
+      "@type": "ListItem",
+      "position": 1,
+      "name": "Home",
+      "item": {{ shop.url | append: routes.root_url | json }}
+    }{%- if product_collection -%},
+    {
+      "@type": "ListItem",
+      "position": 2,
+      "name": {{ product_collection.title | json }},
+      "item": {{ shop.url | append: product_collection.url | json }}
+    }{%- endif -%},
+    {
+      "@type": "ListItem",
+      "position": {%- if product_collection -%}3{%- else -%}2{%- endif -%},
+      "name": {{ product.title | json }},
+      "item": {{ shop.url | append: product.url | json }}
+    }
+  ]
+}
+</script>
 
 {% stylesheet %}
   .jdgm-prev-badge {
