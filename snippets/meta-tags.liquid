@@ -39,21 +39,26 @@
 >
 
 {%- if page_image -%}
+  {%- assign og_image_url = page_image | image_url: width: 1200, height: 630 -%}
   <meta
     property="og:image"
-    content="http:{{ page_image | image_url }}"
+    content="https:{{ og_image_url }}"
   >
   <meta
     property="og:image:secure_url"
-    content="https:{{ page_image | image_url }}"
+    content="https:{{ og_image_url }}"
   >
   <meta
     property="og:image:width"
-    content="{{ page_image.width }}"
+    content="1200"
   >
   <meta
     property="og:image:height"
-    content="{{ page_image.height }}"
+    content="630"
+  >
+  <meta
+    name="twitter:image"
+    content="https:{{ og_image_url }}"
   >
 {%- endif -%}
 
@@ -71,6 +76,62 @@
     content="{{ cart.currency.iso_code }}"
   >
 {%- endif -%}
+
+{%- comment -%} Organization structured data {%- endcomment -%}
+{%- liquid
+  assign social_links = ''
+  if settings.social_facebook_link != blank
+    assign social_links = social_links | append: settings.social_facebook_link | append: '|'
+  endif
+  if settings.social_twitter_link != blank
+    assign social_links = social_links | append: settings.social_twitter_link | append: '|'
+  endif
+  if settings.social_instagram_link != blank
+    assign social_links = social_links | append: settings.social_instagram_link | append: '|'
+  endif
+  if settings.social_pinterest_link != blank
+    assign social_links = social_links | append: settings.social_pinterest_link | append: '|'
+  endif
+  if settings.social_youtube_link != blank
+    assign social_links = social_links | append: settings.social_youtube_link | append: '|'
+  endif
+  assign social_links_array = social_links | split: '|'
+-%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": {{ shop.name | json }},
+  "url": {{ shop.url | json }}{%- if shop.description != blank -%},
+  "description": {{ shop.description | json }}{%- endif -%}{%- if shop.brand.logo -%},
+  "logo": {{ shop.brand.logo | image_url: width: 600 | json }}{%- endif -%}{%- if social_links_array.size > 0 -%},
+  "sameAs": [
+    {%- for link in social_links_array -%}
+      {%- if link != blank -%}
+        {{ link | json }}{%- unless forloop.last -%},{%- endunless -%}
+      {%- endif -%}
+    {%- endfor -%}
+  ]{%- endif -%}
+}
+</script>
+
+{%- comment -%} WebSite structured data with search action {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": {{ shop.name | json }},
+  "url": {{ shop.url | json }},
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": {
+      "@type": "EntryPoint",
+      "urlTemplate": {{ shop.url | append: '/search?q={search_term_string}' | json }}
+    },
+    "query-input": "required name=search_term_string"
+  }
+}
+</script>
 
 <meta
   name="twitter:card"
@@ -97,9 +158,10 @@
   href="{{ canonical_url }}"
 >
 
-{% if page_description %}
-  <meta
-    name="description"
-    content="{{ page_description | escape }}"
-  >
-{% endif %}
+{%- liquid
+  assign meta_description = page_description | default: shop.description | default: shop.name
+-%}
+<meta
+  name="description"
+  content="{{ meta_description | escape }}"
+>

@@ -13,6 +13,21 @@
   </div>
 </div>
 
+{%- comment -%} WebPage structured data {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebPage",
+  "name": {{ page.title | json }},
+  "description": {{ page.excerpt | default: page.title | strip_html | truncate: 160 | json }},
+  "url": {{ shop.url | append: page.url | json }}{%- if page.author != blank -%},
+  "author": {
+    "@type": "Person",
+    "name": {{ page.author | json }}
+  }{%- endif -%}
+}
+</script>
+
 {% schema %}
 {
   "name": "Page",

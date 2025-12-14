@@ -41,7 +41,8 @@
         | image_tag:
           loading: 'eager',
           class: 'h-full w-full object-cover',
-          sizes: '100vw'
+          sizes: '100vw',
+          alt: article.image.alt | default: article.title | escape
       }}
       <div class="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent"></div>
     </figure>
@@ -250,6 +251,37 @@
     </article>
   </div>
 </section>
+
+{%- comment -%} Article structured data {%- endcomment -%}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "headline": {{ article.title | json }},
+  "image": {%- if article.image -%}[{{ article.image | image_url: width: 1200 | json }}]{%- else -%}[]{%- endif -%},
+  "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+  "dateModified": {{ article.updated_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+  "author": {
+    "@type": "Person",
+    "name": {{ article.author | default: shop.name | json }}
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": {{ shop.name | json }},
+    {%- if shop.brand.logo -%}
+    "logo": {
+      "@type": "ImageObject",
+      "url": {{ shop.brand.logo | image_url: width: 600 | json }}
+    }
+    {%- endif -%}
+  },
+  "description": {{ article.excerpt | default: article.summary | default: article.title | strip_html | truncate: 160 | json }},
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": {{ shop.url | append: article.url | json }}
+  }
+}
+</script>
 
 {% stylesheet %}
   .article-content h2 {

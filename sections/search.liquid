@@ -40,7 +40,8 @@
                     class: 'w-full aspect-square object-cover',
                     image: featured_image,
                     url: result.url,
-                    width: 400
+                    width: 400,
+                    alt: featured_image.alt | default: result.title | escape
                   %}
                 {% endif %}
                 <div class="p-4">
