@@ -16,17 +16,22 @@
         "title": "Shop All Products",
         "collection": "",
         "products_per_page": 24,
-        "show_filters": true,
-        "help_banner_title": "Ne znaš koji proizvod odabrati?",
-        "help_banner_description": "<p>Iskoristi naš kviz s tehnologijom analize lica i saznaj što ti treba</p>",
-        "help_banner_image": "shopify://shop_images/gel_za_ciscenje_lica_model_51bb8d8d-6cda-4b2e-962c-4b50bd8fa595.png",
-        "help_banner_overlay_color": "#000000",
-        "help_banner_overlay_opacity": 49,
-        "help_banner_link": "shopify://pages/kviz"
+        "show_filters": true
+      }
+    },
+    "shop_all_CbdXxF": {
+      "type": "shop-all",
+      "name": "Shop All",
+      "settings": {
+        "title": "Shop All Products",
+        "collection": "",
+        "products_per_page": 24,
+        "show_filters": true
       }
     }
   },
   "order": [
-    "shop_all_6XYGtW"
+    "shop_all_6XYGtW",
+    "shop_all_CbdXxF"
   ]
 }
