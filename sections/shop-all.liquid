@@ -40,7 +40,7 @@
 
   {% comment %} Collection chips and filters {% endcomment %}
   <div class="flex md:flex-row md:items-center items-start flex-col gap-2 mb-12 pb-4  flex-wrap">
-    {% if show_filters and section.settings.show_filters %}
+    {% if section.settings.show_filters %}
       <div class="flex flex-wrap items-center gap-2">
         <a
           href="{{ routes.collections_url }}/all"
@@ -68,9 +68,11 @@
       {% endif %}
 
       {% comment %} Filters {% endcomment %}
-      <div class="flex items-center">
-        {% render 'facets' %}
-      </div>
+      {% if show_filters and section.settings.show_filters %}
+        <div class="flex items-center">
+          {% render 'facets' %}
+        </div>
+      {% endif %}
     {% endif %}
   </div>
 
