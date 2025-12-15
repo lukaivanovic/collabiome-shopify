@@ -146,7 +146,7 @@
             <div class="flex flex-col items-center gap-3 bg-white rounded-lg w-1/3 [&>svg]:w-10 [&>svg]:h-10">
               {{ 'icon-check.svg' | inline_asset_content }}
               <span class="font-medium">
-                {{- unique_selling_point.title | default: 'Unique Selling Point' | strip -}}
+                {{- unique_selling_point.usp | default: 'Unique Selling Point' | strip -}}
               </span>
             </div>
           {%- endfor -%}
