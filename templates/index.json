@@ -54,55 +54,53 @@
         ]
       }
     },
-    "rotating_text_DjiUXD": {
-      "type": "rotating-text",
-      "name": "Rotating text",
-      "settings": {}
-    },
-    "home_categories_WxnjY8": {
-      "type": "home-categories",
+    "generic_categories_Gp4wFf": {
+      "type": "generic-categories",
       "blocks": {
-        "category_card_W4ApcV": {
+        "category_card_xGiMd4": {
           "type": "category_card",
           "settings": {
-            "image": "shopify://shop_images/image_2.jpg",
-            "title": "Koža, kosa i nokti",
-            "description": "Uz kolagen proizvode preporodite svoje najbolje vrline",
-            "button_text": "Shop all",
+            "image": "shopify://shop_images/gel_za_ciscenje_lica_model_51bb8d8d-6cda-4b2e-962c-4b50bd8fa595.png",
+            "title": "Category",
+            "description": "Describe this category",
+            "button_text": "Button text",
             "button_url": ""
           }
         },
-        "category_card_xYa3bG": {
+        "category_card_QUi6mt": {
           "type": "category_card",
           "settings": {
-            "image": "shopify://shop_images/Respiracijski_ultra_hidratantni_serum_model.png",
-            "title": "Imunitet i zaštita od sunca",
-            "description": "Sunce više nije problem uz naš lineup",
-            "button_text": "Shop all",
+            "title": "Category",
+            "description": "Describe this category",
+            "button_text": "Button text",
             "button_url": ""
           }
         },
-        "category_card_CqrEwP": {
+        "category_card_gXYCd3": {
           "type": "category_card",
           "settings": {
-            "image": "shopify://shop_images/nutri_spf.png",
-            "title": "Bol u zglobovima, kostima i tetivama",
-            "description": "Pomažemo kod kroničnih bolova",
-            "button_text": "Shop all",
+            "title": "Category",
+            "description": "Describe this category",
+            "button_text": "Button text",
             "button_url": ""
           }
         }
       },
       "block_order": [
-        "category_card_W4ApcV",
-        "category_card_xYa3bG",
-        "category_card_CqrEwP"
+        "category_card_xGiMd4",
+        "category_card_QUi6mt",
+        "category_card_gXYCd3"
       ],
-      "name": "Home categories",
+      "name": "Generic categories",
       "settings": {
-        "title": "Home categories",
+        "title": "Generic categories",
         "description": "Describe this category"
       }
+    },
+    "rotating_text_DjiUXD": {
+      "type": "rotating-text",
+      "name": "Rotating text",
+      "settings": {}
     },
     "testimonial_grid_zcUike": {
       "type": "testimonial-grid",
@@ -130,8 +128,8 @@
   "order": [
     "hero_fbajPp",
     "products_row_jCXxrb",
+    "generic_categories_Gp4wFf",
     "rotating_text_DjiUXD",
-    "home_categories_WxnjY8",
     "testimonial_grid_zcUike",
     "blog_grid_GDkRNF"
   ]
