@@ -1,7 +1,6 @@
 {%- liquid
   if section.settings.manual_product != blank
     assign selected_product = section.settings.manual_product
-    echo selected_product | json
   else
     assign selected_product = product
   endif
@@ -9,7 +8,6 @@
   assign ingredients = selected_product.metafields.custom.section_ingredients_list.value
   assign section_title = selected_product.metafields.custom.section_ingredients_title.value | default: 'Ingredients'
   assign section_description = selected_product.metafields.custom.section_ingredients_description.value | default: 'Only the best for our customers'
-  assign section_eyebrow = selected_product.metafields.custom.section_ingredients_eyebrow.value | default: 'Ingredients'
 
   assign has_ingredients = false
   if ingredients != blank
@@ -21,9 +19,6 @@
   <div class="py-12 md:py-20 bg-product-bg-secondary">
     <div class="container-small mx-auto max-w-4xl px-4 text-center flex flex-col gap-10">
       <div>
-        <p class="text-sm font-medium uppercase text-neutral-500 tracking-wider">
-          {{ section_eyebrow }}
-        </p>
         <h2 class="title-medium">{{ section_title }}</h2>
         {% if section_description != blank %}
           <p class="text-base opacity-70 mt-2">{{ section_description }}</p>

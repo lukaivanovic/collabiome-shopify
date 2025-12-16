@@ -74,32 +74,32 @@
 
 {% schema %}
 {
-  "name": "t:sections.generic_stats.name",
+  "name": "Generic stats",
   "tag": "section",
   "class": "generic-stats",
   "settings": [
     {
       "type": "text",
       "id": "custom_id",
-      "label": "t:settings.custom_id",
-      "info": "t:settings.custom_id_info"
+      "label": "Custom section ID",
+      "info": "Optional anchor to link directly to this section"
     },
     {
       "type": "text",
       "id": "title",
-      "label": "t:sections.generic_stats.settings.title",
+      "label": "Title",
       "default": "Statistics"
     },
     {
       "type": "textarea",
       "id": "description",
-      "label": "t:sections.generic_stats.settings.description",
+      "label": "Description",
       "default": "Add a description for this section"
     },
     {
       "type": "range",
       "id": "padding_top",
-      "label": "t:settings.padding_top",
+      "label": "Padding top",
       "min": 0,
       "max": 100,
       "default": 48,
@@ -108,7 +108,7 @@
     {
       "type": "range",
       "id": "padding_bottom",
-      "label": "t:settings.padding_bottom",
+      "label": "Padding bottom",
       "min": 0,
       "max": 100,
       "default": 48,
@@ -118,39 +118,39 @@
   "blocks": [
     {
       "type": "stat",
-      "name": "t:sections.generic_stats.blocks.stat.name",
+      "name": "Stat",
       "settings": [
         {
           "type": "text",
           "id": "metric",
-          "label": "t:sections.generic_stats.blocks.stat.settings.metric",
+          "label": "Metric",
           "default": "99%"
         },
         {
           "type": "textarea",
           "id": "text",
-          "label": "t:sections.generic_stats.blocks.stat.settings.text",
+          "label": "Text",
           "default": "Add description text for this statistic"
         },
         {
           "type": "text",
           "id": "source",
-          "label": "t:sections.generic_stats.blocks.stat.settings.source",
+          "label": "Source",
           "default": "Source name"
         },
         {
           "type": "url",
           "id": "link_url",
-          "label": "t:sections.generic_stats.blocks.stat.settings.link_url",
-          "info": "t:sections.generic_stats.blocks.stat.settings.link_url_info"
+          "label": "Link URL",
+          "info": "Optional URL to link the source"
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "t:sections.generic_stats.name",
-      "category": "t:sections.generic_stats.category",
+      "name": "Generic stats",
+      "category": "Generic",
       "blocks": [
         {
           "type": "stat",

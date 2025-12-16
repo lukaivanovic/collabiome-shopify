@@ -161,32 +161,6 @@
     },
     "footer": {
       "payment": "Accepted payment methods"
-    },
-    "generic_stats": {
-      "name": "Generic stats",
-      "category": "Generic",
-      "settings": {
-        "title": "Title",
-        "description": "Description"
-      },
-      "blocks": {
-        "stat": {
-          "name": "Stat",
-          "settings": {
-            "metric": "Metric",
-            "text": "Text",
-            "source": "Source",
-            "link_url": "Link URL",
-            "link_url_info": "Optional URL to link the source"
-          }
-        }
-      }
     }
-  },
-  "settings": {
-    "padding_top": "Padding top",
-    "padding_bottom": "Padding bottom",
-    "custom_id": "Custom section ID",
-    "custom_id_info": "Optional anchor to link directly to this section"
   }
 }
