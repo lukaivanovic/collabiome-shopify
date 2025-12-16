@@ -19,15 +19,75 @@
       "name": "Hero",
       "settings": {
         "kicker": "",
-        "title": "Hero title",
+        "title": "",
         "description": "",
         "show_buttons": true,
-        "button_label": "Button label",
+        "button_label": "",
         "button_link": "",
         "button_2_label": "",
         "button_2_link": "",
+        "video": "shopify://files/videos/b159e7e707b84238b66ff1b435a3ad11.mp4",
+        "video_url": "",
         "overlay_color": "#000000",
-        "overlay_opacity": 30
+        "overlay_opacity": 0
+      }
+    },
+    "left_image_text_mBttYG": {
+      "type": "left-image-text",
+      "blocks": {
+        "benefit_BHYQCM": {
+          "type": "benefit",
+          "settings": {
+            "image_icon": "shopify://shop_images/ikonica_09f52b86-150d-4596-8f88-c59519cb861c.webp",
+            "title": "Upaljene akne ostavljaju crvenilo i osjetljivost kože, a svako novo izbijanje čini ten još problematičnijim.",
+            "description": ""
+          }
+        },
+        "benefit_UWkT47": {
+          "type": "benefit",
+          "settings": {
+            "image_icon": "shopify://shop_images/ikonica.webp",
+            "title": "Ožiljci nakon akni ostaju i kad upala prođe, pa se čini da koža nikada ne dobiva priliku za potpuni oporavak.",
+            "description": ""
+          }
+        },
+        "benefit_HtKxTf": {
+          "type": "benefit",
+          "settings": {
+            "image_icon": "shopify://shop_images/makeup.webp",
+            "title": "Kreme i šminka samo privremeno prikrivaju nepravilnosti, ali ne rješavaju uzrok problema.",
+            "description": ""
+          }
+        },
+        "benefit_RVfTfY": {
+          "type": "benefit",
+          "settings": {
+            "image_icon": "shopify://shop_images/zdrava_koza.webp",
+            "title": "Shvatiš da je koži potrebna podrška iznutra, jer samo tako može vratiti ravnotežu i smiriti upalne procese.",
+            "description": ""
+          }
+        }
+      },
+      "block_order": [
+        "benefit_BHYQCM",
+        "benefit_UWkT47",
+        "benefit_HtKxTf",
+        "benefit_RVfTfY"
+      ],
+      "name": "Image and Text",
+      "settings": {
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "image": "shopify://shop_images/okus_narance_3.webp",
+        "image_alt": "Image alt text",
+        "image_position": "left",
+        "title": "Ne radi se samo o prištićima… već i o tragovima koje ostavljaju iza sebe:",
+        "description": "",
+        "show_button": true,
+        "button_label": "Learn more",
+        "button_link": "",
+        "button_style": "solid",
+        "button_link_target": "_self"
       }
     },
     "product_generic_K3qddY": {
@@ -95,6 +155,60 @@
       }
     },
     "left_image_text_nK4mXB": {
+      "type": "left-image-text",
+      "blocks": {
+        "benefit_PHKWzD": {
+          "type": "benefit",
+          "settings": {
+            "title": "Sporiji nastanak bora i očuvan mladolik izgled kože.",
+            "description": ""
+          }
+        },
+        "benefit_bzFzUD": {
+          "type": "benefit",
+          "settings": {
+            "title": "Tvoje tijelo će potaknuti prirodnu proizvodnju kolagena i smanjiti oksidativni stres.",
+            "description": ""
+          }
+        },
+        "benefit_abxKPR": {
+          "type": "benefit",
+          "settings": {
+            "title": "Cink i aktivni sastojci će pomoći smiriti iritacije i spriječiti nova izbijanja akni.",
+            "description": ""
+          }
+        },
+        "benefit_mGCDLM": {
+          "type": "benefit",
+          "settings": {
+            "title": "Koža će postajti čišća, a nepravilnosti manje vidljive.",
+            "description": ""
+          }
+        }
+      },
+      "block_order": [
+        "benefit_PHKWzD",
+        "benefit_bzFzUD",
+        "benefit_abxKPR",
+        "benefit_mGCDLM"
+      ],
+      "name": "Image and Text",
+      "settings": {
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "image": "shopify://shop_images/okus_narance_3.webp",
+        "image_alt": "Image alt text",
+        "image_position": "left",
+        "title": "Što mogu očekivati",
+        "description": "",
+        "show_button": true,
+        "button_label": "Learn more",
+        "button_link": "",
+        "button_style": "solid",
+        "button_link_target": "_self"
+      }
+    },
+    "left_image_text_WMw3We": {
       "type": "left-image-text",
       "name": "Image and Text",
       "settings": {
@@ -266,10 +380,12 @@
   "order": [
     "main",
     "hero_P6waLz",
+    "left_image_text_mBttYG",
     "product_generic_K3qddY",
     "three_column_grid_w9Nfpn",
     "product_ingredients_aKcLt4",
     "left_image_text_nK4mXB",
+    "left_image_text_WMw3We",
     "left_image_text_9fPBhR",
     "three_column_grid_cnzcYM",
     "faq_YwT7Ux",
