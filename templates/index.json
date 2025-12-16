@@ -116,7 +116,7 @@
       "settings": {
         "heading": "Latest articles",
         "description": "Describe this category",
-        "blog": "news",
+        "blog": "clanci",
         "show_date": true,
         "show_author": false,
         "show_excerpt": true,
