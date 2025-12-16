@@ -90,6 +90,51 @@
         "button_link_target": "_self"
       }
     },
+    "generic_stats_H3LBRH": {
+      "type": "generic-stats",
+      "blocks": {
+        "stat_VkfVzb": {
+          "type": "stat",
+          "settings": {
+            "metric": "40%",
+            "text": "Postotak žena koje pate od akni u odrasloj dobi",
+            "source": "",
+            "link_url": ""
+          }
+        },
+        "stat_aCgmpg": {
+          "type": "stat",
+          "settings": {
+            "metric": "31%",
+            "text": "Žene koje razviju trajne ožiljke nakon akni",
+            "source": "",
+            "link_url": ""
+          }
+        },
+        "stat_jChz7w": {
+          "type": "stat",
+          "settings": {
+            "metric": "55%",
+            "text": "Žene kojima akne i ožiljci utječu na samopouzdanje",
+            "source": "",
+            "link_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "stat_VkfVzb",
+        "stat_aCgmpg",
+        "stat_jChz7w"
+      ],
+      "name": "t:sections.generic_stats.name",
+      "settings": {
+        "custom_id": "",
+        "title": "Nisi jedina — tisuće žena bore se s aknama i ožiljcima:",
+        "description": "Add a description for this section",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
     "product_generic_K3qddY": {
       "type": "product-generic",
       "name": "Product",
@@ -381,6 +426,7 @@
     "main",
     "hero_P6waLz",
     "left_image_text_mBttYG",
+    "generic_stats_H3LBRH",
     "product_generic_K3qddY",
     "three_column_grid_w9Nfpn",
     "product_ingredients_aKcLt4",
