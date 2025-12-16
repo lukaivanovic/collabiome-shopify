@@ -15,7 +15,7 @@
       "settings": {
         "title": "Shop All Products",
         "manual_collection": "",
-        "products_per_page": 24,
+        "products_per_page": 32,
         "show_filters": true,
         "show_quiz_banner": true
       }
