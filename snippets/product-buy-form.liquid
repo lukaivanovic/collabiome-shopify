@@ -121,7 +121,14 @@
             {%- elsif selected_variant.available == false or quantity_rule_soldout -%}
               {{ 'products.product.sold_out' | t }}
             {%- else -%}
-              {{ 'products.product.add_to_cart' | t }} ({{ selected_variant.price | money_with_currency }})
+              {{ 'products.product.add_to_cart' | t }}
+              (
+                {%- if selected_variant.compare_at_price > selected_variant.price -%}
+                  <s>{{ selected_variant.compare_at_price | money_with_currency }}</s>
+                  {{ ' ' }}
+                {%- endif -%}
+                {{ selected_variant.price | money_with_currency }}
+              )
             {%- endif -%}
           </span>
         </button>

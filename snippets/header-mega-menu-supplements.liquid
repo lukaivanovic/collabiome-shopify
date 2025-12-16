@@ -42,7 +42,7 @@
         {% for product in featured_products limit: 3 %}
           <a
             href="{{ product.url }}"
-            class="relative flex items-end overflow-hidden bg-black text-white rounded-xl aspect-square px-3 py-3 flex-1"
+            class="group relative flex items-end overflow-hidden bg-black text-white rounded-xl aspect-square px-3 py-3 flex-1"
           >
             <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
               {% if product.featured_media %}
@@ -53,27 +53,27 @@
                     loading: 'lazy',
                     sizes: '100vw',
                     alt: product.title,
-                    class: 'absolute inset-0 w-full h-full object-cover'
+                    class: 'absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-105'
                 }}
               {% else %}
                 <div class="w-full h-full bg-gradient-to-r from-black/60 to-black/30"></div>
               {% endif %}
               <div
                 class="absolute inset-0 pointer-events-none"
-                style="background: #000000; opacity: 0.4;"
+                style="background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 60%);"
               ></div>
             </div>
 
             <div class="relative z-10 w-full flex justify-between gap-3">
               <div>
-                <h3 class="font-semibold leading-snug text-white">
+                <h3 class="text-lg font-medium leading-snug text-white">
                   {{ product.title | escape }}
                 </h3>
                 {% if product.description != blank %}
                   {% liquid
                     assign product_description = product.description | strip_html | truncate: 80
                   %}
-                  <p class="text-xs text-white/70 mt-1">
+                  <p class="text-sm text-white/80 mt-1">
                     {{ product_description }}
                   </p>
                 {% endif %}
@@ -108,11 +108,11 @@
           {% if banner_link != blank %}
             <a
               href="{{ banner_link }}"
-              class="relative flex items-end overflow-hidden bg-black text-white rounded-xl aspect-square px-3 py-3 flex-1"
+              class="group relative flex items-end overflow-hidden bg-black text-white rounded-xl aspect-square px-3 py-3 flex-1"
             >
           {% else %}
             <div
-              class="relative flex items-end overflow-hidden bg-black text-white rounded-xl aspect-square px-3 py-3 flex-1"
+              class="group relative flex items-end overflow-hidden bg-black text-white rounded-xl aspect-square px-3 py-3 flex-1"
             >
           {% endif %}
           <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
@@ -124,14 +124,14 @@
                   loading: 'lazy',
                   sizes: '100vw',
                   alt: banner_title,
-                  class: 'absolute inset-0 w-full h-full object-cover'
+                  class: 'absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-105'
               }}
             {% else %}
               <div class="w-full h-full bg-gradient-to-r from-black/60 to-black/30"></div>
             {% endif %}
             <div
               class="absolute inset-0 pointer-events-none"
-              style="background: {{ banner_overlay_color }}; opacity: {{ banner_overlay_opacity | divided_by: 100.0 }};"
+              style="background: linear-gradient(to top, {{ banner_overlay_color }} 0%, transparent 60%); opacity: {{ banner_overlay_opacity | divided_by: 100.0 }};"
             ></div>
           </div>
 

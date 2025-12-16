@@ -130,13 +130,14 @@
         >
           <div class="prose prose-sm max-w-none">
             {% assign ingredients_array = other_ingredients_list | split: '|' %}
-            <ul class="list-none space-y-2">
+            <p class="text-base text-gray-700">
               {% for ingredient_name in ingredients_array %}
                 {% if ingredient_name != blank %}
-                  <li class="text-base text-gray-700">{{ ingredient_name }}</li>
+                  {% unless forloop.first %}, {% endunless %}
+                  <span>{{ ingredient_name }}</span>
                 {% endif %}
               {% endfor %}
-            </ul>
+            </p>
           </div>
         </div>
       </div>

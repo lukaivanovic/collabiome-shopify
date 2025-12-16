@@ -10,19 +10,21 @@
 
 <div
   data-card="{{ cardStyle }}"
-  class="flex flex-col gap-4 text-foreground overflow-hidden group data-[card=true]:bg-product-bg-secondary data-[card=true]:rounded-xl"
+  class="flex flex-col gap-4 text-foreground overflow-hidden group data-[card=true]:bg-product-bg-secondary data-[card=true]:rounded-xl md:data-[card=true]:p-8"
 >
   <script id="product-data-{{ product.id }}" type="application/json">
     {{ product | json }}
   </script>
-  <a href="{{ product.url }}" class="product-card__image-wrapper h-80 overflow-hidden">
+  <a href="{{ product.url }}" class="product-card__image-wrapper overflow-hidden">
     {% if product.featured_media %}
       {{
         product.featured_media
         | image_url: width: 800, height: 800, crop: 'center'
         | image_tag:
           class: 'product-card__image product-card__image--primary h-full w-full object-contain group-data-[card=true]:object-cover',
-          alt: product.featured_media.alt | default: product.title | escape
+          alt: product.featured_media.alt
+        | default: product.title
+        | escape
       }}
 
       {% if product.media[1] %}
@@ -31,14 +33,17 @@
           | image_url: width: 800, height: 800, crop: 'center'
           | image_tag:
             class: 'product-card__image product-card__image--secondary h-full w-full object-contain group-data-[card=true]:object-cover',
-            alt: product.media[1].alt | default: product.title | append: ' - Alternate view' | escape
+            alt: product.media[1].alt
+          | default: product.title
+          | append: ' - Alternate view'
+          | escape
         }}
       {% endif %}
     {% else %}
       <div class="product-card__placeholder"></div>
     {% endif %}
   </a>
-  <div class="flex flex-col gap-5 group-data-[card=true]:p-4">
+  <div class="flex flex-col gap-5 ">
     <div>
       <h3 class="text-lg font-semibold line-clamp-1">{{ product.title | escape }}</h3>
       <p class="product-card__description text-gray-600 line-clamp-1 h-6">
