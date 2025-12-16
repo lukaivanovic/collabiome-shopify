@@ -40,11 +40,11 @@
 </div>
 
 {% stylesheet %}
-  .home-categories__section {
+  .generic-categories__section {
     position: relative;
   }
 
-  .home-categories__section::before {
+  .generic-categories__section::before {
     margin-top: -300px;
     margin-bottom: -200px;
     padding-top: 320px;
@@ -89,12 +89,12 @@
 
 {% schema %}
 {
-  "name": "Home categories",
+  "name": "Generic categories",
   "tag": "section",
-  "class": "home-categories__section",
+  "class": "generic-categories__section",
   "max_blocks": 3,
   "settings": [
-    { "type": "text", "id": "title", "label": "Text", "default": "Home categories" },
+    { "type": "text", "id": "title", "label": "Text", "default": "Generic categories" },
     { "type": "textarea", "id": "description", "label": "Description", "default": "Describe this category" }
   ],
   "blocks": [
@@ -128,7 +128,7 @@
   ],
   "presets": [
     {
-      "name": "Home categories",
+      "name": "Generic categories",
       "blocks": [
         {
           "type": "category_card",
