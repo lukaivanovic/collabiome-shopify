@@ -14,23 +14,40 @@
       "disabled": true,
       "settings": {}
     },
+    "hero_P6waLz": {
+      "type": "hero",
+      "name": "Hero",
+      "settings": {
+        "kicker": "",
+        "title": "Hero title",
+        "description": "",
+        "show_buttons": true,
+        "button_label": "Button label",
+        "button_link": "",
+        "button_2_label": "",
+        "button_2_link": "",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30
+      }
+    },
     "product_generic_K3qddY": {
       "type": "product-generic",
       "name": "Product",
       "settings": {
-        "product": ""
+        "product": "kolagen-boost"
       }
     },
     "product_ingredients_pDKGG7": {
       "type": "product-ingredients",
       "name": "Ingredients",
       "settings": {
-        "product": "complete-collagen-nocna-krema"
+        "manual_product": ""
       }
     }
   },
   "order": [
     "main",
+    "hero_P6waLz",
     "product_generic_K3qddY",
     "product_ingredients_pDKGG7"
   ]
