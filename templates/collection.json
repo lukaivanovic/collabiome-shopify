@@ -26,7 +26,7 @@
       "settings": {
         "title": "Shop All Products",
         "manual_collection": "paketi",
-        "products_per_page": 4,
+        "products_per_page": 40,
         "show_filters": false,
         "show_quiz_banner": false
       }
