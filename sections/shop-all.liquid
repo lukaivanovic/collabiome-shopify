@@ -40,25 +40,69 @@
 
   {% comment %} Collection chips and filters {% endcomment %}
   {% if section.settings.show_filters %}
+    {% liquid
+      assign chip_all_default_label = 'collections.all' | t | default: 'Shop all'
+      assign chip_supplements_default_label = 'collections.supplements' | t | default: 'Dodaci prehrani'
+      assign chip_cosmetics_default_label = 'collections.cosmetics' | t | default: 'Kozmetika'
+
+      assign chip_all_label = settings.shop_all_chip_label_all | default: chip_all_default_label
+      assign chip_supplements_label = settings.shop_all_chip_label_supplements | default: chip_supplements_default_label
+      assign chip_cosmetics_label = settings.shop_all_chip_label_cosmetics | default: chip_cosmetics_default_label
+    %}
+
     <div class="flex md:flex-row md:items-center items-start flex-col gap-2 mb-12 pb-4  flex-wrap">
       <div class="flex flex-wrap items-center gap-2">
         <a
           href="{{ routes.collections_url }}/all"
           class="collection-chip {% if selected_collection.handle == 'all' or selected_collection.handle == blank %}active{% endif %}"
         >
-          {{ 'collections.all' | t | default: 'Shop all' }}
+          {% if settings.shop_all_chip_icon_all != blank %}
+            <img
+              src="{{ settings.shop_all_chip_icon_all | image_url: width: 40, height: 40 }}"
+              alt="{{ chip_all_label | escape }}"
+              class="collection-chip__icon"
+              loading="lazy"
+              width="40"
+              height="40"
+            >
+          {% endif %}
+          <span class="collection-chip__label">
+            {{ chip_all_label }}
+          </span>
         </a>
         <a
           href="{{ routes.collections_url }}/dodaci-prehrani"
           class="collection-chip {% if selected_collection.handle == 'dodaci-prehrani' %}active{% endif %}"
         >
-          {{ 'collections.supplements' | t | default: 'Dodaci prehrani' }}
+          {% if settings.shop_all_chip_icon_supplements != blank %}
+            <img
+              src="{{ settings.shop_all_chip_icon_supplements | image_url: width: 40, height: 40 }}"
+              alt="{{ chip_supplements_label | escape }}"
+              class="collection-chip__icon"
+              loading="lazy"
+            >
+          {% endif %}
+          <span class="collection-chip__label">
+            {{ chip_supplements_label }}
+          </span>
         </a>
         <a
           href="{{ routes.collections_url }}/kozmetika"
           class="collection-chip {% if selected_collection.handle == 'kozmetika' %}active{% endif %}"
         >
-          {{ 'collections.cosmetics' | t | default: 'Kozmetika' }}
+          {% if settings.shop_all_chip_icon_cosmetics != blank %}
+            <img
+              src="{{ settings.shop_all_chip_icon_cosmetics | image_url: width: 40, height: 40 }}"
+              alt="{{ chip_cosmetics_label | escape }}"
+              class="collection-chip__icon"
+              loading="lazy"
+              width="40"
+              height="40"
+            >
+          {% endif %}
+          <span class="collection-chip__label">
+            {{ chip_cosmetics_label }}
+          </span>
         </a>
       </div>
 
@@ -90,7 +134,7 @@
         </div>
       {% else %}
         <div
-          class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 md:gap-8 mb-12"
+          class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-12"
           data-section-id="{{ section_id }}"
         >
           {% for product in selected_collection.products %}
@@ -203,21 +247,36 @@
     display: flex;
     align-items: center;
     justify-content: center;
+    gap: 0.5rem;
     border-radius: 9999px;
     text-decoration: none;
-    color: #fff;
-    background: #000;
+    color: #111827;
+    background: #ffffff;
+    border: 1px solid #e5e7eb;
     font-size: 0.875rem;
     transition: all 0.2s;
-    opacity: 0.5;
   }
 
   .collection-chip:hover {
-    opacity: 1;
+    background: #f3f4f6;
   }
 
   .collection-chip.active {
-    opacity: 1;
+    background: #111827;
+    color: #ffffff;
+    border-color: #111827;
+  }
+
+  .collection-chip__icon {
+    width: 20px;
+    height: 20px;
+    border-radius: 9999px;
+    object-fit: cover;
+    flex-shrink: 0;
+  }
+
+  .collection-chip__label {
+    white-space: nowrap;
   }
 
   /* Pagination */

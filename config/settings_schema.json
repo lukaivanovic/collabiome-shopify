@@ -116,6 +116,48 @@
     ]
   },
   {
+    "name": "Shop all navigation",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Collection chips for the shop all page"
+      },
+      {
+        "type": "text",
+        "id": "shop_all_chip_label_all",
+        "label": "All products label",
+        "default": "Shop all"
+      },
+      {
+        "type": "image_picker",
+        "id": "shop_all_chip_icon_all",
+        "label": "All products icon"
+      },
+      {
+        "type": "text",
+        "id": "shop_all_chip_label_supplements",
+        "label": "Supplements label",
+        "default": "Dodaci prehrani"
+      },
+      {
+        "type": "image_picker",
+        "id": "shop_all_chip_icon_supplements",
+        "label": "Supplements icon"
+      },
+      {
+        "type": "text",
+        "id": "shop_all_chip_label_cosmetics",
+        "label": "Cosmetics label",
+        "default": "Kozmetika"
+      },
+      {
+        "type": "image_picker",
+        "id": "shop_all_chip_icon_cosmetics",
+        "label": "Cosmetics icon"
+      }
+    ]
+  },
+  {
     "name": "Header Mega Menu",
     "settings": [
       {
