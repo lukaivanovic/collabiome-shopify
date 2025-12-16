@@ -1,0 +1,184 @@
+{%- liquid
+  assign section_id = section.settings.custom_id | default: section.id
+-%}
+
+<section
+  id="{{ section_id }}"
+  class="relative py-12 md:py-20"
+  style="
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="container mx-auto px-4">
+    {%- if section.settings.title != blank or section.settings.description != blank -%}
+      <div class="text-center mb-12">
+        {%- if section.settings.title != blank -%}
+          <h2 class="title-medium">{{ section.settings.title | escape }}</h2>
+        {%- endif -%}
+        {%- if section.settings.description != blank -%}
+          <p class="mt-2 text-base text-foreground-secondary">{{ section.settings.description | escape }}</p>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.blocks.size > 0 -%}
+      <div class="flex flex-wrap justify-center gap-4">
+        {%- for block in section.blocks -%}
+          <div class="w-full md:w-1/3" {{ block.shopify_attributes }}>
+            {%- liquid
+              assign stat_metric = block.settings.metric
+              assign stat_text = block.settings.text
+              assign stat_source = block.settings.source
+              assign stat_link_url = block.settings.link_url
+            -%}
+
+            <div class="border-b border-neutral-100 py-6 bg-product-bg-secondary rounded-2xl p-4">
+              {%- if stat_metric != blank -%}
+                <p class="text-7xl md:text-8xl font-medium text-product-accent">
+                  {{ stat_metric | escape }}
+                </p>
+              {%- endif -%}
+
+              {%- if stat_text != blank -%}
+                <p class="mt-3">{{ stat_text | escape }}</p>
+              {%- endif -%}
+
+              {%- if stat_source != blank or stat_link_url != blank -%}
+                <div class="flex flex-col gap-2 text-[10px] text-[var(--product-accent)]/72 mt-1">
+                  {%- if stat_source != blank -%}
+                    {%- if stat_link_url != blank -%}
+                      <a
+                        href="{{ stat_link_url }}"
+                        class="font-medium"
+                        target="_blank"
+                        rel="noopener"
+                      >
+                        {{- stat_source | escape -}}
+                      </a>
+                    {%- else -%}
+                      <span class="font-medium">
+                        {{ stat_source | escape }}
+                      </span>
+                    {%- endif -%}
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    {%- endif -%}
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "t:sections.generic_stats.name",
+  "tag": "section",
+  "class": "generic-stats",
+  "settings": [
+    {
+      "type": "text",
+      "id": "custom_id",
+      "label": "t:settings.custom_id",
+      "info": "t:settings.custom_id_info"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "t:sections.generic_stats.settings.title",
+      "default": "Statistics"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "t:sections.generic_stats.settings.description",
+      "default": "Add a description for this section"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "t:settings.padding_top",
+      "min": 0,
+      "max": 100,
+      "default": 48,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "t:settings.padding_bottom",
+      "min": 0,
+      "max": 100,
+      "default": 48,
+      "unit": "px"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "stat",
+      "name": "t:sections.generic_stats.blocks.stat.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "metric",
+          "label": "t:sections.generic_stats.blocks.stat.settings.metric",
+          "default": "99%"
+        },
+        {
+          "type": "textarea",
+          "id": "text",
+          "label": "t:sections.generic_stats.blocks.stat.settings.text",
+          "default": "Add description text for this statistic"
+        },
+        {
+          "type": "text",
+          "id": "source",
+          "label": "t:sections.generic_stats.blocks.stat.settings.source",
+          "default": "Source name"
+        },
+        {
+          "type": "url",
+          "id": "link_url",
+          "label": "t:sections.generic_stats.blocks.stat.settings.link_url",
+          "info": "t:sections.generic_stats.blocks.stat.settings.link_url_info"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.generic_stats.name",
+      "category": "t:sections.generic_stats.category",
+      "blocks": [
+        {
+          "type": "stat",
+          "settings": {
+            "metric": "99%",
+            "text": "Customer satisfaction rate",
+            "source": "Source name"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "metric": "5K+",
+            "text": "Happy customers",
+            "source": "Source name"
+          }
+        },
+        {
+          "type": "stat",
+          "settings": {
+            "metric": "100%",
+            "text": "Natural ingredients",
+            "source": "Source name"
+          }
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}
+
