@@ -37,6 +37,185 @@
         "product": "kolagen-boost"
       }
     },
+    "three_column_grid_w9Nfpn": {
+      "type": "three-column-grid",
+      "blocks": {
+        "item_rU3QVR": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design.webp",
+            "title": "Ulij",
+            "description": "Kolagen se može konzumirati u dozi od 25 ml ili 50 ml dnevno. Jedna boca je dovoljna za 10-20 dana.",
+            "link": "",
+            "show_button": false,
+            "button_label": "Learn more"
+          }
+        },
+        "item_MPFXfV": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/Untitled_design_2_463f425f-27ca-4387-9fa4-2a7f2a5c94a8.webp",
+            "title": "Popij",
+            "description": "Svakodnevno popij svoju dozu, možeš pomiješati u omiljeni napitak, sok ili smoothie.",
+            "link": "",
+            "show_button": false,
+            "button_label": "Learn more"
+          }
+        },
+        "item_dBjtA8": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/okus_narance_1.webp",
+            "title": "Blistaj",
+            "description": "Nakon 30 dana korištenja uživaj u prekrasnoj kosi, sjajnoj koži i čvrstim noktima!",
+            "link": "",
+            "show_button": false,
+            "button_label": "Learn more"
+          }
+        }
+      },
+      "block_order": [
+        "item_rU3QVR",
+        "item_MPFXfV",
+        "item_dBjtA8"
+      ],
+      "name": "Three Column Grid",
+      "settings": {
+        "custom_id": "",
+        "title": "Kako konzumirati kolagen",
+        "description": "",
+        "columns": 3
+      }
+    },
+    "product_ingredients_aKcLt4": {
+      "type": "product-ingredients",
+      "name": "Ingredients",
+      "settings": {
+        "manual_product": "complete-collagen-nocna-krema"
+      }
+    },
+    "left_image_text_nK4mXB": {
+      "type": "left-image-text",
+      "name": "Image and Text",
+      "settings": {
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "image": "shopify://shop_images/kolagen_boost_800x800_veci_logo_estetica.jpg",
+        "image_alt": "Image alt text",
+        "image_position": "left",
+        "title": "Najbolji proizvod po izboru dermatologa",
+        "description": "<p>Godine 2022. Kolagen Boost ponio je prestižnu nagradu Estetica Premium Product u kategoriji 'Najbolji suplement s kolagenom'. Ova nagrada posebno je vrijedna jer proizvode kroz nekoliko mjeseci testiraju dermatolozi i nutricionisti, a upravo su oni prepoznali Kolagen Boost kao najbolji izbor za njegu kože, kose i noktiju iznutra.</p>",
+        "show_button": true,
+        "button_label": "Learn more",
+        "button_link": "",
+        "button_style": "solid",
+        "button_link_target": "_self"
+      }
+    },
+    "left_image_text_9fPBhR": {
+      "type": "left-image-text",
+      "name": "Image and Text",
+      "settings": {
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "image": "shopify://shop_images/Iva_Tokic_kolagen.webp",
+        "image_alt": "Image alt text",
+        "image_position": "right",
+        "title": "Nismo pristalice pseudoznanosti i poluistina",
+        "description": "<p>I zato dajemo garanciju na naše proizvode. Vjerujemo u znanost, zato svaki naš proizvod razvija tim vrhunskih stručnjaka i znanstvenika u Hrvatskoj. Sigurni smo u njihovu djelotvornost i zato dajemo potpunu garanciju: ako se nađeš među rijetkih 2,4 % korisnika koji ne primijete rezultate, jednostavno nam vrati proizvod — mi ti vraćamo novac.</p>",
+        "show_button": true,
+        "button_label": "Learn more",
+        "button_link": "",
+        "button_style": "solid",
+        "button_link_target": "_self"
+      }
+    },
+    "three_column_grid_cnzcYM": {
+      "type": "three-column-grid",
+      "blocks": {
+        "item_twBqJT": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/jutarnji.webp",
+            "title": "",
+            "description": "",
+            "link": "https://google.com",
+            "show_button": false,
+            "button_label": "Learn more"
+          }
+        },
+        "item_f8KcFQ": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/index.webp",
+            "title": "",
+            "description": "",
+            "link": "https://google.com",
+            "show_button": false,
+            "button_label": "Learn more"
+          }
+        },
+        "item_pYWxyg": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/tportal_cbb19fc7-659d-41d6-a37d-ec1b002707a6.webp",
+            "title": "",
+            "description": "",
+            "link": "https://google.com",
+            "show_button": false,
+            "button_label": "Learn more"
+          }
+        },
+        "item_UikCn6": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/estetica.webp",
+            "title": "",
+            "description": "",
+            "link": "https://google.com",
+            "show_button": false,
+            "button_label": "Learn more"
+          }
+        },
+        "item_yrb9B3": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/dnevnik.webp",
+            "title": "",
+            "description": "",
+            "link": "https://google.com",
+            "show_button": false,
+            "button_label": "Learn more"
+          }
+        },
+        "item_8iiiMb": {
+          "type": "item",
+          "settings": {
+            "image": "shopify://shop_images/slobodna.webp",
+            "title": "",
+            "description": "",
+            "link": "https://google.com",
+            "show_button": false,
+            "button_label": "Learn more"
+          }
+        }
+      },
+      "block_order": [
+        "item_twBqJT",
+        "item_f8KcFQ",
+        "item_pYWxyg",
+        "item_UikCn6",
+        "item_yrb9B3",
+        "item_8iiiMb"
+      ],
+      "name": "Three Column Grid",
+      "settings": {
+        "custom_id": "",
+        "title": "Mediji o nama",
+        "description": "",
+        "columns": 5
+      }
+    },
     "product_ingredients_pDKGG7": {
       "type": "product-ingredients",
       "name": "Ingredients",
@@ -49,6 +228,11 @@
     "main",
     "hero_P6waLz",
     "product_generic_K3qddY",
+    "three_column_grid_w9Nfpn",
+    "product_ingredients_aKcLt4",
+    "left_image_text_nK4mXB",
+    "left_image_text_9fPBhR",
+    "three_column_grid_cnzcYM",
     "product_ingredients_pDKGG7"
   ]
 }
