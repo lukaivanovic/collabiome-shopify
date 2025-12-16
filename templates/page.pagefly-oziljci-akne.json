@@ -216,6 +216,45 @@
         "columns": 5
       }
     },
+    "faq_YwT7Ux": {
+      "type": "faq",
+      "blocks": {
+        "faq_item_iGfBfd": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Koja je prikladna dob za korištenje Collabiomé linije?",
+            "answer": "<p>Collabiomé je formulirana tako da odgovara potrebama kože odraslih, a posebno je namijenjen ženama koje žele očuvati vitalnost, elastičnost i zdrav izgled kože. Preporučuje se za dob od 25 godina nadalje, kada prirodna proizvodnja kolagena počinje opadati.</p>"
+          }
+        },
+        "faq_item_8AyrYk": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Jesu li proizvodi sigurni za osjetljivu kožu?",
+            "answer": "<p>Da. Formule sadrže pažljivo odabrane biljne i morske sastojke visoke čistoće i bez agresivnih dodataka, što ih čini pogodnima i za osjetljivu kožu.</p>"
+          }
+        },
+        "faq_item_DHiChi": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Koliko brzo se mogu očekivati vidljivi rezultati?",
+            "answer": "<p>Rezultati variraju ovisno o tipu kože i rutini, no već nakon nekoliko tjedana redovite upotrebe može se primijetiti poboljšana hidratacija, elastičnost i osjećaj svježine, dok su učinci na kolagen i čvrstoću kože vidljiviji kroz dužu uporabu.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_iGfBfd",
+        "faq_item_8AyrYk",
+        "faq_item_DHiChi"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "title": "Najčešća pitanja",
+        "description": "",
+        "custom_id": "",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
+    },
     "product_ingredients_pDKGG7": {
       "type": "product-ingredients",
       "name": "Ingredients",
@@ -233,6 +272,7 @@
     "left_image_text_nK4mXB",
     "left_image_text_9fPBhR",
     "three_column_grid_cnzcYM",
+    "faq_YwT7Ux",
     "product_ingredients_pDKGG7"
   ]
 }
