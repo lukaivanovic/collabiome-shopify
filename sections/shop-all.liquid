@@ -54,7 +54,7 @@
       <div class="flex flex-wrap items-center gap-2">
         <a
           href="{{ routes.collections_url }}/all"
-          class="collection-chip {% if selected_collection.handle == 'all' or selected_collection.handle == blank %}active{% endif %}"
+          class="collection-chip font-medium {% if selected_collection.handle == 'all' or selected_collection.handle == blank %}active{% endif %}"
         >
           {% if settings.shop_all_chip_icon_all != blank %}
             <img
@@ -72,7 +72,7 @@
         </a>
         <a
           href="{{ routes.collections_url }}/dodaci-prehrani"
-          class="collection-chip {% if selected_collection.handle == 'dodaci-prehrani' %}active{% endif %}"
+          class="collection-chip font-medium {% if selected_collection.handle == 'dodaci-prehrani' %}active{% endif %}"
         >
           {% if settings.shop_all_chip_icon_supplements != blank %}
             <img
@@ -80,6 +80,8 @@
               alt="{{ chip_supplements_label | escape }}"
               class="collection-chip__icon"
               loading="lazy"
+              width="40"
+              height="40"
             >
           {% endif %}
           <span class="collection-chip__label">
@@ -88,7 +90,7 @@
         </a>
         <a
           href="{{ routes.collections_url }}/kozmetika"
-          class="collection-chip {% if selected_collection.handle == 'kozmetika' %}active{% endif %}"
+          class="collection-chip font-medium {% if selected_collection.handle == 'kozmetika' %}active{% endif %}"
         >
           {% if settings.shop_all_chip_icon_cosmetics != blank %}
             <img
@@ -242,8 +244,8 @@
 {% stylesheet %}
   /* Collection chips */
   .collection-chip {
-    height: 2rem;
-    padding: 0 16px;
+    height: 36px;
+    padding: 4px 12px 4px 8px;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -253,7 +255,6 @@
     color: #111827;
     background: #ffffff;
     border: 1px solid #e5e7eb;
-    font-size: 0.875rem;
     transition: all 0.2s;
   }
 
@@ -262,14 +263,14 @@
   }
 
   .collection-chip.active {
-    background: #111827;
-    color: #ffffff;
-    border-color: #111827;
+    background: #fff;
+    color: #000;
+    border-color: #000;
   }
 
   .collection-chip__icon {
-    width: 20px;
-    height: 20px;
+    width: 24px;
+    height: 24px;
     border-radius: 9999px;
     object-fit: cover;
     flex-shrink: 0;

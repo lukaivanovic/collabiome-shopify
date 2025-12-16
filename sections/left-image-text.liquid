@@ -51,6 +51,34 @@
           </div>
         {% endif %}
 
+        {% if section.blocks.size > 0 %}
+          <div class="mt-4 grid grid-cols-1 gap-1">
+            {% for block in section.blocks %}
+              {% if block.type == 'benefit' %}
+                <div class="border-b border-neutral-200 pb-6 mb-6 last:mb-0" {{ block.shopify_attributes }}>
+                  {% if block.settings.image_icon != blank %}
+                    <div class="mb-4 size-8">
+                      {% render 'image', image: block.settings.image_icon, class: 'w-full h-full object-cover' %}
+                    </div>
+                  {% endif %}
+
+                  {% if block.settings.title != blank %}
+                    <div class="text-base font-[550]">
+                      {{ block.settings.title | escape }}
+                    </div>
+                  {% endif %}
+
+                  {% if block.settings.description != blank %}
+                    <div class="text-base text-foreground-secondary">
+                      {{ block.settings.description }}
+                    </div>
+                  {% endif %}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+
         {% if has_button %}
           <div>
             <a
@@ -170,6 +198,30 @@
         { "value": "_blank", "label": "New tab" }
       ],
       "default": "_self"
+    }
+  ],
+  "max_blocks": 6,
+  "blocks": [
+    {
+      "type": "benefit",
+      "name": "Benefit",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        }
+      ]
     }
   ],
   "presets": [
