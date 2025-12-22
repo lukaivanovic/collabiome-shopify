@@ -194,29 +194,31 @@
         "category_card_KrPJwR": {
           "type": "category_card",
           "settings": {
-            "image": "shopify://shop_images/gel_za_ciscenje_lica_model_51bb8d8d-6cda-4b2e-962c-4b50bd8fa595.png",
-            "title": "Category",
-            "description": "Describe this category",
-            "button_text": "Button text",
-            "button_url": ""
+            "image": "shopify://shop_images/kosa_i_koza.webp",
+            "title": "Kosu i kožu",
+            "description": "",
+            "button_text": "Saznaj više",
+            "button_url": "shopify://collections/dodaci-prehrani"
           }
         },
         "category_card_ETi4Kk": {
           "type": "category_card",
           "settings": {
-            "title": "Category",
-            "description": "Describe this category",
-            "button_text": "Button text",
-            "button_url": ""
+            "image": "shopify://shop_images/Zglobovi.webp",
+            "title": "Zglobove",
+            "description": "",
+            "button_text": "Saznaj više",
+            "button_url": "shopify://products/recupera"
           }
         },
         "category_card_UURVqx": {
           "type": "category_card",
           "settings": {
-            "title": "Category",
-            "description": "Describe this category",
-            "button_text": "Button text",
-            "button_url": ""
+            "image": "shopify://shop_images/Njega_lica.webp",
+            "title": "Njega lica",
+            "description": "",
+            "button_text": "Saznaj više",
+            "button_url": "shopify://collections/kozmetika"
           }
         }
       },
