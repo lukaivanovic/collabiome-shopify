@@ -2036,6 +2036,13 @@
       }
     }
   }
+  .group-hover\:text-neutral-700 {
+    &:is(:where(.group):hover *) {
+      @media (hover: hover) {
+        color: var(--color-neutral-700);
+      }
+    }
+  }
   .group-hover\:text-slate-700 {
     &:is(:where(.group):hover *) {
       @media (hover: hover) {

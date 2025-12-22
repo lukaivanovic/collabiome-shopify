@@ -18,9 +18,9 @@
 <section id="{{ section_id }}" class="py-16">
   <div class="container mx-auto px-4">
     <div class="max-w-3xl">
-      <h2 class="text-3xl font-semibold text-slate-900">{{ section_title | escape }}</h2>
+      <h2 class="text-3xl font-semibold text-neutral-900">{{ section_title | escape }}</h2>
       {% if section_description != blank %}
-        <p class="mt-3 text-base text-slate-600">{{ section_description | escape }}</p>
+        <p class="mt-3 text-base text-neutral-600">{{ section_description | escape }}</p>
       {% endif %}
     </div>
 
@@ -55,13 +55,13 @@
           </div>
         {% endif %}
         {% if item_title != blank %}
-          <h3 class="text-lg font-semibold text-slate-900 group-hover:text-slate-700">{{ item_title | escape }}</h3>
+          <h3 class="text-lg font-semibold text-neutral-900 group-hover:text-neutral-700">{{ item_title | escape }}</h3>
         {% endif %}
         {% if item_description != blank %}
-          <p class="text-sm text-slate-500">{{ item_description | escape }}</p>
+          <p class="text-sm text-neutral-500">{{ item_description | escape }}</p>
         {% endif %}
         {% if show_button and button_label != blank %}
-          <span class="mt-2 text-sm font-medium text-slate-900 underline group-hover:text-slate-700">
+          <span class="mt-2 text-sm font-medium text-neutral-900 underline group-hover:text-neutral-700">
             {{ button_label | escape }}
           </span>
         {% endif %}
