@@ -37,13 +37,13 @@
         {% if item_link != blank %}
           <a
             href="{{ item_link }}"
-            class="flex flex-col gap-2 border-b border-slate-200 pb-6 last:border-b-0 last:pb-0 md:last:border-b-1 group"
+            class="flex flex-col gap-2 border-b border-neutral-200 pb-6 group"
           >
         {% else %}
-          <article class="flex flex-col gap-2 border-b border-slate-200 pb-2 last:border-b-0 last:pb-0">
+          <article class="flex flex-col gap-2 border-b border-neutral-200 pb-6">
         {% endif %}
         {% if item_image != blank %}
-          <div class="overflow-hidden rounded-lg">
+          <div class="overflow-hidden rounded-lg pb-6">
             {{
               item_image
               | image_url: width: 600, height: 400, crop: 'center'
