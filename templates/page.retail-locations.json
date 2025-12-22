@@ -22,11 +22,9 @@
         "heading": "Heading",
         "description": "Description",
         "show_large_retailers": true,
+        "link_label": "Visit retailer",
         "retailers": [
-          "tommy",
-          "ribola",
-          "biobio",
-          "tvornica-zdrave-hrane"
+          "biobio"
         ]
       }
     }
