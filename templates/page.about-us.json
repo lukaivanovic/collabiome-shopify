@@ -18,18 +18,18 @@
       "type": "hero",
       "name": "Hero",
       "settings": {
-        "kicker": "O nama",
+        "kicker": "",
         "title": "Ispod površine: Koja je tajna naših proizvoda",
-        "description": "<p>Pročitaj više o našem putu do najboljih kolagen proizvoda.</p>",
+        "description": "",
         "show_buttons": true,
         "button_label": "Button label",
         "button_link": "",
         "button_2_label": "",
         "button_2_link": "",
         "video_url": "",
-        "image": "shopify://shop_images/image_2.jpg",
+        "image": "shopify://shop_images/Iva_Tokic_kolagen.webp",
         "overlay_color": "#000000",
-        "overlay_opacity": 50
+        "overlay_opacity": 12
       }
     },
     "left_image_text_VmJYhQ": {
@@ -50,24 +50,6 @@
         "button_link_target": "_self"
       }
     },
-    "left_image_text_FXxaHq": {
-      "type": "left-image-text",
-      "name": "Generic #1",
-      "settings": {
-        "padding_top": 60,
-        "padding_bottom": 60,
-        "image": "shopify://shop_images/image_2.jpg",
-        "image_alt": "Image alt text",
-        "image_position": "right",
-        "title": "Stunning feature title",
-        "description": "<p>Share a short description that explains why this feature matters.</p>",
-        "show_button": true,
-        "button_label": "Learn more",
-        "button_link": "",
-        "button_style": "solid",
-        "button_link_target": "_self"
-      }
-    },
     "three_column_grid_T4VJij": {
       "type": "three-column-grid",
       "blocks": {
@@ -75,42 +57,60 @@
           "type": "item",
           "settings": {
             "title": "Kvaliteta proizvoda",
-            "description": "GMP certifikat potvrđuje da su proizvodi proizvedeni u kontroliranim uvjetima, prema preciznim specifikacijama i standardima kvalitete."
+            "description": "GMP certifikat potvrđuje da su proizvodi proizvedeni u kontroliranim uvjetima, prema preciznim specifikacijama i standardima kvalitete.",
+            "link": "",
+            "show_button": false,
+            "button_label": "Learn more"
           }
         },
         "item_bBhEMF": {
           "type": "item",
           "settings": {
             "title": "Sigurnost proizvoda",
-            "description": "GMP certifikat osigurava da su proizvodi proizvedeni prema najvišim standardima sigurnosti, čime se smanjuje rizik od štetnih ili opasnih tvari."
+            "description": "GMP certifikat osigurava da su proizvodi proizvedeni prema najvišim standardima sigurnosti, čime se smanjuje rizik od štetnih ili opasnih tvari.",
+            "link": "",
+            "show_button": false,
+            "button_label": "Learn more"
           }
         },
         "item_jnechf": {
           "type": "item",
           "settings": {
             "title": "Usklađenost s regulativama",
-            "description": "GMP certifikat potvrđuje da je proizvodnja u skladu s međunarodnim i nacionalnim zakonodavnim standardima, što daje dodatnu sigurnost kupcima"
+            "description": "GMP certifikat potvrđuje da je proizvodnja u skladu s međunarodnim i nacionalnim zakonodavnim standardima, što daje dodatnu sigurnost kupcima",
+            "link": "",
+            "show_button": false,
+            "button_label": "Learn more"
           }
         },
         "item_6PXMqh": {
           "type": "item",
           "settings": {
             "title": "Higijena proizvodnih prostora",
-            "description": "Osiguranje da su prostori čisti i da se održavaju u skladu sa standardima kako bi se spriječila kontaminacija proizvoda."
+            "description": "Osiguranje da su prostori čisti i da se održavaju u skladu sa standardima kako bi se spriječila kontaminacija proizvoda.",
+            "link": "",
+            "show_button": false,
+            "button_label": "Learn more"
           }
         },
         "item_VJDpbq": {
           "type": "item",
           "settings": {
             "title": "Pouzdanost proizvođača",
-            "description": "GMP certifikat naglašava da proizvođač ozbiljno shvaća kontrolu kvalitete i sigurnost, što povećava povjerenje kupaca u proizvod i brend"
+            "description": "GMP certifikat naglašava da proizvođač ozbiljno shvaća kontrolu kvalitete i sigurnost, što povećava povjerenje kupaca u proizvod i brend",
+            "link": "",
+            "show_button": false,
+            "button_label": "Learn more"
           }
         },
         "item_PQYPVz": {
           "type": "item",
           "settings": {
             "title": "Transparentnost i sljedivost",
-            "description": "Svi procesi u GMP certificiranim postrojenjima su dokumentirani i sljedivi, što omogućuje brzu reakciju u slučaju bilo kakvih problema s proizvodom."
+            "description": "Svi procesi u GMP certificiranim postrojenjima su dokumentirani i sljedivi, što omogućuje brzu reakciju u slučaju bilo kakvih problema s proizvodom.",
+            "link": "",
+            "show_button": false,
+            "button_label": "Learn more"
           }
         }
       },
@@ -125,8 +125,9 @@
       "name": "t:sections.three_column_grid.name",
       "settings": {
         "custom_id": "",
-        "title": "Hello",
-        "description": "Test"
+        "title": "GPM certifikat, ili certifikat dobre proizvođačke prakse",
+        "description": "GMP (Good Manufacturing Practice) certifikat predstavlja potvrdu da određeni proizvođač pridržava se strogo definiranih standarda i procedura za proizvodnju farmaceutskih proizvoda, prehrambenih dodataka, kozmetike ili drugih proizvoda koji mogu utjecati na zdravlje ljudi. GMP standardi su postavljeni kako bi se osigurala sigurnost, kvaliteta i učinkovitost proizvoda koji dolaze na tržište.",
+        "columns": 3
       }
     },
     "left_image_text_wknBME": {
@@ -135,10 +136,11 @@
       "settings": {
         "padding_top": 60,
         "padding_bottom": 60,
+        "image": "shopify://shop_images/Scientist.webp",
         "image_alt": "Image alt text",
         "image_position": "left",
-        "title": "Stunning feature title",
-        "description": "<p>Share a short description that explains why this feature matters.</p>",
+        "title": "Postavljanje novog standarda u istraživanju",
+        "description": "<p>Podizanje ljestvice u istraživanju znači posvećivanje izvrsnosti, preciznosti i inovacijama.</p><p><br/>Naša predanost znanstvenoj metodologiji i rigoroznim standardima osigurava da svaki korak istraživačkog procesa zadovoljava najviše kriterije.</p><p><br/>Kombinirajući napredne tehnologije s interdisciplinarnim pristupima, težimo postavljanju novih mjerila u istraživanju koja će voditi prema <strong>značajnim otkrićima i poboljšanju kvalitete života.</strong></p>",
         "show_button": true,
         "button_label": "Learn more",
         "button_link": "",
@@ -160,15 +162,17 @@
         "column_AX7V6w": {
           "type": "column",
           "settings": {
-            "title": "",
-            "description": ""
+            "image": "shopify://shop_images/httpswww.kolagenboost.hrcollectionsbestsellersproductskolagen-boost-copyvariant_48399030780236_9.webp",
+            "title": "Verica Dragović Uzelac",
+            "description": "Prof.dr.sc."
           }
         },
         "column_pdWJFb": {
           "type": "column",
           "settings": {
-            "title": "",
-            "description": ""
+            "image": "shopify://shop_images/httpswww.kolagenboost.hrcollectionsbestsellersproductskolagen-boost-copyvariant_48399030780236_10.webp",
+            "title": "Marina Mustapić",
+            "description": "Research and development expert"
           }
         }
       },
@@ -189,7 +193,6 @@
     "main",
     "hero_KRUWjG",
     "left_image_text_VmJYhQ",
-    "left_image_text_FXxaHq",
     "three_column_grid_T4VJij",
     "left_image_text_wknBME",
     "three_column_highlight_jzxGVT"
