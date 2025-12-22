@@ -148,24 +148,6 @@
         "button_link_target": "_self"
       }
     },
-    "left_image_text_NAfwea": {
-      "type": "left-image-text",
-      "name": "Image and Text",
-      "settings": {
-        "padding_top": 60,
-        "padding_bottom": 60,
-        "image": "shopify://shop_images/Scientist.webp",
-        "image_alt": "Image alt text",
-        "image_position": "left",
-        "title": "Stunning feature title",
-        "description": "<p>Share a short description that explains why this feature matters.</p>",
-        "show_button": true,
-        "button_label": "Learn more",
-        "button_link": "",
-        "button_style": "solid",
-        "button_link_target": "_self"
-      }
-    },
     "three_column_highlight_jzxGVT": {
       "type": "three-column-highlight",
       "blocks": {
@@ -258,7 +240,6 @@
     "left_image_text_VmJYhQ",
     "three_column_grid_T4VJij",
     "left_image_text_wknBME",
-    "left_image_text_NAfwea",
     "three_column_highlight_jzxGVT",
     "generic_categories_MgB64H"
   ]
