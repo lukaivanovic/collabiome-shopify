@@ -19,12 +19,20 @@
       "name": "Retail locations",
       "settings": {
         "custom_id": "",
-        "heading": "Heading",
-        "description": "Description",
+        "heading": "Lokacije za kupnju",
+        "description": "",
         "show_large_retailers": true,
         "link_label": "Visit retailer",
         "retailers": [
-          "biobio"
+          "biobio",
+          "vase-zdravlje",
+          "farmacia",
+          "prima-pharme",
+          "salus",
+          "ljekarne-sdz",
+          "terra-organica",
+          "ljekarne-perak",
+          "crosst"
         ]
       }
     }
