@@ -154,7 +154,7 @@
         "column_6Xz4xA": {
           "type": "column",
           "settings": {
-            "image": "shopify://shop_images/woman-cosmetologist-making-beauty-procedures.webp",
+            "image": "shopify://shop_images/httpswww.kolagenboost.hrcollectionsbestsellersproductskolagen-boost-copyvariant_48399030780236_8.webp",
             "title": "Iva Tokić",
             "description": "M.Sc nutricionozima"
           }
@@ -187,6 +187,49 @@
         "heading": "Postavljanje novog standarda u istraživanju",
         "description": "Podizanje ljestvice u istraživanju znači posvećivanje izvrsnosti, preciznosti i inovacijama.\n\n\nNaša predanost znanstvenoj metodologiji i rigoroznim standardima osigurava da svaki korak istraživačkog procesa zadovoljava najviše kriterije.\n\n\nKombinirajući napredne tehnologije s interdisciplinarnim pristupima, težimo postavljanju novih mjerila u istraživanju koja će voditi prema značajnim otkrićima i poboljšanju kvalitete života."
       }
+    },
+    "generic_categories_MgB64H": {
+      "type": "generic-categories",
+      "blocks": {
+        "category_card_KrPJwR": {
+          "type": "category_card",
+          "settings": {
+            "image": "shopify://shop_images/gel_za_ciscenje_lica_model_51bb8d8d-6cda-4b2e-962c-4b50bd8fa595.png",
+            "title": "Category",
+            "description": "Describe this category",
+            "button_text": "Button text",
+            "button_url": ""
+          }
+        },
+        "category_card_ETi4Kk": {
+          "type": "category_card",
+          "settings": {
+            "title": "Category",
+            "description": "Describe this category",
+            "button_text": "Button text",
+            "button_url": ""
+          }
+        },
+        "category_card_UURVqx": {
+          "type": "category_card",
+          "settings": {
+            "title": "Category",
+            "description": "Describe this category",
+            "button_text": "Button text",
+            "button_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "category_card_KrPJwR",
+        "category_card_ETi4Kk",
+        "category_card_UURVqx"
+      ],
+      "name": "Generic categories",
+      "settings": {
+        "title": "Generic categories",
+        "description": "Describe this category"
+      }
     }
   },
   "order": [
@@ -195,6 +238,7 @@
     "left_image_text_VmJYhQ",
     "three_column_grid_T4VJij",
     "left_image_text_wknBME",
-    "three_column_highlight_jzxGVT"
+    "three_column_highlight_jzxGVT",
+    "generic_categories_MgB64H"
   ]
 }
