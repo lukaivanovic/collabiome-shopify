@@ -4,7 +4,7 @@
 {% assign excerpt_words = include.excerpt_words | default: 30 %}
 
 <a href="{{ article.url }}" class="group block h-full">
-  <article class="blog-card h-full flex flex-col bg-white hover:bg-neutral-50 group-hover:shadow-lg transition-shadow duration-300">
+  <article class="blog-card h-full flex flex-col bg-white hover:bg-neutral-50">
     <div class="blog-card__media overflow-hidden">
       {% if article.image %}
         {{

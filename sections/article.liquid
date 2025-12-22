@@ -34,21 +34,19 @@
 
 <section class="relative {{ product_theme_class }}">
   {% if article.image %}
-    <figure class="relative w-full h-80 md:h-96 overflow-hidden">
+    <figure class="relative w-full h-80 md:h-150 overflow-hidden">
       {{
         article.image
         | image_url: width: 2048
-        | image_tag:
-          loading: 'eager',
-          class: 'h-full w-full object-cover',
-          sizes: '100vw',
-          alt: article.image.alt | default: article.title | escape
+        | image_tag: loading: 'eager', class: 'h-full w-full object-cover', sizes: '100vw', alt: article.image.alt
+        | default: article.title
+        | escape
       }}
       <div class="absolute inset-0 bg-gradient-to-b from-black/20 to-transparent"></div>
     </figure>
   {% endif %}
 
-  <div class="container-small pt-20 -mt-80 md:-mt-96 pb-16 md:pb-24 lg:pb-28">
+  <div class="container pt-20 -mt-80 md:-mt-150 pb-16 md:pb-24 lg:pb-28">
     <article class="relative isolate overflow-hidden {{ product_theme_class }}">
       <div class="absolute inset-0 opacity-80 [background:var(--product-background)]"></div>
       <div class="relative z-10 flex flex-col gap-12 bg-white/85 px-6 py-10 backdrop-blur-xl sm:px-10 lg:px-16">
@@ -108,10 +106,7 @@
         </div>
 
         {% if article.tags.size > 0 %}
-          <div class="flex flex-col gap-3 rounded-[24px] border border-white/60 bg-white/80 p-6">
-            <p class="text-xs font-semibold uppercase tracking-[0.35em] text-neutral-500">
-              {{ 'blogs.article.tags_label' | t }}
-            </p>
+          <div class="flex flex-col gap-3 rounded-[24px] border border-white/60 bg-white/80">
             <div class="flex flex-wrap gap-2">
               {% for tag in article.tags %}
                 <a
@@ -124,129 +119,6 @@
             </div>
           </div>
         {% endif %}
-
-        {% if blog.comments_enabled? %}
-          <div id="comments" class="flex flex-col gap-8 rounded-[28px] border border-white/60 bg-white/85 p-6 shadow-[0_30px_90px_rgba(15,23,42,0.08)] sm:p-10">
-            <div class="flex flex-col gap-2">
-              <div class="flex flex-wrap items-baseline justify-between gap-3">
-                <h2 class="text-2xl font-semibold text-neutral-900">
-                  {{ 'blogs.article.comments.title' | t }}
-                </h2>
-                {% if article.comments_count > 0 %}
-                  <span class="text-sm text-neutral-500">
-                    {{ article.comments_count }}
-                  </span>
-                {% endif %}
-              </div>
-              <p class="text-sm text-neutral-500">
-                {{ 'blogs.article.comments.moderation_notice' | t }}
-              </p>
-            </div>
-
-            {% paginate article.comments by 10 %}
-              {% if article.comments_count > 0 %}
-                <div class="space-y-4">
-                  {% for comment in article.comments %}
-                    {% assign comment_date = comment.created_at | time_tag: format: 'date' %}
-                    {% assign comment_date = comment_date | replace: '<time', '<time class="text-sm text-neutral-500"' %}
-                    <div class="rounded-3xl border border-neutral-200 bg-white/90 p-6 shadow-[0_20px_70px_rgba(15,23,42,0.08)]">
-                      <div class="flex flex-wrap items-center justify-between gap-3">
-                        <p class="text-base font-semibold text-neutral-900">
-                          {{ comment.author }}
-                        </p>
-                        {{ comment_date }}
-                      </div>
-                      <div class="mt-4 text-base leading-relaxed text-neutral-700">
-                        {{ comment.content }}
-                      </div>
-                    </div>
-                  {% endfor %}
-                </div>
-              {% else %}
-                <p class="text-sm text-neutral-500">
-                  {{ 'blogs.article.comments.empty' | t }}
-                </p>
-              {% endif %}
-
-              {% if paginate.pages > 1 %}
-                <div class="pt-4">
-                  {{ paginate | default_pagination: anchor: 'comments' }}
-                </div>
-              {% endif %}
-            {% endpaginate %}
-
-            <div class="rounded-3xl border border-neutral-200 bg-white/90 p-6 shadow-[0_20px_70px_rgba(15,23,42,0.08)]">
-              <h3 class="text-xl font-semibold text-neutral-900">
-                {{ 'blogs.article.comments.form_title' | t }}
-              </h3>
-
-              {% form 'new_comment', article, class: 'mt-6 flex flex-col gap-6' %}
-                {% if form.errors %}
-                  <div class="rounded-2xl border border-red-200 bg-red-50/90 p-4 text-sm text-red-900">
-                    {{ form.errors | default_errors }}
-                  </div>
-                {% elsif form.posted_successfully? %}
-                  <p class="rounded-2xl border border-emerald-200 bg-emerald-50/90 p-4 text-sm text-emerald-900">
-                    {{ 'blogs.article.comments.success' | t }}
-                  </p>
-                {% endif %}
-
-                <div class="grid gap-6 md:grid-cols-2">
-                  <div class="flex flex-col gap-2">
-                    <label for="CommentForm-author" class="text-xs font-semibold uppercase tracking-[0.4em] text-neutral-500">
-                      {{ 'blogs.article.comments.name_label' | t }}
-                    </label>
-                    <input
-                      id="CommentForm-author"
-                      class="w-full rounded-2xl border border-neutral-200 bg-white/80 px-4 py-3 text-base text-neutral-900 placeholder:text-neutral-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[var(--product-accent)] focus:ring-offset-2 focus:ring-offset-white"
-                      type="text"
-                      name="comment[author]"
-                      value="{{ form.author }}"
-                      autocomplete="name"
-                      required
-                    >
-                  </div>
-
-                  <div class="flex flex-col gap-2">
-                    <label for="CommentForm-email" class="text-xs font-semibold uppercase tracking-[0.4em] text-neutral-500">
-                      {{ 'blogs.article.comments.email_label' | t }}
-                    </label>
-                    <input
-                      id="CommentForm-email"
-                      class="w-full rounded-2xl border border-neutral-200 bg-white/80 px-4 py-3 text-base text-neutral-900 placeholder:text-neutral-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[var(--product-accent)] focus:ring-offset-2 focus:ring-offset-white"
-                      type="email"
-                      name="comment[email]"
-                      value="{{ form.email }}"
-                      autocomplete="email"
-                      required
-                    >
-                  </div>
-                </div>
-
-                <div class="flex flex-col gap-2">
-                  <label for="CommentForm-body" class="text-xs font-semibold uppercase tracking-[0.4em] text-neutral-500">
-                    {{ 'blogs.article.comments.body_label' | t }}
-                  </label>
-                  <textarea
-                    id="CommentForm-body"
-                    class="min-h-[160px] rounded-2xl border border-neutral-200 bg-white/80 px-4 py-3 text-base leading-relaxed text-neutral-900 placeholder:text-neutral-400 focus:border-transparent focus:outline-none focus:ring-2 focus:ring-[var(--product-accent)] focus:ring-offset-2 focus:ring-offset-white"
-                    name="comment[body]"
-                    required
-                  >{{- form.body -}}</textarea>
-                </div>
-
-                <div class="flex flex-wrap items-center gap-4">
-                  <button
-                    type="submit"
-                    class="inline-flex items-center justify-center rounded-full px-8 py-3 text-xs font-semibold uppercase tracking-[0.45em] text-[var(--product-button-text-color)] [background:var(--product-button-background)] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-[var(--product-accent)]"
-                  >
-                    {{ 'blogs.article.comments.submit' | t }}
-                  </button>
-                </div>
-              {% endform %}
-            </div>
-          </div>
-        {% endif %}
       </div>
     </article>
   </div>
@@ -254,33 +126,33 @@
 
 {%- comment -%} Article structured data {%- endcomment -%}
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "BlogPosting",
-  "headline": {{ article.title | json }},
-  "image": {%- if article.image -%}[{{ article.image | image_url: width: 1200 | json }}]{%- else -%}[]{%- endif -%},
-  "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
-  "dateModified": {{ article.updated_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
-  "author": {
-    "@type": "Person",
-    "name": {{ article.author | default: shop.name | json }}
-  },
-  "publisher": {
-    "@type": "Organization",
-    "name": {{ shop.name | json }},
-    {%- if shop.brand.logo -%}
-    "logo": {
-      "@type": "ImageObject",
-      "url": {{ shop.brand.logo | image_url: width: 600 | json }}
+  {
+    "@context": "https://schema.org",
+    "@type": "BlogPosting",
+    "headline": {{ article.title | json }},
+    "image": {%- if article.image -%}[{{ article.image | image_url: width: 1200 | json }}]{%- else -%}[]{%- endif -%},
+    "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+    "dateModified": {{ article.updated_at | date: '%Y-%m-%dT%H:%M:%S%z' | json }},
+    "author": {
+      "@type": "Person",
+      "name": {{ article.author | default: shop.name | json }}
+    },
+    "publisher": {
+      "@type": "Organization",
+      "name": {{ shop.name | json }},
+      {%- if shop.brand.logo -%}
+      "logo": {
+        "@type": "ImageObject",
+        "url": {{ shop.brand.logo | image_url: width: 600 | json }}
+      }
+      {%- endif -%}
+    },
+    "description": {{ article.excerpt | default: article.summary | default: article.title | strip_html | truncate: 160 | json }},
+    "mainEntityOfPage": {
+      "@type": "WebPage",
+      "@id": {{ shop.url | append: article.url | json }}
     }
-    {%- endif -%}
-  },
-  "description": {{ article.excerpt | default: article.summary | default: article.title | strip_html | truncate: 160 | json }},
-  "mainEntityOfPage": {
-    "@type": "WebPage",
-    "@id": {{ shop.url | append: article.url | json }}
   }
-}
 </script>
 
 {% stylesheet %}
