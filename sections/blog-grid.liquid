@@ -5,7 +5,14 @@
 
 <div class="blog-grid container">
   {% if section.settings.heading != blank %}
-    <h2 class="title-medium">{{ section.settings.heading | escape }}</h2>
+    <div class="blog-grid__header">
+      <h2 class="title-medium">{{ section.settings.heading | escape }}</h2>
+      {% if selected_blog != blank and selected_blog.url != blank and section.settings.show_view_all %}
+        <a href="{{ selected_blog.url }}" class="blog-grid__view-all-button">
+          {{ 'sections.blog_grid.view_all' | t }}
+        </a>
+      {% endif %}
+    </div>
     {% if section.settings.description != blank %}
       <p class="text-secondary pt-2">{{ section.settings.description | escape }}</p>
     {% endif %}
@@ -113,7 +120,7 @@
               }
             }, 250);
           },
-          { passive: true },
+          { passive: true }
         );
 
         updateUI();
@@ -159,6 +166,25 @@
 
   .blog-grid__heading {
     color: color-mix(in srgb, black 88%, transparent);
+  }
+
+  .blog-grid__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+  }
+
+  .blog-grid__view-all-button {
+    text-decoration: none;
+    font-weight: 600;
+    color: var(--color-foreground, #000);
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
+  }
+
+  .blog-grid__view-all-button:hover {
+    opacity: 0.7;
   }
 
   .blog-grid__carousel {
@@ -245,6 +271,11 @@
     .blog-grid {
       padding-top: 80px;
       padding-bottom: 80px;
+    }
+
+    .blog-grid__header {
+      flex-direction: column;
+      align-items: flex-start;
     }
 
     .blog-grid__carousel {

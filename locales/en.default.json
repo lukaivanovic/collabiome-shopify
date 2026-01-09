@@ -161,6 +161,9 @@
     },
     "footer": {
       "payment": "Accepted payment methods"
+    },
+    "blog_grid": {
+      "view_all": "View all"
     }
   }
 }

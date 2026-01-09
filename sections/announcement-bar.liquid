@@ -50,7 +50,9 @@
               <span class="announcement-bar__text text-center m-0">{{ block.settings.message }}</span>
             {% endif %}
             <span class="announcement-bar__cta flex items-center">
-              {{ 'icon-chevron-right.svg' | inline_asset_content }}
+              <span class="uppercase underline">
+                {{ block.settings.cta_label | default: 'Shop now' }}
+              </span>
             </span>
           </a>
         {% else %}
@@ -306,6 +308,13 @@
           "info": "Countdown target info",
           "placeholder": "2025-12-31T23:59:59Z",
           "visible_if": "{{ block.settings.enable_countdown == true }}"
+        },
+        {
+          "type": "text",
+          "id": "cta_label",
+          "label": "CTA label",
+          "default": "Shop now",
+          "info": "Text shown next to the announcement when a link is set"
         }
       ]
     }
