@@ -5,10 +5,17 @@
 
 <div class="blog-grid container">
   {% if section.settings.heading != blank %}
-    <h2 class="title-medium">{{ section.settings.heading | escape }}</h2>
+    <div class="blog-grid__header">
+      <div class="blog-grid__header-row">
+        <h2 class="title-medium blog-grid__heading">{{ section.settings.heading | escape }}</h2>
+        {% if section.settings.show_view_all %}
+          <a class="blog-grid__view-all" href="/blogs/clanci">{{ 'sections.blog_grid.view_all' | t }}</a>
+        {% endif %}
+      </div>
     {% if section.settings.description != blank %}
       <p class="text-secondary pt-2">{{ section.settings.description | escape }}</p>
     {% endif %}
+    </div>
   {% endif %}
 
   {% if selected_blog != blank and selected_blog.articles_count > 0 %}
@@ -159,6 +166,14 @@
 
   .blog-grid__heading {
     color: color-mix(in srgb, black 88%, transparent);
+  }
+
+  .blog-grid__header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    flex-wrap: wrap;
   }
 
   .blog-grid__carousel {
@@ -326,6 +341,17 @@
   .blog-grid__view-all {
     text-decoration: none;
     font-weight: 600;
+    color: var(--color-foreground, #000);
+    opacity: 0.9;
+    white-space: nowrap;
+  }
+  .blog-grid__view-all:hover {
+    text-decoration: underline;
+    opacity: 1;
+  }
+  .blog-grid__view-all:focus-visible {
+    outline: 2px solid currentColor;
+    outline-offset: 2px;
   }
   .blog-grid__empty {
     opacity: 0.7;
