@@ -176,15 +176,6 @@
                     "url": "shopify://products/complete-collagen-nocna-krema"
                   },
                   "blocks": {}
-                },
-                "mobile_menu_category_qLb4fp": {
-                  "type": "mobile-menu-category",
-                  "settings": {
-                    "title": "Svi proizvodi",
-                    "description": "Pretraži svu kozmetiku",
-                    "url": "shopify://collections/kozmetika"
-                  },
-                  "blocks": {}
                 }
               },
               "block_order": [
@@ -193,8 +184,7 @@
                 "mobile_menu_category_KBFLMW",
                 "mobile_menu_category_4bCDA6",
                 "mobile_menu_category_3rcH7d",
-                "mobile_menu_category_QffAKe",
-                "mobile_menu_category_qLb4fp"
+                "mobile_menu_category_QffAKe"
               ]
             }
           },
