@@ -84,6 +84,9 @@
     }
   },
   "sections": {
+    "blog_grid": {
+      "view_all": "View all"
+    },
     "testimonial_grid": {
       "play_video": "Play testimonial video",
       "pause_video": "Pause video",
