@@ -436,17 +436,13 @@ button:disabled:hover {
 }
 
 .product-theme-nutriage {
-  --product-bg: #dcede7;
+  --product-bg: linear-gradient(180deg, #dcf1d0 0%, #f3eddf 100%);
   --product-bg-secondary: #dcede7;
-  --product-accent: #273b20;
+  --product-accent: #2a4631;
   --product-accent-foreground: #f9f1f3;
-  --product-button-background: linear-gradient(
-    180deg,
-    #bffdf0 0%,
-    #fefee8 150%
-  );
-  --product-button-text-color: #273b20;
-  --annoucement-bar-bg: linear-gradient(var(--gradient-nutriage));
+  --product-button-background: #2a4631;
+  --product-button-text-color: #ecf4e1;
+  --annoucement-bar-bg: linear-gradient(180deg, #dcf1d0 0%, #f3eddf 100%);
 }
 
 .product-gradient-bg {
