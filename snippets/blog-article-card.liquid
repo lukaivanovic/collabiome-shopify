@@ -2,9 +2,10 @@
 {% assign show_author = include.show_author | default: false %}
 {% assign show_excerpt = include.show_excerpt | default: false %}
 {% assign excerpt_words = include.excerpt_words | default: 30 %}
+{% assign card_bg_class = include.card_bg_class | default: 'bg-white hover:bg-neutral-50' %}
 
 <a href="{{ article.url }}" class="group block h-full">
-  <article class="blog-card h-full flex flex-col bg-white hover:bg-neutral-50">
+  <article class="blog-card h-full flex flex-col {{ card_bg_class }}">
     <div class="blog-card__media overflow-hidden">
       {% if article.image %}
         {{
