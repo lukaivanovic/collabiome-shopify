@@ -1,7 +1,51 @@
 <footer class="pt-20">
-  <div class="container">
+  {% capture newsletter_content %}
+    <div class="relative z-10 h-full flex flex-col gap-6 justify-center items-start max-w-95">
+      <div class="flex flex-col gap-2">
+        <h4 class="text-2xl text-white uppercase font-semibold">
+          {{ section.settings.newsletter_title | default: 'Newsletter' }}
+        </h4>
+        {% if section.settings.newsletter_description != blank %}
+          <p class=" text-white/80 mt-2">
+            {{ section.settings.newsletter_description }}
+          </p>
+        {% endif %}
+      </div>
+      {% form 'customer', class: 'w-full' %}
+        <input type="hidden" name="contact[tags]" value="newsletter">
+        <div class="relative w-full">
+          <input
+            type="email"
+            name="contact[email]"
+            placeholder="Your email"
+            required
+            class="w-full pr-16 pl-4 py-3 rounded-full bg-black/60 backdrop-blur-2xl border border-black/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-primary"
+          >
+          <button
+            type="submit"
+            aria-label="Subscribe"
+            class="absolute top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-white text-black flex items-center justify-center transition-all duration-200 hover:bg-black hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-black/40 hover:shadow-md hover:scale-105"
+            style="right: 0.25rem;"
+          >
+            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition-colors">
+              <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </button>
+        </div>
+        {% if form.posted_successfully? %}
+          <p class="mt-2 text-green-500 text-sm">Thanks for subscribing!</p>
+        {% endif %}
+        {% if form.errors %}
+          <p class="mt-2 text-red-500 text-sm">{{ form.errors | default_errors }}</p>
+        {% endif %}
+      {% endform %}
+    </div>
+  {% endcapture %}
+
+  {%- comment -%} Mobile/tablet newsletter stays on top {%- endcomment -%}
+  <div class="container md:hidden">
     <div
-      class="px-4 min-h-92 flex items-end md:items-start md:min-h-auto md:px-12 rounded-3xl w-full py-8 relative overflow-hidden "
+      class="px-4 min-h-92 flex items-end md:items-start md:min-h-auto md:px-12 rounded-3xl w-full py-8 relative overflow-hidden"
       style="
         {% if section.settings.newsletter_bg_color != blank %}
           background-color: {{ section.settings.newsletter_bg_color }};
@@ -21,126 +65,114 @@
         </div>
       {% endif %}
 
-      <div class="relative z-10 h-full flex flex-col gap-6 justify-center items-start max-w-95">
-        <div class="flex flex-col gap-2">
-          <h4 class="text-2xl text-white uppercase font-semibold">
-            {{ section.settings.newsletter_title | default: 'Newsletter' }}
-          </h4>
-          {% if section.settings.newsletter_description != blank %}
-            <p class=" text-white/80 mt-2">
-              {{ section.settings.newsletter_description }}
-            </p>
-          {% endif %}
-        </div>
-        {% form 'customer', class: 'w-full' %}
-          <input type="hidden" name="contact[tags]" value="newsletter">
-          <div class="relative w-full">
-            <input
-              type="email"
-              name="contact[email]"
-              placeholder="Your email"
-              required
-              class="w-full pr-16 pl-4 py-3 rounded-full bg-black/60 backdrop-blur-2xl border border-black/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-primary"
-            >
-            <button
-              type="submit"
-              aria-label="Subscribe"
-              class="absolute top-1/2 -translate-y-1/2 h-10 w-10 rounded-full bg-white text-black flex items-center justify-center transition-all duration-200 hover:bg-black hover:text-white focus:outline-none focus-visible:ring-2 focus-visible:ring-white/80 focus-visible:ring-offset-2 focus-visible:ring-offset-black/40 hover:shadow-md hover:scale-105"
-              style="right: 0.25rem;"
-            >
-              <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-5 h-5 transition-colors">
-                <path d="M5 12H19M19 12L12 5M19 12L12 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-              </svg>
-            </button>
-          </div>
-          {% if form.posted_successfully? %}
-            <p class="mt-2 text-green-500 text-sm">Thanks for subscribing!</p>
-          {% endif %}
-          {% if form.errors %}
-            <p class="mt-2 text-red-500 text-sm">{{ form.errors | default_errors }}</p>
-          {% endif %}
-        {% endform %}
-      </div>
+      {{ newsletter_content }}
     </div>
   </div>
 
   <div class="container flex flex-col gap-16 md:gap-40 pt-24 pb-8">
-    <div class="flex flex-col md:flex-row gap-8 md:gap-16 items-start justify-between flex-wrap">
-      <div class="mr-20 md:mr-0">
-        <a href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}" class="[&>svg]:h-16 [&>svg]:w-auto">
-          {{ 'logo-full.svg' | inline_asset_content }}
-        </a>
-      </div>
+    <div class="flex flex-col md:flex-row md:flex-nowrap gap-8 md:gap-16 items-start justify-between flex-wrap">
+      <div class="flex flex-col md:flex-row gap-8 md:gap-16 items-start justify-between flex-wrap flex-grow">
+        <div class="mr-20 md:mr-0">
+          <a href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}" class="[&>svg]:h-16 [&>svg]:w-auto">
+            {{ 'logo-full.svg' | inline_asset_content }}
+          </a>
+        </div>
 
-      <div class="flex flex-row flex-grow gap-16 ">
-        <div>
-          {% if section.settings.menu1_title != blank %}
-            <h4 class="text-sm font-medium uppercase text-secondary">
-              {{ section.settings.menu1_title | escape }}
-            </h4>
+        <div class="flex flex-row flex-grow gap-16">
+          <div>
+            {% if section.settings.menu1_title != blank %}
+              <h4 class="text-sm font-medium uppercase text-secondary">
+                {{ section.settings.menu1_title | escape }}
+              </h4>
+            {% endif %}
+            {% if section.settings.menu1 and section.settings.menu1.links.size > 0 %}
+              <ul class="list-none p-0 m-0 flex flex-col gap-3 pt-4">
+                {% for link in section.settings.menu1.links %}
+                  <li>
+                    <a href="{{ link.url }}" class="no-underline text-foreground hover:text-primary">{{ link.title }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+          <div>
+            {% if section.settings.menu2_title != blank %}
+              <h4 class="text-sm font-medium uppercase text-secondary">
+                {{ section.settings.menu2_title | escape }}
+              </h4>
+            {% endif %}
+            {% if section.settings.menu2 and section.settings.menu2.links.size > 0 %}
+              <ul class="list-none p-0 m-0 flex flex-col gap-3 pt-4">
+                {% for link in section.settings.menu2.links %}
+                  <li>
+                    <a href="{{ link.url }}" class="no-underline text-foreground hover:text-primary">{{ link.title }}</a>
+                  </li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+        </div>
+
+        <div class="flex gap-4">
+          {% if section.settings.social_facebook != blank %}
+            <a
+              href="{{ section.settings.social_facebook }}"
+              aria-label="Facebook"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-foreground-secondary hover:text-foreground-default transition-colors"
+            >
+              {{ 'icon-facebook.svg' | inline_asset_content }}
+            </a>
           {% endif %}
-          {% if section.settings.menu1 and section.settings.menu1.links.size > 0 %}
-            <ul class="list-none p-0 m-0 flex flex-col gap-3 pt-4">
-              {% for link in section.settings.menu1.links %}
-                <li>
-                  <a href="{{ link.url }}" class="no-underline text-foreground hover:text-primary">{{ link.title }}</a>
-                </li>
-              {% endfor %}
-            </ul>
+          {% if section.settings.social_instagram != blank %}
+            <a
+              href="{{ section.settings.social_instagram }}"
+              aria-label="Instagram"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-foreground-secondary hover:text-foreground-default transition-colors"
+            >
+              {{ 'icon-instagram.svg' | inline_asset_content }}
+            </a>
+          {% endif %}
+          {% if section.settings.social_tiktok != blank %}
+            <a
+              href="{{ section.settings.social_tiktok }}"
+              aria-label="TikTok"
+              target="_blank"
+              rel="noopener noreferrer"
+              class="text-foreground-secondary hover:text-foreground-default transition-colors"
+            >
+              {{ 'icon-tiktok.svg' | inline_asset_content }}
+            </a>
           {% endif %}
         </div>
-        <div>
-          {% if section.settings.menu2_title != blank %}
-            <h4 class="text-sm font-medium uppercase text-secondary">
-              {{ section.settings.menu2_title | escape }}
-            </h4>
-          {% endif %}
-          {% if section.settings.menu2 and section.settings.menu2.links.size > 0 %}
-            <ul class="list-none p-0 m-0 flex flex-col gap-3 pt-4">
-              {% for link in section.settings.menu2.links %}
-                <li>
-                  <a href="{{ link.url }}" class="no-underline text-foreground hover:text-primary">{{ link.title }}</a>
-                </li>
-              {% endfor %}
-            </ul>
-          {% endif %}
-        </div>
       </div>
 
-      <div class="flex gap-4">
-        {% if section.settings.social_facebook != blank %}
-          <a
-            href="{{ section.settings.social_facebook }}"
-            aria-label="Facebook"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-foreground-secondary hover:text-foreground-default transition-colors"
-          >
-            {{ 'icon-facebook.svg' | inline_asset_content }}
-          </a>
+      {%- comment -%} Desktop newsletter moves to the right {%- endcomment -%}
+      <div
+        class="hidden md:flex footer-newsletter-card px-8 py-8 relative overflow-hidden"
+        style="
+          {% if section.settings.newsletter_bg_color != blank %}
+            background-color: {{ section.settings.newsletter_bg_color }};
+          {% endif %}
+        "
+      >
+        {% if section.settings.newsletter_bg_image != blank %}
+          <div class="absolute inset-0 opacity-100">
+            {{
+              section.settings.newsletter_bg_image
+              | image_url: width: 600
+              | image_tag:
+                alt: 'Newsletter background',
+                loading: 'lazy',
+                class: 'w-full h-full object-cover newsletter-image'
+            }}
+          </div>
         {% endif %}
-        {% if section.settings.social_instagram != blank %}
-          <a
-            href="{{ section.settings.social_instagram }}"
-            aria-label="Instagram"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-foreground-secondary hover:text-foreground-default transition-colors"
-          >
-            {{ 'icon-instagram.svg' | inline_asset_content }}
-          </a>
-        {% endif %}
-        {% if section.settings.social_tiktok != blank %}
-          <a
-            href="{{ section.settings.social_tiktok }}"
-            aria-label="TikTok"
-            target="_blank"
-            rel="noopener noreferrer"
-            class="text-foreground-secondary hover:text-foreground-default transition-colors"
-          >
-            {{ 'icon-tiktok.svg' | inline_asset_content }}
-          </a>
-        {% endif %}
+
+        {{ newsletter_content }}
       </div>
     </div>
 
@@ -201,6 +233,17 @@
         hsla(0, 0%, 100%, 0) 86%,
         hsla(0, 0%, 100%, 0) 100%
       );
+    }
+  }
+
+  /* Desktop footer newsletter card: right aligned + square shape */
+  @media (min-width: 769px) {
+    .footer-newsletter-card {
+      width: 360px;
+      height: 360px;
+      border-radius: 0;
+      flex: 0 0 auto;
+      align-items: flex-start;
     }
   }
 {% endstyle %}
