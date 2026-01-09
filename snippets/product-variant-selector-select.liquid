@@ -16,11 +16,11 @@
 {% unless product.has_only_default_variant %}
   <div class="flex flex-col gap-4">
     {% for option in product.options_with_values %}
-      <div class="w-full flex items-center justify-start gap-2 border-t border-neutral-100 pt-2">
+      <div class="w-full flex items-center justify-start gap-2 h-7">
         <select
           id="product-options-select-{{ option.position }}"
           name="options[{{ option.name }}]"
-          class="ml-px py-1 rounded-md text-sm! bg-white text-primary font-medium! focus:outline-none"
+          class="ml-px rounded-md text-sm! bg-white text-primary font-medium! focus:outline-none"
           data-option-input
           data-option-position="{{ option.position }}"
         >

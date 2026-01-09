@@ -187,6 +187,12 @@ customElements.define("cart-drawer-items", CartDrawerItems);
 function updateCartCountBadge(itemCount) {
   const cartBubbles = document.querySelectorAll("#cart-icon-bubble");
   
+  if (cartBubbles.length === 0) {
+    // If cart bubbles don't exist yet, try again after a short delay
+    setTimeout(() => updateCartCountBadge(itemCount), 100);
+    return;
+  }
+  
   cartBubbles.forEach((cartBubble) => {
     let badge = cartBubble.querySelector(".cart-count-badge");
     
@@ -211,10 +217,24 @@ function updateCartCountBadge(itemCount) {
 }
 
 // Subscribe to cart updates to update the badge
-if (typeof subscribe !== "undefined" && typeof PUB_SUB_EVENTS !== "undefined") {
+function setupCartBadgeSubscription() {
+  if (typeof subscribe === "undefined" || typeof PUB_SUB_EVENTS === "undefined") {
+    // Retry if dependencies aren't loaded yet
+    setTimeout(setupCartBadgeSubscription, 50);
+    return;
+  }
+  
   subscribe(PUB_SUB_EVENTS.cartUpdate, (data) => {
     if (data && data.cartData && typeof data.cartData.item_count !== "undefined") {
       updateCartCountBadge(data.cartData.item_count);
     }
   });
+}
+
+// Set up subscription when DOM is ready
+if (document.readyState === "loading") {
+  document.addEventListener("DOMContentLoaded", setupCartBadgeSubscription);
+} else {
+  // DOM is already ready
+  setupCartBadgeSubscription();
 }

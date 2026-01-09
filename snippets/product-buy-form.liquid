@@ -89,14 +89,18 @@
       {% endif %}
       data-variant-input
     >
-    <div class="flex flex-col gap-4">
-      {% unless product.has_only_default_variant %}
-        {% if variant_selector_type == 'select' %}
-          {% render 'product-variant-selector-select', product: product %}
-        {% else %}
+    <div class="flex flex-col justify-end gap-4 ">
+      {% if variant_selector_type == 'select' %}
+        <div class=" h-7">
+          {% unless product.has_only_default_variant %}
+            {% render 'product-variant-selector-select', product: product %}
+          {% endunless %}
+        </div>
+      {% else %}
+        {% unless product.has_only_default_variant %}
           {% render 'product-variant-selector-horizontal', product: product %}
-        {% endif %}
-      {% endunless %}
+        {% endunless %}
+      {% endif %}
 
       <div class="product-form__buttons">
         <button
@@ -123,11 +127,11 @@
             {%- else -%}
               {{ 'products.product.add_to_cart' | t }}
               (
-                {%- if selected_variant.compare_at_price > selected_variant.price -%}
-                  <s>{{ selected_variant.compare_at_price | money_with_currency }}</s>
-                  {{ ' ' }}
-                {%- endif -%}
-                {{ selected_variant.price | money_with_currency }}
+              {%- if selected_variant.compare_at_price > selected_variant.price -%}
+                <s>{{ selected_variant.compare_at_price | money_with_currency }}</s>
+                {{ ' ' }}
+              {%- endif -%}
+              {{ selected_variant.price | money_with_currency }}
               )
             {%- endif -%}
           </span>
