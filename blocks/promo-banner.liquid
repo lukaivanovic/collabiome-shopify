@@ -1,0 +1,98 @@
+{% doc %}
+  Promo Banner Block
+
+  Renders a promotional banner card with image, title, description, and optional link.
+  Can be used as a nested block in mega menus and other sections.
+
+  @example
+  {% content_for 'block', type: 'promo-banner', id: 'banner-1' %}
+{% enddoc %}
+
+{% liquid
+  assign url = block.settings.url | default: ''
+  assign title = block.settings.title | default: ''
+  assign description = block.settings.description | default: ''
+  assign overlay_color = block.settings.overlay_color | default: '#000000'
+  assign overlay_opacity = block.settings.overlay_opacity | default: 40
+  assign media = block.settings.image | default: blank
+
+  # If product is selected, use product data
+  if block.settings.product != blank
+    assign url = block.settings.product.url
+    assign title = block.settings.product.title
+    assign description = block.settings.product.description
+    assign media = block.settings.product.featured_media
+  endif
+
+  unless url != blank and title != blank
+    break
+  endunless
+%}
+
+<div {{ block.shopify_attributes }}>
+  {% render 'promo-banner',
+    url: url,
+    title: title,
+    description: description,
+    media: media,
+    overlay_color: overlay_color,
+    overlay_opacity: overlay_opacity,
+    class: ''
+  %}
+</div>
+
+{% schema %}
+{
+  "name": "Promo banner",
+  "settings": [
+    {
+      "type": "product",
+      "id": "product",
+      "label": "Product",
+      "info": "Optional: Select a product to use its details, or manually enter details below"
+    },
+    {
+      "type": "url",
+      "id": "url",
+      "label": "Link URL"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Title"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "Image",
+      "info": "Optional: If a product is selected, this will be overridden by the product image"
+    },
+    {
+      "type": "color",
+      "id": "overlay_color",
+      "label": "Overlay color",
+      "default": "#000000"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "label": "Overlay opacity",
+      "min": 0,
+      "max": 100,
+      "step": 5,
+      "unit": "%",
+      "default": 40
+    }
+  ],
+  "presets": [
+    {
+      "name": "Promo banner"
+    }
+  ]
+}
+{% endschema %}
