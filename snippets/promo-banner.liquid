@@ -1,0 +1,68 @@
+{% doc %}
+  Promo Banner
+
+  Renders a promotional banner card with image, title, description, and optional link.
+
+  @param {string} url - Link URL (required)
+  @param {string} title - Banner title (required)
+  @param {string} description - Banner description text (optional)
+  @param {image} media - Background image object (optional)
+  @param {string} overlay_color - Overlay color in hex format (default: '#000000')
+  @param {number} overlay_opacity - Overlay opacity as percentage 0-100 (default: 40)
+  @param {string} class - Additional CSS classes (optional)
+{% enddoc %}
+
+{% liquid
+  assign url = url | default: ''
+  assign title = title | default: ''
+  assign description = description | default: ''
+  assign media = media | default: blank
+  assign overlay_color = overlay_color | default: '#000000'
+  assign overlay_opacity = overlay_opacity | default: 40
+  assign title_tag = title_tag | default: 'h3'
+  assign class = class | default: ''
+
+  unless url != blank and title != blank
+    break
+  endunless
+%}
+
+<a
+  href="{{ url }}"
+  class="relative flex items-end overflow-hidden bg-black text-white rounded-xl aspect-square px-3 py-3 flex-1 {{ class }}"
+>
+  <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+    {% if media != blank %}
+      {{
+        media
+        | image_url: width: 800
+        | image_tag: loading: 'lazy', sizes: '100vw', alt: title, class: 'absolute inset-0 w-full h-full object-cover'
+      }}
+    {% else %}
+      <div class="w-full h-full bg-gradient-to-r from-black/60 to-black/30"></div>
+    {% endif %}
+    <div
+      class="absolute inset-0 pointer-events-none"
+      style="background: {{ overlay_color }}; opacity: {{ overlay_opacity | divided_by: 100.0 }};"
+    ></div>
+  </div>
+
+  <div class="relative z-10 w-full flex justify-between gap-3">
+    <div>
+      <{{ title_tag }} class="font-semibold leading-snug text-white">
+        {{ title | escape }}
+      </{{ title_tag }}>
+      {% if description != blank %}
+        {% liquid
+          assign description_text = description | strip_html | truncate: 80
+        %}
+        <p class="text-xs text-white/70 mt-1">
+          {{ description_text }}
+        </p>
+      {% endif %}
+    </div>
+    <div class="flex items-center text-white [&>svg]:w-5 [&>svg]:h-5">
+      {{ 'icon-chevron-right.svg' | inline_asset_content }}
+    </div>
+  </div>
+</a>

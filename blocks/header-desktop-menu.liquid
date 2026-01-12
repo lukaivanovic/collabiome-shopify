@@ -1,0 +1,165 @@
+{% doc %}
+  Desktop Navigation Menu
+
+  Renders the desktop navigation with mega menu panels.
+
+  @param {object} shop_menu - Shop navigation menu (required)
+  @param {object} marketing_menu - Marketing/utility menu (optional)
+  @param {object} cosmetics_menu - Cosmetics mega menu (optional)
+  @param {object} supplements_menu - Supplements mega menu (optional)
+
+  @example
+  {% content_for 'block',
+    type: 'header-desktop-menu',
+    id: 'header-desktop-menu',
+    shop_menu: section.settings.shop_menu,
+    marketing_menu: section.settings.marketing_menu,
+    cosmetics_menu: section.settings.cosmetics_menu,
+    supplements_menu: section.settings.supplements_menu
+  %}
+{% enddoc %}
+
+{% liquid
+  assign shop_menu = shop_menu | default: empty
+  assign marketing_menu = marketing_menu | default: empty
+  assign cosmetics_menu = cosmetics_menu | default: empty
+  assign supplements_menu = supplements_menu | default: empty
+%}
+
+<mega-menu
+  class="bg-white border-b border-black/12 h-16"
+  role="navigation"
+  data-mega-menu-root
+  {{ block.shopify_attributes }}
+>
+  <div class="container grid grid-cols-[1fr_auto_1fr] items-center justify-center py-2 px-3 relative h-16">
+    <div class="flex gap-2" data-desktop-menu data-mega-menu-triggers>
+      {% if shop_menu and shop_menu.links.size > 0 %}
+        {% for link in shop_menu.links %}
+          <a
+            href="{{ link.url }}"
+            class="block relative py-1 px-3 no-underline text-primary hover:bg-neutral-100 rounded-full"
+            {% if link.type == 'collection_link' %}
+              data-mega-menu-trigger
+              data-collection-handle="{{ link.object.handle }}"
+              aria-haspopup="true"
+              aria-expanded="false"
+            {% endif %}
+          >
+            {{ link.title }}
+          </a>
+        {% endfor %}
+      {% endif %}
+    </div>
+
+    <a href="{{ routes.root_url }}" aria-label="{{ shop.name | escape }}" class="[&>svg]:h-10 [&>svg]:w-auto">
+      {{ 'logo-full.svg' | inline_asset_content }}
+    </a>
+
+    <div class="flex items-center gap-2 justify-end">
+      {% if marketing_menu and marketing_menu.links.size > 0 %}
+        {% for link in marketing_menu.links %}
+          <a
+            href="{{ link.url }}"
+            class="block relative py-1 px-3 no-underline text-primary hover:bg-neutral-100 rounded-full"
+          >
+            {{ link.title }}
+          </a>
+        {% endfor %}
+      {% endif %}
+
+      {% render 'header-customer-avatar' %}
+      <a
+        href="{{ routes.cart_url }}"
+        aria-label="Cart"
+        aria-haspopup="drawer"
+        id="cart-icon-bubble"
+        class="relative flex items-center justify-center size-9 [&>svg]:size-6 rounded-full hover:bg-neutral-100"
+      >
+        {{ 'icon-cart.svg' | inline_asset_content }}
+        {% if cart.item_count > 0 %}
+          <span
+            class="cart-count-badge absolute -top-1 -right-1 flex items-center justify-center min-w-[18px] h-[18px] px-1.5 text-xs font-medium text-[var(--product-accent-foreground)] bg-[var(--product-accent)] rounded-full"
+            aria-label="{{ cart.item_count }} items in cart"
+          >
+            {{ cart.item_count }}
+          </span>
+        {% endif %}
+      </a>
+    </div>
+  </div>
+
+  <div data-mega-menu-panels>
+    {% content_for 'block', type: 'header-mega-menu-cosmetics', id: 'mega-menu-cosmetics' %}
+
+    {% content_for 'block', type: 'header-mega-menu-supplements', id: 'mega-menu-supplements' %}
+  </div>
+</mega-menu>
+
+{% stylesheet %}
+  [data-mega-menu-root] {
+    position: relative;
+  }
+
+  .mega-menu-panel {
+    z-index: 9999;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: opacity 200ms ease, transform 220ms ease;
+  }
+
+  .mega-menu-panel[data-state='open'] {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .mega-menu-card {
+    width: 100%;
+    transition: box-shadow 200ms ease;
+  }
+
+  .mega-menu-card:hover {
+    box-shadow: 0 18px 40px -18px rgba(0, 0, 0, 0.25);
+  }
+
+  [data-mega-menu-trigger].is-active {
+    background-color: rgba(0, 0, 0, 0.04);
+  }
+
+  [data-mega-menu-trigger]:hover {
+    text-decoration: none;
+  }
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Desktop menu",
+  "settings": [
+    {
+      "type": "link_list",
+      "id": "shop_menu",
+      "label": "Shop menu"
+    },
+    {
+      "type": "link_list",
+      "id": "marketing_menu",
+      "label": "Marketing menu"
+    },
+    {
+      "type": "link_list",
+      "id": "cosmetics_menu",
+      "label": "Cosmetics mega menu"
+    },
+    {
+      "type": "link_list",
+      "id": "supplements_menu",
+      "label": "Supplements mega menu"
+    }
+  ],
+  "presets": [
+    {
+      "name": "Desktop menu"
+    }
+  ]
+}
+{% endschema %}

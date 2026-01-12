@@ -2,6 +2,9 @@
   Header Mega Menu - Cosmetics
 
   Renders a custom mega menu panel for the cosmetics collection with hardcoded filter links.
+
+  @example
+  {% content_for 'block', type: 'header-mega-menu-cosmetics', id: 'mega-menu-cosmetics' %}
 {% enddoc %}
 
 {% liquid
@@ -28,6 +31,7 @@
   class="mega-menu-panel pointer-events-none absolute left-0 top-[calc(100%-16px)] w-full aria-[hidden=false]:pointer-events-auto"
   data-mega-menu-panel="{{ cosmetics_collection.handle }}"
   aria-hidden="true"
+  {{ block.shopify_attributes }}
 >
   <div class="container py-3">
     <div
@@ -284,3 +288,10 @@
     </div>
   </div>
 </div>
+
+{% schema %}
+{
+  "name": "Mega menu - Cosmetics",
+  "settings": []
+}
+{% endschema %}

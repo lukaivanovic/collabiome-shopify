@@ -1,0 +1,173 @@
+{% doc %}
+  Header Mega Menu - Supplements
+
+  Renders a custom mega menu panel for the supplements collection.
+
+  @example
+  {% content_for 'block', type: 'header-mega-menu-supplements', id: 'mega-menu-supplements' %}
+{% enddoc %}
+
+{% liquid
+  # Prefer explicit supplements collection handles, fall back if needed
+  assign supplements_collection = collections['dodaci-prehrani'] | default: collections.supplements
+
+  # Use featured_products metafield when available, otherwise fall back to collection products
+  assign featured_products = blank
+
+  if supplements_collection.metafields.custom and supplements_collection.metafields.custom.featured_products
+    assign featured_products = supplements_collection.metafields.custom.featured_products.value
+  endif
+
+  if featured_products == blank
+    assign featured_products = supplements_collection.products
+  endif
+
+  unless supplements_collection and supplements_collection != empty
+    break
+  endunless
+%}
+
+<div
+  class="mega-menu-panel pointer-events-none absolute left-0 top-[calc(100%-16px)] w-full aria-[hidden=false]:pointer-events-auto"
+  data-mega-menu-panel="{{ supplements_collection.handle }}"
+  aria-hidden="true"
+  {{ block.shopify_attributes }}
+>
+  <div class="container py-3">
+    <div
+      class="mega-menu-card rounded-2xl border border-black/12 bg-[var(--color-background-default)]"
+      data-mega-menu-card
+    >
+      <div class="flex flex-row gap-3 p-8">
+        {% for product in featured_products limit: 3 %}
+          <a
+            href="{{ product.url }}"
+            class="group relative flex items-end overflow-hidden bg-black text-white rounded-xl aspect-square px-3 py-3 flex-1"
+          >
+            <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+              {% if product.featured_media %}
+                {{
+                  product.featured_media
+                  | image_url: width: 800
+                  | image_tag:
+                    loading: 'lazy',
+                    sizes: '100vw',
+                    alt: product.title,
+                    class: 'absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-105'
+                }}
+              {% else %}
+                <div class="w-full h-full bg-gradient-to-r from-black/60 to-black/30"></div>
+              {% endif %}
+              <div
+                class="absolute inset-0 pointer-events-none"
+                style="background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 60%);"
+              ></div>
+            </div>
+
+            <div class="relative z-10 w-full flex justify-between gap-3">
+              <div>
+                <h3 class="text-lg font-medium leading-snug text-white">
+                  {{ product.title | escape }}
+                </h3>
+                {% if product.description != blank %}
+                  {% liquid
+                    assign product_description = product.description | strip_html | truncate: 80
+                  %}
+                  <p class="text-sm text-white/80 mt-1">
+                    {{ product_description }}
+                  </p>
+                {% endif %}
+              </div>
+              <div class="flex items-center text-white [&>svg]:w-5 [&>svg]:h-5">
+                {{ 'icon-chevron-right.svg' | inline_asset_content }}
+              </div>
+            </div>
+          </a>
+        {% endfor %}
+
+        {% comment %} Quiz Banner Card {% endcomment %}
+        {% liquid
+          # Use global theme settings
+          assign banner_title = settings.quiz_banner_title
+          assign banner_description = settings.quiz_banner_description
+          assign banner_image = settings.quiz_banner_image
+          assign banner_overlay_color = settings.quiz_banner_overlay_color | default: '#000000'
+          assign banner_overlay_opacity = settings.quiz_banner_overlay_opacity | default: 30
+          assign banner_link = settings.quiz_banner_link
+          assign banner_link_text = settings.quiz_banner_link_text | default: 'See our recommendations'
+
+          # Check if banner has content
+          assign banner_has_content = false
+          if banner_title != blank
+            assign banner_has_content = true
+          elsif banner_description != blank
+            assign banner_has_content = true
+          endif
+        %}
+        {% if banner_has_content %}
+          {% if banner_link != blank %}
+            <a
+              href="{{ banner_link }}"
+              class="group relative flex items-end overflow-hidden bg-black text-white rounded-xl aspect-square px-3 py-3 flex-1"
+            >
+          {% else %}
+            <div
+              class="group relative flex items-end overflow-hidden bg-black text-white rounded-xl aspect-square px-3 py-3 flex-1"
+            >
+          {% endif %}
+          <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+            {% if banner_image != blank %}
+              {{
+                banner_image
+                | image_url: width: 800
+                | image_tag:
+                  loading: 'lazy',
+                  sizes: '100vw',
+                  alt: banner_title,
+                  class: 'absolute inset-0 w-full h-full object-cover transition-transform duration-300 ease-out group-hover:scale-105'
+              }}
+            {% else %}
+              <div class="w-full h-full bg-gradient-to-r from-black/60 to-black/30"></div>
+            {% endif %}
+            <div
+              class="absolute inset-0 pointer-events-none"
+              style="background: linear-gradient(to top, {{ banner_overlay_color }} 0%, transparent 60%); opacity: {{ banner_overlay_opacity | divided_by: 100.0 }};"
+            ></div>
+          </div>
+
+          <div class="relative z-10 w-full flex justify-between gap-3">
+            <div>
+              {% if banner_title != blank %}
+                <h2 class="font-semibold leading-snug">
+                  {{ banner_title | escape }}
+                </h2>
+              {% endif %}
+              {% if banner_description != blank %}
+                <p class="text-xs text-white/50">
+                  {{ banner_description }}
+                </p>
+              {% endif %}
+            </div>
+            {% if banner_link != blank %}
+              <div class="flex items-center text-white [&>svg]:w-5 [&>svg]:h-5">
+                {{ 'icon-chevron-right.svg' | inline_asset_content }}
+              </div>
+            {% endif %}
+          </div>
+          {% if banner_link != blank %}
+            </a>
+          {% else %}
+            </div>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "Mega menu - Supplements",
+  "settings": []
+}
+{% endschema %}

@@ -1,5 +1,7 @@
 <header class="hidden md:block bg-white z-99 border-b border-black/8 h-16 ">
-  {% render 'header-desktop-nav',
+  {% content_for 'block',
+    type: 'header-desktop-menu',
+    id: 'header-desktop-menu',
     shop_menu: section.settings.shop_menu,
     marketing_menu: section.settings.marketing_menu,
     cosmetics_menu: section.settings.cosmetics_menu,
