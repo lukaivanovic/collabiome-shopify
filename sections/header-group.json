@@ -20,7 +20,8 @@
             "message": "Free shipping on orders over $50",
             "link_url": "shopify://collections/all",
             "enable_countdown": false,
-            "countdown_target": ""
+            "countdown_target": "",
+            "cta_label": "Shop now"
           }
         },
         "announcement_bBJARR": {
@@ -29,7 +30,8 @@
             "message": "Hello world",
             "link_url": "",
             "enable_countdown": false,
-            "countdown_target": ""
+            "countdown_target": "",
+            "cta_label": "Shop now"
           }
         },
         "announcement_hrbXet": {
@@ -38,7 +40,8 @@
             "message": "Hello world",
             "link_url": "",
             "enable_countdown": true,
-            "countdown_target": "2011-10-05T14:48:00.000Z"
+            "countdown_target": "2011-10-05T14:48:00.000Z",
+            "cta_label": "Shop now"
           }
         }
       },
@@ -55,6 +58,64 @@
     "header": {
       "type": "header",
       "blocks": {
+        "header-desktop-menu": {
+          "type": "header-desktop-menu",
+          "static": true,
+          "settings": {
+            "shop_menu": "",
+            "marketing_menu": "",
+            "cosmetics_menu": "",
+            "supplements_menu": ""
+          },
+          "blocks": {
+            "mega-menu-cosmetics": {
+              "type": "header-mega-menu-cosmetics",
+              "static": true,
+              "settings": {},
+              "blocks": {
+                "promo_banner_HmEWad": {
+                  "type": "promo-banner",
+                  "name": "Promo banner",
+                  "settings": {
+                    "product": "",
+                    "url": "shopify://products/recupera-cooling-gel",
+                    "title": "Recupera Cooling Gel",
+                    "description": "",
+                    "image": "shopify://shop_images/2_1e81687c-742f-42d3-9f89-09720c383f10.png",
+                    "overlay_color": "#000000",
+                    "overlay_opacity": 40
+                  },
+                  "blocks": {}
+                },
+                "promo_banner_3z3GPm": {
+                  "type": "promo-banner",
+                  "name": "Promo banner",
+                  "settings": {
+                    "product": "",
+                    "url": "shopify://collections/kozmetika",
+                    "title": "Poklon paketi",
+                    "description": "",
+                    "image": "shopify://shop_images/Puna_rutina_collabiome_ff7f6c4d-6f04-4766-9eea-1318f7d8ab0c.png",
+                    "overlay_color": "#000000",
+                    "overlay_opacity": 40
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "promo_banner_HmEWad",
+                "promo_banner_3z3GPm"
+              ]
+            },
+            "mega-menu-supplements": {
+              "type": "header-mega-menu-supplements",
+              "static": true,
+              "settings": {},
+              "blocks": {}
+            }
+          },
+          "block_order": []
+        },
         "header-mobile-menu": {
           "type": "header-mobile-menu",
           "static": true,
