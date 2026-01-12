@@ -21,28 +21,16 @@
         <div class="blog-card__placeholder" aria-hidden="true"></div>
       {% endif %}
     </div>
-    <div class="flex flex-1 flex-col gap-3 p-6">
-      {% if show_date and article.published_at %}
-        <div class="text-xs font-medium uppercase tracking-[0.4em] text-indigo-500">
-          {{ article.published_at | date: '%b %d, %Y' }}
-        </div>
-      {% endif %}
+    <div class="flex flex-1 flex-row justify-between items-center gap-1 p-6">
+      <div>
+        <h3 class="blog-card__title h-[2lh] line-clamp-2 text-lg font-medium">
+          {{ article.title | escape }}
+        </h3>
+      </div>
 
-      <h3 class="blog-card__title h-[2lh] line-clamp-2 text-lg font-medium">
-        {{ article.title | escape }}
-      </h3>
-
-      {% if show_author and article.author %}
-        <p class="text-sm text-gray-500">
-          {{ article.author | escape }}
-        </p>
-      {% endif %}
-
-      {% if show_excerpt %}
-        <p class="text-sm text-slate-600 leading-relaxed">
-          {{ article.excerpt | strip_html | truncatewords: excerpt_words }}
-        </p>
-      {% endif %}
+      <div class="text-neutral-400 [&>svg]:w-6 [&>svg]:h-6">
+        {{ 'icon-chevron-right.svg' | inline_asset_content }}
+      </div>
     </div>
   </article>
 </a>

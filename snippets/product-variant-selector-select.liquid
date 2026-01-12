@@ -16,13 +16,22 @@
 {% unless product.has_only_default_variant %}
   <div class="flex flex-col gap-4">
     {% for option in product.options_with_values %}
-      <div class="w-full flex items-center justify-start gap-2 h-7">
+      <div
+        class="relative w-full flex items-center justify-start gap-2 h-7"
+        data-variant-select-root
+        data-option-position="{{ option.position }}"
+      >
+        {%- comment -%}
+          Native select is kept (hidden) so the existing JS in assets/product-form.js
+          can continue to read values and handle variant changes.
+        {%- endcomment -%}
         <select
           id="product-options-select-{{ option.position }}"
           name="options[{{ option.name }}]"
-          class="ml-px rounded-md text-sm! bg-white text-primary font-medium! focus:outline-none"
+          class="hidden"
           data-option-input
           data-option-position="{{ option.position }}"
+          data-variant-select-input
         >
           {% for value in option.values %}
             {% liquid
@@ -74,6 +83,87 @@
             </option>
           {% endfor %}
         </select>
+
+        <button
+          type="button"
+          class="inline-flex w-full items-center justify-center rounded-full  hover:bg-neutral-100 bg-white px-4 text-sm font-medium text-primary h-8 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 focus-visible:ring-primary"
+          data-variant-select-button
+          aria-haspopup="listbox"
+          aria-expanded="false"
+        >
+          <span class="truncate" data-variant-select-label>
+            {% if option.selected_value %}
+              {{ option.selected_value }}
+            {% else %}
+              {{ 'Odaberi paket' }}
+            {% endif %}
+          </span>
+          <span
+            class="ml-1 flex items-center justify-center shrink-0 [&>svg]:w-4 [&>svg]:h-4 text-neutral-400"
+            aria-hidden="true"
+          >
+            {{ 'icon-chevron-down.svg' | inline_asset_content }}
+          </span>
+        </button>
+
+        <div
+          class="absolute left-1/2 -translate-x-1/2 bottom-8 min-w-75 mb-1 z-10 w-full rounded-md border border-gray-200 bg-white shadow-md hidden"
+          data-variant-select-panel
+          role="listbox"
+        >
+          {% for value in option.values %}
+            {% liquid
+              # Reuse the discount logic from above loop, but we need it again
+              assign matching_variant = null
+              assign discount_variant = null
+              assign discount_text = ''
+              assign option_index = option.position | minus: 1
+
+              for variant in product.variants
+                if variant.options[option_index] == value
+                  if matching_variant == null
+                    assign matching_variant = variant
+                  endif
+
+                  if variant.compare_at_price > variant.price
+                    if discount_variant == null
+                      assign discount_variant = variant
+                    endif
+                  endif
+                endif
+              endfor
+
+              if discount_variant != null
+                assign matching_variant = discount_variant
+              endif
+
+              if matching_variant != null and matching_variant.compare_at_price > matching_variant.price
+                assign compare_at_price = matching_variant.compare_at_price
+                assign current_price = matching_variant.price
+                assign savings = compare_at_price | minus: current_price
+                assign savings_times_100 = savings | times: 100
+                assign savings_percent = savings_times_100 | divided_by: compare_at_price | round
+                assign discount_text = '-' | append: savings_percent | append: '%'
+              endif
+            %}
+            <button
+              type="button"
+              class="flex w-full items-center justify-between px-3 py-1.5 text-sm text-primary hover:bg-gray-50"
+              role="option"
+              data-value="{{ value }}"
+              data-variant-select-option
+              aria-selected="{% if option.selected_value == value %}true{% else %}false{% endif %}"
+            >
+              <span class="truncate font-medium">{{ value }}</span>
+              {% if discount_text != '' %}
+                <span class="ml-2 text-[10px] font-medium px-1.5 py-0.5 tabular-nums rounded-full bg-[var(--product-accent)] text-[var(--product-button-text-color)] whitespace-nowrap">
+                  {{ discount_text }}
+                </span>
+              {% endif %}
+            </button>
+          {% endfor %}
+        </div>
+
         <span
           class="hidden text-xs font-medium px-1.5 py-0.5 tabular-nums rounded-full bg-[var(--product-accent)] text-[var(--product-button-text-color)] whitespace-nowrap"
           data-variant-badge

@@ -5,17 +5,23 @@
 
 <div class="blog-grid container">
   {% if section.settings.heading != blank %}
-    <div class="blog-grid__header">
-      <h2 class="title-medium">{{ section.settings.heading | escape }}</h2>
+    <div class="blog-grid__header flex items-center justify-between gap-4">
+      <div>
+        <h2 class="title-medium">{{ section.settings.heading | escape }}</h2>
+        {% if section.settings.description != blank %}
+          <p class="text-secondary pt-2">{{ section.settings.description | escape }}</p>
+        {% endif %}
+      </div>
+
       {% if selected_blog != blank and selected_blog.url != blank and section.settings.show_view_all %}
-        <a href="{{ selected_blog.url }}" class="blog-grid__view-all-button">
+        <a
+          href="{{ selected_blog.url }}"
+          class="bg-white border border-black/12 rounded-full px-4 py-2 text-sm font-medium"
+        >
           {{ 'sections.blog_grid.view_all' | t }}
         </a>
       {% endif %}
     </div>
-    {% if section.settings.description != blank %}
-      <p class="text-secondary pt-2">{{ section.settings.description | escape }}</p>
-    {% endif %}
   {% endif %}
 
   {% if selected_blog != blank and selected_blog.articles_count > 0 %}
@@ -29,7 +35,7 @@
       </div>
 
       <button
-        class="embla__prev blog-grid__nav blog-grid__nav--prev"
+        class="embla__prev blog-grid__nav blog-grid__nav--prev -translate-x-4"
         aria-label="Previous article"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -38,7 +44,7 @@
       </button>
 
       <button
-        class="embla__next blog-grid__nav blog-grid__nav--next"
+        class="embla__next blog-grid__nav blog-grid__nav--next translate-x-4"
         aria-label="Next article"
       >
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -213,12 +219,13 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 24px;
-    height: 24px;
+    width: 32px;
+    height: 32px;
     border: none;
     border-radius: 50%;
-    background: #000;
-    color: #fff;
+    background: var(--color-neutral-200);
+    border: 1px solid var(--color-neutral-300);
+    color: var(--color-neutral-500);
     cursor: pointer;
     transition: all 0.2s ease;
     transform: translateY(-50%);

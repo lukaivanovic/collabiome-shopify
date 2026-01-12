@@ -89,20 +89,14 @@
       {% endif %}
       data-variant-input
     >
-    <div class="flex flex-col justify-end gap-4 ">
-      {% if variant_selector_type == 'select' %}
-        <div class=" h-7">
-          {% unless product.has_only_default_variant %}
-            {% render 'product-variant-selector-select', product: product %}
-          {% endunless %}
-        </div>
-      {% else %}
+    <div class="flex flex-col items-center justify-end gap-2 ">
+      {% if variant_selector_type == 'horizontal' %}
         {% unless product.has_only_default_variant %}
           {% render 'product-variant-selector-horizontal', product: product %}
         {% endunless %}
       {% endif %}
 
-      <div class="product-form__buttons">
+      <div class="product-form__buttons w-full">
         <button
           id="ProductSubmitButton-{{ section_id_value }}"
           type="submit"
@@ -140,6 +134,14 @@
           {{ form | payment_button }}
         {%- endif -%}
       </div>
+
+      {% if variant_selector_type == 'select' %}
+        <div class=" h-7">
+          {% unless product.has_only_default_variant %}
+            {% render 'product-variant-selector-select', product: product %}
+          {% endunless %}
+        </div>
+      {% endif %}
     </div>
   {%- endform -%}
 </product-form>

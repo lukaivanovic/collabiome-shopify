@@ -20,6 +20,7 @@ if (!customElements.get("product-form")) {
         // Initialize product data and variant selection
         this.initializeProductData();
         this.setupVariantSelection();
+        this.setupCustomVariantSelects();
         this.setupQuantitySelection();
       }
 
@@ -187,6 +188,114 @@ if (!customElements.get("product-form")) {
           console.error("Product data script not found");
           this.product = null;
         }
+      }
+
+      setupCustomVariantSelects() {
+        if (!this.form) return;
+
+        const roots = this.form.querySelectorAll("[data-variant-select-root]");
+        if (!roots.length) return;
+
+        const closeAllPanels = (exceptRoot = null) => {
+          this.form
+            .querySelectorAll("[data-variant-select-root]")
+            .forEach((root) => {
+              if (exceptRoot && root === exceptRoot) return;
+              const panel = root.querySelector("[data-variant-select-panel]");
+              const button = root.querySelector("[data-variant-select-button]");
+              if (panel && !panel.classList.contains("hidden")) {
+                panel.classList.add("hidden");
+              }
+              if (button) {
+                button.setAttribute("aria-expanded", "false");
+              }
+            });
+        };
+
+        roots.forEach((root) => {
+          const button = root.querySelector("[data-variant-select-button]");
+          const panel = root.querySelector("[data-variant-select-panel]");
+          const select = root.querySelector(
+            'select[name^="options["][data-variant-select-input]'
+          );
+          const label = root.querySelector("[data-variant-select-label]");
+
+          if (!button || !panel || !select || !label) return;
+
+          const optionButtons = panel.querySelectorAll(
+            "[data-variant-select-option]"
+          );
+
+          const updateFromSelect = () => {
+            const selectedOption = select.options[select.selectedIndex];
+            if (selectedOption) {
+              label.textContent = selectedOption.textContent.trim();
+            }
+
+            optionButtons.forEach((btn) => {
+              const value = btn.dataset.value;
+              const isSelected = value === select.value;
+              btn.setAttribute("aria-selected", String(isSelected));
+            });
+          };
+
+          const openPanel = () => {
+            closeAllPanels(root);
+            panel.classList.remove("hidden");
+            button.setAttribute("aria-expanded", "true");
+          };
+
+          const closePanel = () => {
+            panel.classList.add("hidden");
+            button.setAttribute("aria-expanded", "false");
+          };
+
+          button.addEventListener("click", (event) => {
+            event.stopPropagation();
+            const isOpen = button.getAttribute("aria-expanded") === "true";
+            if (isOpen) {
+              closePanel();
+            } else {
+              openPanel();
+            }
+          });
+
+          optionButtons.forEach((btn) => {
+            btn.addEventListener("click", (event) => {
+              event.stopPropagation();
+              const value = btn.dataset.value;
+              if (!value || value === select.value) {
+                closePanel();
+                return;
+              }
+
+              select.value = value;
+              select.dispatchEvent(new Event("change", { bubbles: true }));
+              updateFromSelect();
+              closePanel();
+            });
+          });
+
+          // Sync when select changes (e.g., via JS)
+          select.addEventListener("change", updateFromSelect);
+
+          // Initial state
+          updateFromSelect();
+        });
+
+        // Close dropdowns when clicking outside this form
+        document.addEventListener("click", (event) => {
+          if (!this.contains(event.target)) {
+            closeAllPanels();
+          }
+        });
+
+        // Close on Escape
+        document.addEventListener("keydown", (event) => {
+          if (event.key === "Escape") {
+            closeAllPanels();
+          }
+        });
       }
 
       setupVariantSelection() {
