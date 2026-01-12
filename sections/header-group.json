@@ -100,11 +100,26 @@
                     "overlay_opacity": 40
                   },
                   "blocks": {}
+                },
+                "promo_banner_HRLMPY": {
+                  "type": "promo-banner",
+                  "name": "Promo banner",
+                  "settings": {
+                    "product": "",
+                    "url": "shopify://pages/kviz",
+                    "title": "Kviz",
+                    "description": "",
+                    "image": "shopify://shop_images/Scientist.webp",
+                    "overlay_color": "#000000",
+                    "overlay_opacity": 40
+                  },
+                  "blocks": {}
                 }
               },
               "block_order": [
                 "promo_banner_HmEWad",
-                "promo_banner_3z3GPm"
+                "promo_banner_3z3GPm",
+                "promo_banner_HRLMPY"
               ]
             },
             "mega-menu-supplements": {
