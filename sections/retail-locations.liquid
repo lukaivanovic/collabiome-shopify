@@ -19,7 +19,12 @@
           {% unless retailer.importance == 'large' %}
             {% continue %}
           {% endunless %}
-          <div class="flex h-full flex-col rounded-[32px] bg-white p-12">
+          <a
+            class="flex h-full flex-col rounded-[32px] bg-white p-12"
+            href="{{ retailer.link }}"
+            target="_blank"
+            rel="noopener"
+          >
             {% if retailer.logo %}
               {% assign retailer_alt = retailer.name | default: '' | escape %}
               <div class="aspect-[5/2] max-w-100 overflow-hidden rounded-[28px] ">
@@ -40,16 +45,8 @@
               {% if retailer.desc != blank %}
                 <p class="mt-2 text-sm text-slate-600 text-center">{{ retailer.desc }}</p>
               {% endif %}
-              {% if retailer.link != blank %}
-                <a
-                  href="{{ retailer.link }}"
-                  class="mt-4 block text-sm font-medium text-center text-slate-700 underline-offset-2 hover:underline"
-                >
-                  {{ retailer.link }}
-                </a>
-              {% endif %}
             </div>
-          </div>
+          </a>
         {% endfor %}
       </div>
     {% endif %}
