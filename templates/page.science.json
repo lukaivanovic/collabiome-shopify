@@ -68,11 +68,20 @@
             "title": "Riblji kolagen",
             "description": ""
           }
+        },
+        "ingredient_eGK8Pa": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/18705517_pf-s89-td-1154-01.jpg",
+            "title": "Riblji kolagen",
+            "description": ""
+          }
         }
       },
       "block_order": [
         "ingredient_2_d7cEbU",
-        "ingredient_Y77p38"
+        "ingredient_Y77p38",
+        "ingredient_eGK8Pa"
       ],
       "name": "Science Ingredients",
       "settings": {
