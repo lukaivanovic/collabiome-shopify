@@ -50,6 +50,40 @@
         "button_link_target": "_self"
       }
     },
+    "science_ingredients_g9WzjQ": {
+      "type": "science-ingredients",
+      "blocks": {
+        "ingredient_2_d7cEbU": {
+          "type": "ingredient_2",
+          "settings": {
+            "image": "shopify://shop_images/18920488_pf-s89-td-0482-01.jpg",
+            "title": "MSM",
+            "description": ""
+          }
+        },
+        "ingredient_Y77p38": {
+          "type": "ingredient",
+          "settings": {
+            "image": "shopify://shop_images/18705517_pf-s89-td-1154-01.jpg",
+            "title": "Riblji kolagen",
+            "description": ""
+          }
+        }
+      },
+      "block_order": [
+        "ingredient_2_d7cEbU",
+        "ingredient_Y77p38"
+      ],
+      "name": "Science Ingredients",
+      "settings": {
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "title": "Sastojci koji rade zajedno",
+        "description": "Kada se nutrijenti iznutra i aktivni sastojci izvana usklade — rezultat je zdravija, punija i otpornija koža.",
+        "title_2": "Additional Ingredients",
+        "description_2": "More ingredients that make a difference"
+      }
+    },
     "three_column_highlight_7MPhnC": {
       "type": "three-column-highlight",
       "blocks": {
@@ -247,6 +281,7 @@
     "main",
     "hero_93y6Qf",
     "left_image_text_6GxPn3",
+    "science_ingredients_g9WzjQ",
     "three_column_highlight_7MPhnC",
     "generic_stats_bCWWzK",
     "science_principles_3jXqx7",
