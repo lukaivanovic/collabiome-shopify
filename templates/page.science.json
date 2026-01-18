@@ -180,6 +180,43 @@
         "padding_bottom": 48
       }
     },
+    "science_supplements_YMp3PE": {
+      "type": "science-supplements",
+      "blocks": {
+        "benefit_CrGDdR": {
+          "type": "benefit",
+          "settings": {
+            "image": "shopify://shop_images/uri_ifs___M_1567a98b-d258-4145-9cd1-625742630c1e.webp",
+            "title": "test",
+            "description": ""
+          }
+        },
+        "benefit_t6EHLL": {
+          "type": "benefit",
+          "settings": {
+            "title": "",
+            "description": ""
+          }
+        }
+      },
+      "block_order": [
+        "benefit_CrGDdR",
+        "benefit_t6EHLL"
+      ],
+      "name": "Science Supplements",
+      "settings": {
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "title": "Testiranje naših nutrikozmetičkih proizvoda",
+        "description": "<p>Naši suplementi razvijeni su na temelju opsežnih kliničkih istraživanja i sustavnih pregleda znanstvene literature.<br/><br/>Oralni hidrolizirani kolagen ispituje se u randomiziranim, placebo-kontroliranim studijama, kroz različite populacije i dizajne istraživanja. U studijama se prate objektivni parametri povezani sa stanjem kože tijekom 8 do 12 tjedana redovite suplementacije.</p>",
+        "image_1": "shopify://shop_images/32134.jpg",
+        "image_1_alt": "",
+        "image_2": "shopify://shop_images/graf_69232f03-46ab-41c5-9248-01470dfc2e6d.png",
+        "image_2_alt": "",
+        "card_title": "test",
+        "card_description": "<p>test</p><p></p>"
+      }
+    },
     "science_principles_3jXqx7": {
       "type": "science-principles",
       "blocks": {
@@ -295,6 +332,7 @@
     "science_ingredients_g9WzjQ",
     "three_column_highlight_7MPhnC",
     "generic_stats_bCWWzK",
+    "science_supplements_YMp3PE",
     "science_principles_3jXqx7",
     "left_image_text_mURNpD",
     "faq_PA9YeG",
