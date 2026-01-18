@@ -50,6 +50,46 @@
         "button_link_target": "_self"
       }
     },
+    "three_column_highlight_7MPhnC": {
+      "type": "three-column-highlight",
+      "blocks": {
+        "column_VgCYFH": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/httpswww.kolagenboost.hrcollectionsbestsellersproductskolagen-boost-copyvariant_48399030780236_8.webp",
+            "title": "Iva Tokić",
+            "description": "M.Sc nutricionozima"
+          }
+        },
+        "column_Beekib": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/httpswww.kolagenboost.hrcollectionsbestsellersproductskolagen-boost-copyvariant_48399030780236_9.webp",
+            "title": "Verica Dragović Uzelac",
+            "description": "Prof.dr.sc."
+          }
+        },
+        "column_YzxGfK": {
+          "type": "column",
+          "settings": {
+            "image": "shopify://shop_images/httpswww.kolagenboost.hrcollectionsbestsellersproductskolagen-boost-copyvariant_48399030780236_10.webp",
+            "title": "Marina Mustapić",
+            "description": "Research and development expert"
+          }
+        }
+      },
+      "block_order": [
+        "column_VgCYFH",
+        "column_Beekib",
+        "column_YzxGfK"
+      ],
+      "name": "t:sections.three_column_highlight.name",
+      "settings": {
+        "custom_id": "",
+        "heading": "Stručnost iza naših formula",
+        "description": ""
+      }
+    },
     "generic_stats_bCWWzK": {
       "type": "generic-stats",
       "blocks": {
@@ -207,6 +247,7 @@
     "main",
     "hero_93y6Qf",
     "left_image_text_6GxPn3",
+    "three_column_highlight_7MPhnC",
     "generic_stats_bCWWzK",
     "science_principles_3jXqx7",
     "left_image_text_mURNpD",
