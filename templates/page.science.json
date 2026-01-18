@@ -219,10 +219,12 @@
         "padding_bottom": 60,
         "title": "Testiranje naših nutrikozmetičkih proizvoda",
         "description": "<p>Naši suplementi razvijeni su na temelju opsežnih kliničkih istraživanja i sustavnih pregleda znanstvene literature.<br/><br/>Oralni hidrolizirani kolagen ispituje se u randomiziranim, placebo-kontroliranim studijama, kroz različite populacije i dizajne istraživanja. U studijama se prate objektivni parametri povezani sa stanjem kože tijekom 8 do 12 tjedana redovite suplementacije.</p>",
+        "image_position": "right",
         "image_1": "shopify://shop_images/32134.jpg",
         "image_1_alt": "",
         "image_2": "shopify://shop_images/graf_69232f03-46ab-41c5-9248-01470dfc2e6d.png",
         "image_2_alt": "",
+        "product_theme": "recupera",
         "card_title": "Certificirani kolagen za tvoju kožu",
         "card_description": "<p>Sve potrebne laboratorijske pretrage</p>"
       }
@@ -266,10 +268,12 @@
         "padding_bottom": 60,
         "title": "Testiranje naših nutrikozmetičkih proizvoda",
         "description": "<p>Naši suplementi razvijeni su na temelju opsežnih kliničkih istraživanja i sustavnih pregleda znanstvene literature.<br/><br/>Oralni hidrolizirani kolagen ispituje se u randomiziranim, placebo-kontroliranim studijama, kroz različite populacije i dizajne istraživanja. U studijama se prate objektivni parametri povezani sa stanjem kože tijekom 8 do 12 tjedana redovite suplementacije.</p>",
+        "image_position": "left",
         "image_1": "shopify://shop_images/32134.jpg",
         "image_1_alt": "",
         "image_2": "shopify://shop_images/graf_69232f03-46ab-41c5-9248-01470dfc2e6d.png",
         "image_2_alt": "",
+        "product_theme": "default",
         "card_title": "Certificirani kolagen za tvoju kožu",
         "card_description": "<p>Sve potrebne laboratorijske pretrage</p>"
       }
