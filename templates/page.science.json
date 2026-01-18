@@ -13,9 +13,46 @@
       "type": "page",
       "disabled": true,
       "settings": {}
+    },
+    "hero_93y6Qf": {
+      "type": "hero",
+      "name": "Hero",
+      "settings": {
+        "kicker": "",
+        "title": "Znanost koja se vidi na koži.",
+        "description": "<p>Ovo je znanstvena podloga iza nutrikozmetičkog pristupa iznutra i izvana.</p>",
+        "show_buttons": true,
+        "button_label": "Button label",
+        "button_link": "",
+        "button_2_label": "",
+        "button_2_link": "",
+        "image": "shopify://shop_images/Iva_Tokic_kolagen.webp",
+        "overlay_color": "#000000",
+        "overlay_opacity": 30
+      }
+    },
+    "left_image_text_6GxPn3": {
+      "type": "left-image-text",
+      "name": "Image and Text",
+      "settings": {
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "image": "shopify://shop_images/uri_ifs___M_1567a98b-d258-4145-9cd1-625742630c1e.webp",
+        "image_alt": "Image alt text",
+        "image_position": "left",
+        "title": "Zašto je kolagen temelj  svih naših proizvoda",
+        "description": "<p>Share a short description that explains why this feature matters.</p>",
+        "show_button": true,
+        "button_label": "Learn more",
+        "button_link": "",
+        "button_style": "solid",
+        "button_link_target": "_self"
+      }
     }
   },
   "order": [
-    "main"
+    "main",
+    "hero_93y6Qf",
+    "left_image_text_6GxPn3"
   ]
 }
