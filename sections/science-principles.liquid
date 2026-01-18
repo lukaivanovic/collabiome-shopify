@@ -59,9 +59,9 @@
         or section.settings.banner_title != blank
         or section.settings.banner_description != blank
       %}
-        <div class="relative overflow-hidden rounded-2xl bg-neutral-100 flex flex-row bg-product-bg-secondary p-3 max-w-md mx-auto">
+        <div class="relative overflow-hidden rounded-2xl bg-neutral-100 flex flex-row gap-2 bg-product-bg-secondary p-3 max-w-lg mx-auto">
           {% if section.settings.banner_image != blank %}
-            <div class="w-32 h-32 shrink-0 overflow-hidden">
+            <div class="w-28 h-28 shrink-0 overflow-hidden">
               {{
                 section.settings.banner_image
                 | image_url: width: 1200
@@ -79,7 +79,7 @@
           {% if section.settings.banner_title != blank or section.settings.banner_description != blank %}
             <div class=" flex flex-col justify-center">
               {% if section.settings.banner_title != blank %}
-                <h3 class="text-base font-semibold mb-3">
+                <h3 class="text-base font-semibold mb-1">
                   {{ section.settings.banner_title | escape }}
                 </h3>
               {% endif %}
