@@ -49,11 +49,123 @@
         "button_style": "solid",
         "button_link_target": "_self"
       }
+    },
+    "generic_stats_bCWWzK": {
+      "type": "generic-stats",
+      "blocks": {
+        "stat_CcGEtp": {
+          "type": "stat",
+          "settings": {
+            "metric": "99%",
+            "text": "Customer satisfaction rate",
+            "source": "Source name",
+            "link_url": ""
+          }
+        },
+        "stat_CQtCmH": {
+          "type": "stat",
+          "settings": {
+            "metric": "5K+",
+            "text": "Happy customers",
+            "source": "Source name",
+            "link_url": ""
+          }
+        },
+        "stat_DzUjXq": {
+          "type": "stat",
+          "settings": {
+            "metric": "100%",
+            "text": "Natural ingredients",
+            "source": "Source name",
+            "link_url": ""
+          }
+        }
+      },
+      "block_order": [
+        "stat_CcGEtp",
+        "stat_CQtCmH",
+        "stat_DzUjXq"
+      ],
+      "name": "Generic stats",
+      "settings": {
+        "custom_id": "",
+        "title": "Što pokazuju istraživanja",
+        "description": "Kliničke studije i sustavni pregledi literature pokazuju da je oralna suplementacija hidroliziranim kolagenom povezana sa statistički značajnim poboljšanjima određenih parametara stanja kože u usporedbi s placebom.\n\nNajčešće zabilježeni učinci odnose se na hidrataciju, elastičnost i parametre izgleda kože nakon kontinuirane primjene.",
+        "padding_top": 48,
+        "padding_bottom": 48
+      }
+    },
+    "left_image_text_mURNpD": {
+      "type": "left-image-text",
+      "name": "Image and Text",
+      "settings": {
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "image": "shopify://shop_images/graf.png",
+        "image_alt": "Image alt text",
+        "image_position": "right",
+        "title": "Stunning feature title",
+        "description": "<p>Share a short description that explains why this feature matters.</p>",
+        "show_button": true,
+        "button_label": "Learn more",
+        "button_link": "",
+        "button_style": "solid",
+        "button_link_target": "_self"
+      }
+    },
+    "blog_grid_HDCD7M": {
+      "type": "blog-grid",
+      "name": "Blog grid",
+      "settings": {
+        "heading": "Latest articles",
+        "description": "Describe this category",
+        "blog": "clanci",
+        "show_date": true,
+        "show_author": false,
+        "show_excerpt": true,
+        "excerpt_words": 20,
+        "show_view_all": true
+      }
+    },
+    "faq_PA9YeG": {
+      "type": "faq",
+      "blocks": {
+        "faq_item_BQDpqR": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Frequently asked question?",
+            "answer": "<p>This is the answer to the frequently asked question.</p>"
+          }
+        },
+        "faq_item_rGGQae": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Another frequently asked question?",
+            "answer": "<p>This is another answer to a frequently asked question.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "faq_item_BQDpqR",
+        "faq_item_rGGQae"
+      ],
+      "name": "FAQ",
+      "settings": {
+        "title": "FAQ",
+        "description": "",
+        "custom_id": "",
+        "padding_top": 40,
+        "padding_bottom": 40
+      }
     }
   },
   "order": [
     "main",
     "hero_93y6Qf",
-    "left_image_text_6GxPn3"
+    "left_image_text_6GxPn3",
+    "generic_stats_bCWWzK",
+    "left_image_text_mURNpD",
+    "faq_PA9YeG",
+    "blog_grid_HDCD7M"
   ]
 }
