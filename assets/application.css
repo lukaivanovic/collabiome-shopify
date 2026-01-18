@@ -2665,6 +2665,11 @@
       width: calc(var(--spacing) * 20);
     }
   }
+  .md\:w-120 {
+    @media (width >= 48rem) {
+      width: calc(var(--spacing) * 120);
+    }
+  }
   .md\:w-\[calc\(50\%-0\.5rem\)\] {
     @media (width >= 48rem) {
       width: calc(50% - 0.5rem);
