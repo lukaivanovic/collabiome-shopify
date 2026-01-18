@@ -14,7 +14,7 @@
     {%- comment -%} Half and half grid: Left (title + desc + benefits + card) and Right (two images) {%- endcomment -%}
     <div class="flex flex-col gap-10 lg:flex-row lg:items-start">
       {%- comment -%} Left side: Title + Description + Benefits + Card {%- endcomment -%}
-      <div class="w-full lg:w-1/2 flex flex-col gap-6">
+      <div class="w-full lg:w-1/2 flex flex-col gap-6 pt-12">
         {% if section.settings.title != blank %}
           <h2 class="title-medium">{{ section.settings.title | escape }}</h2>
         {% endif %}
@@ -24,24 +24,25 @@
 
         {%- comment -%} Benefits blocks: Image + Title + Description {%- endcomment -%}
         {% if section.blocks.size > 0 %}
-          <div class="flex flex-col gap-6 mt-2">
+          <div class="flex flex-col gap-6 mt-8">
+            <div class="text-sm text-foreground-secondary">Rezultati istraživanja</div>
             {% for block in section.blocks %}
               {% if block.type == 'benefit' %}
                 <div
-                  class="flex flex-col md:flex-row gap-4 items-start border-b border-neutral-200 pb-6 mb-6 last:mb-0"
+                  class="flex flex-col md:flex-row md:items-center gap-4 border-b border-neutral-100 pb-6 mb-6 last:mb-0"
                   {{ block.shopify_attributes }}
                 >
                   {% if block.settings.image != blank %}
-                    <div class="shrink-0 w-24 h-24 md:w-32 md:h-32">
+                    <div class="shrink-0 w-16 h-16 md:w-20 md:h-20">
                       {% render 'image', image: block.settings.image, class: 'w-full h-full object-cover rounded-lg' %}
                     </div>
                   {% endif %}
-                  <div class="flex flex-col gap-2">
+                  <div class="flex flex-col gap-1">
                     {% if block.settings.title != blank %}
-                      <h3 class="text-lg font-semibold">{{ block.settings.title | escape }}</h3>
+                      <h3 class=" font-semibold">{{ block.settings.title | escape }}</h3>
                     {% endif %}
                     {% if block.settings.description != blank %}
-                      <div class="text-base text-foreground-secondary">{{ block.settings.description }}</div>
+                      <div class="text-sm text-foreground-secondary">{{ block.settings.description }}</div>
                     {% endif %}
                   </div>
                 </div>
@@ -52,12 +53,12 @@
 
         {%- comment -%} Product-bg-secondary card with title + desc {%- endcomment -%}
         {% if section.settings.card_title != blank or section.settings.card_description != blank %}
-          <div class="bg-product-bg-secondary rounded-2xl p-6 md:p-8 mt-2">
+          <div class="bg-product-bg-secondary rounded-2xl p-4 md:p-4 mt-2">
             {% if section.settings.card_title != blank %}
-              <h3 class="text-xl md:text-2xl font-semibold mb-4">{{ section.settings.card_title | escape }}</h3>
+              <h3 class="font-semibold">{{ section.settings.card_title | escape }}</h3>
             {% endif %}
             {% if section.settings.card_description != blank %}
-              <div class="text-base text-foreground-secondary">{{ section.settings.card_description }}</div>
+              <div class="text-sm text-foreground-secondary">{{ section.settings.card_description }}</div>
             {% endif %}
           </div>
         {% endif %}
