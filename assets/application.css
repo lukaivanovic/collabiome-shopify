@@ -2930,6 +2930,11 @@
       align-items: center;
     }
   }
+  .lg\:items-start {
+    @media (width >= 64rem) {
+      align-items: flex-start;
+    }
+  }
   .lg\:space-y-5 {
     @media (width >= 64rem) {
       :where(& > :not(:last-child)) {

@@ -14,7 +14,7 @@
 >
   <div class="container mx-auto px-4">
     {%- if layout_style == 'side-by-side' -%}
-      <div class="flex flex-col gap-10 lg:flex-row lg:items-center {% if content_position == 'right' %}lg:flex-row-reverse{% endif %}">
+      <div class="flex flex-col gap-10 lg:flex-row lg:items-start {% if content_position == 'right' %}lg:flex-row-reverse{% endif %}">
         {%- if section.settings.title != blank or section.settings.description != blank -%}
           <div class="w-full lg:w-1/2">
             <div class="text-left">
@@ -30,9 +30,9 @@
 
         {%- if section.blocks.size > 0 -%}
           <div class="w-full {% if section.settings.title != blank or section.settings.description != blank %}lg:w-1/2{% endif %}">
-            <div class="flex flex-wrap justify-start gap-4">
+            <div class="flex flex-col gap-4">
               {%- for block in section.blocks -%}
-                <div class="w-full md:w-[calc(50%-0.5rem)]" {{ block.shopify_attributes }}>
+                <div class="w-full" {{ block.shopify_attributes }}>
                   {%- liquid
                     assign stat_metric = block.settings.metric
                     assign stat_text = block.settings.text
