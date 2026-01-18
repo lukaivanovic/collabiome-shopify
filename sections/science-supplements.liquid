@@ -24,8 +24,8 @@
 
         {%- comment -%} Benefits blocks: Image + Title + Description {%- endcomment -%}
         {% if section.blocks.size > 0 %}
-          <div class="flex flex-col gap-6 mt-8">
-            <div class="text-sm text-foreground-secondary">Rezultati istraživanja</div>
+          <div class="flex flex-col mt-8">
+            <div class="text-sm text-foreground-secondary mb-3">Rezultati istraživanja</div>
             {% for block in section.blocks %}
               {% if block.type == 'benefit' %}
                 <div
