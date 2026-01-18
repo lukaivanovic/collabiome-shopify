@@ -26,6 +26,7 @@
         "button_link": "",
         "button_2_label": "",
         "button_2_link": "",
+        "video_url": "",
         "image": "shopify://shop_images/Iva_Tokic_kolagen.webp",
         "overlay_color": "#000000",
         "overlay_opacity": 30
@@ -41,7 +42,7 @@
         "image_alt": "Image alt text",
         "image_position": "left",
         "title": "Zašto je kolagen temelj  svih naših proizvoda",
-        "description": "<p>Share a short description that explains why this feature matters.</p>",
+        "description": "<p>Kolagen je ključni strukturni protein kože, vezivnog tkiva i dermalne matrice. Sudjeluje u očuvanju čvrstoće, elastičnosti i otpornosti kože te je izravno povezan s procesima koji se s vremenom prirodno usporavaju.</p><p><br/>Upravo zato kolagen promatramo kao zajedničku točku svih naših formulacija — iznutra i izvana.</p>",
         "show_button": true,
         "button_label": "Learn more",
         "button_link": "",
