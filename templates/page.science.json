@@ -191,17 +191,27 @@
             "description": "<p>Povećanje mjerenih parametara hidratacije u intervencijskim skupinama u odnosu na placebo.</p>"
           }
         },
-        "benefit_t6EHLL": {
+        "benefit_P4Yb9h": {
           "type": "benefit",
           "settings": {
-            "title": "",
-            "description": ""
+            "image": "shopify://shop_images/uri_ifs___M_1567a98b-d258-4145-9cd1-625742630c1e.webp",
+            "title": "Hidratacija kože",
+            "description": "<p>Povećanje mjerenih parametara hidratacije u intervencijskim skupinama u odnosu na placebo.</p>"
+          }
+        },
+        "benefit_8hhmrE": {
+          "type": "benefit",
+          "settings": {
+            "image": "shopify://shop_images/uri_ifs___M_1567a98b-d258-4145-9cd1-625742630c1e.webp",
+            "title": "Hidratacija kože",
+            "description": "<p>Povećanje mjerenih parametara hidratacije u intervencijskim skupinama u odnosu na placebo.</p>"
           }
         }
       },
       "block_order": [
         "benefit_CrGDdR",
-        "benefit_t6EHLL"
+        "benefit_P4Yb9h",
+        "benefit_8hhmrE"
       ],
       "name": "Science Supplements",
       "settings": {
@@ -213,8 +223,8 @@
         "image_1_alt": "",
         "image_2": "shopify://shop_images/graf_69232f03-46ab-41c5-9248-01470dfc2e6d.png",
         "image_2_alt": "",
-        "card_title": "test",
-        "card_description": "<p>test</p><p></p>"
+        "card_title": "Certificirani kolagen za tvoju kožu",
+        "card_description": "<p>Sve potrebne laboratorijske pretrage</p>"
       }
     },
     "science_principles_3jXqx7": {
