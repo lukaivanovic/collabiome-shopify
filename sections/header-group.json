@@ -132,7 +132,25 @@
                   "recupera"
                 ]
               },
-              "blocks": {}
+              "blocks": {
+                "promo_banner_tXeGKx": {
+                  "type": "promo-banner",
+                  "name": "Promo banner",
+                  "settings": {
+                    "product": "",
+                    "url": "shopify://products/recupera-cooling-gel",
+                    "title": "Recupera Cooling Gel",
+                    "description": "",
+                    "image": "shopify://shop_images/2_1e81687c-742f-42d3-9f89-09720c383f10.png",
+                    "overlay_color": "#000000",
+                    "overlay_opacity": 40
+                  },
+                  "blocks": {}
+                }
+              },
+              "block_order": [
+                "promo_banner_tXeGKx"
+              ]
             }
           },
           "block_order": []
