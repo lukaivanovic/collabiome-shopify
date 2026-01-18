@@ -19,21 +19,9 @@
         "show_filters": true,
         "show_quiz_banner": true
       }
-    },
-    "shop_all_CbdXxF": {
-      "type": "shop-all",
-      "name": "Shop All",
-      "settings": {
-        "title": "Shop All Products",
-        "manual_collection": "paketi",
-        "products_per_page": 40,
-        "show_filters": false,
-        "show_quiz_banner": false
-      }
     }
   },
   "order": [
-    "shop_all_6XYGtW",
-    "shop_all_CbdXxF"
+    "shop_all_6XYGtW"
   ]
 }
