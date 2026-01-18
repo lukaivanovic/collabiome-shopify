@@ -102,7 +102,7 @@
           "type": "principle",
           "settings": {
             "image_icon": "shopify://shop_images/uri_ifs___M_1567a98b-d258-4145-9cd1-625742630c1e.webp",
-            "title": "test",
+            "title": "GMO Free",
             "description": ""
           }
         },
@@ -110,7 +110,7 @@
           "type": "principle",
           "settings": {
             "image_icon": "shopify://shop_images/uri_ifs___M_1567a98b-d258-4145-9cd1-625742630c1e.webp",
-            "title": "test",
+            "title": "Gluten Free",
             "description": ""
           }
         },
@@ -132,8 +132,8 @@
       "settings": {
         "padding_top": 60,
         "padding_bottom": 60,
-        "title": "Science Principles",
-        "description": "Discover the science behind our products",
+        "title": "Čistoća i transparentnost",
+        "description": "",
         "banner_image": "shopify://shop_images/gmp-1-588x411.jpg",
         "banner_title": "Proizvedeno prema GMP standardima",
         "banner_description": "<p>Naši proizvodi nastaju u pogonima s međunarodno priznatom GMP certifikacijom, što osigurava sigurnost, čistoću i dosljednost svake serije.</p><p></p>"
