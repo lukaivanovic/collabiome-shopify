@@ -134,8 +134,9 @@
         "padding_bottom": 60,
         "title": "Science Principles",
         "description": "Discover the science behind our products",
-        "banner_title": "test",
-        "banner_description": ""
+        "banner_image": "shopify://shop_images/gmp-1-588x411.jpg",
+        "banner_title": "Proizvedeno prema GMP standardima",
+        "banner_description": "<p>Naši proizvodi nastaju u pogonima s međunarodno priznatom GMP certifikacijom, što osigurava sigurnost, čistoću i dosljednost svake serije.</p><p></p>"
       }
     },
     "left_image_text_mURNpD": {
