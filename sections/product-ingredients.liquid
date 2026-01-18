@@ -17,7 +17,7 @@
 
 {% if has_ingredients %}
   <div class="py-12 md:py-20 bg-product-bg-secondary">
-    <div class="container-small mx-auto max-w-4xl px-4 text-center flex flex-col gap-10">
+    <div class="container-small mx-auto max-w-4xl px-4 text-center flex flex-col gap-8">
       <div>
         <h2 class="title-medium">{{ section_title }}</h2>
         {% if section_description != blank %}
@@ -36,7 +36,7 @@
             <div class="shrink-0 w-24 h-24 md:w-full md:h-auto md:aspect-square">
               {% render 'image', image: ingredient.image, class: ' w-full h-full object-cover' %}
             </div>
-            <div class="text-left md:text-center py-4">
+            <div class="text-left md:text-center px-3 pt-3 pb-7">
               <h3 class="text-lg font-medium">{{ ingredient.name }}</h3>
               <p class="text-sm text-secondary">{{ ingredient.description }}</p>
             </div>
@@ -64,14 +64,10 @@
 
       {% if other_ingredients != '' %}
         <div>
-          <div class="h-px bg-neutral-100"></div>
-          <div class="text-sm uppercase tracking-wide opacity-70 mb-2 mt-6">
-            {{ 'sections.product_ingredients.list' | t }}
-          </div>
           <button
             type="button"
             data-drawer-trigger="ingredients-drawer"
-            class="text-base font-medium text-primary hover:underline mt-2"
+            class="text-sm font-medium text-black/40 hover:underline"
           >
             {{ 'sections.product_ingredients.view_all' | t }}
           </button>
