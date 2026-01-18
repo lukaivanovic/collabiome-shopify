@@ -24,10 +24,10 @@
 
       {%- comment -%} Blocks with icon + text underneath {%- endcomment -%}
       {% if section.blocks.size > 0 %}
-        <div class="grid grid-cols-1 gap-6">
+        <div class="flex flex-row flex-wrap">
           {% for block in section.blocks %}
             {% if block.type == 'principle' %}
-              <div class="border-b border-neutral-200 pb-6 mb-6 last:mb-0" {{ block.shopify_attributes }}>
+              <div class="w-1/2 md:w-1/4 px-2 md:px-4" {{ block.shopify_attributes }}>
                 {% if block.settings.image_icon != blank %}
                   <div class="mb-4 size-8">
                     {% render 'image', image: block.settings.image_icon, class: 'w-full h-full object-cover' %}
