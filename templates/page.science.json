@@ -165,6 +165,8 @@
         "custom_id": "",
         "title": "Što pokazuju istraživanja",
         "description": "Kliničke studije i sustavni pregledi literature pokazuju da je oralna suplementacija hidroliziranim kolagenom povezana sa statistički značajnim poboljšanjima određenih parametara stanja kože u usporedbi s placebom.\n\nNajčešće zabilježeni učinci odnose se na hidrataciju, elastičnost i parametre izgleda kože nakon kontinuirane primjene.",
+        "layout_style": "side-by-side",
+        "content_position": "left",
         "padding_top": 48,
         "padding_bottom": 48
       }
