@@ -28,7 +28,7 @@
             {% for block in section.blocks %}
               {% if block.type == 'benefit' %}
                 <div
-                  class="flex flex-col md:flex-row gap-4 items-start"
+                  class="flex flex-col md:flex-row gap-4 items-start border-b border-neutral-200 pb-6 mb-6 last:mb-0"
                   {{ block.shopify_attributes }}
                 >
                   {% if block.settings.image != blank %}
@@ -75,7 +75,9 @@
                 decoding: 'async',
                 sizes: '(max-width: 1024px) 100vw, 50vw',
                 class: 'w-full h-full object-cover',
-                alt: section.settings.image_1_alt | default: section.settings.title | escape
+                alt: section.settings.image_1_alt
+              | default: section.settings.title
+              | escape
             }}
           </div>
         {% endif %}
@@ -89,7 +91,9 @@
                 decoding: 'async',
                 sizes: '(max-width: 1024px) 100vw, 50vw',
                 class: 'w-full h-full object-cover',
-                alt: section.settings.image_2_alt | default: section.settings.title | escape
+                alt: section.settings.image_2_alt
+              | default: section.settings.title
+              | escape
             }}
           </div>
         {% endif %}
