@@ -21,7 +21,7 @@
     <div class="flex flex-col gap-10 lg:flex-row lg:items-center {% if image_position == 'right' %}lg:flex-row-reverse{% endif %}">
       <div class="w-full lg:w-1/2">
         {% if section.settings.image != blank %}
-          <div class="overflow-hidden rounded-[28px] bg-slate-100">
+          <div class="overflow-hidden rounded-[28px]">
             {{
               section.settings.image
               | image_url: width: 1600
