@@ -14,75 +14,73 @@
 %}
 
 {% unless product.has_only_default_variant %}
-  <div class="flex flex-col gap-4">
-    {% for option in product.options_with_values %}
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-3 w-full">
-        {% for value in option.values %}
-          {% liquid
-            # Find variant that matches this option value
-            assign matching_variant = null
-            assign option_index = option.position | minus: 1
+  {% for option in product.options_with_values %}
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-3 w-full">
+      {% for value in option.values %}
+        {% liquid
+          # Find variant that matches this option value
+          assign matching_variant = null
+          assign option_index = option.position | minus: 1
 
-            for variant in product.variants
-              if variant.options[option_index] == value
-                if matching_variant == null
-                  assign matching_variant = variant
-                endif
+          for variant in product.variants
+            if variant.options[option_index] == value
+              if matching_variant == null
+                assign matching_variant = variant
               endif
-            endfor
-          %}
-          <label
-            for="product-options[{{ option.name }}]-{{ forloop.index }}"
-            class="group relative flex md:flex-col md:text-center items-center px-3 md:px-6 py-4 gap-2 border bg-white rounded-md cursor-pointer transition-all border-neutral-200 hover:bg-neutral-100 data-[selected=true]:border-[var(--product-accent)] data-[selected=true]:[background:var(--product-background)]"
-            data-option-label
-            data-option-position="{{ option.position }}"
+            endif
+          endfor
+        %}
+        <label
+          for="product-options[{{ option.name }}]-{{ forloop.index }}"
+          class="group relative flex md:flex-col md:text-center items-center px-3 md:px-6 py-4 gap-2 border bg-white rounded-md cursor-pointer transition-all border-neutral-200 hover:bg-neutral-100 data-[selected=true]:border-[var(--product-accent)] data-[selected=true]:[background:var(--product-background)]"
+          data-option-label
+          data-option-position="{{ option.position }}"
+          {% if option.selected_value == value %}
+            data-selected="true"
+          {% else %}
+            data-selected="false"
+          {% endif %}
+        >
+          <input
+            type="radio"
+            id="product-options[{{ option.name }}]-{{ forloop.index }}"
+            name="options[{{ option.name }}]"
+            value="{{ value }}"
             {% if option.selected_value == value %}
-              data-selected="true"
-            {% else %}
-              data-selected="false"
+              checked
             {% endif %}
+            data-option-input
+            class="md:sr-only w-4 h-4 text-[var(--product-accent)] border-neutral-300 cursor-pointer accent-[var(--product-accent)]"
+            data-option-position="{{ option.position }}"
           >
-            <input
-              type="radio"
-              id="product-options[{{ option.name }}]-{{ forloop.index }}"
-              name="options[{{ option.name }}]"
-              value="{{ value }}"
-              {% if option.selected_value == value %}
-                checked
-              {% endif %}
-              data-option-input
-              class="md:sr-only w-4 h-4 text-[var(--product-accent)] border-neutral-300 cursor-pointer accent-[var(--product-accent)]"
-              data-option-position="{{ option.position }}"
-            >
-            {% if matching_variant and matching_variant.featured_image %}
-              <div class="hidden md:block w-full aspect-square rounded-md overflow-hidden mb-2">
-                {% render 'image', image: matching_variant.featured_image, width: 200, height: 200, crop: 'center' %}
-              </div>
-            {% endif %}
-            <div class="flex flex-col gap-1">
-              <span class="font-medium text-primary group-data-[selected=true]:text-[var(--product-accent)]">
-                {{- value -}}
+          {% if matching_variant and matching_variant.featured_image %}
+            <div class="hidden md:block w-full aspect-square rounded-md overflow-hidden mb-2">
+              {% render 'image', image: matching_variant.featured_image, width: 200, height: 200, crop: 'center' %}
+            </div>
+          {% endif %}
+          <div class="flex flex-row items-center md:items-start md:flex-col gap-1">
+            <span class="font-medium text-primary group-data-[selected=true]:text-[var(--product-accent)]">
+              {{- value -}}
+            </span>
+            {% if matching_variant and matching_variant.metafields.custom.quantity %}
+              <span class="text-sm text-neutral-600">
+                {{ matching_variant.metafields.custom.quantity.value }}
               </span>
-              {% if matching_variant and matching_variant.metafields.custom.quantity %}
-                <span class="text-sm text-neutral-600">
-                  {{ matching_variant.metafields.custom.quantity.value }}
-                </span>
-              {% endif %}
-            </div>
-            <div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center gap-1">
-              <span
-                class="hidden text-xs font-medium px-1.5 py-0.5 tabular-nums rounded-full bg-[var(--product-accent)] text-[var(--product-button-text-color)] whitespace-nowrap z-10"
-                data-variant-badge
-              ></span>
-              {% if value.variant.price > 5000 %}
-                <span class="hidden md:inline-block text-xs font-medium px-1.5 py-0.5 tabular-nums rounded-full bg-[var(--product-accent)] text-[var(--product-button-text-color)] whitespace-nowrap z-10">
-                  Free delivery
-                </span>
-              {% endif %}
-            </div>
-          </label>
-        {% endfor %}
-      </div>
-    {% endfor %}
-  </div>
+            {% endif %}
+          </div>
+          <div class="absolute top-0.5  md:top-0 right-1 md:left-1/2 md:-translate-x-1/2 -translate-y-1/2 flex items-center justify-center gap-1">
+            <span
+              class="hidden text-xs font-medium px-1.5 py-0.5 tabular-nums rounded-full bg-[var(--product-accent)] text-[var(--product-button-text-color)] whitespace-nowrap z-10"
+              data-variant-badge
+            ></span>
+            {% if value.variant.price > 5000 %}
+              <span class="hidden md:inline-block text-xs font-medium px-1.5 py-0.5 tabular-nums rounded-full bg-[var(--product-accent)] text-[var(--product-button-text-color)] whitespace-nowrap z-10">
+                Free delivery
+              </span>
+            {% endif %}
+          </div>
+        </label>
+      {% endfor %}
+    </div>
+  {% endfor %}
 {% endunless %}
