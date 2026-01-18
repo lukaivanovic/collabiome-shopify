@@ -1,10 +1,19 @@
 {% liquid
   assign section_id = section.settings.custom_id | default: section.id
+  assign image_position = section.settings.image_position | default: 'right'
+
+  assign product_theme = section.settings.product_theme | default: 'default'
+  case product_theme
+    when 'recupera'
+      assign product_theme_class = 'product-theme-recupera'
+    else
+      assign product_theme_class = 'product-theme-default'
+  endcase
 %}
 
 <section
   id="{{ section_id }}"
-  class="relative"
+  class="relative {{ product_theme_class }}"
   style="
     padding-top: {{ section.settings.padding_top }}px;
     padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -12,7 +21,7 @@
 >
   <div class="container mx-auto px-4">
     {%- comment -%} Half and half grid: Left (title + desc + benefits + card) and Right (two images) {%- endcomment -%}
-    <div class="flex flex-col gap-10 lg:flex-row lg:items-start">
+    <div class="flex flex-col gap-10 lg:flex-row lg:items-start {% if image_position == 'left' %}lg:flex-row-reverse{% endif %}">
       {%- comment -%} Left side: Title + Description + Benefits + Card {%- endcomment -%}
       <div class="w-full lg:w-1/2 flex flex-col gap-6 pt-12">
         {% if section.settings.title != blank %}
@@ -148,6 +157,16 @@
       "content": "Images"
     },
     {
+      "type": "select",
+      "id": "image_position",
+      "label": "Image position",
+      "options": [
+        { "value": "left", "label": "Left" },
+        { "value": "right", "label": "Right" }
+      ],
+      "default": "right"
+    },
+    {
       "type": "image_picker",
       "id": "image_1",
       "label": "Image 1"
@@ -166,6 +185,20 @@
       "type": "text",
       "id": "image_2_alt",
       "label": "Image 2 alt text"
+    },
+    {
+      "type": "header",
+      "content": "Theme"
+    },
+    {
+      "type": "select",
+      "id": "product_theme",
+      "label": "Product theme",
+      "options": [
+        { "value": "default", "label": "Default" },
+        { "value": "recupera", "label": "Recupera" }
+      ],
+      "default": "default"
     },
     {
       "type": "header",
