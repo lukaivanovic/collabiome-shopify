@@ -154,6 +154,17 @@
         "type": "image_picker",
         "id": "shop_all_chip_icon_cosmetics",
         "label": "Cosmetics icon"
+      },
+      {
+        "type": "text",
+        "id": "shop_all_chip_label_bundles",
+        "label": "Bundles label",
+        "default": "Bundles"
+      },
+      {
+        "type": "image_picker",
+        "id": "shop_all_chip_icon_bundles",
+        "label": "Bundles icon"
       }
     ]
   },
