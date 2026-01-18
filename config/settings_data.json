@@ -20,6 +20,8 @@
     "shop_all_chip_label_supplements": "Dodaci prehrani",
     "shop_all_chip_icon_supplements": "shopify://shop_images/Beznaslova_1080x1080piks._13.png",
     "shop_all_chip_icon_cosmetics": "shopify://shop_images/gel_za_ciscenje_lica_model_51bb8d8d-6cda-4b2e-962c-4b50bd8fa595.png",
+    "shop_all_chip_label_bundles": "Paketi",
+    "shop_all_chip_icon_bundles": "shopify://shop_images/kolagen_boost_800x800_veci_logo_estetica.jpg",
     "mega_menu_featured_product": "recupera-cooling-gel",
     "background_green": "#dbeae5",
     "background_pink": "#f8dce5",
