@@ -44,10 +44,12 @@
       assign chip_all_default_label = 'collections.all' | t | default: 'Shop all'
       assign chip_supplements_default_label = 'collections.supplements' | t | default: 'Dodaci prehrani'
       assign chip_cosmetics_default_label = 'collections.cosmetics' | t | default: 'Kozmetika'
+      assign chip_bundles_default_label = 'collections.bundles' | t | default: 'Bundles'
 
       assign chip_all_label = settings.shop_all_chip_label_all | default: chip_all_default_label
       assign chip_supplements_label = settings.shop_all_chip_label_supplements | default: chip_supplements_default_label
       assign chip_cosmetics_label = settings.shop_all_chip_label_cosmetics | default: chip_cosmetics_default_label
+      assign chip_bundles_label = settings.shop_all_chip_label_bundles | default: chip_bundles_default_label
     %}
 
     <div class="flex md:flex-row md:items-center items-start flex-col gap-2 mb-12 pb-4  flex-wrap">
@@ -106,6 +108,24 @@
             {{ chip_cosmetics_label }}
           </span>
         </a>
+        <a
+          href="{{ routes.collections_url }}/bundles"
+          class="collection-chip font-medium {% if selected_collection.handle == 'bundles' %}active{% endif %}"
+        >
+          {% if settings.shop_all_chip_icon_bundles != blank %}
+            <img
+              src="{{ settings.shop_all_chip_icon_bundles | image_url: width: 40, height: 40 }}"
+              alt="{{ chip_bundles_label | escape }}"
+              class="collection-chip__icon"
+              loading="lazy"
+              width="40"
+              height="40"
+            >
+          {% endif %}
+          <span class="collection-chip__label">
+            {{ chip_bundles_label }}
+          </span>
+        </a>
       </div>
 
       {% comment %} Separator {% endcomment %}
@@ -136,7 +156,7 @@
         </div>
       {% else %}
         <div
-          class="grid grid-cols-1 md:grid-cols-3 gap-4 sm:gap-6 mb-12"
+          class="grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-6 mb-12"
           data-section-id="{{ section_id }}"
         >
           {% for product in selected_collection.products %}
