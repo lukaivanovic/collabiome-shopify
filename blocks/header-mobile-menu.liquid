@@ -70,12 +70,6 @@
     {% comment %} Render category links blocks {% endcomment %}
     {% content_for 'blocks' %}
 
-    {% comment %}
-      Quiz banner for customers who don't know what to choose.
-      Uses global settings from Theme Settings > Quiz Banner.
-    {% endcomment %}
-    {% render 'quiz-banner', variant: 'mobile' %}
-
     {% if marketing_menu and marketing_menu.links.size > 0 %}
       <div>
         <ul class="list-none m-0 p-0 flex flex-col gap-2">
@@ -217,6 +211,9 @@
   "blocks": [
     {
       "type": "mobile-menu-category-links"
+    },
+    {
+      "type": "promo-banner"
     }
   ],
   "settings": [
