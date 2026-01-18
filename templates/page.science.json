@@ -227,6 +227,53 @@
         "card_description": "<p>Sve potrebne laboratorijske pretrage</p>"
       }
     },
+    "science_supplements_zMj98p": {
+      "type": "science-supplements",
+      "blocks": {
+        "benefit_mydzwM": {
+          "type": "benefit",
+          "settings": {
+            "image": "shopify://shop_images/uri_ifs___M_1567a98b-d258-4145-9cd1-625742630c1e.webp",
+            "title": "Hidratacija kože",
+            "description": "<p>Povećanje mjerenih parametara hidratacije u intervencijskim skupinama u odnosu na placebo.</p>"
+          }
+        },
+        "benefit_MJkPPB": {
+          "type": "benefit",
+          "settings": {
+            "image": "shopify://shop_images/uri_ifs___M_1567a98b-d258-4145-9cd1-625742630c1e.webp",
+            "title": "Hidratacija kože",
+            "description": "<p>Povećanje mjerenih parametara hidratacije u intervencijskim skupinama u odnosu na placebo.</p>"
+          }
+        },
+        "benefit_N387iA": {
+          "type": "benefit",
+          "settings": {
+            "image": "shopify://shop_images/uri_ifs___M_1567a98b-d258-4145-9cd1-625742630c1e.webp",
+            "title": "Hidratacija kože",
+            "description": "<p>Povećanje mjerenih parametara hidratacije u intervencijskim skupinama u odnosu na placebo.</p>"
+          }
+        }
+      },
+      "block_order": [
+        "benefit_mydzwM",
+        "benefit_MJkPPB",
+        "benefit_N387iA"
+      ],
+      "name": "Science Supplements",
+      "settings": {
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "title": "Testiranje naših nutrikozmetičkih proizvoda",
+        "description": "<p>Naši suplementi razvijeni su na temelju opsežnih kliničkih istraživanja i sustavnih pregleda znanstvene literature.<br/><br/>Oralni hidrolizirani kolagen ispituje se u randomiziranim, placebo-kontroliranim studijama, kroz različite populacije i dizajne istraživanja. U studijama se prate objektivni parametri povezani sa stanjem kože tijekom 8 do 12 tjedana redovite suplementacije.</p>",
+        "image_1": "shopify://shop_images/32134.jpg",
+        "image_1_alt": "",
+        "image_2": "shopify://shop_images/graf_69232f03-46ab-41c5-9248-01470dfc2e6d.png",
+        "image_2_alt": "",
+        "card_title": "Certificirani kolagen za tvoju kožu",
+        "card_description": "<p>Sve potrebne laboratorijske pretrage</p>"
+      }
+    },
     "science_principles_3jXqx7": {
       "type": "science-principles",
       "blocks": {
@@ -343,6 +390,7 @@
     "three_column_highlight_7MPhnC",
     "generic_stats_bCWWzK",
     "science_supplements_YMp3PE",
+    "science_supplements_zMj98p",
     "science_principles_3jXqx7",
     "left_image_text_mURNpD",
     "faq_PA9YeG",
