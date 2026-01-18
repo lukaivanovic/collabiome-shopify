@@ -95,6 +95,49 @@
         "padding_bottom": 48
       }
     },
+    "science_principles_3jXqx7": {
+      "type": "science-principles",
+      "blocks": {
+        "principle_36JxKb": {
+          "type": "principle",
+          "settings": {
+            "image_icon": "shopify://shop_images/uri_ifs___M_1567a98b-d258-4145-9cd1-625742630c1e.webp",
+            "title": "test",
+            "description": ""
+          }
+        },
+        "principle_DAVEX7": {
+          "type": "principle",
+          "settings": {
+            "image_icon": "shopify://shop_images/uri_ifs___M_1567a98b-d258-4145-9cd1-625742630c1e.webp",
+            "title": "test",
+            "description": ""
+          }
+        },
+        "principle_XGRXMD": {
+          "type": "principle",
+          "settings": {
+            "image_icon": "shopify://shop_images/uri_ifs___M_1567a98b-d258-4145-9cd1-625742630c1e.webp",
+            "title": "test",
+            "description": ""
+          }
+        }
+      },
+      "block_order": [
+        "principle_36JxKb",
+        "principle_DAVEX7",
+        "principle_XGRXMD"
+      ],
+      "name": "Science Principles",
+      "settings": {
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "title": "Science Principles",
+        "description": "Discover the science behind our products",
+        "banner_title": "test",
+        "banner_description": ""
+      }
+    },
     "left_image_text_mURNpD": {
       "type": "left-image-text",
       "name": "Image and Text",
@@ -111,20 +154,6 @@
         "button_link": "",
         "button_style": "solid",
         "button_link_target": "_self"
-      }
-    },
-    "blog_grid_HDCD7M": {
-      "type": "blog-grid",
-      "name": "Blog grid",
-      "settings": {
-        "heading": "Latest articles",
-        "description": "Describe this category",
-        "blog": "clanci",
-        "show_date": true,
-        "show_author": false,
-        "show_excerpt": true,
-        "excerpt_words": 20,
-        "show_view_all": true
       }
     },
     "faq_PA9YeG": {
@@ -157,6 +186,20 @@
         "padding_top": 40,
         "padding_bottom": 40
       }
+    },
+    "blog_grid_HDCD7M": {
+      "type": "blog-grid",
+      "name": "Blog grid",
+      "settings": {
+        "heading": "Latest articles",
+        "description": "Describe this category",
+        "blog": "clanci",
+        "show_date": true,
+        "show_author": false,
+        "show_excerpt": true,
+        "excerpt_words": 20,
+        "show_view_all": true
+      }
     }
   },
   "order": [
@@ -164,6 +207,7 @@
     "hero_93y6Qf",
     "left_image_text_6GxPn3",
     "generic_stats_bCWWzK",
+    "science_principles_3jXqx7",
     "left_image_text_mURNpD",
     "faq_PA9YeG",
     "blog_grid_HDCD7M"
