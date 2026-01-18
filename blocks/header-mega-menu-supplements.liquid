@@ -8,23 +8,27 @@
 {% enddoc %}
 
 {% liquid
-  # Prefer explicit supplements collection handles, fall back if needed
+  # Prefer block settings, then metafield, then fall back to collection products
+  assign featured_products = blank
   assign supplements_collection = collections['dodaci-prehrani'] | default: collections.supplements
 
-  # Use featured_products metafield when available, otherwise fall back to collection products
-  assign featured_products = blank
+  # Use product list from settings if available
+  if block.settings.featured_products != blank and block.settings.featured_products.size > 0
+    assign featured_products = block.settings.featured_products
+  else
+    # Fall back to metafield or collection products
+    if supplements_collection.metafields.custom and supplements_collection.metafields.custom.featured_products
+      assign featured_products = supplements_collection.metafields.custom.featured_products.value
+    endif
 
-  if supplements_collection.metafields.custom and supplements_collection.metafields.custom.featured_products
-    assign featured_products = supplements_collection.metafields.custom.featured_products.value
+    if featured_products == blank
+      assign featured_products = supplements_collection.products
+    endif
+
+    unless supplements_collection and supplements_collection != empty
+      break
+    endunless
   endif
-
-  if featured_products == blank
-    assign featured_products = supplements_collection.products
-  endif
-
-  unless supplements_collection and supplements_collection != empty
-    break
-  endunless
 %}
 
 <div
@@ -44,7 +48,7 @@
             href="{{ product.url }}"
             class="group relative flex items-end overflow-hidden bg-black text-white rounded-xl aspect-square px-3 py-3 flex-1"
           >
-            <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
+            <div class="overflow-hidden" aria-hidden="true">
               {% if product.featured_media %}
                 {{
                   product.featured_media
@@ -58,10 +62,6 @@
               {% else %}
                 <div class="w-full h-full bg-gradient-to-r from-black/60 to-black/30"></div>
               {% endif %}
-              <div
-                class="absolute inset-0 pointer-events-none"
-                style="background: linear-gradient(to top, rgba(0, 0, 0, 0.75) 0%, transparent 60%);"
-              ></div>
             </div>
 
             <div class="relative z-10 w-full flex justify-between gap-3">
@@ -101,7 +101,15 @@
       "type": "promo-banner"
     }
   ],
-  "settings": [],
+  "settings": [
+    {
+      "type": "product_list",
+      "id": "featured_products",
+      "label": "Featured products",
+      "limit": 10,
+      "info": "Select products to display in the mega menu. If no products are selected, the collection metafield or collection products will be used."
+    }
+  ],
   "presets": [
     {
       "name": "Mega menu - Supplements"
