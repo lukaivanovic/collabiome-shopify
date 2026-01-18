@@ -11,91 +11,89 @@
   "
 >
   <div class="container mx-auto px-4">
-    <div class="flex flex-col gap-10">
-      {%- comment -%} Half and half grid: Left (title + desc) and Right (two images) {%- endcomment -%}
-      <div class="flex flex-col gap-10 lg:flex-row lg:items-start">
-        {%- comment -%} Left side: Title + Description {%- endcomment -%}
-        <div class="w-full lg:w-1/2 flex flex-col gap-6">
-          {% if section.settings.title != blank %}
-            <h2 class="title-medium">{{ section.settings.title | escape }}</h2>
-          {% endif %}
-          {% if section.settings.description != blank %}
-            <div class="text-base opacity-70">{{ section.settings.description }}</div>
-          {% endif %}
-        </div>
+    {%- comment -%} Half and half grid: Left (title + desc + benefits + card) and Right (two images) {%- endcomment -%}
+    <div class="flex flex-col gap-10 lg:flex-row lg:items-start">
+      {%- comment -%} Left side: Title + Description + Benefits + Card {%- endcomment -%}
+      <div class="w-full lg:w-1/2 flex flex-col gap-6">
+        {% if section.settings.title != blank %}
+          <h2 class="title-medium">{{ section.settings.title | escape }}</h2>
+        {% endif %}
+        {% if section.settings.description != blank %}
+          <div class="text-base opacity-70">{{ section.settings.description }}</div>
+        {% endif %}
 
-        {%- comment -%} Right side: Two images stacked vertically {%- endcomment -%}
-        <div class="w-full lg:w-1/2 flex flex-col gap-4">
-          {% if section.settings.image_1 != blank %}
-            <div class="overflow-hidden rounded-2xl">
-              {{
-                section.settings.image_1
-                | image_url: width: 1600
-                | image_tag:
-                  loading: 'lazy',
-                  decoding: 'async',
-                  sizes: '(max-width: 1024px) 100vw, 50vw',
-                  class: 'w-full h-full object-cover',
-                  alt: section.settings.image_1_alt | default: section.settings.title | escape
-              }}
-            </div>
-          {% endif %}
-          {% if section.settings.image_2 != blank %}
-            <div class="overflow-hidden rounded-2xl">
-              {{
-                section.settings.image_2
-                | image_url: width: 1600
-                | image_tag:
-                  loading: 'lazy',
-                  decoding: 'async',
-                  sizes: '(max-width: 1024px) 100vw, 50vw',
-                  class: 'w-full h-full object-cover',
-                  alt: section.settings.image_2_alt | default: section.settings.title | escape
-              }}
-            </div>
-          {% endif %}
-        </div>
+        {%- comment -%} Benefits blocks: Image + Title + Description {%- endcomment -%}
+        {% if section.blocks.size > 0 %}
+          <div class="flex flex-col gap-6 mt-2">
+            {% for block in section.blocks %}
+              {% if block.type == 'benefit' %}
+                <div
+                  class="flex flex-col md:flex-row gap-4 items-start"
+                  {{ block.shopify_attributes }}
+                >
+                  {% if block.settings.image != blank %}
+                    <div class="shrink-0 w-24 h-24 md:w-32 md:h-32">
+                      {% render 'image', image: block.settings.image, class: 'w-full h-full object-cover rounded-lg' %}
+                    </div>
+                  {% endif %}
+                  <div class="flex flex-col gap-2">
+                    {% if block.settings.title != blank %}
+                      <h3 class="text-lg font-semibold">{{ block.settings.title | escape }}</h3>
+                    {% endif %}
+                    {% if block.settings.description != blank %}
+                      <div class="text-base text-foreground-secondary">{{ block.settings.description }}</div>
+                    {% endif %}
+                  </div>
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
+
+        {%- comment -%} Product-bg-secondary card with title + desc {%- endcomment -%}
+        {% if section.settings.card_title != blank or section.settings.card_description != blank %}
+          <div class="bg-product-bg-secondary rounded-2xl p-6 md:p-8 mt-2">
+            {% if section.settings.card_title != blank %}
+              <h3 class="text-xl md:text-2xl font-semibold mb-4">{{ section.settings.card_title | escape }}</h3>
+            {% endif %}
+            {% if section.settings.card_description != blank %}
+              <div class="text-base text-foreground-secondary">{{ section.settings.card_description }}</div>
+            {% endif %}
+          </div>
+        {% endif %}
       </div>
 
-      {%- comment -%} Benefits blocks: Image + Title + Description {%- endcomment -%}
-      {% if section.blocks.size > 0 %}
-        <div class="flex flex-col gap-6">
-          {% for block in section.blocks %}
-            {% if block.type == 'benefit' %}
-              <div
-                class="flex flex-col md:flex-row gap-4 items-start"
-                {{ block.shopify_attributes }}
-              >
-                {% if block.settings.image != blank %}
-                  <div class="shrink-0 w-24 h-24 md:w-32 md:h-32">
-                    {% render 'image', image: block.settings.image, class: 'w-full h-full object-cover rounded-lg' %}
-                  </div>
-                {% endif %}
-                <div class="flex flex-col gap-2">
-                  {% if block.settings.title != blank %}
-                    <h3 class="text-lg font-semibold">{{ block.settings.title | escape }}</h3>
-                  {% endif %}
-                  {% if block.settings.description != blank %}
-                    <div class="text-base text-foreground-secondary">{{ block.settings.description }}</div>
-                  {% endif %}
-                </div>
-              </div>
-            {% endif %}
-          {% endfor %}
-        </div>
-      {% endif %}
-
-      {%- comment -%} Product-bg-secondary card with title + desc {%- endcomment -%}
-      {% if section.settings.card_title != blank or section.settings.card_description != blank %}
-        <div class="bg-product-bg-secondary rounded-2xl p-6 md:p-8">
-          {% if section.settings.card_title != blank %}
-            <h3 class="text-xl md:text-2xl font-semibold mb-4">{{ section.settings.card_title | escape }}</h3>
-          {% endif %}
-          {% if section.settings.card_description != blank %}
-            <div class="text-base text-foreground-secondary">{{ section.settings.card_description }}</div>
-          {% endif %}
-        </div>
-      {% endif %}
+      {%- comment -%} Right side: Two images stacked vertically {%- endcomment -%}
+      <div class="w-full lg:w-1/2 flex flex-col gap-4">
+        {% if section.settings.image_1 != blank %}
+          <div class="overflow-hidden rounded-2xl">
+            {{
+              section.settings.image_1
+              | image_url: width: 1600
+              | image_tag:
+                loading: 'lazy',
+                decoding: 'async',
+                sizes: '(max-width: 1024px) 100vw, 50vw',
+                class: 'w-full h-full object-cover',
+                alt: section.settings.image_1_alt | default: section.settings.title | escape
+            }}
+          </div>
+        {% endif %}
+        {% if section.settings.image_2 != blank %}
+          <div class="overflow-hidden rounded-2xl">
+            {{
+              section.settings.image_2
+              | image_url: width: 1600
+              | image_tag:
+                loading: 'lazy',
+                decoding: 'async',
+                sizes: '(max-width: 1024px) 100vw, 50vw',
+                class: 'w-full h-full object-cover',
+                alt: section.settings.image_2_alt | default: section.settings.title | escape
+            }}
+          </div>
+        {% endif %}
+      </div>
     </div>
   </div>
 </section>
