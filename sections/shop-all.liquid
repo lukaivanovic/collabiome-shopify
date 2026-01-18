@@ -27,13 +27,15 @@
     Help banner for customers who don't know what to choose.
     Uses global settings from Theme Settings > Quiz Banner.
   {% endcomment %}
-  {% if section.settings.show_quiz_banner %}
-    {% render 'quiz-banner', variant: 'desktop' %}
-  {% endif %}
+  {% comment %}
+    {% if section.settings.show_quiz_banner %}
+      {% render 'quiz-banner', variant: 'desktop' %}
+    {% endif %}
+  {% endcomment %}
 
   {% if section.settings.title != blank %}
-    <div class="mb-6 text-left">
-      <h1 class="text-5xl!">{{ selected_collection.title | default: 'Svi proizvodi' }}</h1>
+    <div class="mb-6 text-center hidden">
+      <h1 class="text-xl!">{{ selected_collection.title | default: 'Svi proizvodi' }}</h1>
       <p class="text-secondary mt-1">{{ selected_collection.description | default: 'Opis kolekcije' }}</p>
     </div>
   {% endif %}
@@ -52,7 +54,7 @@
       assign chip_bundles_label = settings.shop_all_chip_label_bundles | default: chip_bundles_default_label
     %}
 
-    <div class="flex md:flex-row md:items-center items-start flex-col gap-2 mb-12 pb-4  flex-wrap">
+    <div class="flex md:flex-col md:items-center items-start flex-col gap-2 mb-12 pb-4  flex-wrap">
       <div class="flex flex-wrap items-center gap-2">
         <a
           href="{{ routes.collections_url }}/all"
@@ -109,8 +111,8 @@
           </span>
         </a>
         <a
-          href="{{ routes.collections_url }}/bundles"
-          class="collection-chip font-medium {% if selected_collection.handle == 'bundles' %}active{% endif %}"
+          href="{{ routes.collections_url }}/paketi"
+          class="collection-chip font-medium {% if selected_collection.handle == 'paketi' %}active{% endif %}"
         >
           {% if settings.shop_all_chip_icon_bundles != blank %}
             <img
