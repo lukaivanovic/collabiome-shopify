@@ -125,7 +125,13 @@
             "mega-menu-supplements": {
               "type": "header-mega-menu-supplements",
               "static": true,
-              "settings": {},
+              "settings": {
+                "featured_products": [
+                  "kolagen-boost",
+                  "kolagen-nutriage",
+                  "recupera"
+                ]
+              },
               "blocks": {}
             }
           },
