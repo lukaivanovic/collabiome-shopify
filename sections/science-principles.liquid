@@ -1,0 +1,187 @@
+{% liquid
+  assign section_id = section.settings.custom_id | default: section.id
+%}
+
+<section
+  id="{{ section_id }}"
+  class="relative"
+  style="
+    padding-top: {{ section.settings.padding_top }}px;
+    padding-bottom: {{ section.settings.padding_bottom }}px;
+  "
+>
+  <div class="container mx-auto px-4">
+    <div class="flex flex-col gap-10">
+      {%- comment -%} Header and Description {%- endcomment -%}
+      <div class="container-small mx-auto max-w-4xl text-center">
+        {% if section.settings.title != blank %}
+          <h2 class="title-medium">{{ section.settings.title | escape }}</h2>
+        {% endif %}
+        {% if section.settings.description != blank %}
+          <p class="text-base opacity-70 mt-2">{{ section.settings.description }}</p>
+        {% endif %}
+      </div>
+
+      {%- comment -%} Blocks with icon + text underneath {%- endcomment -%}
+      {% if section.blocks.size > 0 %}
+        <div class="grid grid-cols-1 gap-6">
+          {% for block in section.blocks %}
+            {% if block.type == 'principle' %}
+              <div class="border-b border-neutral-200 pb-6 mb-6 last:mb-0" {{ block.shopify_attributes }}>
+                {% if block.settings.image_icon != blank %}
+                  <div class="mb-4 size-8">
+                    {% render 'image', image: block.settings.image_icon, class: 'w-full h-full object-cover' %}
+                  </div>
+                {% endif %}
+
+                {% if block.settings.title != blank %}
+                  <div class="text-base font-[550]">
+                    {{ block.settings.title | escape }}
+                  </div>
+                {% endif %}
+
+                {% if block.settings.description != blank %}
+                  <div class="text-base text-foreground-secondary">
+                    {{ block.settings.description }}
+                  </div>
+                {% endif %}
+              </div>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endif %}
+
+      {%- comment -%} Simple Banner with image, header and description {%- endcomment -%}
+      {% if section.settings.banner_image != blank
+        or section.settings.banner_title != blank
+        or section.settings.banner_description != blank
+      %}
+        <div class="relative overflow-hidden rounded-2xl bg-neutral-100">
+          {% if section.settings.banner_image != blank %}
+            <div class="w-full overflow-hidden">
+              {{
+                section.settings.banner_image
+                | image_url: width: 1200
+                | image_tag:
+                  loading: 'lazy',
+                  decoding: 'async',
+                  sizes: '100vw',
+                  class: 'w-full h-auto object-cover',
+                  alt: section.settings.banner_title
+                | default: 'Banner image'
+              }}
+            </div>
+          {% endif %}
+
+          {% if section.settings.banner_title != blank or section.settings.banner_description != blank %}
+            <div class="px-6 py-8 md:px-10 md:py-12">
+              {% if section.settings.banner_title != blank %}
+                <h3 class="text-2xl md:text-3xl font-semibold mb-3">
+                  {{ section.settings.banner_title | escape }}
+                </h3>
+              {% endif %}
+              {% if section.settings.banner_description != blank %}
+                <div class="text-base text-foreground-secondary">
+                  {{ section.settings.banner_description }}
+                </div>
+              {% endif %}
+            </div>
+          {% endif %}
+        </div>
+      {% endif %}
+    </div>
+  </div>
+</section>
+
+{% schema %}
+{
+  "name": "Science Principles",
+  "tag": "section",
+  "class": "section-science-principles",
+  "settings": [
+    {
+      "type": "range",
+      "id": "padding_top",
+      "label": "Padding top",
+      "min": 0,
+      "max": 100,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "label": "Padding bottom",
+      "min": 0,
+      "max": 100,
+      "unit": "px",
+      "default": 60
+    },
+    {
+      "type": "header",
+      "content": "Content"
+    },
+    {
+      "type": "text",
+      "id": "title",
+      "label": "Heading",
+      "default": "Science Principles"
+    },
+    {
+      "type": "textarea",
+      "id": "description",
+      "label": "Description",
+      "default": "Discover the science behind our products"
+    },
+    {
+      "type": "header",
+      "content": "Banner"
+    },
+    {
+      "type": "image_picker",
+      "id": "banner_image",
+      "label": "Banner image"
+    },
+    {
+      "type": "text",
+      "id": "banner_title",
+      "label": "Banner heading"
+    },
+    {
+      "type": "richtext",
+      "id": "banner_description",
+      "label": "Banner description"
+    }
+  ],
+  "max_blocks": 10,
+  "blocks": [
+    {
+      "type": "principle",
+      "name": "Principle",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image_icon",
+          "label": "Icon"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "Title"
+        },
+        {
+          "type": "textarea",
+          "id": "description",
+          "label": "Description"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "Science Principles",
+      "category": "Generic"
+    }
+  ]
+}
+{% endschema %}
