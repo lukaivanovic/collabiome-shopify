@@ -51,7 +51,7 @@
     </div>
     {% unless hide_buy_form %}
       {%
-        render 'product-buy-form',
+        render 'product-buy-form-modal',
         product: product,
         section_id: section.id,
         product_form_id: 'product-card-' | append: product.id,

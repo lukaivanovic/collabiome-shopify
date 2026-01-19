@@ -1,0 +1,236 @@
+{% doc %}
+  Product Buy Form (unified)
+
+  Renders a reusable product purchase form that works on product pages and product cards.
+
+  @param {product} product - Product object (required)
+  @param {boolean} show_dynamic_checkout - Display dynamic checkout buttons (default: false)
+  @param {boolean} gift_card_recipient_feature_active - Hide errors when gift card recipient feature is active (default: false)
+  @param {string} section_id - Section identifier used for DOM scoping (optional)
+  @param {string} product_form_id - Explicit form identifier (optional)
+  @param {boolean} quantity_rule_soldout - Flag from parent context indicating quantity rule sold out (default: false)
+  @param {string} button_variant - Button style variant (default | neutral_large)
+  @param {number} free_delivery_threshold - Price threshold (in cents) for free delivery label (default: 5000)
+  @param {string} variant_selector_type - Variant selector type: 'horizontal' or 'select' (default: 'horizontal')
+{% enddoc %}
+
+{% liquid
+  if product == blank
+    echo '<!-- Error: product required for product-buy-form -->'
+    break
+  endif
+
+  assign show_dynamic_checkout = show_dynamic_checkout | default: false
+  assign gift_card_recipient_feature_active = gift_card_recipient_feature_active | default: false
+  assign section_id_value = section_id | default: 'main-product'
+  assign form_id_value = product_form_id | default: section_id_value | append: '-product-form'
+  assign quantity_rule_soldout = quantity_rule_soldout | default: false
+  assign button_variant = button_variant | default: 'default'
+  assign free_delivery_threshold = free_delivery_threshold | default: 5000
+  assign variant_selector_type = variant_selector_type | default: 'horizontal'
+
+  assign selected_variant = product.selected_or_first_available_variant | default: product.first_available_variant
+
+  if selected_variant != blank
+    assign check_against_inventory = true
+    if selected_variant.inventory_management != 'shopify' or selected_variant.inventory_policy == 'continue'
+      assign check_against_inventory = false
+    endif
+    if selected_variant.quantity_rule.min > selected_variant.inventory_quantity and check_against_inventory
+      assign quantity_rule_soldout = true
+    endif
+  endif
+
+  assign button_classes = 'button flex items-center gap-2 h-14 px-7 text-base [background:var(--product-button-background)] [color:var(--product-button-text-color)] w-full'
+%}
+
+{% liquid
+  # Determine initial variant state
+  if selected_variant == blank
+    assign initial_state = 'unavailable'
+  elsif selected_variant.available == false or quantity_rule_soldout
+    assign initial_state = 'soldout'
+  else
+    assign initial_state = 'available'
+  endif
+%}
+
+<button
+  type="button"
+  data-drawer-trigger="product-variant-drawer-{{ section_id_value }}-{{ product.id }}"
+>
+  open
+</button>
+
+<generic-drawer
+  id="product-variant-drawer-{{ section_id_value }}-{{ product.id }}"
+  data-role="product-variant"
+  class="fixed inset-0 z-[9999] flex items-end justify-center"
+  aria-hidden="true"
+>
+  <div
+    class="fixed inset-0 bg-black/40 transition-opacity duration-300"
+    data-drawer-overlay
+  ></div>
+
+  <div
+    class="relative w-full max-w-2xl bg-white rounded-t-3xl shadow-xl transform transition-transform duration-300 p-6"
+    data-drawer-content
+  >
+    <div class="flex items-center justify-between mb-4">
+      <h2 class="text-lg font-semibold">
+        {{ product.title }}
+      </h2>
+      <button
+        type="button"
+        class="p-2 rounded-full hover:bg-neutral-100"
+        data-drawer-close
+      >
+        {{ 'icon-x.svg' | inline_asset_content }}
+      </button>
+    </div>
+
+    <product-form
+      class="product-form"
+      data-hide-errors="{{ gift_card_recipient_feature_active }}"
+      data-section-id="{{ section_id_value }}"
+      data-product-id="{{ product.id }}"
+      data-product-data-id="product-data-{{ product.id }}"
+      data-product-data-fallback="product-data"
+      data-variant-state="{{ initial_state }}"
+      data-variant-id="{% if selected_variant != blank %}{{ selected_variant.id }}{% endif %}"
+      data-variant-price="{% if selected_variant != blank %}{{ selected_variant.price }}{% endif %}"
+    >
+      <div class="product-form__error-message-wrapper" role="alert" hidden>
+        <span class="svg-wrapper">
+          {{- 'icon-error.svg' | inline_asset_content -}}
+        </span>
+        <span class="product-form__error-message"></span>
+      </div>
+
+      {%- form 'product',
+        product,
+        id: form_id_value,
+        class: 'form',
+        novalidate: 'novalidate',
+        data-type: 'add-to-cart-form'
+      -%}
+        <input
+          type="hidden"
+          name="id"
+          value="{% if selected_variant != blank %}{{ selected_variant.id }}{% endif %}"
+          {% if selected_variant == blank or selected_variant.available == false or quantity_rule_soldout %}
+            disabled
+          {% endif %}
+          data-variant-input
+        >
+        <div class="flex flex-col items-center justify-end gap-4 @container/product-variant-selector">
+          {% unless product.has_only_default_variant %}
+            <div class="w-full">
+              {% render 'product-variant-selector-horizontal', product: product %}
+            </div>
+          {% endunless %}
+
+          <div class="product-form__buttons w-full">
+            <button
+              id="ProductSubmitButton-{{ section_id_value }}"
+              type="submit"
+              name="add"
+              class="{{ button_classes }}"
+              data-add-to-cart
+              data-text-available="{{ 'products.product.add_to_cart' | t }}"
+              data-text-soldout="{{ 'products.product.sold_out' | t }}"
+              data-text-unavailable="{{ 'products.product.unavailable' | t }}"
+              {% if selected_variant == blank or selected_variant.available == false or quantity_rule_soldout %}
+                disabled
+              {% endif %}
+            >
+              <div class="size-6">
+                {{ 'icon-cart.svg' | inline_asset_content }}
+              </div>
+              <span data-add-to-cart-text>
+                {%- if selected_variant == blank -%}
+                  {{ 'products.product.unavailable' | t }}
+                {%- elsif selected_variant.available == false or quantity_rule_soldout -%}
+                  {{ 'products.product.sold_out' | t }}
+                {%- else -%}
+                  {{ 'products.product.add_to_cart' | t }}
+                  (
+                  {%- if selected_variant.compare_at_price > selected_variant.price -%}
+                    <s>{{ selected_variant.compare_at_price | money_with_currency }}</s>
+                    {{ ' ' }}
+                  {%- endif -%}
+                  {{ selected_variant.price | money_with_currency }}
+                  )
+                {%- endif -%}
+              </span>
+            </button>
+            {%- if show_dynamic_checkout -%}
+              {{ form | payment_button }}
+            {%- endif -%}
+          </div>
+        </div>
+      {%- endform -%}
+    </product-form>
+  </div>
+</generic-drawer>
+
+<script src="{{ 'drawer.js' | asset_url }}" defer="defer"></script>
+<script>
+  // Move product variant drawers to body to escape overflow constraints
+  (function () {
+    const drawerId = 'product-variant-drawer-{{ section_id_value }}-{{ product.id }}';
+    const drawer = document.getElementById(drawerId);
+
+    if (drawer && drawer.parentElement !== document.body) {
+      // Move drawer to body to escape overflow constraints
+      document.body.appendChild(drawer);
+    }
+  })();
+</script>
+
+{% stylesheet %}
+  /* Product variant drawer (bottom sheet) - Full screen, escapes overflow */
+  generic-drawer[data-role='product-variant'] {
+    visibility: hidden;
+    pointer-events: none;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    z-index: 9999 !important;
+    margin: 0 !important;
+    padding: 0 !important;
+  }
+
+  generic-drawer[data-role='product-variant'][data-active='true'] {
+    visibility: visible;
+    pointer-events: auto;
+  }
+
+  generic-drawer[data-role='product-variant'] [data-drawer-overlay] {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+  }
+
+  generic-drawer[data-role='product-variant'][data-active='true'] [data-drawer-overlay] {
+    opacity: 1;
+  }
+
+  generic-drawer[data-role='product-variant'] [data-drawer-content] {
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    position: relative !important;
+    z-index: 10000 !important;
+  }
+
+  generic-drawer[data-role='product-variant'][data-active='true'] [data-drawer-content] {
+    transform: translateY(0);
+  }
+{% endstylesheet %}
