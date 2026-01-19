@@ -55,12 +55,32 @@
   endif
 %}
 
-<button
-  type="button"
-  data-drawer-trigger="product-variant-drawer-{{ section_id_value }}-{{ product.id }}"
->
-  open
-</button>
+<div class="product-form__buttons w-full">
+  <button
+    data-drawer-trigger="product-variant-drawer-{{ section_id_value }}-{{ product.id }}"
+    class="{{ button_classes }}"
+  >
+    <div class="size-6">
+      {{ 'icon-cart.svg' | inline_asset_content }}
+    </div>
+    <span data-add-to-cart-text>
+      {%- if selected_variant == blank -%}
+        {{ 'products.product.unavailable' | t }}
+      {%- elsif selected_variant.available == false or quantity_rule_soldout -%}
+        {{ 'products.product.sold_out' | t }}
+      {%- else -%}
+        {{ 'products.product.add_to_cart' | t }}
+        (
+        {%- if selected_variant.compare_at_price > selected_variant.price -%}
+          <s>{{ selected_variant.compare_at_price | money_with_currency }}</s>
+          {{ ' ' }}
+        {%- endif -%}
+        {{ selected_variant.price | money_with_currency }}
+        )
+      {%- endif -%}
+    </span>
+  </button>
+</div>
 
 <generic-drawer
   id="product-variant-drawer-{{ section_id_value }}-{{ product.id }}"
