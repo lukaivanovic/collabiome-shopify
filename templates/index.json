@@ -13,16 +13,16 @@
       "type": "hero",
       "name": "Hero",
       "settings": {
-        "kicker": "Collabiome",
-        "title": "Purify. track. Self-cleaning.",
-        "description": "<p>Collagen Boost is the #1 choice for millions of women around the world.</p>",
+        "kicker": "collabiome",
+        "title": "Gdje se susreću koža i znanost",
+        "description": "<p>Collabiome spaja kolagen, mikrobiom i napredne formulacije za zdravu kožu iznutra i izvana.<br/></p>",
         "show_buttons": true,
-        "button_label": "Shop Exclusive",
+        "button_label": "istraži collabiome",
         "button_link": "shopify://pages/kontakt",
         "button_2_label": "fsdfs",
         "button_2_link": "",
         "video_url": "",
-        "image": "shopify://shop_images/gel_za_ciscenje_lica_model_98cc49ce-9702-48f0-b724-d6bc954389a9.png",
+        "image": "shopify://shop_images/Untitled_design_7.webp",
         "overlay_color": "#000000",
         "overlay_opacity": 32
       }
