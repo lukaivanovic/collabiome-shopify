@@ -43,8 +43,8 @@
       },
       "name": "Product",
       "settings": {
-        "title": "Featured products",
-        "description": "Discover our latest products",
+        "title": "Odabrano za tebe",
+        "description": "Pažljivo odabrani proizvodi za svakodnevnu rutinu njege",
         "products": [
           "complete-collagen-nocna-krema",
           "collagen-anti-pollution-moisturizer",
