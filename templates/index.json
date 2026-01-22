@@ -60,28 +60,30 @@
         "category_card_xGiMd4": {
           "type": "category_card",
           "settings": {
-            "image": "shopify://shop_images/gel_za_ciscenje_lica_model_51bb8d8d-6cda-4b2e-962c-4b50bd8fa595.png",
-            "title": "Category",
-            "description": "Describe this category",
-            "button_text": "Button text",
+            "image": "shopify://shop_images/Boost_u_novom_ruhu_12.png",
+            "title": "Njega kože",
+            "description": "Kozmetički proizvodi za svakodnevnu rutinu njege lica",
+            "button_text": "Istraži",
             "button_url": ""
           }
         },
         "category_card_QUi6mt": {
           "type": "category_card",
           "settings": {
-            "title": "Category",
-            "description": "Describe this category",
-            "button_text": "Button text",
+            "image": "shopify://shop_images/nutri_spf_0dea685d-bee5-463a-8494-55cb9359f722.png",
+            "title": "Koža,kosa i nokti",
+            "description": "Nutrikozmetički dodaci prehrani koji iznutra podržavaju zdrav izgled kože, kose i noktiju",
+            "button_text": "istraži",
             "button_url": ""
           }
         },
         "category_card_gXYCd3": {
           "type": "category_card",
           "settings": {
-            "title": "Category",
-            "description": "Describe this category",
-            "button_text": "Button text",
+            "image": "shopify://shop_images/Boost_u_novom_ruhu_13.png",
+            "title": "Zglobovi",
+            "description": "Dodaci prehrani za podršku pokretljivosti, fleksibilnosti i općem zdravlju zglobova i vezivnog tkiva.",
+            "button_text": "istraži",
             "button_url": ""
           }
         }
@@ -93,8 +95,8 @@
       ],
       "name": "Generic categories",
       "settings": {
-        "title": "Generic categories",
-        "description": "Describe this category"
+        "title": "Sve što tvoje tijelo treba",
+        "description": "Od kozmetike do dodataka prehrani, Collabiome nudi cjelovitu podršku za kožu, kosu, nokte i zglobove."
       }
     },
     "rotating_text_DjiUXD": {
