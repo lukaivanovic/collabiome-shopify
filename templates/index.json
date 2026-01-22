@@ -116,8 +116,8 @@
       "type": "blog-grid",
       "name": "Blog posts",
       "settings": {
-        "heading": "Latest articles",
-        "description": "Describe this category",
+        "heading": "Collabiome Journal",
+        "description": "Inspiracija, znanost i praktični savjeti za zdravu kožu i tijelo – iznutra i izvana.",
         "blog": "clanci",
         "show_date": true,
         "show_author": false,
