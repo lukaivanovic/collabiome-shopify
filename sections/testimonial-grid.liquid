@@ -34,13 +34,23 @@
           assign t_result = 'now' | date: '%N' | modulo: diff
         endif
 
-        assign v1 = videos[0]
-        assign v2 = videos[1]
-        assign v3 = videos[2]
-        assign v4 = videos[3]
-        assign t1 = texts[0]
-        assign t2 = texts[1]
-        assign t3 = texts[2]
+        if v_total > 0
+          assign v1 = videos[v_result]
+          assign v_i2 = v_result | plus: 1 | modulo: v_total
+          assign v2 = videos[v_i2]
+          assign v_i3 = v_result | plus: 2 | modulo: v_total
+          assign v3 = videos[v_i3]
+          assign v_i4 = v_result | plus: 3 | modulo: v_total
+          assign v4 = videos[v_i4]
+        endif
+
+        if t_total > 0
+          assign t1 = texts[t_result]
+          assign t_i2 = t_result | plus: 1 | modulo: t_total
+          assign t2 = texts[t_i2]
+          assign t_i3 = t_result | plus: 2 | modulo: t_total
+          assign t3 = texts[t_i3]
+        endif
       %}
 
       <div class="testimonial-grid__column">
