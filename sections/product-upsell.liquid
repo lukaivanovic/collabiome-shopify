@@ -21,7 +21,7 @@
         {% endif %}
       </div>
 
-      <div class="mt-12 hidden gap-8 md:grid md:grid-cols-2 lg:grid-cols-3">
+      <div class="mt-12 hidden gap-8 md:grid md:grid-cols-2 lg:grid-cols-3 md:items-stretch">
         {% for upsell_item in upsell_metafield %}
           {% render 'product-upsell-card',
             product: upsell_item.product.value,

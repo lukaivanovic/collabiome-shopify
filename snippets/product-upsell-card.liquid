@@ -11,7 +11,7 @@
 {% enddoc %}
 
 <div class="product-upsell-card flex h-full flex-col items-center">
-  <div class="relative w-full bg-white rounded-t-full p-4 pb-6">
+  <div class="relative w-full bg-white rounded-t-full p-4 pb-6 shrink-0">
     <div class="relative aspect-square overflow-hidden rounded-full bg-gray-100">
       {% render 'image', image: image, class: 'absolute inset-0 h-full w-full object-cover' %}
     </div>
@@ -21,17 +21,22 @@
     </div>
   </div>
 
-  <div class="w-full  bg-white rounded-b-xl p-4 pt-6 text-center flex flex-col gap-4">
-    <div>
-      <h3 class="mb-2 text-xl font-semibold">{{ title }}</h3>
+  <div class="w-full flex flex-1 flex-col gap-4 bg-white rounded-b-xl p-4 pt-6 text-center">
+    <div class="min-h-0">
+      <h3 class="mb-2 text-xl font-semibold line-clamp-2">{{ title }}</h3>
 
-      <p class="text-sm text-gray-600">
+      <p class="text-sm text-gray-600 line-clamp-3">
         {{ description }}
       </p>
     </div>
 
-    <div class="border-t border-neutral-100 pt-4">
-      {% render 'product-card-mini', product: product, show_dynamic_checkout: false, hide_buy_form: true %}
+    <div class="mt-auto border-t border-neutral-100 pt-4">
+      {% render 'product-card-mini',
+        product: product,
+        show_dynamic_checkout: false,
+        hide_buy_form: true,
+        clamp_title: true
+      %}
     </div>
   </div>
 </div>

@@ -25,7 +25,7 @@
           </div>
         {% endif %}
         <div class="product-videos__grid">
-          {% for video in videos %}
+          {% for video in videos limit: 4 %}
             {% liquid
               assign video_media = video.value | default: video
             %}
@@ -83,19 +83,22 @@
 
 {% stylesheet %}
   .product-videos__grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
     gap: 2rem;
   }
 
   .product-videos__item {
-    width: 100%;
+    flex: 0 0 calc(25% - 1.5rem);
+    max-width: calc(25% - 1.5rem);
     position: relative;
   }
 
   .product-videos__media {
     aspect-ratio: 9 / 16;
     width: 100%;
+    max-height: 560px;
     overflow: hidden;
     border-radius: var(--style-border-radius-cards, 12px);
     position: relative;
@@ -137,8 +140,8 @@
 
   @media (max-width: 768px) {
     .product-videos__grid {
-      display: flex;
-      flex-direction: row;
+      flex-wrap: nowrap;
+      justify-content: flex-start;
       gap: 1.5rem;
       overflow-x: auto;
       overflow-y: hidden;
@@ -154,8 +157,13 @@
 
     .product-videos__item {
       flex: 0 0 auto;
+      max-width: none;
       width: 280px;
       scroll-snap-align: start;
+    }
+
+    .product-videos__media {
+      max-height: none;
     }
   }
 {% endstylesheet %}

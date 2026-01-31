@@ -8,6 +8,7 @@
   @param {boolean} hide_buy_form - Hide the mini buy form (default: false)
   @param {boolean} show_dynamic_checkout - Display accelerated checkout button (default: true)
   @param {string} card_class - Additional utility classes for the wrapper
+  @param {boolean} clamp_title - Clamp product title to 2 lines (default: false)
 {% enddoc %}
 
 {% liquid
@@ -17,6 +18,7 @@
     assign show_dynamic_checkout = true
   endif
   assign card_class = card_class | default: ''
+  assign clamp_title = clamp_title | default: false
   assign passed_headline_text = headline_text | default: ''
   assign headline_text = ''
 
@@ -57,8 +59,8 @@
     {% endif %}
   </a>
 
-  <div class="flex flex-1 flex-col gap-1 text-left min-w-0">
-    <h3 class="text-foreground">
+  <div class="flex flex-1 flex-col gap-1 text-left min-w-0 min-h-0">
+    <h3 class="text-foreground {% if clamp_title %}line-clamp-2{% endif %}">
       <a href="{{ product.url }}" class="transition hover:opacity-80">
         {{ product.title | escape }}
       </a>

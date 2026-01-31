@@ -45,8 +45,6 @@
   </div>
 </div>
 
-{% content_for 'block', type: 'rotating-text', id: 'products-row-rotating-text' %}
-
 {% javascript %}
   document.addEventListener('DOMContentLoaded', function () {
     const script = document.createElement('script');
@@ -165,7 +163,7 @@
   @media (max-width: 768px) {
     .products-row {
       padding-top: 120px;
-      padding-bottom: 160px;
+      padding-bottom: 120px;
     }
 
     .products-row__carousel {

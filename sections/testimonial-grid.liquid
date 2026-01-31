@@ -50,6 +50,8 @@
           assign t2 = texts[t_i2]
           assign t_i3 = t_result | plus: 2 | modulo: t_total
           assign t3 = texts[t_i3]
+          assign t_i4 = t_result | plus: 3 | modulo: t_total
+          assign t4 = texts[t_i4]
         endif
       %}
 
@@ -70,7 +72,7 @@
       <div class="testimonial-grid__column">
         {% render 'testimonial-card-video', entry: v4 %}
         <article class="testimonial-grid__item bg-green">
-          {% render 'testimonial-card-text', entry: t2 %}
+          {% render 'testimonial-card-text', entry: t4 %}
         </article>
       </div>
 
