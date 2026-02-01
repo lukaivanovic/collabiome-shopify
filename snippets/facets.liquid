@@ -28,7 +28,7 @@
               <button
                 type="button"
                 data-select-button
-                class="flex items-center justify-between gap-2 px-4 h-8 bg-transparent border border-black rounded-full text-sm font-medium text-black cursor-pointer transition-all hover:opacity-100 opacity-50 whitespace-nowrap w-full md:w-auto"
+                class="flex items-center justify-between gap-1 px-4 h-8 bg-transparent border border-black rounded-full text-sm font-medium text-black cursor-pointer transition-all whitespace-nowrap w-full md:w-auto"
                 aria-expanded="false"
               >
                 <span>{{ filter.label }}</span>
@@ -37,13 +37,13 @@
                 </span>
               </button>
               <div
-                class="absolute top-[calc(100%+0.25rem)] left-0 z-50 min-w-[200px] max-w-[280px] w-full md:w-auto max-h-[300px] overflow-y-auto bg-white border border-neutral-200 rounded-md shadow-lg hidden"
+                class="absolute top-[calc(100%+0.25rem)] left-0 z-50 min-w-[200px] max-w-[280px] w-full md:w-auto max-h-[300px] overflow-y-auto bg-white border border-black rounded-md shadow-lg hidden"
                 data-select-panel
               >
                 <ul class="list-none p-2 m-0 flex flex-col gap-1">
                   {% for value in filter.values %}
                     <li class="block">
-                      <label class="flex items-center gap-2 cursor-pointer py-1.5 px-2 rounded text-sm transition-colors hover:bg-gray-100">
+                      <label class="flex items-center gap-2 cursor-pointer py-1.5 px-2 rounded text-sm transition-colors hover:bg-neutral-100">
                         <input
                           type="checkbox"
                           name="{{ filter.param_name }}"
@@ -58,7 +58,7 @@
                         >
                         <span class="flex items-center gap-1 text-black">
                           {{ value.label }}
-                          <span class="text-gray-500 font-normal">({{ value.count }})</span>
+                          <span class="text-black/70 font-normal">({{ value.count }})</span>
                         </span>
                       </label>
                     </li>
@@ -72,7 +72,7 @@
               <button
                 type="button"
                 data-select-button
-                class="flex items-center justify-between gap-2 px-4 h-8 bg-transparent border border-black rounded-full text-sm font-medium text-black cursor-pointer transition-all hover:opacity-100 opacity-50 whitespace-nowrap w-full md:w-auto"
+                class="flex items-center justify-between gap-1 px-4 h-8 bg-transparent border border-black rounded-full text-sm font-medium text-black cursor-pointer transition-all whitespace-nowrap w-full md:w-auto"
                 aria-expanded="false"
               >
                 <span>{{ filter.label }}</span>
@@ -81,12 +81,12 @@
                 </span>
               </button>
               <div
-                class="absolute top-[calc(100%+0.25rem)] left-0 z-50 min-w-[200px] max-w-[280px] w-full md:w-auto max-h-[300px] overflow-y-auto bg-white border border-neutral-200 rounded-md shadow-lg hidden"
+                class="absolute top-[calc(100%+0.25rem)] left-0 z-50 min-w-[200px] max-w-[280px] w-full md:w-auto max-h-[300px] overflow-y-auto bg-white border border-black rounded-md shadow-lg hidden"
                 data-select-panel
               >
                 <ul class="list-none p-2 m-0 flex flex-col gap-1">
                   <li class="block">
-                    <label class="flex items-center gap-2 cursor-pointer py-1.5 px-2 rounded text-sm transition-colors hover:bg-gray-100">
+                    <label class="flex items-center gap-2 cursor-pointer py-1.5 px-2 rounded text-sm transition-colors hover:bg-neutral-100">
                       <input
                         type="checkbox"
                         name="{{ filter.param_name }}"
@@ -101,12 +101,12 @@
                       >
                       <span class="flex items-center gap-1 text-black">
                         {{ filter.true_value.label }}
-                        <span class="text-gray-500 font-normal">({{ filter.true_value.count }})</span>
+                        <span class="text-black/70 font-normal">({{ filter.true_value.count }})</span>
                       </span>
                     </label>
                   </li>
                   <li class="block">
-                    <label class="flex items-center gap-2 cursor-pointer py-1.5 px-2 rounded text-sm transition-colors hover:bg-gray-100">
+                    <label class="flex items-center gap-2 cursor-pointer py-1.5 px-2 rounded text-sm transition-colors hover:bg-neutral-100">
                       <input
                         type="checkbox"
                         name="{{ filter.param_name }}"
@@ -121,7 +121,7 @@
                       >
                       <span class="flex items-center gap-1 text-black">
                         {{ filter.false_value.label }}
-                        <span class="text-gray-500 font-normal">({{ filter.false_value.count }})</span>
+                        <span class="text-black/70 font-normal">({{ filter.false_value.count }})</span>
                       </span>
                     </label>
                   </li>
@@ -130,7 +130,7 @@
             </facet-select>
 
           {% when 'price_range' %}
-            <div class="flex flex-col md:flex-row md:items-center items-start gap-3 px-4 h-8 bg-transparent border border-black rounded-full w-full opacity-50 transition-all hover:opacity-100">
+            <div class="flex flex-col md:flex-row md:items-center items-start gap-3 px-4 h-8 bg-transparent border border-black rounded-full w-full">
               <label class="text-sm font-medium text-black whitespace-nowrap">{{ filter.label }}</label>
               <div class="flex gap-2 items-center w-full md:w-auto">
                 <label class="flex items-center gap-1 text-sm text-black">
@@ -140,7 +140,7 @@
                     name="{{ filter.min_value.param_name }}"
                     value="{{ filter.min_value.value | default: '' }}"
                     placeholder="{{ filter.range_min | money_without_currency }}"
-                    class="px-2 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 w-20 md:w-20 flex-1 md:flex-initial"
+                    class="px-2 py-1.5 border border-black rounded text-sm text-black focus:outline-none focus:ring-2 focus:ring-black/20 w-20 md:w-20 flex-1 md:flex-initial"
                   >
                 </label>
                 <label class="flex items-center gap-1 text-sm text-black">
@@ -150,7 +150,7 @@
                     name="{{ filter.max_value.param_name }}"
                     value="{{ filter.max_value.value | default: '' }}"
                     placeholder="{{ filter.range_max | money_without_currency }}"
-                    class="px-2 py-1.5 border border-gray-300 rounded text-sm focus:outline-none focus:border-blue-500 focus:ring-1 focus:ring-blue-500 w-20 md:w-20 flex-1 md:flex-initial"
+                    class="px-2 py-1.5 border border-black rounded text-sm text-black focus:outline-none focus:ring-2 focus:ring-black/20 w-20 md:w-20 flex-1 md:flex-initial"
                   >
                 </label>
               </div>
@@ -161,12 +161,12 @@
       {% comment %} Clear all button {% endcomment %}
       <a
         href="{{ collection.url }}"
-        class="px-4 h-8 flex items-center justify-center bg-transparent border border-black rounded-full text-sm font-medium text-black no-underline transition-all hover:opacity-100 opacity-50 whitespace-nowrap {% unless has_active_filters %}cursor-not-allowed pointer-events-none{% endunless %}"
+        class="px-4 h-8 flex items-center justify-center bg-transparent  rounded-full text-sm font-medium text-neutral-500 no-underline whitespace-nowrap {% unless has_active_filters %}cursor-not-allowed pointer-events-none{% endunless %}"
         {% unless has_active_filters %}
           aria-disabled="true" tabindex="-1"
         {% endunless %}
       >
-        {{ 'filters.clear_all' | t | default: 'Očisti sve' }}
+        Očisti sve
       </a>
     </div>
   </form>
@@ -180,7 +180,7 @@
 
   [data-chevron-icon] svg {
     display: block;
-    width: 1rem;
-    height: 1rem;
+    width: 0.75rem;
+    height: 0.75rem;
   }
 {% endstylesheet %}

@@ -85,7 +85,7 @@
 <generic-drawer
   id="product-variant-drawer-{{ section_id_value }}-{{ product.id }}"
   data-role="product-variant"
-  class="fixed inset-0 z-[9999] flex items-end justify-center"
+  class="product-variant-drawer fixed inset-0 z-[9999] flex items-end justify-center md:items-center"
   aria-hidden="true"
 >
   <div
@@ -94,7 +94,7 @@
   ></div>
 
   <div
-    class="relative w-full max-w-2xl bg-white rounded-t-3xl shadow-xl transform transition-transform duration-300 p-6"
+    class="product-variant-drawer__content relative w-full max-w-2xl bg-white rounded-t-3xl md:rounded-3xl shadow-xl transform transition-all duration-300 p-6"
     data-drawer-content
   >
     <div class="flex items-center justify-between mb-4">
@@ -109,6 +109,21 @@
         {{ 'icon-x.svg' | inline_asset_content }}
       </button>
     </div>
+
+    {% if settings.product_variant_modal_title != blank or settings.product_variant_modal_description != blank %}
+      <div class="mb-4 space-y-1">
+        {% if settings.product_variant_modal_title != blank %}
+          <h3 class="text-base font-medium text-foreground">
+            {{ settings.product_variant_modal_title }}
+          </h3>
+        {% endif %}
+        {% if settings.product_variant_modal_description != blank %}
+          <div class="text-sm text-foreground/80 prose prose-sm max-w-none">
+            {{ settings.product_variant_modal_description }}
+          </div>
+        {% endif %}
+      </div>
+    {% endif %}
 
     <product-form
       class="product-form"
@@ -245,12 +260,25 @@
 
   generic-drawer[data-role='product-variant'] [data-drawer-content] {
     transform: translateY(100%);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease, opacity 0.3s ease;
     position: relative !important;
     z-index: 10000 !important;
   }
 
   generic-drawer[data-role='product-variant'][data-active='true'] [data-drawer-content] {
     transform: translateY(0);
+  }
+
+  /* Desktop: center modal on screen */
+  @media (min-width: 768px) {
+    generic-drawer[data-role='product-variant'] [data-drawer-content] {
+      transform: scale(0.95);
+      opacity: 0;
+    }
+
+    generic-drawer[data-role='product-variant'][data-active='true'] [data-drawer-content] {
+      transform: scale(1);
+      opacity: 1;
+    }
   }
 {% endstylesheet %}

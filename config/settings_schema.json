@@ -181,5 +181,29 @@
         "label": "Featured product"
       }
     ]
+  },
+  {
+    "name": "Product variant modal",
+    "settings": [
+      {
+        "type": "header",
+        "content": "Quick add / variant modal"
+      },
+      {
+        "type": "paragraph",
+        "content": "Title and description shown above variant options when customers open the add-to-cart modal from product cards."
+      },
+      {
+        "type": "text",
+        "id": "product_variant_modal_title",
+        "label": "Title",
+        "default": "Izaberite opciju"
+      },
+      {
+        "type": "richtext",
+        "id": "product_variant_modal_description",
+        "label": "Description"
+      }
+    ]
   }
 ]

@@ -20,6 +20,12 @@
   if selected_collection.handle == 'kozmetika' or selected_collection.handle == 'cosmetics'
     assign show_filters = true
   endif
+
+  # Split layout by bundle metafield for non-bundle categories (not paketi/bundles)
+  assign is_bundle_collection = false
+  if selected_collection.handle == 'paketi' or selected_collection.handle == 'bundles'
+    assign is_bundle_collection = true
+  endif
 %}
 
 <div class="container mx-auto max-w-7xl px-4 py-8">
@@ -130,10 +136,14 @@
         </a>
       </div>
 
-      {% comment %} Separator {% endcomment %}
-      {% if show_filters and section.settings.show_filters %}
-        <div class="md:w-px md:h-4 h-px w-full bg-neutral-200"></div>
-      {% endif %}
+      {% comment %} Collection title {% endcomment %}
+      <h1 class="text-2xl md:text-3xl! font-semibold mb-2 text-center mt-8">
+        {% if selected_collection.handle == 'all' or selected_collection.handle == blank %}
+          Svi proizvodi
+        {% else %}
+          {{ selected_collection.title }}
+        {% endif %}
+      </h1>
 
       {% comment %} Filters {% endcomment %}
       {% if show_filters and section.settings.show_filters %}
@@ -157,16 +167,49 @@
           </a>
         </div>
       {% else %}
-        <div
-          class="grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-6 mb-12"
-          data-section-id="{{ section_id }}"
-        >
-          {% for product in selected_collection.products %}
-            <div class="product-card">
-              {% render 'product-card', product: product, hide_buy_form: false, cardStyle: true %}
-            </div>
-          {% endfor %}
-        </div>
+        {% if is_bundle_collection %}
+          {% comment %} Bundles / Paketi: single grid, all products {% endcomment %}
+          <div
+            class="grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-6 mb-12"
+            data-section-id="{{ section_id }}"
+          >
+            {% for product in selected_collection.products %}
+              <div class="product-card">
+                {% render 'product-card', product: product, hide_buy_form: false, cardStyle: true %}
+              </div>
+            {% endfor %}
+          </div>
+        {% else %}
+          {% comment %} Non-bundle categories: first list = is_a_bundle false, second list = is_a_bundle true {% endcomment %}
+          <div
+            class="grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-6 mb-12"
+            data-section-id="{{ section_id }}"
+          >
+            {% for product in selected_collection.products %}
+              {% assign is_a_bundle = product.metafields.custom.is_a_bundle.value %}
+              {% if is_a_bundle != true and is_a_bundle != 'true' %}
+                <div class="product-card">
+                  {% render 'product-card', product: product, hide_buy_form: false, cardStyle: true %}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+          {% comment %} Collection title {% endcomment %}
+          <h1 class="text-2xl md:text-3xl! font-semibold mb-8 text-center mt-8">Paketi</h1>
+          <div
+            class="grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-6 mb-12"
+            data-section-id="{{ section_id }}"
+          >
+            {% for product in selected_collection.products %}
+              {% assign is_a_bundle = product.metafields.custom.is_a_bundle.value %}
+              {% if is_a_bundle == true or is_a_bundle == 'true' %}
+                <div class="product-card">
+                  {% render 'product-card', product: product, hide_buy_form: false, cardStyle: true %}
+                </div>
+              {% endif %}
+            {% endfor %}
+          </div>
+        {% endif %}
 
         {% if paginate.pages > 1 %}
           <nav class="pagination" role="navigation" aria-label="Pagination">

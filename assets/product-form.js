@@ -91,6 +91,9 @@ if (!customElements.get("product-form")) {
               });
             this.error = false;
             const quickAddModal = this.closest("quick-add-modal");
+            const productVariantDrawer = this.closest(
+              'generic-drawer[data-role="product-variant"]'
+            );
             if (quickAddModal) {
               document.body.addEventListener(
                 "modalClosed",
@@ -107,6 +110,13 @@ if (!customElements.get("product-form")) {
                 { once: true }
               );
               quickAddModal.hide(true);
+            } else if (productVariantDrawer) {
+              if (this.cart) {
+                CartPerformance.measure("add:paint-updated-sections", () => {
+                  this.cart.renderContents(response);
+                });
+              }
+              productVariantDrawer.close();
             } else {
               CartPerformance.measure("add:paint-updated-sections", () => {
                 console.log("renderContents", response);
