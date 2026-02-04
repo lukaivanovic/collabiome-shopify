@@ -40,7 +40,9 @@
         {% render 'free-shipping-progress' %}
       {%- endif -%}
       {%- if cart == empty -%}
-        {% render 'cart-drawer-empty' %}
+        <div class="drawer__inner-empty flex flex-col flex-1 overflow-y-auto">
+          {% render 'cart-drawer-empty' %}
+        </div>
       {%- else -%}
         <cart-drawer-items
           {% if cart == empty %}

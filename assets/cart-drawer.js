@@ -186,21 +186,22 @@ customElements.define("cart-drawer-items", CartDrawerItems);
 // Update cart count badge in header
 function updateCartCountBadge(itemCount) {
   const cartBubbles = document.querySelectorAll("#cart-icon-bubble");
-  
+
   if (cartBubbles.length === 0) {
     // If cart bubbles don't exist yet, try again after a short delay
     setTimeout(() => updateCartCountBadge(itemCount), 100);
     return;
   }
-  
+
   cartBubbles.forEach((cartBubble) => {
     let badge = cartBubble.querySelector(".cart-count-badge");
-    
+
     if (itemCount > 0) {
       if (!badge) {
         // Create badge if it doesn't exist
         badge = document.createElement("span");
-        badge.className = "cart-count-badge absolute -top-1 -right-1 flex items-center justify-center min-w-[18px] h-[18px] px-1.5 text-xs font-medium text-[var(--product-accent-foreground)] bg-[var(--product-accent)] rounded-full";
+        badge.className =
+          "cart-count-badge absolute -top-1 -right-1 flex items-center justify-center min-w-[18px] h-[18px] px-1.5 text-xs font-medium text-[var(--product-accent-foreground)] bg-[var(--product-accent)] rounded-full";
         badge.setAttribute("aria-label", `${itemCount} items in cart`);
         cartBubble.appendChild(badge);
       }
@@ -216,19 +217,53 @@ function updateCartCountBadge(itemCount) {
   });
 }
 
+function fetchCartCount() {
+  const cartUrl =
+    window.routes && window.routes.cart_url
+      ? `${window.routes.cart_url}.js`
+      : "/cart.js";
+
+  return fetch(cartUrl, { credentials: "same-origin" })
+    .then((response) => {
+      if (!response.ok) {
+        throw new Error(`Cart fetch failed: ${response.status}`);
+      }
+      return response.json();
+    })
+    .then((cart) => {
+      if (typeof cart.item_count !== "undefined") {
+        updateCartCountBadge(cart.item_count);
+      }
+    })
+    .catch((error) => {
+      console.error(error);
+    });
+}
+
 // Subscribe to cart updates to update the badge
 function setupCartBadgeSubscription() {
-  if (typeof subscribe === "undefined" || typeof PUB_SUB_EVENTS === "undefined") {
+  if (
+    typeof subscribe === "undefined" ||
+    typeof PUB_SUB_EVENTS === "undefined"
+  ) {
     // Retry if dependencies aren't loaded yet
     setTimeout(setupCartBadgeSubscription, 50);
     return;
   }
-  
+
   subscribe(PUB_SUB_EVENTS.cartUpdate, (data) => {
-    if (data && data.cartData && typeof data.cartData.item_count !== "undefined") {
+    if (
+      data &&
+      data.cartData &&
+      typeof data.cartData.item_count !== "undefined"
+    ) {
       updateCartCountBadge(data.cartData.item_count);
+    } else {
+      fetchCartCount();
     }
   });
+
+  fetchCartCount();
 }
 
 // Set up subscription when DOM is ready
