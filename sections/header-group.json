@@ -17,38 +17,16 @@
         "announcement_pBhDC9": {
           "type": "announcement",
           "settings": {
-            "message": "Free shipping on orders over $50",
+            "message": "Besplatna dostava na narudžbe preko €50",
             "link_url": "shopify://collections/all",
             "enable_countdown": false,
             "countdown_target": "",
-            "cta_label": "Shop now"
-          }
-        },
-        "announcement_bBJARR": {
-          "type": "announcement",
-          "settings": {
-            "message": "Hello world",
-            "link_url": "",
-            "enable_countdown": false,
-            "countdown_target": "",
-            "cta_label": "Shop now"
-          }
-        },
-        "announcement_hrbXet": {
-          "type": "announcement",
-          "settings": {
-            "message": "Hello world",
-            "link_url": "",
-            "enable_countdown": true,
-            "countdown_target": "2011-10-05T14:48:00.000Z",
-            "cta_label": "Shop now"
+            "cta_label": "Kupi sada"
           }
         }
       },
       "block_order": [
-        "announcement_pBhDC9",
-        "announcement_bBJARR",
-        "announcement_hrbXet"
+        "announcement_pBhDC9"
       ],
       "name": "Announcement bar",
       "settings": {
