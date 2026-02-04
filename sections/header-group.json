@@ -92,7 +92,7 @@
                   "name": "Promo banner",
                   "settings": {
                     "product": "",
-                    "url": "shopify://collections/kozmetika",
+                    "url": "shopify://collections/paketi",
                     "title": "Poklon paketi",
                     "description": "",
                     "image": "shopify://shop_images/Puna_rutina_collabiome_ff7f6c4d-6f04-4766-9eea-1318f7d8ab0c.png",
@@ -138,10 +138,10 @@
                   "name": "Promo banner",
                   "settings": {
                     "product": "",
-                    "url": "shopify://products/recupera-cooling-gel",
-                    "title": "Recupera Cooling Gel",
+                    "url": "shopify://collections/paketi",
+                    "title": "Poklon paketi",
                     "description": "",
-                    "image": "shopify://shop_images/2_1e81687c-742f-42d3-9f89-09720c383f10.png",
+                    "image": "shopify://shop_images/SLIKEZAWEB_34_3f4e36a7-5e12-4831-9890-e7f71f42efb5_1.png",
                     "overlay_color": "#000000",
                     "overlay_opacity": 40
                   },
