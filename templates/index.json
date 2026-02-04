@@ -42,6 +42,15 @@
         ]
       }
     },
+    "rotating_text_DjiUXD": {
+      "type": "rotating-text",
+      "name": "Rotating text",
+      "settings": {
+        "text": "GMP Certifikat · Prirodni sastojci · Proizvedeno u Hrvatskoj ·",
+        "speed": 60,
+        "gap": 24
+      }
+    },
     "generic_categories_Gp4wFf": {
       "type": "generic-categories",
       "blocks": {
@@ -85,15 +94,6 @@
       "settings": {
         "title": "Sve što tvoje tijelo treba",
         "description": "Od kozmetike do dodataka prehrani, Collabiome nudi cjelovitu podršku za kožu, kosu, nokte i zglobove."
-      }
-    },
-    "rotating_text_DjiUXD": {
-      "type": "rotating-text",
-      "name": "Rotating text",
-      "settings": {
-        "text": "Rotating text test",
-        "speed": 60,
-        "gap": 24
       }
     },
     "testimonial_grid_zcUike": {
