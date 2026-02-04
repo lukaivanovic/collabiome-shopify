@@ -82,6 +82,7 @@
                 "promo_banner_HRLMPY": {
                   "type": "promo-banner",
                   "name": "Promo banner",
+                  "disabled": true,
                   "settings": {
                     "product": "",
                     "url": "shopify://pages/kviz",
