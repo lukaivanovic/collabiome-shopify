@@ -17,24 +17,120 @@
     "faq_tdnNBt": {
       "type": "faq",
       "blocks": {
+        "faq_item_C3pmLy": {
+          "type": "faq_item",
+          "settings": {
+            "question": "U kojim uvjetima čuvati proizvode nakon otvaranja?",
+            "answer": "<p>Preporuča se čuvati na temperaturi do 25°C, na tamnom mjestu. Može se čuvati i u hladnjaku.<br/><br/></p>"
+          }
+        },
+        "faq_item_GJqEPW": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Koja je razlika Kolagen Nutriagea u odnosu na Kolagen Boost?",
+            "answer": "<p>Razlika u odnosu na Kolagen Boost je obogaćen sastav, novi okus, nova formula za još bolje i brže djelovanje na kožu, kosu, nokte zahvaljujući antioksidansima koji štite od UV zračenja i utječu na  imunitet.<br/><br/><br/><br/></p>"
+          }
+        },
+        "faq_item_KUzQeU": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Koristi li Kolagen Boost umjetna sladila?",
+            "answer": "<p>Ne, jedini zaslađivaći koje smo koristili su stevia i sorbitol. Stevia je slađa od šećera čak 200 do 400 puta. Stevia je prirodni zaslađivač, za razliku od šećera ne izaziva karijes, nema kalorija, glikemijskog indeksa ni štetnih nuspojava poput umjetnih zaslađivača te je otporna na visoke temperature. Sorbitol, poliol ili šećerni alkohol, je zaslađivač koji je slađi od saharoze, a kalorijska vrijednost mu je za 1/3 manja. Ugodnog je okusa, ne pogoduje razvoju karijesa i koristan je oboljelima od dijabetesa.<br/><br/></p>"
+          }
+        },
+        "faq_item_4Uxn48": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Je li Kolagen Boost veganski proizvod?",
+            "answer": "<p>Ne, naš proizvod je vegetarijanski, ali sadrži ribu.<br/><br/></p>"
+          }
+        },
+        "faq_item_d3dWhg": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Koliko dugo traju rezultati korištenja kolagena?",
+            "answer": "<p>Vaše tijelo prirodno svakodnevno proizvodi kolagen, uzimanje dodatnog možete smatrati kontinuiranim postupkom recikliranja i obnavljanja prirodnog kolagena jer se dio kolagena u vašem tijelu zamjenjuje svaki dan. Kada svakodnevno koristite ovaj proizvod opskrbljujete svoje tijelo hranjivim sastojcima koji podržavaju novu proizvodnju kolagena. Kao i svakom prehrambenom pristupu, potrebno je vrijeme da hranjive tvari potaknu prirodni proces obnove vašeg tijela. Kad prestanete koristiti kolageni, više ne pružate tijelu istu hranjivu podršku za svakodnevno obnavljanje kolagena.<br/><br/></p>"
+          }
+        },
+        "faq_item_VW76ap": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Kada mogu očekivati rezultate?",
+            "answer": "<p>Prve rezultate možete vidjeti već nakon mjesec dana uzimanja. Svaka osoba ima različitu potrebu za kolagenom ovisno o godinama, prehrambenim i životnim navikama. Kod nekih pojedinaca se efekt vidi jako brzo, a kod drugih je potrebno malo više vremena za vidljive rezultate.<br/><br/></p>"
+          }
+        },
+        "faq_item_fJkapN": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Koji se kolagen koristi u Kolagen Boostu?",
+            "answer": "<p>Koristimo hidrolizirani riblji kolagen tipa I brenda Naticol® koji se pokazao kao najbolji za kosu, kožu, nokte i zglobove. Studija objavljena 2018. godine u Juniper Online Journal of Case Studies otkrila je da mala doza peptida kolagena iz ribe tipa I brenda Naticol®, može smanjiti pojavu bora, finih linija i suhoće kože kod zrelih žena. Rezultati studije pokazuju da čak i niska doza Naticola od 2,5 g može vidljivo smanjiti znakove starenja kože. Kolagen Boost koristi upravo Naticol® hidrolizirani riblji kolagen, a u preporučenoj dnevnoj dozi sadrži čak 10 g kolagena, 4 puta više nego u objavljenoj studiji.<br/><br/></p>"
+          }
+        },
+        "faq_item_fk9Mgt": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Gdje se proizvode kolageni?",
+            "answer": "<p>Ponosni smo što jsu ovo proizvodi koji su razvijeni i proizvedeni u Hrvatskoj. Radili smo brojna istraživanja s timom stručnjaka te više od dvije godine testirali proizvode kako bi mogli proizvesti djelotvorni tekuće riblje kolagene s idealnim omjerom vitamina, minerala i kolagena po najvišim svjetskim standardima.<br/><br/></p>"
+          }
+        },
+        "faq_item_npDUPg": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Kakav je okus svih kolagena?",
+            "answer": "<p>Kolagen Boost ima okus naranče kao i Recupera, a Nutriage ima okus šumskog voća.<br/><br/></p>"
+          }
+        },
+        "faq_item_zUecje": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Zašto Kolagen Boost ima bolje djelovanje od drugih dodataka prehrani s kolagenom?",
+            "answer": "<p>Dnevna doza sadrži sve dnevne potrebe odrasle osobe za vitaminom C, svim vitaminima B kompleksa, cinkom, folnom kiselinom, sadrži čak 10 000 mg ribljeg kolagena tipa I i 500 mg MSM-a. Tajna našeg proizvoda je idealni odabir i omjer svih sastojaka koji su spojeni zajedno kako bi apsorpcija kolagena bila što veća. Kolagen Boost je pravo malo postrojenje za proizvodnju kolagena u boci od 500 ml.<br/><br/></p>"
+          }
+        },
+        "faq_item_WiGtRk": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Što sadrži Kolagen Boost?",
+            "answer": "<p>50 ml proizvoda sadrži 10.000 mg hidroliziranog ribljeg kolagena, 200 mg vitamina C, 100 mg hijaluronske kiseline, 500 mg MSM-a, 50 μg biotina, sve vitamine B kompleksa, folnu kiselinu i cink.<br/><br/></p>"
+          }
+        },
         "faq_item_mkba8j": {
           "type": "faq_item",
           "settings": {
-            "question": "Frequently asked question?",
-            "answer": "<p>This is the answer to the frequently asked question.</p>"
+            "question": "Je li istina da naše tijelo starenjem gubi kolagen?",
+            "answer": "<p><strong>Kolagen</strong>je najzastupljeniji protein u tijelu i ključni je sastojak svih vezivnih tkiva. Moderna prehrana sadrži nažalost minimalno kolagena. Prirodna proizvodnja kolagena u organizmu opada za čak 1% godišnje već nakon navršene 20. godine života, ali naša potreba za njim se povećava s vremenom.<strong>Do 40. godine proizvodnja kolagena opadne do 20%.</strong>Kolagen Boost je namjenjen svima koji žele održati ili popraviti zdravlje i ljepotu svoje kože, kose i noktiju kao i svima koji u ranoj dobi imaju probleme s kožom i aknama. Kolagen Boost rješava problem deficita kolagena i omogućava da koža, kosa, nokti i zglobovi ostali vitalni.<br/><br/></p>"
           }
         },
         "faq_item_NffpRk": {
           "type": "faq_item",
           "settings": {
-            "question": "Another frequently asked question?",
-            "answer": "<p>This is another answer to a frequently asked question.</p>"
+            "question": "Koje su prednosti kolagena tipa I?",
+            "answer": "<p>Kolagen tipa I gradivni je element strukture naše kože, čineći oko 80% dermalnog sloja naše kože. Naše tijelo prirodno proizvodi kolagen, ali njegova se proizvodnja počinje smanjivati kako starimo. Pokazalo se da je dodatak kolagena koristan za održavanje zdrave i hidratizirane kože. Morski (riblji) kolagen sastoji se od kolagena tipa I i bogat je jedinstvenim aminokiselinama koje utječu na zdravlje kože, kose, noktiju i zglobova i potiču prirodnu proizvodnju kolagena u tijelu.<br/><br/></p>"
+          }
+        },
+        "faq_item_9FzY4p": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Je li bolji tekući kolagen ili u prahu?",
+            "answer": "<p>Tekući oblik kolagena ima najveći stopu apsorpcije budući da je već pripremljen za preradu u vašem tijelu. Kada unosite dodatke u obliku praha, kapsula ili tableta, vaše tijelo mora raditi više kako bi ih probavilo i iz njih izvuklo hranjive tvari što usporava apsorpciju.<br/><br/></p>"
           }
         }
       },
       "block_order": [
+        "faq_item_C3pmLy",
+        "faq_item_GJqEPW",
+        "faq_item_KUzQeU",
+        "faq_item_4Uxn48",
+        "faq_item_d3dWhg",
+        "faq_item_VW76ap",
+        "faq_item_fJkapN",
+        "faq_item_fk9Mgt",
+        "faq_item_npDUPg",
+        "faq_item_zUecje",
+        "faq_item_WiGtRk",
         "faq_item_mkba8j",
-        "faq_item_NffpRk"
+        "faq_item_NffpRk",
+        "faq_item_9FzY4p"
       ],
       "name": "FAQ",
       "settings": {
@@ -48,22 +144,62 @@
     "faq_MkQEzm": {
       "type": "faq",
       "blocks": {
+        "faq_item_dbpjKp": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Kada mogu očekivati prve vidljive rezultate?",
+            "answer": "<p><br/>Većina korisnika primjećuje poboljšan osjećaj hidratacije i ugode vrlo brzo, dok se vidljive promjene u teksturi i izgledu kože obično javljaju nakon nekoliko tjedana redovite upotrebe.<br/><br/></p>"
+          }
+        },
+        "faq_item_pBjBtt": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Jesu li Collabiomè proizvodi dermatološki testirani?",
+            "answer": "<p><br/>Formulacije su razvijene u skladu sa suvremenim kozmetičkim standardima i temeljene na znanstveno proučenim sastojcima, s fokusom na sigurnost i učinkovitost<br/><br/></p>"
+          }
+        },
+        "faq_item_3LBFhM": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Mogu li koristiti Collabiomè kozmetiku zajedno s drugim proizvodima?",
+            "answer": "<p><br/>Da, Collabiomè proizvodi lako se uklapaju u postojeće rutine. Ipak, preporučuje se izbjegavati istovremeno korištenje više jakih aktivnih sastojaka kako bi se smanjio rizik od iritacija.<br/><br/></p>"
+          }
+        },
+        "faq_item_87JNTr": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Kako pravilno kombinirati proizvode unutar rutine?",
+            "answer": "<p><br/>Rutina započinje čišćenjem, nastavlja se serumima prema potrebi kože, a završava hidratantnom ili zaštitnom kremom. Eksfolijant se koristi povremeno, dok je SPF obavezan korak u jutarnjoj rutini.<br/><br/></p>"
+          }
+        },
+        "faq_item_CD8tFe": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Jesu li Collabiomè proizvodi pogodni za svakodnevnu upotrebu?",
+            "answer": "<p><br/>Da. Svi proizvodi u liniji razvijeni su za redovitu, svakodnevnu rutinu njege kože, uz poštivanje prirodnog ritma i funkcije kože.<br/><br/></p>"
+          }
+        },
         "faq_item_zriKCQ": {
           "type": "faq_item",
           "settings": {
-            "question": "Frequently asked question?",
-            "answer": "<p>This is the answer to the frequently asked question.</p>"
+            "question": "Za koje tipove kože je Collabiomè kozmetika namijenjena?",
+            "answer": "<p><br/>Collabiomè kozmetika formulirana je tako da odgovara svim tipovima kože, uključujući osjetljivu. Teksture i aktivni sastojci prilagođeni su koži kojoj je potrebna ravnoteža, hidratacija i podrška kožnoj barijeri. Na svakoj stranici pojedinačnog proizvoda nevedene su upute za uporabu i tip kože kojoj je proizvod namjenjen.<br/><br/></p>"
           }
         },
         "faq_item_wMrMFn": {
           "type": "faq_item",
           "settings": {
-            "question": "Another frequently asked question?",
-            "answer": "<p>This is another answer to a frequently asked question.</p>"
+            "question": "Mogu li koristiti Collabiomè proizvode ako imam osjetljivu kožu?",
+            "answer": "<p><br/>Mogu li koristiti Collabiomè proizvode ako imam osjetljivu kožu?<br/><br/></p>"
           }
         }
       },
       "block_order": [
+        "faq_item_dbpjKp",
+        "faq_item_pBjBtt",
+        "faq_item_3LBFhM",
+        "faq_item_87JNTr",
+        "faq_item_CD8tFe",
         "faq_item_zriKCQ",
         "faq_item_wMrMFn"
       ],
@@ -79,22 +215,38 @@
     "faq_BMHE8K": {
       "type": "faq",
       "blocks": {
+        "faq_item_dcazR9": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Želiš postaviti pitanje koje  ne vidiš na ovom popisu?",
+            "answer": "<p>Slobodno nas kontaktirajte putem maila na pitanja@kolagenboost.com. Na sve upite odgovaramo u roku od 24h.</p>"
+          }
+        },
+        "faq_item_QVfqMQ": {
+          "type": "faq_item",
+          "settings": {
+            "question": "Kako mogu podnijeti reklamaciju?",
+            "answer": "<p><br/>Ako imate prigovor ili reklamaciju vezanu uz narudžbu ili proizvod, molimo vas da nam se javite putem e-maila na <a><strong>pitanja@kolagenboost.com</strong></a>.<br/><br/>U poruci navedite broj narudžbe, kratak opis problema i, ako je primjenjivo, fotografije proizvoda. Naš tim će vam se javiti u najkraćem mogućem roku.<br/><br/></p>"
+          }
+        },
         "faq_item_JxTddH": {
           "type": "faq_item",
           "settings": {
-            "question": "Frequently asked question?",
-            "answer": "<p>This is the answer to the frequently asked question.</p>"
+            "question": "Koliki je rok trajanja?",
+            "answer": "<p>Rok trajanja je jasno ispisan na dnu svake kutije s proizvodom. Proizvod je najbolje upotrijebiti u roku od dvije godine od dana proizvodnje.<br/><br/></p>"
           }
         },
         "faq_item_e7j4iA": {
           "type": "faq_item",
           "settings": {
-            "question": "Another frequently asked question?",
-            "answer": "<p>This is another answer to a frequently asked question.</p>"
+            "question": "Koje je tipično vrijeme obrade narudžbe i dostave?",
+            "answer": "<p>Pored vremena prijevoza za svaki način otpreme, molimo pričekajte 1-2 radna dana za obradu vaše narudžbe. Nakon što je narudžba poslana, dobit ćete broj potvrde.<br/><br/></p>"
           }
         }
       },
       "block_order": [
+        "faq_item_dcazR9",
+        "faq_item_QVfqMQ",
         "faq_item_JxTddH",
         "faq_item_e7j4iA"
       ],
