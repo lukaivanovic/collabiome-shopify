@@ -143,8 +143,25 @@
       {% if unique_selling_points != blank %}
         <div class="flex flex-row flex-wrap justify-center gap-y-10">
           {%- for unique_selling_point in unique_selling_points -%}
+            {%- liquid
+              assign usp_icon_raw = unique_selling_point.icon | default: ''
+              assign usp_icon_key = usp_icon_raw | downcase | strip | replace: '.svg', '' | replace: 'icon-', ''
+            -%}
             <div class="flex flex-col items-center gap-3 bg-white rounded-lg w-1/3 [&>svg]:w-10 [&>svg]:h-10">
-              {{ 'icon-check.svg' | inline_asset_content }}
+              {% case usp_icon_key %}
+                {% when 'apothecary-filter' %}
+                  {{ 'icon-apothecary-filter.svg' | inline_asset_content }}
+                {% when 'herb' %}
+                  {{ 'icon-herb.svg' | inline_asset_content }}
+                {% when 'spf' %}
+                  {{ 'icon-spf.svg' | inline_asset_content }}
+                {% when 'microscope' %}
+                  {{ 'icon-microscope.svg' | inline_asset_content }}
+                {% when 'ferment-jar' %}
+                  {{ 'icon-ferment-jar.svg' | inline_asset_content }}
+                {% else %}
+                  {{ 'icon-check.svg' | inline_asset_content }}
+              {% endcase %}
               <span class="font-medium">
                 {{- unique_selling_point.usp | default: 'Unique Selling Point' | strip -}}
               </span>
