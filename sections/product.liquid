@@ -47,14 +47,14 @@
 
           <div class="absolute bottom-2 right-2">
             <button
-              class="embla__prev [background:var(--product-accent)] rounded-full z-2 p-1 text-white"
+              class="embla__prev [background:var(--product-accent)] rounded-full z-2 p-1 text-product-accent-foreground"
               aria-label="Previous image"
             >
               {{ 'icon-chevron-left.svg' | inline_asset_content }}
             </button>
 
             <button
-              class="embla__next [background:var(--product-accent)] rounded-full z-2 p-1 text-white"
+              class="embla__next [background:var(--product-accent)] rounded-full z-2 p-1 text-product-accent-foreground"
               aria-label="Next image"
             >
               {{ 'icon-chevron-right.svg' | inline_asset_content }}
@@ -146,38 +146,25 @@
             {%- liquid
               assign usp_icon_raw = unique_selling_point.icon | default: ''
               assign usp_icon_key = usp_icon_raw | downcase | strip | replace: '.svg', '' | replace: 'icon-', ''
-              assign usp_icon_asset = ''
-              assign usp_icon_is_large = false
-
-              case usp_icon_key
-                when 'apothecary-filter'
-                  assign usp_icon_asset = 'icon-apothecary-filter.svg'
-                when 'herb'
-                  assign usp_icon_asset = 'icon-herb.svg'
-                when 'spf'
-                  assign usp_icon_asset = 'icon-spf.svg'
-                when 'microscope'
-                  assign usp_icon_asset = 'icon-microscope.svg'
-                when 'ferment-jar'
-                  assign usp_icon_asset = 'icon-ferment-jar.svg'
-                when 'croatia'
-                  assign usp_icon_asset = 'icon-croatia.svg'
-                  assign usp_icon_is_large = true
-                else
-                  assign usp_icon_asset = 'icon-check.svg'
-              endcase
             -%}
-            <div class="flex flex-col items-center gap-3 bg-white rounded-lg w-1/3 [&>svg]:w-10 [&>svg]:h-10 [&>img]:w-10 [&>img]:h-10">
-              {% if usp_icon_is_large %}
-                {{
-                  usp_icon_asset
-                  | asset_url
-                  | image_tag: alt: unique_selling_point.usp, width: 40, height: 40, loading: 'lazy'
-                }}
-              {% else %}
-                {{ usp_icon_asset | inline_asset_content }}
-              {% endif %}
-              <span class="font-medium">
+            <div class="flex flex-col text-center items-center gap-3 bg-white rounded-lg w-1/2 md:w-1/4 text-product-accent">
+              {% case usp_icon_key %}
+                {% when 'apothecary-filter' %}
+                  {% render 'icon-apothecary-filter' %}
+                {% when 'herb' %}
+                  {% render 'icon-herb' %}
+                {% when 'spf' %}
+                  {% render 'icon-spf' %}
+                {% when 'microscope' %}
+                  {% render 'icon-microscope' %}
+                {% when 'ferment-jar' %}
+                  {% render 'icon-ferment-jar' %}
+                {% when 'croatia' %}
+                  {% render 'icon-croatia' %}
+                {% else %}
+                  {{ 'icon-check.svg' | inline_asset_content }}
+              {% endcase %}
+              <span class="font-medium text-xs max-w-32">
                 {{- unique_selling_point.usp | default: 'Unique Selling Point' | strip -}}
               </span>
             </div>

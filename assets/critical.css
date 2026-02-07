@@ -397,9 +397,9 @@ button:disabled:hover {
     #ede1d7 40.21%,
     #f6b4ca 100%
   );
-  --product-bg-secondary: #FDEEED;
+  --product-bg-secondary: #fdeeed;
   --product-accent: #783047;
-  --product-accent-foreground: #f9f1f3;
+  --product-accent-foreground: #fdeeed;
   --product-button-background: linear-gradient(var(--gradient-boost));
   --product-button-text-color: #783047;
   --annoucement-bar-bg: linear-gradient(var(--gradient-boost));
