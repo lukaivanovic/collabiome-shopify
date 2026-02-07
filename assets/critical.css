@@ -426,7 +426,7 @@ button:disabled:hover {
     #b4ceff 35.34%,
     #d4b9ff 103.04%
   );
-  --product-button-text-color: #000;
+  --product-button-text-color: #1c2b72;
   --annoucement-bar-bg: linear-gradient(var(--gradient-recupera));
 }
 
