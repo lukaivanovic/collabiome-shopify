@@ -418,7 +418,7 @@ button:disabled:hover {
     color-mix(in srgb, #b4ceff, transparent 70%) 35.34%,
     color-mix(in srgb, #d4b9ff, transparent 70%) 103.04%
   );
-  --product-accent: #000;
+  --product-accent: #1c2b72;
   --product-accent-foreground: #f9f1f3;
   --product-button-background: linear-gradient(
     20deg,
