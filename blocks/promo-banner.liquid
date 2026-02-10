@@ -36,15 +36,11 @@
   class="relative w-full h-full flex items-end overflow-hidden text-white rounded-xl aspect-square px-3 py-3 flex-1"
 >
   <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
-    {% if media != blank %}
-      {{
-        media
-        | image_url: width: 800
-        | image_tag: loading: 'lazy', sizes: '100vw', alt: title, class: 'absolute inset-0 w-full h-full object-cover'
-      }}
-    {% else %}
-      <div class="w-full h-full bg-gradient-to-r from-black/60 to-black/30"></div>
-    {% endif %}
+    {{
+      media
+      | image_url: width: 800
+      | image_tag: loading: 'lazy', sizes: '100vw', alt: title, class: 'absolute inset-0 w-full h-full object-cover'
+    }}
     <div
       class="absolute inset-0 pointer-events-none"
       style="background: {{ overlay_color }}; opacity: {{ overlay_opacity | divided_by: 100.0 }};"
