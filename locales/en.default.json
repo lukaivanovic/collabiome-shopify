@@ -22,7 +22,8 @@
   "collections": {
     "all": "Shop all",
     "supplements": "Dodaci prehrani",
-    "cosmetics": "Kozmetika"
+    "cosmetics": "Kozmetika",
+    "bundles": "Paketi"
   },
   "filters": {
     "title": "Filters",

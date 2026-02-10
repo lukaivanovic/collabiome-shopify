@@ -1,0 +1,22 @@
+{% doc %}
+  Header Mega Menu - Cosmetics (snippet wrapper)
+
+  Renders the static theme block `header-mega-menu-cosmetics` so it can be
+  included from the desktop header navigation.
+
+  Note: The `cosmetics_menu` parameter is accepted for API compatibility with
+  `header-desktop-nav`, but the underlying block derives its own data from
+  collections and metafields.
+
+  @param {linklist} cosmetics_menu - Optional secondary menu (currently unused)
+
+  @example
+  {% render 'header-mega-menu-cosmetics', cosmetics_menu: cosmetics_menu %}
+{% enddoc %}
+
+{% liquid
+  assign cosmetics_menu = cosmetics_menu | default: empty
+%}
+
+{% content_for 'block', type: 'header-mega-menu-cosmetics', id: 'mega-menu-cosmetics' %}
+

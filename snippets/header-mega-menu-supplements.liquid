@@ -1,0 +1,22 @@
+{% doc %}
+  Header Mega Menu - Supplements (snippet wrapper)
+
+  Renders the static theme block `header-mega-menu-supplements` so it can be
+  included from the desktop header navigation.
+
+  Note: The `supplements_menu` parameter is accepted for API compatibility with
+  `header-desktop-nav`, but the underlying block derives its own data from the
+  supplements collection, metafields, or block settings.
+
+  @param {linklist} supplements_menu - Optional secondary menu (currently unused)
+
+  @example
+  {% render 'header-mega-menu-supplements', supplements_menu: supplements_menu %}
+{% enddoc %}
+
+{% liquid
+  assign supplements_menu = supplements_menu | default: empty
+%}
+
+{% content_for 'block', type: 'header-mega-menu-supplements', id: 'mega-menu-supplements' %}
+

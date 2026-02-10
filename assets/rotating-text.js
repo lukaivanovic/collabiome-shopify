@@ -1,4 +1,4 @@
-(function () {
+ (function () {
   function ready(fn) {
     if (document.readyState === "loading") {
       document.addEventListener("DOMContentLoaded", fn);
@@ -92,3 +92,4 @@
       : Array.prototype.forEach.call(tracks, setupTrack);
   });
 })();
+
