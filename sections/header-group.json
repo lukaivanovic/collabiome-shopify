@@ -122,7 +122,7 @@
                     "description": "",
                     "image": "shopify://shop_images/SLIKEZAWEB_34_3f4e36a7-5e12-4831-9890-e7f71f42efb5_1.png",
                     "overlay_color": "#000000",
-                    "overlay_opacity": 40
+                    "overlay_opacity": 0
                   },
                   "blocks": {}
                 }
