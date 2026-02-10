@@ -103,9 +103,9 @@
           name="add"
           class="{{ button_classes }}"
           data-add-to-cart
-          data-text-available="{{ 'products.product.add_to_cart' | t }}"
-          data-text-soldout="{{ 'products.product.sold_out' | t }}"
-          data-text-unavailable="{{ 'products.product.unavailable' | t }}"
+          data-text-available="Dodaj u košaricu"
+          data-text-soldout="Nije dostupno"
+          data-text-unavailable="Nije dostupno"
           {% if selected_variant == blank or selected_variant.available == false or quantity_rule_soldout %}
             disabled
           {% endif %}
@@ -115,11 +115,11 @@
           </div>
           <span data-add-to-cart-text>
             {%- if selected_variant == blank -%}
-              {{ 'products.product.unavailable' | t }}
+              Nije dostupno
             {%- elsif selected_variant.available == false or quantity_rule_soldout -%}
-              {{ 'products.product.sold_out' | t }}
+              Nije dostupno
             {%- else -%}
-              {{ 'products.product.add_to_cart' | t }}
+              Dodaj u košaricu
               (
               {%- if selected_variant.compare_at_price > selected_variant.price -%}
                 <s>{{ selected_variant.compare_at_price | money_with_currency }}</s>
