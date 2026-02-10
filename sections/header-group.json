@@ -120,9 +120,9 @@
                     "url": "shopify://collections/paketi",
                     "title": "Poklon paketi",
                     "description": "",
-                    "image": "shopify://shop_images/SLIKEZAWEB_34_3f4e36a7-5e12-4831-9890-e7f71f42efb5_1.png",
+                    "image": "shopify://shop_images/image_97.png",
                     "overlay_color": "#000000",
-                    "overlay_opacity": 0
+                    "overlay_opacity": 35
                   },
                   "blocks": {}
                 }
