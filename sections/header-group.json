@@ -141,20 +141,6 @@
             "shop_menu": "main-menu"
           },
           "blocks": {
-            "promo_banner_jr78cJ": {
-              "type": "promo-banner",
-              "name": "Promo banner",
-              "settings": {
-                "product": "complete-collagen-nocna-krema",
-                "url": "",
-                "title": "test",
-                "description": "test",
-                "image": "shopify://shop_images/web_33.png",
-                "overlay_color": "#000000",
-                "overlay_opacity": 40
-              },
-              "blocks": {}
-            },
             "mobile_menu_category_links_pdFDPA": {
               "type": "mobile-menu-category-links",
               "name": "Menu category links",
@@ -279,12 +265,26 @@
                 "mobile_menu_category_3rcH7d",
                 "mobile_menu_category_QffAKe"
               ]
+            },
+            "promo_banner_jr78cJ": {
+              "type": "promo-banner",
+              "name": "Promo banner",
+              "settings": {
+                "product": "complete-collagen-nocna-krema",
+                "url": "",
+                "title": "test",
+                "description": "test",
+                "image": "shopify://shop_images/web_33.png",
+                "overlay_color": "#000000",
+                "overlay_opacity": 40
+              },
+              "blocks": {}
             }
           },
           "block_order": [
-            "promo_banner_jr78cJ",
             "mobile_menu_category_links_pdFDPA",
-            "mobile_menu_category_links_zwycbn"
+            "mobile_menu_category_links_zwycbn",
+            "promo_banner_jr78cJ"
           ]
         }
       },
