@@ -9,13 +9,9 @@
   <h1 class=" mb-8">{{ collection.title }}</h1>
 
   <div class="grid grid-cols-[repeat(auto-fill,minmax(320px,1fr))] gap-4">
-    {% paginate collection.products by 20 %}
-      {% for product in collection.products %}
-        {% render 'product-card', product: product %}
-      {% endfor %}
-
-      {{ paginate | default_pagination }}
-    {% endpaginate %}
+    {% for product in collection.products %}
+      {% render 'product-card', product: product %}
+    {% endfor %}
   </div>
 </div>
 

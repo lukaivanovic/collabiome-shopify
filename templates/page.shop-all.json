@@ -14,7 +14,6 @@
       "settings": {
         "title": "Shop All Products",
         "collection": "kozmetika",
-        "products_per_page": 24,
         "show_filters": false
       }
     },
@@ -24,7 +23,6 @@
       "settings": {
         "title": "Shop All Products",
         "collection": "poklon-paketi",
-        "products_per_page": 24,
         "show_filters": false
       }
     }

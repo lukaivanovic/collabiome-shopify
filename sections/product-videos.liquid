@@ -2,6 +2,7 @@
   assign videos = product.metafields.custom.section_videos.value
   assign section_title = product.metafields.custom.section_videos_title.value | default: section.settings.title
   assign section_description = product.metafields.custom.section_videos_description.value | default: section.settings.description
+  assign section_id = section.settings.custom_id | default: section.id
 -%}
 
 {% if videos != blank %}
@@ -24,13 +25,14 @@
             {% endif %}
           </div>
         {% endif %}
-        <div class="product-videos__grid">
-          {% for video in videos limit: 4 %}
+        <div class="embla product-videos__carousel relative" data-section-id="{{ section_id }}">
+          <div class="embla__container">
+            {% for video in videos %}
             {% liquid
               assign video_media = video.value | default: video
             %}
             {% if video_media != blank %}
-              <div class="product-videos__item">
+              <div class="embla__slide product-videos__item">
                 <testimonial-video-player class="testimonial-video-player group">
                   <button
                     type="button"
@@ -72,21 +74,209 @@
                 </testimonial-video-player>
               </div>
             {% endif %}
-          {% endfor %}
+            {% endfor %}
+          </div>
+
+          <button
+            class="embla__prev product-videos__nav product-videos__nav--prev"
+            aria-label="Prethodni video"
+          >
+            {{ 'icon-chevron-left.svg' | inline_asset_content }}
+          </button>
+
+          <button
+            class="embla__next product-videos__nav product-videos__nav--next"
+            aria-label="Sljedeći video"
+          >
+            {{ 'icon-chevron-right.svg' | inline_asset_content }}
+          </button>
+        </div>
+
+        <div class="product-videos__progress" aria-hidden="true">
+          <div class="product-videos__progress-bar"></div>
         </div>
       </div>
     </div>
   </div>
 
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      const script = document.createElement('script');
+      script.src = 'https://unpkg.com/embla-carousel/embla-carousel.umd.js';
+      script.onload = function () {
+        document.querySelectorAll('.product-videos__carousel').forEach(function (carouselElement) {
+          const mobileMediaQuery = window.matchMedia('(max-width: 768px)');
+
+          function getSlidesToScroll() {
+            const width = window.innerWidth;
+            if (width < 768) return 1;
+            if (width <= 1024) return 2;
+            return 4;
+          }
+
+          const embla = EmblaCarousel(carouselElement, {
+            loop: false,
+            align: 'start',
+            containScroll: 'trimSnaps',
+            slidesToScroll: getSlidesToScroll(),
+          });
+
+          const sectionElement = carouselElement.closest('.product-videos');
+          const prevButton = carouselElement.querySelector('.embla__prev');
+          const nextButton = carouselElement.querySelector('.embla__next');
+          const progressBar = sectionElement?.querySelector('.product-videos__progress-bar');
+          const slideElements = Array.from(carouselElement.querySelectorAll('.embla__slide'));
+
+          function syncMobileVideoPlayback() {
+            if (!slideElements.length) return;
+
+            const selectedIndex = embla.selectedScrollSnap();
+
+            slideElements.forEach(function (slideElement, index) {
+              const player = slideElement.querySelector('testimonial-video-player');
+              const video = slideElement.querySelector('[data-inline-video] video');
+
+              if (!video) return;
+
+              const isSelected = index === selectedIndex;
+
+              if (mobileMediaQuery.matches) {
+                if (!isSelected) {
+                  video.pause();
+                  video.muted = true;
+                  video.loop = true;
+                  video.currentTime = 0;
+
+                  if (player?.hasAttribute('data-active')) {
+                    player.removeAttribute('data-active');
+
+                    if (player.constructor?.currentlyPlaying === player) {
+                      player.constructor.currentlyPlaying = null;
+                    }
+                  }
+                  return;
+                }
+
+                if (!player?.hasAttribute('data-active')) {
+                  video.muted = true;
+                  video.loop = true;
+                  const playPromise = video.play();
+                  if (playPromise?.catch) {
+                    playPromise.catch(() => {});
+                  }
+                }
+                return;
+              }
+
+              if (!player?.hasAttribute('data-active')) {
+                video.muted = true;
+                video.loop = true;
+                const playPromise = video.play();
+                if (playPromise?.catch) {
+                  playPromise.catch(() => {});
+                }
+              }
+            });
+          }
+
+          function enforceMobileActiveSlidePlayback(event) {
+            if (!mobileMediaQuery.matches) return;
+
+            const video = event.currentTarget;
+            const slideElement = video.closest('.embla__slide');
+            const slideIndex = slideElements.indexOf(slideElement);
+
+            if (slideIndex !== embla.selectedScrollSnap()) {
+              video.pause();
+            }
+          }
+
+          function updateUI() {
+            if (prevButton) prevButton.disabled = !embla.canScrollPrev();
+            if (nextButton) nextButton.disabled = !embla.canScrollNext();
+            if (progressBar) {
+              const progress = Math.min(Math.max(embla.scrollProgress() * 100, 0), 100);
+              progressBar.style.width = `${progress}%`;
+            }
+          }
+
+          if (prevButton) {
+            prevButton.addEventListener('click', function () {
+              embla.scrollPrev();
+            });
+          }
+
+          if (nextButton) {
+            nextButton.addEventListener('click', function () {
+              embla.scrollNext();
+            });
+          }
+
+          slideElements.forEach(function (slideElement) {
+            const video = slideElement.querySelector('[data-inline-video] video');
+            if (!video) return;
+            video.addEventListener('play', enforceMobileActiveSlidePlayback);
+          });
+
+          embla.on('scroll', updateUI);
+          embla.on('select', updateUI);
+          embla.on('reInit', updateUI);
+          embla.on('select', syncMobileVideoPlayback);
+          embla.on('reInit', syncMobileVideoPlayback);
+
+          let currentSlidesToScroll = getSlidesToScroll();
+          let resizeTimer;
+          window.addEventListener(
+            'resize',
+            function () {
+              clearTimeout(resizeTimer);
+              resizeTimer = setTimeout(function () {
+                const newSlidesToScroll = getSlidesToScroll();
+                if (currentSlidesToScroll !== newSlidesToScroll) {
+                  currentSlidesToScroll = newSlidesToScroll;
+                  embla.reInit({ slidesToScroll: newSlidesToScroll });
+                } else {
+                  embla.reInit();
+                }
+              }, 250);
+            },
+            { passive: true }
+          );
+
+          if (mobileMediaQuery.addEventListener) {
+            mobileMediaQuery.addEventListener('change', syncMobileVideoPlayback);
+          } else if (mobileMediaQuery.addListener) {
+            mobileMediaQuery.addListener(syncMobileVideoPlayback);
+          }
+
+          updateUI();
+          syncMobileVideoPlayback();
+        });
+      };
+      document.head.appendChild(script);
+    });
+  </script>
+
   <script src="{{ 'testimonial-video-player.js' | asset_url }}" defer></script>
 {% endif %}
 
 {% stylesheet %}
-  .product-videos__grid {
-    display: grid;
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-    justify-content: start;
+  .product-videos {
+    overflow: hidden;
+  }
+
+  .product-videos__carousel {
+    position: relative;
+  }
+
+  .product-videos .embla__container {
+    display: flex;
     gap: 2rem;
+  }
+
+  .product-videos .embla__slide {
+    flex: 0 0 calc((100% - 6rem) / 4);
+    min-width: 0;
   }
 
   .product-videos__item {
@@ -136,26 +326,90 @@
     outline-offset: 4px;
   }
 
+  .product-videos__nav {
+    position: absolute;
+    top: 50%;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    border: 1px solid var(--color-neutral-300);
+    border-radius: 50%;
+    background: var(--color-neutral-200);
+    color: var(--color-neutral-500);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    transform: translateY(-50%);
+  }
+
+  .product-videos__nav--prev {
+    left: 0.5rem;
+    padding-left: 3px;
+  }
+
+  .product-videos__nav--next {
+    right: 0.5rem;
+    padding-left: 5px;
+  }
+
+  .product-videos__nav:hover:not(:disabled) {
+    background: #333;
+    color: #fff;
+  }
+
+  .product-videos__nav:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+
+  .product-videos__progress {
+    width: 100%;
+    height: 1px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 1px;
+    margin-top: 2rem;
+    overflow: hidden;
+  }
+
+  .product-videos__progress-bar {
+    height: 100%;
+    background-color: var(--color-foreground, #000);
+    border-radius: 1px;
+    width: 0%;
+    min-width: 1px;
+    transition: width 0.3s ease;
+    transform-origin: left;
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .product-videos .embla__slide {
+      flex: 0 0 calc((100% - 2rem) / 2);
+    }
+  }
+
   @media (max-width: 768px) {
-    .product-videos__grid {
-      grid-template-columns: none;
-      grid-auto-flow: column;
-      grid-auto-columns: 280px;
-      gap: 1.5rem;
-      overflow-x: auto;
-      overflow-y: hidden;
-      scroll-snap-type: x mandatory;
-      -webkit-overflow-scrolling: touch;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
+    .product-videos__carousel {
+      margin: 0 -16px;
+      padding: 0 16px;
     }
 
-    .product-videos__grid::-webkit-scrollbar {
+    .product-videos .embla__container {
+      gap: 1.5rem;
+    }
+
+    .product-videos .embla__slide {
+      flex: 0 0 280px;
+      min-width: 280px;
+    }
+
+    .product-videos__nav {
       display: none;
     }
 
-    .product-videos__item {
-      scroll-snap-align: start;
+    .product-videos__progress {
+      margin-top: 1.5rem;
     }
 
     .product-videos__media {

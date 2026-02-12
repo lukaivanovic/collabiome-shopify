@@ -1,6 +1,5 @@
 {% liquid
   assign section_id = section.settings.custom_id | default: section.id
-  assign products_per_page = section.settings.products_per_page | default: 24
 
   # Priority: 1) Collection page context (preserves current functionality)
   #           2) Section setting collection (for use on other pages)
@@ -155,149 +154,60 @@
   {% endif %}
 
   {% if selected_collection != blank %}
-    {% comment %} Collection context - use pagination {% endcomment %}
-    {% paginate selected_collection.products by products_per_page %}
-      {% if selected_collection.products.size == 0 %}
-        <div class="text-center py-12">
-          <p class="text-lg opacity-75">
-            {{ 'filters.no_products' | t | default: 'Nisu pronađeni proizvodi s odabranim filtrima.' }}
-          </p>
-          <a href="{{ selected_collection.url }}" class="inline-block mt-4 px-6 py-2 bg-black text-white rounded">
-            {{ 'filters.clear_all' | t | default: 'Očisti sve filtre' }}
-          </a>
+    {% if selected_collection.products.size == 0 %}
+      <div class="text-center py-12">
+        <p class="text-lg opacity-75">
+          {{ 'filters.no_products' | t | default: 'Nisu pronađeni proizvodi s odabranim filtrima.' }}
+        </p>
+        <a href="{{ selected_collection.url }}" class="inline-block mt-4 px-6 py-2 bg-black text-white rounded">
+          {{ 'filters.clear_all' | t | default: 'Očisti sve filtre' }}
+        </a>
+      </div>
+    {% else %}
+      {% if is_bundle_collection %}
+        {% comment %} Paketi: jedinstvena mreža svih proizvoda {% endcomment %}
+        <div
+          class="grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-6 mb-12"
+          data-section-id="{{ section_id }}"
+        >
+          {% for product in selected_collection.products %}
+            <div class="product-card">
+              {% render 'product-card', product: product, hide_buy_form: false, cardStyle: true %}
+            </div>
+          {% endfor %}
         </div>
       {% else %}
-        {% if is_bundle_collection %}
-          {% comment %} Paketi: jedinstvena mreža svih proizvoda {% endcomment %}
-          <div
-            class="grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-6 mb-12"
-            data-section-id="{{ section_id }}"
-          >
-            {% for product in selected_collection.products %}
+        {% comment %} Non-bundle categories: first list = is_a_bundle false, second list = is_a_bundle true {% endcomment %}
+        <div
+          class="grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-6 mb-12"
+          data-section-id="{{ section_id }}"
+        >
+          {% for product in selected_collection.products %}
+            {% assign is_a_bundle = product.metafields.custom.is_a_bundle.value %}
+            {% if is_a_bundle != true and is_a_bundle != 'true' %}
               <div class="product-card">
                 {% render 'product-card', product: product, hide_buy_form: false, cardStyle: true %}
               </div>
-            {% endfor %}
-          </div>
-        {% else %}
-          {% comment %} Non-bundle categories: first list = is_a_bundle false, second list = is_a_bundle true {% endcomment %}
-          <div
-            class="grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-6 mb-12"
-            data-section-id="{{ section_id }}"
-          >
-            {% for product in selected_collection.products %}
-              {% assign is_a_bundle = product.metafields.custom.is_a_bundle.value %}
-              {% if is_a_bundle != true and is_a_bundle != 'true' %}
-                <div class="product-card">
-                  {% render 'product-card', product: product, hide_buy_form: false, cardStyle: true %}
-                </div>
-              {% endif %}
-            {% endfor %}
-          </div>
-          {% comment %} Collection title {% endcomment %}
-          <h1 class="text-2xl md:text-3xl! font-semibold mb-8 text-center mt-8">Paketi</h1>
-          <div
-            class="grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-6 mb-12"
-            data-section-id="{{ section_id }}"
-          >
-            {% for product in selected_collection.products %}
-              {% assign is_a_bundle = product.metafields.custom.is_a_bundle.value %}
-              {% if is_a_bundle == true or is_a_bundle == 'true' %}
-                <div class="product-card">
-                  {% render 'product-card', product: product, hide_buy_form: false, cardStyle: true %}
-                </div>
-              {% endif %}
-            {% endfor %}
-          </div>
-        {% endif %}
-
-        {% if paginate.pages > 1 %}
-          <nav class="pagination" role="navigation" aria-label="Straničenje">
-            <div class="pagination__container">
-              {% if paginate.previous %}
-                <a
-                  href="{{ paginate.previous.url }}"
-                  class="pagination__link pagination__link--prev"
-                  aria-label="Prethodna stranica"
-                >
-                  <svg
-                    class="pagination__icon"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                  <span>Prethodna</span>
-                </a>
-              {% else %}
-                <span class="pagination__link pagination__link--prev pagination__link--disabled" aria-disabled="true">
-                  <svg
-                    class="pagination__icon"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                  <span>Prethodna</span>
-                </span>
-              {% endif %}
-
-              <div class="pagination__pages">
-                {% for part in paginate.parts %}
-                  {% if part.is_link %}
-                    <a href="{{ part.url }}" class="pagination__page">{{ part.title }}</a>
-                  {% elsif part.title == paginate.current_page %}
-                    <span class="pagination__page pagination__page--active" aria-current="page">{{ part.title }}</span>
-                  {% else %}
-                    <span class="pagination__page pagination__page--ellipsis">{{ part.title }}</span>
-                  {% endif %}
-                {% endfor %}
+            {% endif %}
+          {% endfor %}
+        </div>
+        {% comment %} Collection title {% endcomment %}
+        <h1 class="text-2xl md:text-3xl! font-semibold mb-8 text-center mt-8">Paketi</h1>
+        <div
+          class="grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-6 mb-12"
+          data-section-id="{{ section_id }}"
+        >
+          {% for product in selected_collection.products %}
+            {% assign is_a_bundle = product.metafields.custom.is_a_bundle.value %}
+            {% if is_a_bundle == true or is_a_bundle == 'true' %}
+              <div class="product-card">
+                {% render 'product-card', product: product, hide_buy_form: false, cardStyle: true %}
               </div>
-
-              {% if paginate.next %}
-                <a
-                  href="{{ paginate.next.url }}"
-                  class="pagination__link pagination__link--next"
-                  aria-label="Sljedeća stranica"
-                >
-                  <span>Sljedeća</span>
-                  <svg
-                    class="pagination__icon"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </a>
-              {% else %}
-                <span class="pagination__link pagination__link--next pagination__link--disabled" aria-disabled="true">
-                  <span>Sljedeća</span>
-                  <svg
-                    class="pagination__icon"
-                    width="16"
-                    height="16"
-                    viewBox="0 0 16 16"
-                    fill="none"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
-                    <path d="M6 4L10 8L6 12" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-                  </svg>
-                </span>
-              {% endif %}
-            </div>
-          </nav>
-        {% endif %}
+            {% endif %}
+          {% endfor %}
+        </div>
       {% endif %}
-    {% endpaginate %}
+    {% endif %}
   {% else %}
     {% comment %} Fallback - no collection available {% endcomment %}
     <div class="text-center py-12">
@@ -346,105 +256,6 @@
     white-space: nowrap;
   }
 
-  /* Pagination */
-  .pagination {
-    margin-top: 3rem;
-    padding-top: 2rem;
-  }
-
-  .pagination__container {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    flex-wrap: wrap;
-  }
-
-  .pagination__link {
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.5rem 1rem;
-    border-radius: 0.375rem;
-    text-decoration: none;
-    color: #000;
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    background: transparent;
-    border: 1px solid transparent;
-  }
-
-  .pagination__link:hover:not(.pagination__link--disabled) {
-    background: rgba(0, 0, 0, 0.05);
-  }
-
-  .pagination__link--disabled {
-    opacity: 0.4;
-    cursor: not-allowed;
-    color: #666;
-  }
-
-  .pagination__icon {
-    flex-shrink: 0;
-  }
-
-  .pagination__pages {
-    display: flex;
-    align-items: center;
-    gap: 0.25rem;
-  }
-
-  .pagination__page {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    min-width: 2.5rem;
-    height: 2.5rem;
-    padding: 0 0.75rem;
-    border-radius: 0.375rem;
-    text-decoration: none;
-    color: #000;
-    font-size: 0.875rem;
-    font-weight: 500;
-    transition: all 0.2s ease;
-    background: transparent;
-    border: 1px solid transparent;
-  }
-
-  .pagination__page:hover:not(.pagination__page--active):not(.pagination__page--ellipsis) {
-    background: rgba(0, 0, 0, 0.05);
-  }
-
-  .pagination__page--active {
-    background: #000;
-    color: #fff;
-    border-color: #000;
-    cursor: default;
-  }
-
-  .pagination__page--ellipsis {
-    color: #666;
-    cursor: default;
-    pointer-events: none;
-  }
-
-  @media (max-width: 640px) {
-    .pagination__link span {
-      display: none;
-    }
-
-    .pagination__link {
-      padding: 0.5rem;
-    }
-
-    .pagination__page {
-      min-width: 2.25rem;
-      height: 2.25rem;
-      padding: 0 0.5rem;
-      font-size: 0.8125rem;
-    }
-  }
 {% endstylesheet %}
 
 <script src="{{ 'facet-select.js' | asset_url }}" defer></script>
@@ -467,15 +278,6 @@
       "id": "manual_collection",
       "label": "Collection",
       "info": "Select a collection to display. Leave empty to show all products."
-    },
-    {
-      "type": "range",
-      "id": "products_per_page",
-      "label": "Products per page",
-      "min": 4,
-      "max": 48,
-      "step": 4,
-      "default": 24
     },
     {
       "type": "checkbox",
