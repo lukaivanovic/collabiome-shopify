@@ -9,110 +9,110 @@
  */
 {
   "general": {
-    "products": "Products",
-    "load_more": "Load more products"
+    "products": "Proizvodi",
+    "load_more": "Učitaj više proizvoda"
   },
   "products": {
     "product": {
-      "add_to_cart": "Add to cart",
-      "sold_out": "Sold out",
-      "unavailable": "Unavailable"
+      "add_to_cart": "Dodaj u košaricu",
+      "sold_out": "Nije dostupan",
+      "unavailable": "Nije dostupan"
     }
   },
   "collections": {
-    "all": "Shop all",
+    "all": "Vidi sve proizvode",
     "supplements": "Dodaci prehrani",
     "cosmetics": "Kozmetika",
     "bundles": "Paketi"
   },
   "filters": {
-    "title": "Filters",
-    "clear_all": "Clear all",
-    "apply": "Apply Filters",
-    "no_products": "No products found with the selected filters.",
-    "active_filters": "Active filters",
-    "price_from": "From",
-    "price_to": "To",
-    "select_placeholder": "Select options",
-    "selected_count": "{{ count }} selected",
-    "clear_filter": "Clear",
-    "skin_type": "Skin Type",
-    "routine_part": "Routine Part",
-    "problem_solution": "Problem Solution",
+    "title": "Filtriraj",
+    "clear_all": "Očisti sve",
+    "apply": "Primijeni filtre",
+    "no_products": "Nema proizvoda sa odabranim filterom.",
+    "active_filters": "Aktivni filteri",
+    "price_from": "Od",
+    "price_to": "Do",
+    "select_placeholder": "Odaberi opcije",
+    "selected_count": "odabranih",
+    "clear_filter": "Očisti",
+    "skin_type": "Tip kože",
+    "routine_part": "Rutina",
+    "problem_solution": "Problem rješenje",
     "skin_type_options": {
-      "dry": "Dry",
-      "oily": "Oily",
+      "dry": "Suho",
+      "oily": "Mješovito",
       "combination": "Combination",
-      "sensitive": "Sensitive",
-      "normal": "Normal"
+      "sensitive": "Osjetljiva",
+      "normal": "Normalna"
     },
     "routine_part_options": {
-      "cleanser": "Cleanser",
+      "cleanser": "Čišćenje",
       "toner": "Toner",
       "serum": "Serum",
-      "moisturizer": "Moisturizer",
-      "mask": "Mask",
-      "eye_care": "Eye Care"
+      "moisturizer": "Hidratantna krema",
+      "mask": "Maska",
+      "eye_care": "Očna njega"
     },
     "problem_solution_options": {
-      "acne": "Acne",
-      "aging": "Aging",
-      "hydration": "Hydration",
-      "brightening": "Brightening",
-      "redness": "Redness",
-      "dark_spots": "Dark Spots"
+      "acne": "Akne",
+      "aging": "Starenje",
+      "hydration": "Hidratacija",
+      "brightening": "Tamnjenje",
+      "redness": "Crvenilo",
+      "dark_spots": "Tamne mrlje"
     }
   },
   "blogs": {
     "article": {
-      "back_link": "Back to {{ blog }}",
+      "back_link": "Nazad na {{ blog }}",
       "meta": {
-        "author_html": "By {{ author }}",
-        "reading_time": "{{ minutes }} min read"
+        "author_html": "Od {{ author }}",
+        "reading_time": "{{ minutes }} min čitanja"
       },
-      "tags_label": "Filed under",
+      "tags_label": "Pripadajuće teme",
       "comments": {
-        "title": "Comments",
-        "empty": "Be the first to share your thoughts.",
-        "form_title": "Add a comment",
-        "name_label": "Name",
+        "title": "Komentari",
+        "empty": "Budite prvi da podijelite svoje misli.",
+        "form_title": "Dodaj komentar",
+        "name_label": "Ime",
         "email_label": "Email",
-        "body_label": "Comment",
-        "submit": "Post comment",
-        "success": "Thanks! Your comment has been submitted for review.",
-        "moderation_notice": "Comments are published after moderation."
+        "body_label": "Komentar",
+        "submit": "Objavi komentar",
+        "success": "Hvala! Vaš komentar je poslat za pregled.",
+        "moderation_notice": "Komentari su objavljeni nakon moderacije."
       }
     }
   },
   "sections": {
     "testimonial_grid": {
-      "play_video": "Play testimonial video",
-      "pause_video": "Pause video",
-      "close_video": "Close video dialog",
-      "video_dialog_label": "Testimonial video dialog"
+      "play_video": "Pokreni video",
+      "pause_video": "Pauziraj video",
+      "close_video": "Zatvori video dialog",
+      "video_dialog_label": "Video dialog testimoniala"
     },
     "three_column_grid": {
-      "name": "Three column grid",
-      "category": "Layout",
-      "default_title": "Three column grid",
-      "default_description": "Add a short description to explain this section.",
-      "item_default_title": "Item title",
-      "item_default_description": "Add a short summary for this item.",
+      "name": "Tri kolumna grid",
+      "category": "Izgled",
+      "default_title": "Tri kolumna grid",
+      "default_description": "Dodaj kratki opis da objasni ovaj odjeljak.",
+      "item_default_title": "Naslov stavke",
+      "item_default_description": "Dodaj kratki opis za ovu stavku.",
       "settings": {
         "custom_id": "Custom section ID",
-        "custom_id_info": "Optional anchor to link directly to this block.",
-        "title": "Title",
-        "description": "Description"
+        "custom_id_info": "Opcionalni anchor za direktnu vezu na ovaj blok.",
+        "title": "Naslov",
+        "description": "Opis"
       },
       "blocks": {
         "item": {
-          "name": "Grid item",
+          "name": "Grid stavka",
           "settings": {
             "image": "Image",
-            "title": "Title",
-            "description": "Description",
+            "title": "Naslov",
+            "description": "Opis",
             "link": "Link",
-            "show_button": "Show link button",
+            "show_button": "Prikaži gumb linka",
             "button_label": "Button label"
           }
         }
@@ -124,47 +124,47 @@
       "dot_aria_label": "Go to slide {{ slide }}"
     },
     "product_science": {
-      "name": "Product science",
-      "category": "Product",
-      "default_title": "Science spotlight",
-      "default_description": "Discover the research powering this formula.",
-      "link_label": "Read study",
+      "name": "Znanost o proizvodu",
+      "category": "Proizvod",
+      "default_title": "Znanstvena pozornica",
+      "default_description": "Otkrij istraživanja koja potiču ovu formulu.",
+      "link_label": "Pročitaj studiju",
       "source_prefix": "Source: {{ source }}",
-      "image_alt": "Illustration of product science for {{ title }}"
+      "image_alt": "Ilustracija znanosti o proizvodu za {{ title }}"
     },
     "product_ingredients": {
-      "name": "Product ingredients",
+      "name": "Sastojci proizvoda",
       "category": "Product",
-      "title": "Ingredients",
+      "title": "Sastojci",
       "description": "",
-      "list": "Other ingredients",
-      "view_all": "View all ingredients",
+      "list": "Ostali sastojci",
+      "view_all": "Vidi sve sastojke",
       "settings": {
-        "title": "Title",
-        "description": "Description",
-        "eyebrow": "Eyebrow"
+        "title": "Naslov",
+        "description": "Opis",
+        "eyebrow": "Očni obris"
       }
     },
     "three_column_highlight": {
-      "name": "Three column highlights",
+      "name": "Tri kolumna pozornice",
       "category": "Custom",
-      "section_heading": "Heading",
-      "section_description": "Description",
-      "custom_id": "Section ID",
-      "column_name": "Column",
-      "column_image": "Image",
-      "column_title": "Title",
-      "column_description": "Description"
+      "section_heading": "Naslov",
+      "section_description": "Opis",
+      "custom_id": "ID odjeljka",
+      "column_name": "Kolona",
+      "column_image": "Slika",
+      "column_title": "Naslov",
+      "column_description": "Opis"
     },
     "legal_page": {
-      "name": "Legal page",
-      "category": "Pages"
+      "name": "Pravne stranice",
+      "category": "Stranice"
     },
     "footer": {
-      "payment": "Accepted payment methods"
+      "payment": "Prihvaćeni načini plaćanja"
     },
     "blog_grid": {
-      "view_all": "View all"
+      "view_all": "Vidi sve"
     }
   }
 }
