@@ -145,10 +145,11 @@
               "type": "promo-banner",
               "name": "Promo banner",
               "settings": {
-                "product": "",
+                "product": "complete-collagen-nocna-krema",
                 "url": "",
                 "title": "test",
-                "description": "",
+                "description": "test",
+                "image": "shopify://shop_images/web_33.png",
                 "overlay_color": "#000000",
                 "overlay_opacity": 40
               },
