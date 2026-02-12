@@ -18,8 +18,6 @@
               <div class="mt-2 text-base text-foreground-secondary">
                 {% if product.metafields.custom.section_videos_description != blank %}
                   {{ product.metafields.custom.section_videos_description | metafield_tag }}
-                {% else %}
-                  {{ section.settings.description }}
                 {% endif %}
               </div>
             {% endif %}
