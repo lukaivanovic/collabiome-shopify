@@ -435,14 +435,11 @@
   .-mt-10 {
     margin-top: calc(var(--spacing) * -10);
   }
-  .-mt-12 {
-    margin-top: calc(var(--spacing) * -12);
-  }
-  .-mt-20 {
-    margin-top: calc(var(--spacing) * -20);
-  }
   .-mt-80 {
     margin-top: calc(var(--spacing) * -80);
+  }
+  .-mt-\[16px\] {
+    margin-top: calc(16px * -1);
   }
   .mt-1 {
     margin-top: calc(var(--spacing) * 1);
@@ -809,9 +806,6 @@
   }
   .min-w-75 {
     min-width: calc(var(--spacing) * 75);
-  }
-  .min-w-150 {
-    min-width: calc(var(--spacing) * 150);
   }
   .min-w-\[18px\] {
     min-width: 18px;

@@ -316,6 +316,12 @@ cart-drawer-items {
   width: 100%;
 }
 
+@media screen and (max-width: 749px) {
+  .cart-drawer .cart__ctas {
+    margin-top: 0.75rem;
+  }
+}
+
 .cart-drawer .cart__checkout-button {
   max-width: none;
   width: 100%;

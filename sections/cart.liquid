@@ -41,7 +41,7 @@
 
           <div class="space-y-6 rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm">
             <div class="flex items-center justify-between">
-              <span class="text-lg font-medium text-neutral-900">Estimated total</span>
+              <span class="text-lg font-medium text-neutral-900">Ukupno</span>
               <span class="text-lg font-semibold text-neutral-900">{{ cart.total_price | money_with_currency }}</span>
             </div>
             {% if cart.cart_level_discount_applications.size > 0 %}
@@ -56,7 +56,7 @@
                 {% endfor %}
               </ul>
             {% endif %}
-            <p class="text-sm text-neutral-500">Taxes, discounts, and shipping are calculated at checkout.</p>
+            <p class="text-sm text-neutral-500">Porezi, popusti i dostava obračunavaju se pri plaćanju.</p>
             <div class="flex flex-wrap gap-3">
               <button
                 type="submit"

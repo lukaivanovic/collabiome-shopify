@@ -41,7 +41,7 @@
     endif
   endif
 
-  assign button_classes = 'relative button flex items-center gap-2 h-14 px-7 text-base [background:var(--product-button-background)] [color:var(--product-button-text-color)] w-full'
+  assign button_classes = 'relative button button-product-buy flex items-center gap-2 h-14 px-7 text-base [background:var(--product-button-background)] [color:var(--product-button-text-color)] w-full'
 %}
 
 {% liquid
@@ -72,10 +72,10 @@
         Dodaj u košaricu
         (
         {%- if selected_variant.compare_at_price > selected_variant.price -%}
-          <s class="absolute left-1/2 text-sm -translate-x-1/2 bottom-0 translate-y-3 bg-[#f9f1f3] text-[#783047] px-1.5 rounded-full">{{ selected_variant.compare_at_price | money_with_currency }}</s>
+          <s class="absolute left-1/2 text-sm -translate-x-1/2 bottom-0 translate-y-3 bg-[#f9f1f3] text-[#783047] px-1.5 rounded-full">{{ selected_variant.compare_at_price | money }}</s>
           {{ ' ' }}
         {%- endif -%}
-        {{ selected_variant.price | money_with_currency }}
+        {{ selected_variant.price | money }}
         )
       {%- endif -%}
     </span>
@@ -192,10 +192,10 @@
                   Dodaj u košaricu
                   (
                   {%- if selected_variant.compare_at_price > selected_variant.price -%}
-                    <s class="absolute left-0 top-0">{{ selected_variant.compare_at_price | money_with_currency }}</s>
+                    <s class="absolute left-0 top-0">{{ selected_variant.compare_at_price | money }}</s>
                     {{ ' ' }}
                   {%- endif -%}
-                  {{ selected_variant.price | money_with_currency }}
+                  {{ selected_variant.price | money }}
                   )
                 {%- endif -%}
               </span>

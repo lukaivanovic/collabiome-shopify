@@ -265,6 +265,11 @@ button:disabled:hover {
   font-size: 15px;
 }
 
+.button.button-product-buy {
+  text-transform: none;
+  letter-spacing: normal;
+}
+
 .text-xxs {
   font-size: 10px;
   line-height: 1.2;
