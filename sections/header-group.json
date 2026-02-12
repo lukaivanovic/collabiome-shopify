@@ -141,6 +141,19 @@
             "shop_menu": "main-menu"
           },
           "blocks": {
+            "promo_banner_jr78cJ": {
+              "type": "promo-banner",
+              "name": "Promo banner",
+              "settings": {
+                "product": "",
+                "url": "",
+                "title": "test",
+                "description": "",
+                "overlay_color": "#000000",
+                "overlay_opacity": 40
+              },
+              "blocks": {}
+            },
             "mobile_menu_category_links_pdFDPA": {
               "type": "mobile-menu-category-links",
               "name": "Menu category links",
@@ -268,6 +281,7 @@
             }
           },
           "block_order": [
+            "promo_banner_jr78cJ",
             "mobile_menu_category_links_pdFDPA",
             "mobile_menu_category_links_zwycbn"
           ]
