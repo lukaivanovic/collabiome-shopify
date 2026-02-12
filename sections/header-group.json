@@ -199,7 +199,7 @@
                     "title": "Moisturizer",
                     "description": "Nahrani svoje lice",
                     "image": "shopify://shop_images/Collagen_Anti_Pollution_Moisturizer_product.png",
-                    "url": ""
+                    "url": "shopify://products/collagen-anti-pollution-moisturizer"
                   },
                   "blocks": {}
                 },
@@ -210,7 +210,7 @@
                     "title": "Gel za čišćenje lica",
                     "description": "Za čisto i smireno lice",
                     "image": "shopify://shop_images/ESSENTIAL_COLLAGEN_CLEANSING_GEL_100ml_1d4c90ad-22c3-4753-9170-267ae5f87ad2.png",
-                    "url": ""
+                    "url": "shopify://products/essential-collagen-gel-za-ciscenje-lica"
                   },
                   "blocks": {}
                 },
@@ -221,7 +221,7 @@
                     "title": "Exfolijant",
                     "description": "Očisti svoje lice kao nikad dosad",
                     "image": "shopify://shop_images/Exfolijant_-_Kompleks_vocnih_kiselina_i_enzima_6563bdb5-96c8-47a1-8f49-4ace194d8bf5.png",
-                    "url": ""
+                    "url": "shopify://products/exfolijant-kompleks-vocnih-kiselina-i-enzima"
                   },
                   "blocks": {}
                 },
@@ -232,7 +232,7 @@
                     "title": "Biome Moisturizer SPF30",
                     "description": "Za najbolji izgled",
                     "image": "shopify://shop_images/Collagen_Biome_Moisturizer_SPF30_-_Multibiome_complex_decd784e-3a45-4015-9e33-8b9be4f61d37.png",
-                    "url": ""
+                    "url": "shopify://products/collagen-biome-moistureizer-spf30-multibiome-complex"
                   },
                   "blocks": {}
                 },
