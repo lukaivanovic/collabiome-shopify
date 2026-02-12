@@ -15,9 +15,9 @@
     assign selected_collection = collections.all
   endif
 
-  # Define filter options for Kozmetika collection
+  # Define filter options for Kozmetika and Paketi collections
   assign show_filters = false
-  if selected_collection.handle == 'kozmetika' or selected_collection.handle == 'cosmetics'
+  if selected_collection.handle == 'kozmetika' or selected_collection.handle == 'cosmetics' or selected_collection.handle == 'paketi' or selected_collection.handle == 'bundles'
     assign show_filters = true
   endif
 
