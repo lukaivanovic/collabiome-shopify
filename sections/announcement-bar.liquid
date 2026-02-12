@@ -41,7 +41,7 @@
                   <span class="announcement-bar__text text-center m-0">{{ block.settings.message }}</span>
                 {% endif %}
                 <span class="announcement-bar__timer tabular-nums whitespace-nowrap" aria-live="polite">
-                  Ends in
+                  Završava za
                   <span class="time days">00</span>d <span class="time hours">00</span>h
                   <span class="time minutes">00</span>m <span class="time seconds">00</span>s
                 </span>
@@ -51,7 +51,7 @@
             {% endif %}
             <span class="announcement-bar__cta flex items-center">
               <span class="uppercase underline">
-                {{ block.settings.cta_label | default: 'Shop now' }}
+                {{ block.settings.cta_label | default: 'Kupi sada' }}
               </span>
             </span>
           </a>
@@ -65,7 +65,7 @@
                 <span class="announcement-bar__text text-center m-0">{{ block.settings.message }}</span>
               {% endif %}
               <span class="announcement-bar__timer tabular-nums whitespace-nowrap" aria-live="polite">
-                Ends in
+                Završava za
                 <span class="time days">00</span>d <span class="time hours">00</span>h
                 <span class="time minutes">00</span>m <span class="time seconds">00</span>s
               </span>
@@ -288,7 +288,7 @@
           "type": "text",
           "id": "message",
           "label": "Text",
-          "default": "Free shipping on orders over $50"
+          "default": "Besplatna dostava za narudžbe iznad $50"
         },
         {
           "type": "url",
@@ -313,7 +313,7 @@
           "type": "text",
           "id": "cta_label",
           "label": "CTA label",
-          "default": "Shop now",
+          "default": "Kupi sada",
           "info": "Text shown next to the announcement when a link is set"
         }
       ]
@@ -327,7 +327,7 @@
         "announcement_1": {
           "type": "announcement",
           "settings": {
-            "message": "Free shipping on orders over $50"
+            "message": "Besplatna dostava za narudžbe iznad $50"
           }
         }
       },
@@ -340,19 +340,19 @@
         "announcement_1": {
           "type": "announcement",
           "settings": {
-            "message": "Free shipping on orders over $50"
+            "message": "Besplatna dostava za narudžbe iznad $50"
           }
         },
         "announcement_2": {
           "type": "announcement",
           "settings": {
-            "message": "New arrivals - Shop now"
+            "message": "New arrivals - Kupi sada"
           }
         },
         "announcement_3": {
           "type": "announcement",
           "settings": {
-            "message": "Sign up for 10% off your first order"
+            "message": "Prijavi se i ostvari 10% popusta na prvu narudžbu"
           }
         }
       },

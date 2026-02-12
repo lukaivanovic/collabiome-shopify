@@ -23,7 +23,7 @@
   <div class="flex items-center justify-start">
     <button
       class="flex items-center justify-center p-2 rounded hover:bg-black/5 focus:outline-2 focus:outline-[var(--color-foreground)] focus:outline-offset-2"
-      aria-label="Open navigation menu"
+      aria-label="Otvori navigacijski izbornik"
       aria-expanded="false"
       data-menu-toggle
     >
@@ -39,7 +39,7 @@
     {% render 'header-customer-avatar' %}
     <a
       href="{{ routes.cart_url }}"
-      aria-label="Cart"
+      aria-label="Košarica"
       aria-haspopup="drawer"
       id="cart-icon-bubble"
       class="relative flex items-center justify-center size-6 [&>svg]:size-6"
@@ -48,7 +48,7 @@
       {% if cart.item_count > 0 %}
         <span
           class="cart-count-badge absolute -top-1 -right-1 flex items-center justify-center min-w-[18px] h-[18px] px-1.5 text-xs font-medium text-[var(--product-accent-foreground)] bg-[var(--product-accent)] rounded-full"
-          aria-label="{{ cart.item_count }} items in cart"
+          aria-label="{{ cart.item_count }} artikala u košarici"
         >
           {{ cart.item_count }}
         </span>

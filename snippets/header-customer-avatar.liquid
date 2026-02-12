@@ -11,7 +11,7 @@
   assign avatar_customer = customer
   assign initials = ''
   assign wrapper_class = wrapper_class | default: 'flex items-center justify-center size-9 [&>svg]:size-6 rounded-full hover:bg-neutral-100'
-  assign aria_label = aria_label | default: 'Account'
+  assign aria_label = aria_label | default: 'Korisnički račun'
 
   if avatar_customer and avatar_customer != empty
     if avatar_customer.first_name != blank

@@ -43,7 +43,7 @@
   id="CartDrawer-Item-{{ item.index | plus: 1 }}"
   class=" bg-white border-b px-4 flex items-center gap-4 border-neutral-200 py-4 last:border-b-0 relative{% if item.parent_relationship.parent != null %} cart-item__nested-line{% endif %}"
   {% if item.parent_relationship.parent != null %}
-    aria-label="{{ item.product.title | escape }} part of {{ item.parent_relationship.parent.title | escape }}"
+    aria-label="{{ item.product.title | escape }} dio paketa {{ item.parent_relationship.parent.title | escape }}"
   {% endif %}
 >
   <div class="loading__spinner hidden absolute bottom-6 right-6 size-4 ">
@@ -77,11 +77,11 @@
     <div>
       {%- if item.original_line_price != item.final_line_price -%}
         <div class="flex flex-col">
-          <span class="visually-hidden">Regular price</span>
+          <span class="visually-hidden">Redovna cijena</span>
           <span class="text-xs text-neutral-500">
             {{ item.original_line_price | money }}
           </span>
-          <span class="visually-hidden">Sale price</span>
+          <span class="visually-hidden">Snižena cijena</span>
           <p class="text-xs text-neutral-900">{{ item.final_line_price | money }}</p>
         </div>
       {%- else -%}
@@ -98,7 +98,7 @@
             class="quantity__button w-5 h-5 rounded-sm bg-neutral-200  flex items-center justify-center hover:bg-neutral-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             name="minus"
             type="button"
-            aria-label="Decrease quantity for {{ item.product.title | escape }}"
+            aria-label="Smanji količinu za {{ item.product.title | escape }}"
             {% if item.instructions and item.instructions.can_update_quantity == false %}
               disabled
             {% endif %}
@@ -125,7 +125,7 @@
               {% endif %}
               step="{{ item.variant.quantity_rule.increment }}"
               {% # theme-check-enable %}
-              aria-label="Quantity for {{ item.product.title | escape }}"
+              aria-label="Količina za {{ item.product.title | escape }}"
               id="Drawer-quantity-{{ item.index | plus: 1 }}"
               data-index="{{ item.index | plus: 1 }}"
               {% if item.instructions and item.instructions.can_update_quantity == false %}
@@ -139,7 +139,7 @@
             class="quantity__button w-5 h-5 rounded-sm bg-neutral-200  flex items-center justify-center hover:bg-neutral-100 transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
             name="plus"
             type="button"
-            aria-label="Increase quantity for {{ item.product.title | escape }}"
+            aria-label="Povećaj količinu za {{ item.product.title | escape }}"
             {% if item.instructions and item.instructions.can_update_quantity == false %}
               disabled
             {% endif %}
@@ -168,25 +168,25 @@
             hidden
           >
             {%- if has_qty_rules == false -%}
-              <span class="volume-pricing-label caption">Volume pricing</span>
+              <span class="volume-pricing-label caption">Količinski popust</span>
             {%- endif -%}
             <div class="quantity__rules caption">
               {%- if item.variant.quantity_rule.increment > 1 -%}
                 <span class="divider">
-                  Must be purchased in multiples of {{ item.variant.quantity_rule.increment }}
+                  Mora se kupiti u višekratnicima od {{ item.variant.quantity_rule.increment }}
                 </span>
               {%- endif -%}
               {%- if item.variant.quantity_rule.min > 1 -%}
-                <span class="divider"> Minimum of {{ item.variant.quantity_rule.min }} </span>
+                <span class="divider"> Najmanje {{ item.variant.quantity_rule.min }} </span>
               {%- endif -%}
               {%- if item.variant.quantity_rule.max != null -%}
-                <span class="divider"> Maximum of {{ item.variant.quantity_rule.max }} </span>
+                <span class="divider"> Najviše {{ item.variant.quantity_rule.max }} </span>
               {%- endif -%}
             </div>
             <button
               class="button-close button button--tertiary"
               type="button"
-              aria-label="Close"
+              aria-label="Zatvori"
             >
               <span class="svg-wrapper">
                 {{- 'icon-close.svg' | inline_asset_content -}}
@@ -234,7 +234,7 @@
         <button
           type="button"
           class="text-neutral-500 hover:text-neutral-700 transition-colors flex items-center justify-center"
-          aria-label="Remove {{ item.title | escape }}"
+          aria-label="Ukloni {{ item.title | escape }}"
           data-variant-id="{{ item.variant.id }}"
           {% if item.instructions and item.instructions.can_remove == false %}
             class="hidden"
@@ -253,7 +253,7 @@
 {% comment %}
   {%- if item.line_level_discount_allocations.size > 0 -%}
     <div class="mt-2">
-      <ul class="flex flex-col gap-1" role="list" aria-label="Discount">
+      <ul class="flex flex-col gap-1" role="list" aria-label="Popust">
         {%- for discount in item.line_level_discount_allocations -%}
           <li class="flex items-center gap-1 text-sm text-green-600">
             <span class="svg-wrapper w-4 h-4">

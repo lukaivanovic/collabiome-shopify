@@ -110,7 +110,7 @@
       <label class="text-sm font-medium text-black whitespace-nowrap">{{ filter.label }}</label>
       <div class="flex gap-2 items-center w-full md:w-auto">
         <label class="flex items-center gap-1 text-sm text-black">
-          <span>{{ 'filters.price_from' | t | default: 'From' }}</span>
+          <span>{{ 'filters.price_from' | t | default: 'Od' }}</span>
           <input
             type="number"
             name="{{ filter.min_value.param_name }}"
@@ -120,7 +120,7 @@
           >
         </label>
         <label class="flex items-center gap-1 text-sm text-black">
-          <span>{{ 'filters.price_to' | t | default: 'To' }}</span>
+          <span>{{ 'filters.price_to' | t | default: 'Do' }}</span>
           <input
             type="number"
             name="{{ filter.max_value.param_name }}"

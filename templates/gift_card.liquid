@@ -30,13 +30,13 @@
         <h1>{{ gift_card.balance | money }}</h1>
 
         {% if gift_card.enabled == false or gift_card.expired %}
-          <p>This gift card has expired</p>
+          <p>Ova poklon kartica je istekla</p>
         {% endif %}
 
         {% if gift_card.expires_on %}
           {% assign expires_on = gift_card.expires_on | date: '%B %e, %Y' %}
           <p>
-            Expires on {{ expires_on }}
+            Istječe {{ expires_on }}
           </p>
         {% endif %}
 
@@ -46,7 +46,7 @@
           {% else %}
             <img
               src="{{ 'gift-card/card.svg' | shopify_asset_url }}"
-              alt="Gift card"
+              alt="Poklon kartica"
               width="300"
               height="200"
             >
@@ -54,14 +54,14 @@
         </p>
 
         <h2>{{ shop.name }}</h2>
-        <p>Use this gift card at checkout</p>
+        <p>Iskoristite ovu poklon karticu pri plaćanju</p>
         <p>{{ gift_card.code | format_code }}</p>
 
         {% if gift_card.pass_url %}
           <a href="{{ gift_card.pass_url }}">
             <img
               src="{{ 'gift-card/add-to-apple-wallet.svg' | shopify_asset_url }}"
-              alt="Add to Apple Wallet"
+              alt="Dodaj u Apple Wallet"
               width="200"
               height="60"
             >

@@ -12,17 +12,17 @@
     <details id="Details-CartDrawer">
       <summary>
         <span class="summary__title">
-          Order special instructions
+          Posebne napomene za narudžbu
           {{- 'icon-caret.svg' | inline_asset_content -}}
         </span>
       </summary>
       <cart-note class="cart__note field">
-        <label class="visually-hidden" for="CartDrawer-Note">Order special instructions</label>
+        <label class="visually-hidden" for="CartDrawer-Note">Posebne napomene za narudžbu</label>
         <textarea
           id="CartDrawer-Note"
           class="text-area text-area--resize-vertical field__input"
           name="note"
-          placeholder="Order special instructions"
+          placeholder="Posebne napomene za narudžbu"
         >{{ cart.note }}</textarea>
       </cart-note>
     </details>
@@ -51,12 +51,12 @@
         disabled
       {% endif %}
     >
-      Check out
+      Plaćanje
     </button>
 
     <div class="cart-drawer__footer-messages">
       {%- if cart.cart_level_discount_applications.size > 0 -%}
-        <ul class="discounts list-unstyled" role="list" aria-label="Discount">
+        <ul class="discounts list-unstyled" role="list" aria-label="Popust">
           {%- for discount in cart.cart_level_discount_applications -%}
             <li class="discounts__discount discounts__discount--end">
               {{- 'icon-discount.svg' | inline_asset_content -}}

@@ -49,10 +49,10 @@
   {% comment %} Collection chips and filters {% endcomment %}
   {% if section.settings.show_filters %}
     {% liquid
-      assign chip_all_default_label = 'collections.all' | t | default: 'Shop all'
+      assign chip_all_default_label = 'collections.all' | t | default: 'Svi proizvodi'
       assign chip_supplements_default_label = 'collections.supplements' | t | default: 'Dodaci prehrani'
       assign chip_cosmetics_default_label = 'collections.cosmetics' | t | default: 'Kozmetika'
-      assign chip_bundles_default_label = 'collections.bundles' | t | default: 'Bundles'
+      assign chip_bundles_default_label = 'collections.bundles' | t | default: 'Paketi'
 
       assign chip_all_label = settings.shop_all_chip_label_all | default: chip_all_default_label
       assign chip_supplements_label = settings.shop_all_chip_label_supplements | default: chip_supplements_default_label
@@ -160,15 +160,15 @@
       {% if selected_collection.products.size == 0 %}
         <div class="text-center py-12">
           <p class="text-lg opacity-75">
-            {{ 'filters.no_products' | t | default: 'No products found with the selected filters.' }}
+            {{ 'filters.no_products' | t | default: 'Nisu pronađeni proizvodi s odabranim filtrima.' }}
           </p>
           <a href="{{ selected_collection.url }}" class="inline-block mt-4 px-6 py-2 bg-black text-white rounded">
-            {{ 'filters.clear_all' | t | default: 'Clear all filters' }}
+            {{ 'filters.clear_all' | t | default: 'Očisti sve filtre' }}
           </a>
         </div>
       {% else %}
         {% if is_bundle_collection %}
-          {% comment %} Bundles / Paketi: single grid, all products {% endcomment %}
+          {% comment %} Paketi / Paketi: single grid, all products {% endcomment %}
           <div
             class="grid grid-cols-1 md:grid-cols-4 gap-4 sm:gap-6 mb-12"
             data-section-id="{{ section_id }}"
@@ -212,13 +212,13 @@
         {% endif %}
 
         {% if paginate.pages > 1 %}
-          <nav class="pagination" role="navigation" aria-label="Pagination">
+          <nav class="pagination" role="navigation" aria-label="Straničenje">
             <div class="pagination__container">
               {% if paginate.previous %}
                 <a
                   href="{{ paginate.previous.url }}"
                   class="pagination__link pagination__link--prev"
-                  aria-label="Previous page"
+                  aria-label="Prethodna stranica"
                 >
                   <svg
                     class="pagination__icon"
@@ -230,7 +230,7 @@
                   >
                     <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
-                  <span>Previous</span>
+                  <span>Prethodna</span>
                 </a>
               {% else %}
                 <span class="pagination__link pagination__link--prev pagination__link--disabled" aria-disabled="true">
@@ -244,7 +244,7 @@
                   >
                     <path d="M10 12L6 8L10 4" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
                   </svg>
-                  <span>Previous</span>
+                  <span>Prethodna</span>
                 </span>
               {% endif %}
 
@@ -264,9 +264,9 @@
                 <a
                   href="{{ paginate.next.url }}"
                   class="pagination__link pagination__link--next"
-                  aria-label="Next page"
+                  aria-label="Sljedeća stranica"
                 >
-                  <span>Next</span>
+                  <span>Sljedeća</span>
                   <svg
                     class="pagination__icon"
                     width="16"
@@ -280,7 +280,7 @@
                 </a>
               {% else %}
                 <span class="pagination__link pagination__link--next pagination__link--disabled" aria-disabled="true">
-                  <span>Next</span>
+                  <span>Sljedeća</span>
                   <svg
                     class="pagination__icon"
                     width="16"
@@ -301,7 +301,7 @@
   {% else %}
     {% comment %} Fallback - no collection available {% endcomment %}
     <div class="text-center py-12">
-      <p class="text-lg opacity-75">No products available.</p>
+      <p class="text-lg opacity-75">Nema dostupnih proizvoda.</p>
     </div>
   {% endif %}
 </div>
@@ -460,7 +460,7 @@
       "type": "text",
       "id": "title",
       "label": "Page Title",
-      "default": "Shop All Products"
+      "default": "Svi proizvodi"
     },
     {
       "type": "collection",

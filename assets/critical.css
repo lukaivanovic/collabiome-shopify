@@ -419,9 +419,9 @@ button:disabled:hover {
   );
   --product-bg-secondary: linear-gradient(
     20deg,
-    color-mix(in srgb, #a2eeff, transparent 70%) 3.17%,
-    color-mix(in srgb, #b4ceff, transparent 70%) 35.34%,
-    color-mix(in srgb, #d4b9ff, transparent 70%) 103.04%
+    color-mix(in srgb, #a2eeff, white 70%) 3.17%,
+    color-mix(in srgb, #b4ceff, white 70%) 35.34%,
+    color-mix(in srgb, #d4b9ff, white 70%) 103.04%
   );
   --product-accent: #1c2b72;
   --product-accent-foreground: #f9f1f3;

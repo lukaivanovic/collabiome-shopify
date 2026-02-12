@@ -35,14 +35,14 @@
     },
     "product_benefits_HE6ycF": {
       "type": "product-benefits",
-      "name": "Product Benefits",
+      "name": "Prednosti proizvoda",
       "settings": {
         "title": "Glow up with our product"
       }
     },
     "product_ingredients_Mhp7N3": {
       "type": "product-ingredients",
-      "name": "Product Ingredients",
+      "name": "Sastojci proizvoda",
       "settings": {
         "manual_product": ""
       }

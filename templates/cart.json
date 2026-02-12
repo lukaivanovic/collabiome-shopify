@@ -12,8 +12,8 @@
     "main": {
       "type": "cart",
       "settings": {
-        "title": "Your cart",
-        "description": "Review your items before checking out."
+        "title": "Vaša košarica",
+        "description": "Pregledajte artikle prije plaćanja."
       }
     },
     "1764930776feef78bd": {

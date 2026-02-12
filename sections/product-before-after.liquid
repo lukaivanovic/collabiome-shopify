@@ -9,10 +9,10 @@
   <div class="{{ product_theme_class }} py-12 md:py-20 product-gradient-bg">
     <div class="container-small text-center  relative flex flex-col items-center gap-3">
       <p class="text-xs font-medium uppercase text-neutral-500 tracking-wider">
-        {{ section.settings.eyebrow | default: 'Before & after' }}
+        {{ section.settings.eyebrow | default: 'Prije i poslije' }}
       </p>
       <h2 class="title-medium">
-        {{ product.metafields.custom.section_before_after_title.value | default: 'Before & after' }}
+        {{ product.metafields.custom.section_before_after_title.value | default: 'Prije i poslije' }}
       </h2>
 
       {% if product.metafields.custom.section_before_after_description.value %}

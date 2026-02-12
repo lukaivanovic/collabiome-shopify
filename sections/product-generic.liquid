@@ -42,14 +42,14 @@
           <div class="absolute bottom-2 right-2">
             <button
               class="embla__prev [background:var(--product-accent)] rounded-full z-2 p-1 text-white"
-              aria-label="Previous image"
+              aria-label="Prethodna slika"
             >
               {{ 'icon-chevron-left.svg' | inline_asset_content }}
             </button>
 
             <button
               class="embla__next [background:var(--product-accent)] rounded-full z-2 p-1 text-white"
-              aria-label="Next image"
+              aria-label="Sljedeća slika"
             >
               {{ 'icon-chevron-right.svg' | inline_asset_content }}
             </button>
@@ -63,7 +63,7 @@
             <button
               class="embla-thumbs__slide flex-shrink-0 w-14 h-14 rounded-lg overflow-hidden border-2! border-transparent! bg-white opacity-90 hover:opacity-100 transition-all data-[active=true]:border-[var(--product-accent)]! data-[active=true]:opacity-100"
               type="button"
-              aria-label="View image {{ forloop.index }}"
+              aria-label="Prikaži sliku {{ forloop.index }}"
               data-active="false"
             >
               {% render 'image', image: image %}
@@ -109,12 +109,12 @@
 
       {% comment %} Benefits {% endcomment %}
       <div class="flex flex-col gap-4">
-        <span class="text-xs font-semibold uppercase text-neutral-500 tracking-wider">Benefits</span>
+        <span class="text-xs font-semibold uppercase text-neutral-500 tracking-wider">Prednosti</span>
         <div class="flex flex-col gap-2">
           {%- for benefit in benefits -%}
             <div class="flex items-center gap-3 bg-white rounded-lg">
               <span class="text-[var(--product-accent)]">{{ 'icon-check.svg' | inline_asset_content }}</span>
-              <span class="font-medium">{{ benefit | default: 'Benefit' | strip }}</span>
+              <span class="font-medium">{{ benefit | default: 'Prednost' | strip }}</span>
             </div>
           {%- endfor -%}
         </div>
@@ -122,7 +122,7 @@
 
       {% comment %} Description {% endcomment %}
       <div class="flex flex-col gap-3">
-        <span class="text-xs font-medium uppercase text-neutral-500 tracking-widest">Description</span>
+        <span class="text-xs font-medium uppercase text-neutral-500 tracking-widest">Opis</span>
         <div class="flex flex-col">
           {% if selected_product.description != blank %}
             <div class="leading-[1.6] text-black font-medium gap-4 flex flex-col line-clamp-5">
@@ -134,7 +134,7 @@
 
       {% comment %} Accordions {% endcomment %}
       <div class="flex flex-col gap-4">
-        <span class="text-xs font-medium uppercase text-neutral-500 tracking-widest">Additional information</span>
+        <span class="text-xs font-medium uppercase text-neutral-500 tracking-widest">Dodatne informacije</span>
         <div class="product-accordion flex flex-col">
           {%- for accordion_item in accordion_items -%}
             <collapsible-item class="accordion-item border-b border-neutral-100 bg-white transition-colors">

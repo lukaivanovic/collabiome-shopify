@@ -34,17 +34,17 @@
     },
     "left_image_text_KwRcBJ": {
       "type": "left-image-text",
-      "name": "Image and Text",
+      "name": "Slika i tekst",
       "settings": {
         "padding_top": 60,
         "padding_bottom": 60,
         "image": "shopify://shop_images/kosa_563af865-2fe1-461a-b3b3-bd1576bcdfca.webp",
-        "image_alt": "Image alt text",
+        "image_alt": "Alternativni tekst slike",
         "image_position": "left",
         "title": "Sve počinje gotovo neprimjetno… kosa postane tanja i beživotna…",
         "description": "<p>Pod prstima više nije mekana kao prije, kao da je izgubila sjaj i hidrataciju.</p><p>Svako češljanje završava s nekoliko vlasi na četki, a bojenje i feniranje ostavljaju je još lomljivijom.</p><p>Frizura više ne traje kao nekada, a vrhovi izgledaju suho i ispucano.</p><p>Tada shvatiš da ti je kosa izgubila snagu iznutra.</p>",
         "show_button": true,
-        "button_label": "Learn more",
+        "button_label": "Saznaj više",
         "button_link": "",
         "button_style": "solid",
         "button_link_target": "_self"
@@ -52,17 +52,17 @@
     },
     "left_image_text_p8MWz9": {
       "type": "left-image-text",
-      "name": "Image and Text",
+      "name": "Slika i tekst",
       "settings": {
         "padding_top": 60,
         "padding_bottom": 60,
         "image": "shopify://shop_images/koza.webp",
-        "image_alt": "Image alt text",
+        "image_alt": "Alternativni tekst slike",
         "image_position": "right",
         "title": "Sve počinje gotovo neprimjetno… kosa postane tanja i beživotna…",
         "description": "<p>Pod prstima više nije mekana kao prije, kao da je izgubila sjaj i hidrataciju.</p><p>Svako češljanje završava s nekoliko vlasi na četki, a bojenje i feniranje ostavljaju je još lomljivijom.</p><p>Frizura više ne traje kao nekada, a vrhovi izgledaju suho i ispucano.</p><p>Tada shvatiš da ti je kosa izgubila snagu iznutra.</p>",
         "show_button": true,
-        "button_label": "Learn more",
+        "button_label": "Saznaj više",
         "button_link": "",
         "button_style": "solid",
         "button_link_target": "_self"
@@ -70,17 +70,17 @@
     },
     "left_image_text_KnKbnn": {
       "type": "left-image-text",
-      "name": "Image and Text",
+      "name": "Slika i tekst",
       "settings": {
         "padding_top": 60,
         "padding_bottom": 60,
         "image": "shopify://shop_images/nokti_prije_poslije.webp",
-        "image_alt": "Image alt text",
+        "image_alt": "Alternativni tekst slike",
         "image_position": "left",
         "title": "Nokti postaju tanki i krhki,",
         "description": "<p>Pod prstima više nije mekana kao prije, kao da je izgubila sjaj i hidrataciju.</p><p>Svako češljanje završava s nekoliko vlasi na četki, a bojenje i feniranje ostavljaju je još lomljivijom.</p><p>Frizura više ne traje kao nekada, a vrhovi izgledaju suho i ispucano.</p><p>Tada shvatiš da ti je kosa izgubila snagu iznutra.</p>",
         "show_button": true,
-        "button_label": "Learn more",
+        "button_label": "Saznaj više",
         "button_link": "",
         "button_style": "solid",
         "button_link_target": "_self"
@@ -115,7 +115,7 @@
             "description": "Kolagen se može konzumirati u dozi od 25 ml ili 50 ml dnevno. Jedna boca je dovoljna za 10-20 dana.",
             "link": "",
             "show_button": false,
-            "button_label": "Learn more"
+            "button_label": "Saznaj više"
           }
         },
         "item_acQtLR": {
@@ -126,7 +126,7 @@
             "description": "Svakodnevno popij svoju dozu, možeš pomiješati u omiljeni napitak, sok ili smoothie.",
             "link": "",
             "show_button": false,
-            "button_label": "Learn more"
+            "button_label": "Saznaj više"
           }
         },
         "item_Ttk3Nh": {
@@ -137,7 +137,7 @@
             "description": "Nakon 30 dana korištenja uživaj u prekrasnoj kosi, sjajnoj koži i čvrstim noktima!",
             "link": "",
             "show_button": false,
-            "button_label": "Learn more"
+            "button_label": "Saznaj više"
           }
         }
       },
@@ -156,24 +156,24 @@
     },
     "product_ingredients_knjfgi": {
       "type": "product-ingredients",
-      "name": "Ingredients",
+      "name": "Sastojci",
       "settings": {
         "manual_product": "complete-collagen-nocna-krema"
       }
     },
     "left_image_text_rKXn9C": {
       "type": "left-image-text",
-      "name": "Image and Text",
+      "name": "Slika i tekst",
       "settings": {
         "padding_top": 60,
         "padding_bottom": 60,
         "image": "shopify://shop_images/kolagen_boost_800x800_veci_logo_estetica.jpg",
-        "image_alt": "Image alt text",
+        "image_alt": "Alternativni tekst slike",
         "image_position": "left",
         "title": "Najbolji proizvod po izboru dermatologa",
         "description": "<p>Godine 2022. Kolagen Boost ponio je prestižnu nagradu Estetica Premium Product u kategoriji 'Najbolji suplement s kolagenom'. Ova nagrada posebno je vrijedna jer proizvode kroz nekoliko mjeseci testiraju dermatolozi i nutricionisti, a upravo su oni prepoznali Kolagen Boost kao najbolji izbor za njegu kože, kose i noktiju iznutra.</p>",
         "show_button": true,
-        "button_label": "Learn more",
+        "button_label": "Saznaj više",
         "button_link": "",
         "button_style": "solid",
         "button_link_target": "_self"
@@ -181,17 +181,17 @@
     },
     "left_image_text_YxhUCd": {
       "type": "left-image-text",
-      "name": "Image and Text",
+      "name": "Slika i tekst",
       "settings": {
         "padding_top": 60,
         "padding_bottom": 60,
         "image": "shopify://shop_images/Iva_Tokic_kolagen.webp",
-        "image_alt": "Image alt text",
+        "image_alt": "Alternativni tekst slike",
         "image_position": "right",
         "title": "Nismo pristalice pseudoznanosti i poluistina",
         "description": "<p>I zato dajemo garanciju na naše proizvode. Vjerujemo u znanost, zato svaki naš proizvod razvija tim vrhunskih stručnjaka i znanstvenika u Hrvatskoj. Sigurni smo u njihovu djelotvornost i zato dajemo potpunu garanciju: ako se nađeš među rijetkih 2,4 % korisnika koji ne primijete rezultate, jednostavno nam vrati proizvod — mi ti vraćamo novac.</p>",
         "show_button": true,
-        "button_label": "Learn more",
+        "button_label": "Saznaj više",
         "button_link": "",
         "button_style": "solid",
         "button_link_target": "_self"
@@ -208,7 +208,7 @@
             "description": "",
             "link": "https://google.com",
             "show_button": false,
-            "button_label": "Learn more"
+            "button_label": "Saznaj više"
           }
         },
         "item_je3x3k": {
@@ -219,7 +219,7 @@
             "description": "",
             "link": "https://google.com",
             "show_button": false,
-            "button_label": "Learn more"
+            "button_label": "Saznaj više"
           }
         },
         "item_qhzjCx": {
@@ -230,7 +230,7 @@
             "description": "",
             "link": "https://google.com",
             "show_button": false,
-            "button_label": "Learn more"
+            "button_label": "Saznaj više"
           }
         },
         "item_Vmp8cN": {
@@ -241,7 +241,7 @@
             "description": "",
             "link": "https://google.com",
             "show_button": false,
-            "button_label": "Learn more"
+            "button_label": "Saznaj više"
           }
         },
         "item_gADFVU": {
@@ -252,7 +252,7 @@
             "description": "",
             "link": "https://google.com",
             "show_button": false,
-            "button_label": "Learn more"
+            "button_label": "Saznaj više"
           }
         },
         "item_xMGyfY": {
@@ -263,7 +263,7 @@
             "description": "",
             "link": "https://google.com",
             "show_button": false,
-            "button_label": "Learn more"
+            "button_label": "Saznaj više"
           }
         }
       },

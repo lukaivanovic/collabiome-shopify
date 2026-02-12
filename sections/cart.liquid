@@ -1,5 +1,5 @@
 {% liquid
-  assign section_title = section.settings.title | default: 'Your cart'
+  assign section_title = section.settings.title | default: 'Vaša košarica'
   assign section_description = section.settings.description | default: ''
 %}
 
@@ -26,10 +26,10 @@
         >
           <div class="space-y-6 rounded-3xl border border-neutral-200 bg-white p-6 shadow-sm">
             <div class="flex items-center justify-between">
-              <p class="text-sm font-medium uppercase tracking-wide text-neutral-500">Cart summary</p>
+              <p class="text-sm font-medium uppercase tracking-wide text-neutral-500">Sažetak košarice</p>
               <span class="text-sm text-neutral-500">
                 {{ cart.item_count }}
-                {% if cart.item_count == 1 %}item{% else %}items{% endif %}
+                {% if cart.item_count == 1 %}artikl{% else %}artikala{% endif %}
               </span>
             </div>
             <div class="space-y-6">
@@ -45,7 +45,7 @@
               <span class="text-lg font-semibold text-neutral-900">{{ cart.total_price | money_with_currency }}</span>
             </div>
             {% if cart.cart_level_discount_applications.size > 0 %}
-              <ul class="space-y-2 text-sm text-green-600" role="list" aria-label="Discounts">
+              <ul class="space-y-2 text-sm text-green-600" role="list" aria-label="Popusti">
                 {% for discount in cart.cart_level_discount_applications %}
                   <li class="flex items-center gap-2">
                     <span class="inline-flex h-5 w-5 items-center justify-center rounded-full bg-green-100 text-green-700">
@@ -63,20 +63,20 @@
                 name="update"
                 class="inline-flex h-12 items-center justify-center rounded-full border border-neutral-900 px-6 text-sm font-medium uppercase tracking-wide text-neutral-900 transition hover:bg-neutral-900 hover:text-white"
               >
-                Update cart
+                Ažuriraj košaricu
               </button>
               <button
                 type="submit"
                 name="checkout"
                 class="inline-flex h-12 flex-1 basis-48 items-center justify-center rounded-full bg-neutral-900 px-6 text-sm font-medium uppercase tracking-wide text-white transition hover:bg-neutral-800"
               >
-                Check out
+                Plaćanje
               </button>
               <a
                 href="{{ routes.all_products_collection_url }}"
                 class="inline-flex h-12 items-center justify-center rounded-full border border-transparent px-6 text-sm font-medium uppercase tracking-wide text-neutral-600 transition hover:text-neutral-900"
               >
-                Continue shopping
+                Nastavi kupnju
               </a>
             </div>
           </div>
@@ -96,13 +96,13 @@
       "type": "text",
       "id": "title",
       "label": "Title",
-      "default": "Your cart"
+      "default": "Vaša košarica"
     },
     {
       "type": "textarea",
       "id": "description",
       "label": "Description",
-      "default": "Review your items before checking out."
+      "default": "Pregledajte artikle prije plaćanja."
     }
   ],
   "presets": [

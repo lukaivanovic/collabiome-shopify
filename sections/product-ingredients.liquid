@@ -6,8 +6,8 @@
   endif
 
   assign ingredients = selected_product.metafields.custom.section_ingredients_list.value
-  assign section_title = selected_product.metafields.custom.section_ingredients_title.value | default: 'Ingredients'
-  assign section_description = selected_product.metafields.custom.section_ingredients_description.value | default: 'Only the best for our customers'
+  assign section_title = selected_product.metafields.custom.section_ingredients_title.value | default: 'Sastojci'
+  assign section_description = selected_product.metafields.custom.section_ingredients_description.value | default: 'Samo najbolje za naše kupce'
 
   assign has_ingredients = false
   if ingredients != blank
@@ -94,11 +94,11 @@
           class="flex items-center justify-between p-6 border-b border-neutral-200 flex-shrink-0"
         >
           <h2 data-drawer-title class="m-0 text-xl font-semibold text-gray-900">
-            {{ 'sections.product_ingredients.list' | t | default: 'All Ingredients' }}
+            {{ 'sections.product_ingredients.list' | t | default: 'Svi sastojci' }}
           </h2>
           <button
             data-drawer-close
-            aria-label="Close drawer"
+            aria-label="Zatvori panel"
             class="flex items-center justify-center w-8 h-8 border-0 bg-transparent cursor-pointer text-gray-500 rounded transition-all duration-200 ease-in-out hover:bg-gray-100 hover:text-gray-700"
           >
             <svg
@@ -180,7 +180,7 @@
 
 {% schema %}
 {
-  "name": "Product Ingredients",
+  "name": "Sastojci proizvoda",
   "settings": [
     {
       "type": "product",
@@ -192,7 +192,7 @@
   "tag": "section",
   "presets": [
     {
-      "name": "Ingredients",
+      "name": "Sastojci",
       "category": "Product"
     }
   ]

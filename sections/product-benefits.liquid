@@ -30,7 +30,7 @@
     <div class="container flex gap-6 flex-col-reverse lg:flex-row md:gap-16">
       <div class="flex-1 flex flex-col py-6">
         <div class="pb-6">
-          <h2 class="title-medium">{{ benefits_title | default: 'Product Benefits' }}</h2>
+          <h2 class="title-medium">{{ benefits_title | default: 'Prednosti proizvoda' }}</h2>
           {% if has_description %}
             <p class="mt-2 text-base text-foreground-secondary">{{ benefits_description }}</p>
           {% endif %}
@@ -74,7 +74,7 @@
 
 {% schema %}
 {
-  "name": "Product Benefits",
+  "name": "Prednosti proizvoda",
   "tag": "section",
   "settings": [
     {
@@ -85,7 +85,7 @@
   ],
   "presets": [
     {
-      "name": "Product Benefits",
+      "name": "Prednosti proizvoda",
       "category": "Product"
     }
   ]

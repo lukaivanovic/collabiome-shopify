@@ -26,7 +26,7 @@ class FacetFilterForm extends HTMLElement {
     // Handle clear all button click
     this.form.addEventListener("click", (e) => {
       const target = e.target.closest('a');
-      if (target && (target.textContent.trim().toLowerCase().includes("clear all") || target.textContent.trim().toLowerCase().includes("clear"))) {
+      if (target && (target.textContent.trim().toLowerCase().includes("clear all") || target.textContent.trim().toLowerCase().includes("clear") || target.textContent.trim().toLowerCase().includes("očisti sve") || target.textContent.trim().toLowerCase().includes("očisti"))) {
         // Check if it's disabled
         if (target.hasAttribute('aria-disabled') || target.classList.contains('pointer-events-none')) {
           e.preventDefault();
@@ -131,7 +131,7 @@ class FacetFilterForm extends HTMLElement {
     const clearAllButton = Array.from(this.form.querySelectorAll('a')).find(
       link => {
         const text = link.textContent.trim().toLowerCase();
-        return text.includes('clear all') || text.includes('clear');
+        return text.includes('clear all') || text.includes('clear') || text.includes('očisti sve') || text.includes('očisti');
       }
     );
 
@@ -153,8 +153,8 @@ class FacetFilterForm extends HTMLElement {
     // This is a simplified version - in a real implementation,
     // you'd want to load translations from the theme
     const translations = {
-      "general.products": "Products",
-      "filters.no_products": "No products found with the selected filters.",
+      "general.products": "Proizvodi",
+      "filters.no_products": "Nisu pronađeni proizvodi s odabranim filtrima.",
     };
     return translations[key] || fallback;
   }

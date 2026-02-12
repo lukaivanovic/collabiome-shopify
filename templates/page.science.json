@@ -22,7 +22,7 @@
         "title": "Znanost koja se vidi na koži.",
         "description": "<p>Ovo je znanstvena podloga iza nutrikozmetičkog pristupa iznutra i izvana.</p>",
         "show_buttons": true,
-        "button_label": "Button label",
+        "button_label": "Oznaka gumba",
         "button_link": "",
         "button_2_label": "",
         "button_2_link": "",
@@ -34,17 +34,17 @@
     },
     "left_image_text_6GxPn3": {
       "type": "left-image-text",
-      "name": "Image and Text",
+      "name": "Slika i tekst",
       "settings": {
         "padding_top": 60,
         "padding_bottom": 60,
         "image": "shopify://shop_images/uri_ifs___M_1567a98b-d258-4145-9cd1-625742630c1e.webp",
-        "image_alt": "Image alt text",
+        "image_alt": "Alternativni tekst slike",
         "image_position": "left",
         "title": "Zašto je kolagen temelj  svih naših proizvoda",
         "description": "<p>Kolagen je ključni strukturni protein kože, vezivnog tkiva i dermalne matrice. Sudjeluje u očuvanju čvrstoće, elastičnosti i otpornosti kože te je izravno povezan s procesima koji se s vremenom prirodno usporavaju.</p><p><br/>Upravo zato kolagen promatramo kao zajedničku točku svih naših formulacija — iznutra i izvana.</p>",
         "show_button": true,
-        "button_label": "Learn more",
+        "button_label": "Saznaj više",
         "button_link": "",
         "button_style": "solid",
         "button_link_target": "_self"
@@ -83,14 +83,14 @@
         "ingredient_Y77p38",
         "ingredient_eGK8Pa"
       ],
-      "name": "Science Ingredients",
+      "name": "Znanstveni sastojci",
       "settings": {
         "padding_top": 60,
         "padding_bottom": 60,
         "title": "Sastojci koji rade zajedno",
         "description": "Kada se nutrijenti iznutra i aktivni sastojci izvana usklade — rezultat je zdravija, punija i otpornija koža.",
-        "title_2": "Additional Ingredients",
-        "description_2": "More ingredients that make a difference"
+        "title_2": "Dodatni sastojci",
+        "description_2": "Još sastojaka koji čine razliku"
       }
     },
     "three_column_highlight_7MPhnC": {
@@ -117,7 +117,7 @@
           "settings": {
             "image": "shopify://shop_images/httpswww.kolagenboost.hrcollectionsbestsellersproductskolagen-boost-copyvariant_48399030780236_10.webp",
             "title": "Marina Mustapić",
-            "description": "Research and development expert"
+            "description": "Stručnjak za istraživanje i razvoj"
           }
         }
       },
@@ -140,8 +140,8 @@
           "type": "stat",
           "settings": {
             "metric": "99%",
-            "text": "Customer satisfaction rate",
-            "source": "Source name",
+            "text": "Stopa zadovoljstva kupaca",
+            "source": "Naziv izvora",
             "link_url": ""
           }
         },
@@ -149,8 +149,8 @@
           "type": "stat",
           "settings": {
             "metric": "5K+",
-            "text": "Happy customers",
-            "source": "Source name",
+            "text": "Zadovoljni kupci",
+            "source": "Naziv izvora",
             "link_url": ""
           }
         },
@@ -158,8 +158,8 @@
           "type": "stat",
           "settings": {
             "metric": "100%",
-            "text": "Natural ingredients",
-            "source": "Source name",
+            "text": "Prirodni sastojci",
+            "source": "Naziv izvora",
             "link_url": ""
           }
         }
@@ -169,7 +169,7 @@
         "stat_CQtCmH",
         "stat_DzUjXq"
       ],
-      "name": "Generic stats",
+      "name": "Opća statistika",
       "settings": {
         "custom_id": "",
         "title": "Što pokazuju istraživanja",
@@ -213,7 +213,7 @@
         "benefit_P4Yb9h",
         "benefit_8hhmrE"
       ],
-      "name": "Science Supplements",
+      "name": "Znanstveni dodaci",
       "settings": {
         "padding_top": 60,
         "padding_bottom": 60,
@@ -262,7 +262,7 @@
         "benefit_MJkPPB",
         "benefit_N387iA"
       ],
-      "name": "Science Supplements",
+      "name": "Znanstveni dodaci",
       "settings": {
         "padding_top": 60,
         "padding_bottom": 60,
@@ -324,17 +324,17 @@
     },
     "left_image_text_mURNpD": {
       "type": "left-image-text",
-      "name": "Image and Text",
+      "name": "Slika i tekst",
       "settings": {
         "padding_top": 60,
         "padding_bottom": 60,
         "image": "shopify://shop_images/graf_69232f03-46ab-41c5-9248-01470dfc2e6d.png",
-        "image_alt": "Image alt text",
+        "image_alt": "Alternativni tekst slike",
         "image_position": "right",
         "title": "Stunning feature title",
         "description": "<p>Share a short description that explains why this feature matters.</p>",
         "show_button": true,
-        "button_label": "Learn more",
+        "button_label": "Saznaj više",
         "button_link": "",
         "button_style": "solid",
         "button_link_target": "_self"
