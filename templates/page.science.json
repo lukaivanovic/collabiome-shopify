@@ -331,8 +331,8 @@
         "image": "shopify://shop_images/graf_69232f03-46ab-41c5-9248-01470dfc2e6d.png",
         "image_alt": "Alternativni tekst slike",
         "image_position": "right",
-        "title": "Stunning feature title",
-        "description": "<p>Share a short description that explains why this feature matters.</p>",
+        "title": "Istaknuta značajka",
+        "description": "<p>Dodajte kratak opis koji objašnjava zašto je ova značajka važna.</p>",
         "show_button": true,
         "button_label": "Saznaj više",
         "button_link": "",
@@ -346,15 +346,15 @@
         "faq_item_BQDpqR": {
           "type": "faq_item",
           "settings": {
-            "question": "Frequently asked question?",
-            "answer": "<p>This is the answer to the frequently asked question.</p>"
+            "question": "Često postavljeno pitanje?",
+            "answer": "<p>Ovo je odgovor na često postavljeno pitanje.</p>"
           }
         },
         "faq_item_rGGQae": {
           "type": "faq_item",
           "settings": {
-            "question": "Another frequently asked question?",
-            "answer": "<p>This is another answer to a frequently asked question.</p>"
+            "question": "Još jedno često postavljeno pitanje?",
+            "answer": "<p>Ovo je još jedan odgovor na često postavljeno pitanje.</p>"
           }
         }
       },
@@ -362,9 +362,9 @@
         "faq_item_BQDpqR",
         "faq_item_rGGQae"
       ],
-      "name": "FAQ",
+      "name": "Česta pitanja",
       "settings": {
-        "title": "FAQ",
+        "title": "Česta pitanja",
         "description": "",
         "custom_id": "",
         "padding_top": 40,
@@ -375,8 +375,8 @@
       "type": "blog-grid",
       "name": "Blog grid",
       "settings": {
-        "heading": "Latest articles",
-        "description": "Describe this category",
+        "heading": "Najnoviji članci",
+        "description": "Opišite ovu kategoriju",
         "blog": "clanci",
         "show_date": true,
         "show_author": false,

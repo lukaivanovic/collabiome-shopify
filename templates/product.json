@@ -20,15 +20,15 @@
     },
     "product_videos_KABRrw": {
       "type": "product-videos",
-      "name": "Product Videos",
+      "name": "Videozapisi proizvoda",
       "settings": {
-        "title": "Product Videos",
-        "description": "<p>Watch our product videos</p>"
+        "title": "Videozapisi proizvoda",
+        "description": "<p>Pogledajte naše videozapise proizvoda</p>"
       }
     },
     "product_before_after_RheAtk": {
       "type": "product-before-after",
-      "name": "Product Before & After",
+      "name": "Prije i poslije proizvoda",
       "settings": {
         "eyebrow": ""
       }
@@ -49,34 +49,34 @@
     },
     "product_science_nfrBbH": {
       "type": "product-science",
-      "name": "Product Science",
+      "name": "Znanost o proizvodu",
       "settings": {}
     },
     "product_comparison_YHCngK": {
       "type": "product-comparison",
-      "name": "Product Comparison",
+      "name": "Usporedba proizvoda",
       "settings": {
-        "title": "Comparison",
+        "title": "Usporedba",
         "description": ""
       }
     },
     "product_upsell_RFhKfi": {
       "type": "product-upsell",
-      "name": "Product Upsell",
+      "name": "Dodatna ponuda proizvoda",
       "settings": {}
     },
     "product_faq_jmHdaa": {
       "type": "product-faq",
-      "name": "Product FAQ",
+      "name": "Česta pitanja o proizvodu",
       "settings": {
-        "title": "FAQ",
-        "description": "<p>Got a less-frequently asked question? Contact us at <a href=\"/policies/privacy-policy\" title=\"Privacy Policy\">pitanja@kolagenboost.hr</a></p>"
+        "title": "Česta pitanja",
+        "description": "<p>Imate dodatno pitanje? Kontaktirajte nas na <a href=\"/policies/privacy-policy\" title=\"Pravila privatnosti\">pitanja@kolagenboost.hr</a></p>"
       }
     },
     "product_reviews_APUjTe": {
       "type": "product-reviews",
       "disabled": true,
-      "name": "Product Reviews",
+      "name": "Recenzije proizvoda",
       "settings": {
         "background_color": "#ffffff"
       }

@@ -1,7 +1,7 @@
 {%- liquid
   assign upsell_metafield = product.metafields.custom.upsell_products.value
 
-  assign section_title = product.metafields.custom.section_upsell_title.value | default: 'Complete your routine'
+  assign section_title = product.metafields.custom.section_upsell_title.value | default: 'Upotpunite svoju rutinu'
   assign section_description = product.metafields.custom.section_upsell_description.value
 
   assign has_upsell = false
@@ -263,11 +263,11 @@
 
 {% schema %}
 {
-  "name": "Product Upsell",
+  "name": "Dodatna ponuda proizvoda",
   "tag": "section",
   "presets": [
     {
-      "name": "Product Upsell",
+      "name": "Dodatna ponuda proizvoda",
       "category": "Product"
     }
   ]
