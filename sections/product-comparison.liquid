@@ -11,13 +11,13 @@
   <div class="container-small text-center py-30 {{ product_theme_class }}">
     <div>
       <p class="text-sm font-medium uppercase text-neutral-500 tracking-wider">
-        {{ section.settings.eyebrow | default: 'Comparison' }}
+        {{ section.settings.eyebrow | default: 'Usporedba' }}
       </p>
       <h2 class="title-medium">{{ comparisons.title | default: 'Comparison' }}</h2>
       {% if section.settings.description %}
         <div class="text-base opacity-70 mt-2">{{ section.settings.description }}</div>
-      {% elsif comparisons.description %}
-        <p class="text-base opacity-70 mt-2">{{ comparisons.description }}</p>
+      {% elsif comparison.description != blank %}
+        <p class="text-base opacity-70 mt-2">{{ comparison.description }}</p>
       {% endif %}
     </div>
 
