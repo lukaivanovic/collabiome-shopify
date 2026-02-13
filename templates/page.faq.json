@@ -137,8 +137,8 @@
         "title": "Dodaci prehrani",
         "description": "",
         "custom_id": "",
-        "padding_top": 40,
-        "padding_bottom": 40
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "faq_MkQEzm": {
@@ -208,8 +208,8 @@
         "title": "Kozmetika",
         "description": "",
         "custom_id": "",
-        "padding_top": 40,
-        "padding_bottom": 40
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     },
     "faq_BMHE8K": {
@@ -255,8 +255,8 @@
         "title": "Dostava i reklamacija",
         "description": "",
         "custom_id": "",
-        "padding_top": 40,
-        "padding_bottom": 40
+        "padding_top": 0,
+        "padding_bottom": 0
       }
     }
   },
