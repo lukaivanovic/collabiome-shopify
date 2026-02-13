@@ -271,10 +271,24 @@
               "name": "Promo banner",
               "settings": {
                 "product": "complete-collagen-nocna-krema",
-                "url": "",
-                "title": "test",
-                "description": "test",
-                "image": "shopify://shop_images/web_33.png",
+                "url": "shopify://collections",
+                "title": "Pogledaj sve proizvode",
+                "description": "",
+                "image": "shopify://shop_images/Puna_rutina_collabiome_ff7f6c4d-6f04-4766-9eea-1318f7d8ab0c.png",
+                "overlay_color": "#000000",
+                "overlay_opacity": 40
+              },
+              "blocks": {}
+            },
+            "promo_banner_JaUi9Q": {
+              "type": "promo-banner",
+              "name": "Promo banner",
+              "settings": {
+                "product": "complete-collagen-nocna-krema",
+                "url": "shopify://collections/paketi",
+                "title": "Poklon paketi",
+                "description": "",
+                "image": "shopify://shop_images/BF2025-2025-11-07T123409.829_26a9121d-8773-48a3-b707-fa21590e3686.png",
                 "overlay_color": "#000000",
                 "overlay_opacity": 40
               },
@@ -284,7 +298,8 @@
           "block_order": [
             "mobile_menu_category_links_pdFDPA",
             "mobile_menu_category_links_zwycbn",
-            "promo_banner_jr78cJ"
+            "promo_banner_jr78cJ",
+            "promo_banner_JaUi9Q"
           ]
         }
       },
