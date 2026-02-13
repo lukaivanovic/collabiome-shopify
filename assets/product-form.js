@@ -469,7 +469,18 @@ if (!customElements.get("product-form")) {
         const baseText = textMap[state];
         if (state === "available" && variant) {
           const formattedPrice = this.formatMoney(variant.price);
-          this.submitButtonText.textContent = `${baseText} (${formattedPrice})`;
+          const hasDiscount =
+            variant.compare_at_price && variant.compare_at_price > variant.price;
+          this.submitButtonText.replaceChildren();
+          this.submitButtonText.append(`${baseText} (`);
+          if (hasDiscount) {
+            const comparePrice = document.createElement("s");
+            comparePrice.style.color = "rgba(255, 255, 255, 0.72)";
+            comparePrice.style.textDecorationColor = "rgba(255, 255, 255, 0.72)";
+            comparePrice.textContent = this.formatMoney(variant.compare_at_price);
+            this.submitButtonText.append(comparePrice, " ");
+          }
+          this.submitButtonText.append(`${formattedPrice})`);
         } else {
           this.submitButtonText.textContent = baseText;
         }

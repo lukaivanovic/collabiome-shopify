@@ -72,7 +72,7 @@
         Dodaj u košaricu
         (
         {%- if selected_variant.compare_at_price > selected_variant.price -%}
-          <s class="absolute left-1/2 text-sm -translate-x-1/2 bottom-0 translate-y-3 bg-[#f9f1f3] text-[#783047] px-1.5 rounded-full">{{ selected_variant.compare_at_price | money }}</s>
+          <s style="color: rgba(255, 255, 255, 0.72); text-decoration-color: rgba(255, 255, 255, 0.72);">{{ selected_variant.compare_at_price | money }}</s>
           {{ ' ' }}
         {%- endif -%}
         {{ selected_variant.price | money }}
@@ -192,7 +192,7 @@
                   Dodaj u košaricu
                   (
                   {%- if selected_variant.compare_at_price > selected_variant.price -%}
-                    <s class="absolute left-0 top-0">{{ selected_variant.compare_at_price | money }}</s>
+                    <s style="color: rgba(255, 255, 255, 0.72); text-decoration-color: rgba(255, 255, 255, 0.72);">{{ selected_variant.compare_at_price | money }}</s>
                     {{ ' ' }}
                   {%- endif -%}
                   {{ selected_variant.price | money }}
