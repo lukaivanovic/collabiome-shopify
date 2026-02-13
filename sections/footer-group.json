@@ -14,9 +14,9 @@
     "footer": {
       "type": "footer",
       "settings": {
-        "menu1_title": "Shop",
+        "menu1_title": "Proizvodi",
         "menu1": "footer",
-        "menu2_title": "Company",
+        "menu2_title": "Tvrtka",
         "menu2": "footer-company",
         "bottom_menu": "footer-legal",
         "social_facebook": "https://www.instagram.com/codemagehr/",
