@@ -270,7 +270,7 @@
               "type": "promo-banner",
               "name": "Promo banner",
               "settings": {
-                "product": "complete-collagen-nocna-krema",
+                "product": "",
                 "url": "shopify://collections",
                 "title": "Pogledaj sve proizvode",
                 "description": "",
@@ -284,7 +284,7 @@
               "type": "promo-banner",
               "name": "Promo banner",
               "settings": {
-                "product": "complete-collagen-nocna-krema",
+                "product": "",
                 "url": "shopify://collections/paketi",
                 "title": "Poklon paketi",
                 "description": "",
