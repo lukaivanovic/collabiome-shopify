@@ -1,0 +1,26 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "shop_all_6XYGtW": {
+      "type": "shop-all",
+      "name": "Shop All",
+      "settings": {
+        "title": "Shop All Products",
+        "manual_collection": "",
+        "show_filters": true,
+        "show_quiz_banner": true
+      }
+    }
+  },
+  "order": [
+    "shop_all_6XYGtW"
+  ]
+}
