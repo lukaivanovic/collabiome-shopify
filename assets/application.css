@@ -705,6 +705,9 @@
   .min-h-92 {
     min-height: calc(var(--spacing) * 92);
   }
+  .min-h-\[80px\] {
+    min-height: 80px;
+  }
   .w-1 {
     width: calc(var(--spacing) * 1);
   }
