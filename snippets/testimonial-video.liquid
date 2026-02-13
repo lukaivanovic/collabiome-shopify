@@ -3,7 +3,7 @@
 %}
 
 {% if video_media %}
-  <testimonial-video-player class="testimonial-video-player group">
+  <testimonial-video-player class="testimonial-video-player group" data-autoplay-when-visible>
     <button
       type="button"
       class="testimonial-video-player__trigger"
@@ -14,7 +14,6 @@
         {{
           video_media
           | video_tag:
-            autoplay: true,
             muted: true,
             loop: true,
             controls: false,
