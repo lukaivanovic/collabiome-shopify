@@ -222,8 +222,13 @@
                   <span class=" text-black font-medium">
                     {{- accordion_item.title | strip -}}
                   </span>
-                  <div class="w-6 h-6 flex items-center justify-center [background:var(--product-background)] rounded-full text-[var(--product-accent)]">
-                    {{ 'icon-plus.svg' | inline_asset_content }}
+                  <div class="accordion-icon w-6 h-6 flex items-center justify-center [background:var(--product-background)] rounded-full text-[var(--product-accent)] [&>svg]:size-4">
+                    <span class="accordion-icon-plus">
+                      {{ 'icon-plus.svg' | inline_asset_content }}
+                    </span>
+                    <span class="accordion-icon-minus">
+                      {{ 'icon-minus.svg' | inline_asset_content }}
+                    </span>
                   </div>
                 </button>
                 <div class="accordion-content" data-collapsible-content>
@@ -439,10 +444,6 @@
 
   /* Accordion Styles (only the interactive parts kept) */
 
-  .accordion-item.active .accordion-icon {
-    transform: rotate(180deg);
-  }
-
   .accordion-content {
     max-height: 0;
     overflow: hidden;
@@ -451,6 +452,22 @@
 
   .accordion-item.active .accordion-content {
     max-height: 500px;
+  }
+
+  .product-accordion .accordion-icon-plus {
+    display: block;
+  }
+
+  .product-accordion .accordion-icon-minus {
+    display: none;
+  }
+
+  .product-accordion button[aria-expanded='true'] .accordion-icon-plus {
+    display: none;
+  }
+
+  .product-accordion button[aria-expanded='true'] .accordion-icon-minus {
+    display: block;
   }
 {% endstylesheet %}
 
