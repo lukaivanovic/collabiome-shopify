@@ -18,9 +18,30 @@
         "show_filters": true,
         "show_quiz_banner": true
       }
+    },
+    "products_row_NgHaXm": {
+      "type": "products-row",
+      "name": "Product",
+      "settings": {
+        "title": "Istaknuti proizvodi",
+        "description": "Otkrij naše najnovije proizvode",
+        "products": [
+          "complete-collagen-nocna-krema-exfolijant",
+          "kolagen-nutriage-1-1-gratis-1",
+          "kolagen-nutriage-respiracijski-ultra-hidratantni-serum-gratis",
+          "2xkolagen-boost-collagen-moisturizer-hidratantna-krema-gratis-plus-besplatna-dostava",
+          "2xkolagen-boost-gel-za-ciscenje-lica-gratis",
+          "dermokozmeticki-paket-sjaj",
+          "anti-age-paket-obnova",
+          "essential-collagen-gel-za-ciscenje-lica-i-respiracijski-ultra-hidratantni-serum",
+          "kolagen-nutriage-collagen-biome-moisturizer-spf-30-gratis-i-besplatna-dostava",
+          "kolagen-boost-nutriage-1"
+        ]
+      }
     }
   },
   "order": [
-    "shop_all_6XYGtW"
+    "shop_all_6XYGtW",
+    "products_row_NgHaXm"
   ]
 }
