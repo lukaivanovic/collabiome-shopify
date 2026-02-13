@@ -80,7 +80,7 @@
               <input
                 type="email"
                 name="contact[email]"
-                placeholder="Your email"
+                placeholder="Tvoja email adresa"
                 required
                 class="w-full pr-16 pl-4 py-3 rounded-full bg-black/60 backdrop-blur-2xl border border-black/20 text-white placeholder-white/70 focus:outline-none focus:ring-2 focus:ring-primary"
               >
@@ -101,7 +101,7 @@
               </button>
             </div>
             {% if form.posted_successfully? %}
-              <p class="mt-2 text-green-500 text-sm">Thanks for subscribing!</p>
+              <p class="mt-2 text-green-500 text-sm">Hvala na prijavi!</p>
             {% endif %}
             {% if form.errors %}
               <p class="mt-2 text-red-500 text-sm">{{ form.errors | default_errors }}</p>
