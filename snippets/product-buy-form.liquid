@@ -123,7 +123,6 @@
               (
               {%- if selected_variant.compare_at_price > selected_variant.price -%}
                 <s>{{ selected_variant.compare_at_price | money }}</s>
-                test
                 {{ ' ' }}
               {%- endif -%}
               {{ selected_variant.price | money }}
