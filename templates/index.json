@@ -62,7 +62,7 @@
             "title": "Njega kože",
             "description": "Kozmetički proizvodi za svakodnevnu rutinu njege lica",
             "button_text": "Istraži",
-            "button_url": ""
+            "button_url": "shopify://collections/kozmetika"
           }
         },
         "category_card_QUi6mt": {
@@ -72,7 +72,7 @@
             "title": "Koža,kosa i nokti",
             "description": "Nutrikozmetički dodaci prehrani koji iznutra podržavaju zdrav izgled kože, kose i noktiju",
             "button_text": "Istraži",
-            "button_url": ""
+            "button_url": "shopify://collections/dodaci-prehrani"
           }
         },
         "category_card_gXYCd3": {
@@ -82,7 +82,7 @@
             "title": "Zglobovi",
             "description": "Dodaci prehrani za podršku pokretljivosti, fleksibilnosti i općem zdravlju zglobova i vezivnog tkiva.",
             "button_text": "Istraži",
-            "button_url": ""
+            "button_url": "shopify://products/recupera"
           }
         }
       },
