@@ -122,7 +122,8 @@
               Dodaj u košaricu
               (
               {%- if selected_variant.compare_at_price > selected_variant.price -%}
-                <s style="color: rgba(255, 255, 255, 0.72); text-decoration-color: rgba(255, 255, 255, 0.72);">{{ selected_variant.compare_at_price | money }}</s>
+                <s>{{ selected_variant.compare_at_price | money }}</s>
+                test
                 {{ ' ' }}
               {%- endif -%}
               {{ selected_variant.price | money }}

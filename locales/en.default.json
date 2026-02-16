@@ -67,8 +67,8 @@
     "article": {
       "back_link": "Nazad na {{ blog }}",
       "meta": {
-        "author_html": "Od {{ author }}",
-        "reading_time": "{{ minutes }} min čitanja"
+        "author_html": "{{ author }}",
+        "reading_time": "{{ minutes }} minuta"
       },
       "tags_label": "Pripadajuće teme",
       "comments": {

@@ -475,8 +475,6 @@ if (!customElements.get("product-form")) {
           this.submitButtonText.append(`${baseText} (`);
           if (hasDiscount) {
             const comparePrice = document.createElement("s");
-            comparePrice.style.color = "rgba(255, 255, 255, 0.72)";
-            comparePrice.style.textDecorationColor = "rgba(255, 255, 255, 0.72)";
             comparePrice.textContent = this.formatMoney(variant.compare_at_price);
             this.submitButtonText.append(comparePrice, " ");
           }

@@ -33,7 +33,7 @@
 <a
   {{ block.shopify_attributes }}
   href="{{ url }}"
-  class="relative w-full h-full min-h-[80px] flex items-end overflow-hidden text-white rounded-xl aspect-auto md:aspect-square px-3 py-3 flex-1"
+  class="relative flex items-end overflow-hidden text-white rounded-xl aspect-auto md:aspect-square p-3 min-h-40 md:min-h-auto md:h-full"
 >
   <div class="absolute inset-0 z-0 overflow-hidden" aria-hidden="true">
     {{
@@ -70,6 +70,7 @@
 {% schema %}
 {
   "name": "Promo banner",
+  "tag": null,
   "settings": [
     {
       "type": "product",

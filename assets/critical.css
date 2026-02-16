@@ -260,9 +260,9 @@ button:disabled:hover {
   justify-content: center;
   font-weight: 550;
   font-family: "Red Hat Text", sans-serif;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
-  font-size: 15px;
+  /* text-transform: uppercase; */
+  /* letter-spacing: 0.04em; */
+  font-size: 14px;
 }
 
 .button.button-product-buy {

@@ -35,8 +35,13 @@
         product: product,
         show_dynamic_checkout: false,
         hide_buy_form: true,
-        clamp_title: true
+        clamp_title: true,
+        card_class: ''
       %}
+
+      <a href="{{ product.url }}" class="mt-3 inline-flex w-full items-center justify-center button bg-[var(--product-button-background)] text-[var(--product-button-text-color)]">
+        Vidi proizvod
+      </a>
     </div>
   </div>
 </div>
